@@ -23,14 +23,16 @@
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    {{-- <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script> --}}
+    <script src="https://kit.fontawesome.com/9494185896.js" crossorigin="anonymous"></script>
+
     <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
     <link id="pagestyle" href="{{ asset('assets/css/soft-ui-dashboard.css') }}" rel="stylesheet" />
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
   </head>
 
   <body class="g-sidenav-show bg-gray-100">
-    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3" id="sidenav-main">
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
       <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href="">
@@ -41,7 +43,7 @@
       <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" href="../pages/dashboard.html">
+            <a class="nav-link {{ $namepage === 'Dashboard' ? 'active' : '' }}  " href="{{ $namepage === 'Dashboard' ? '#' : route('dashboard-admin') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <title>shop</title>
@@ -67,7 +69,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../pages/tables.html">
+            <a class="nav-link {{ $namepage === 'Data' ? 'active' :  '' }}" href="{{ $namepage === 'Data' ? '#' : url('/datapage') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <title>office</title>
@@ -93,7 +95,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../pages/billing.html">
+            <a class="nav-link {{ $namepage === 'Pelajaran' ? 'active' : '' }}" href="{{ $namepage === 'Pelajaran' ? '#' : route('pelajaran') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <title>credit-card</title>
@@ -119,7 +121,7 @@
             <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../pages/profile.html">
+            <a class="nav-link {{ $namepage === 'Profile' ? 'active' : '' }}" href="{{ $namepage === 'Profile' ? '#' : route('profile-admin') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <title>customer-support</title>
@@ -147,6 +149,16 @@
           </li>
         </ul>
       </div>
+      <ul class="navbar-nav position-absolute w-100 mb-2" style="bottom: 0; ">
+        <li class="nav-item  d-flex justify-content-start align-items-start" >
+            <button class="nav-link p-0" type="button"  data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="display:flex !important;   border:none; background-color: transparent; ">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+
+              <span class="nav-link-text">Keluar</span>
+            </button>
+          </li>
+      </ul>
+
     </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
       <!-- Navbar -->
@@ -155,9 +167,9 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
               <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-              <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
+              <li class="breadcrumb-item text-sm text-dark active" aria-current="page">{{ $namepage }}</li>
             </ol>
-            <h6 class="font-weight-bolder mb-0">Dashboard</h6>
+            <h6 class="font-weight-bolder mb-0">{{ $namepage }}</h6>
           </nav>
           <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <ul class="navbar-nav justify-content-end">
@@ -176,9 +188,28 @@
       </nav>
 
 @yield('content')
+<!-- Button trigger modal -->
 
+
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog d-flex justify-content-center" style="border: none !important;">
+      <div class="modal-content" style="max-width: 300px">
+        <div class="modal-footer" style="border: none !important">
+            <button type="button" style="background-color: #;" class="" data-bs-dismiss="modal">Close</button>
+            <form method="POST" action="/logout">
+              @csrf
+              <button class="nav-link p-0" type="submit" style="display:flex !important;   border:none; background-color: transparent; ">
+                <span class="nav-link-text">Keluar</span>
+              </button>
+          </form>
+          </div>
+      </div>
+    </div>
+  </div>
 
 </main>
+
 
 <!--   Core JS Files   -->
 <script src="../assets/js/core/popper.min.js"></script>

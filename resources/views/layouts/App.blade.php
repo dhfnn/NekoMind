@@ -29,14 +29,20 @@
               <div class="menu-profile d-flex align-items-center">
                 <ul class="menu">
                   <li class="menu-item">
-                    <a href="{{ route('profile-pengguna') }}" class="ps-4 ps-xl-4 d-flex align-items-center a-putar">
+                    <a href="Profilepengguna" class="ps-4 ps-xl-4 d-flex align-items-center a-putar">
                       <i class="fa-solid fa-caret-down i-putar" style="color: #00000076"></i>
                       <i class="fa-solid fa-circle-user i-pd ms-1"></i>
                     </a>
                     <ul class="drop-menu">
-                      <li class="drop-menu-item"><a href="{{ route('profile-pengguna') }}">Akun</a></li>
-                      <li class="drop-menu-item"><a href="{{ route('editprofile-p') }}">Ubah Profile</a></li>
-                      <li class="drop-menu-item"><a href="" style="color: rgb(255, 0, 0) !important">Keluar</a></li>
+                      <li class="drop-menu-item"><a href="/Profilepengguna">Akun</a></li>
+                      <li class="drop-menu-item"><a href="{{ url('Profilepengguna/' . $userId . '/edit') }}">Ubah Profile</a></li>
+                      <li class="drop-menu-item">
+                        <form action="/logout" method="POST">
+                            @csrf
+                        <button type="submit " style="border: none; background-color:transparent; color: rgb(255, 0, 0) !important" >
+                            Keluar</button>
+                        </li>
+                        </form>
                     </ul>
                   </li>
                 </ul>
@@ -48,7 +54,7 @@
       </nav>
 
       <!-- navbar bagian bawah  -------------------------------------------------------------------------------->
-      <<div class="navbar navbar-multi d-md-none pb-2 px-4">
+      <div class="navbar navbar-multi d-md-none pb-2 px-4">
         <div class="nav-item d-flex flex-column align-items-center ps-3 tod">
           <a href="{{ Route::currentRouteName() === 'dashboard-pengguna' ? '#' : route('dashboard-pengguna') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
             <i class="fa-solid fa-house i-multi {{ Route::currentRouteName() === 'dashboard-pengguna' ? 'i-act' : '' }}"></i>
@@ -68,9 +74,9 @@
           </a>
         </div>
         <div class="nav-item d-flex flex-column align-items-center ps-0 pe-3">
-          <a href="{{ Route::currentRouteName() === 'profile-pengguna' ? '#' : route('profile-pengguna') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
-            <i class="fa-solid fa-circle-user i-multi {{ Route::currentRouteName() === 'profile-pengguna' ? 'i-act' : '' }} "></i>
-            <span class="i-multit {{ Route::currentRouteName() === 'profile-pengguna' ? 'i-act' : '' }} ">Profile</span>
+          <a href="{{ request()->is('Profilepengguna') ? '#' : route('Profilepengguna.index') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
+            <i class="fa-solid fa-circle-user i-multi {{ request()->is('Profilepengguna') ? 'i-act' : '' }}"></i>
+            <span class="i-multit {{ request()->is('Profilepengguna') ? '#' : ''}}">Profile</span>
           </a>
         </div>
       </div>
