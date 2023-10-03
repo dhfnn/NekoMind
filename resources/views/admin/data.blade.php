@@ -8,11 +8,11 @@
       <div class="card mb-4">
         <div class="card-header pb-0 d-flex justify-content-between">
           <h6>Tabel Daftar Akun</h6>
-          <a href="{{ url('/data/create') }}" class=" d-flex justify-content-between align-items-center px-2 me-4" style="border: 1px solid rgba(0, 0, 0, 0.075); border-radius:10px ;color:black !important;">  <i class="fa-solid fa-plus"></i></a>
+          <a href="{{ url('/data/create') }}" class=" d-flex justify-content-between align-items-center px-2 me-2" style="border: 1px solid rgba(0, 0, 0, 0.075); border-radius:10px ;color:black !important;">  <i class="fa-solid fa-plus"></i></a>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
           <div class="table-responsive p-0">
-            <table class="table align-items-center mb-0">
+            <table class="table align-items-center mb-0" id="dataTable">
               <thead>
                 <tr>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">PENGGUNA</th>
@@ -44,21 +44,21 @@
                   </td>
                   <td class="align-middle text-center text-sm">
                     <span class="text-secondary text-xs font-weight-bold">
-                        @if ($user->datapengguna)
-                          {{ $user->email }}
-                        @else
+                        {{-- @if ($user->users) --}}
+                          {{ $user->email}}
+                        {{-- @else
                           -
-                        @endif
+                        @endif --}}
                       </span>
 
                   </td>
                   <td class="align-middle text-center">
                     <span class="text-secondary text-xs font-weight-bold">
-                        @if ($user->datapengguna)
+                        {{-- @if ($user->users) --}}
                           {{ $user->bergabung }}
-                        @else
+                        {{-- @else
                           -
-                        @endif
+                        @endif --}}
                       </span>
                   </td>
                   <td class="align-middle text-center">
@@ -67,10 +67,9 @@
 
     <a class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user"  href="{{ url('data/' . $user->id . '/edit') }} ">Edit</a>
 {{-- @endforeach --}}
-                      <a href="javascript:;" class="text-danger font-weight-bold text-xs ms-1 ps-1" style="border-left: 1px solid rgba(0, 0, 0, 0.329)" data-toggle="tooltip" data-original-title="Edit user"> hapus </a>
                   </td>
                   <td class="align-middle text-center">
-                    <a  class="text-secondary text-xs font-weight-bold">
+                    <a href="{{ url('/data/' .$user->id) }}"  class="text-secondary text-xs font-weight-bold">
                         <span class="">
                             <i class="fa-solid fa-caret-right"></i>
                           </span>

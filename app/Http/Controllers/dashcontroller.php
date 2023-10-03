@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\datalainnya;
 use App\Models\datapengguna;
+use App\Models\users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class dashcontroller extends Controller
 {
     function dashadmin(){
-
+        $jumlahPengguna = users::count();
         $namepage = 'Dashboard';
-        return view('admin.dashboard', compact('namepage'));
+        return view('admin.dashboard', compact('namepage','jumlahPengguna'));
     }
 
 

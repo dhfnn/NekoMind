@@ -61,12 +61,22 @@ class data extends Controller
         // $data['password'] = Hash:make($request->password);
         $data['password'] =Hash::make($request->password);
         $data['role']     = $request->role;
+        $data['bergabung']= date('Y-m-d');
         users::create($data);
-        return redirect('admin/dashboard');
+        return redirect('data');
     }
     public function show(string $id)
     {
-        // $userData = users::with('Datapengguna','Datalainnya')->get();
+        $namepage = 'Data';
+        $userData = users::with('Datapengguna','Datalainnya')->find($id);
+
+        // $mergedData = [
+        //     'datapengguna' => $userData->datapengguna,
+        //     'datalainnya' => $userData->datalainnya,
+        // ];
+
+        return view('more.datapengguna',compact('userData','namepage'));
+
 
 
 
@@ -81,23 +91,8 @@ class data extends Controller
 
             $data = users::where('id', $id)->first();
             $dataKota = Kota::all();
-            $datapengguna = datapengguna::where('user_id', $id)->first();
-            $datalainnya = datalainnya::where('user_id', $id)->first();
-
-            $data2 = Datapengguna::where('user_id', $id)->first();
-            $data3 = Datalainnya::where('user_id', $id)->first();
             $userData = users::with('Datapengguna','Datalainnya')->get();
-            return view('more.editpengguna', compact('data','data2','data3','datalainnya','datapengguna','dataKota'));
-
-            // if ($datalainnya &&  $datapengguna) {
-            //     $peringatan="";
-            //     return view('component.edit',compact('data','data2','data3','peringatan','datalainnya','datapengguna','dataKota'));
-            // } else {
-            //     $peringatan="DATA PENGGUNA YANG INGIN ANDA EDIT MASIH KOSONG !!";
-
-            //     return view('component.tambah',compact('data','data2','data3','peringatan','datalainnya','datapengguna','dataKota'));
-
-            // }
+            return view('more.editpengguna', compact('data','dataKota','userData'));
 
         }
 
@@ -122,16 +117,17 @@ class data extends Controller
                 $data3['password'] = $data3p->password;
             }
             $updatedata3 = users::where('id', $id)->update($data3);
-            if ($updatedata3) {
-                return redirect('data');
-            } else {
-                return 'gagal';
-            }
+            return redirect('data');
+
+            // if ($updatedata3) {
+            // } else {
+            //     return 'gagal';
+            // }
             // batas table akun --------------------------------------------------------------
 
 
 
-            $dataA = datapengguna::where('user_id', $id)->first();
+        $dataA = datapengguna::where('user_id', $id)->first();
         $dataB = datalainnya::where('user_id', $id)->first();
 
         if ($dataA &&  $dataB) {
@@ -205,6 +201,6 @@ class data extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
     }
 }

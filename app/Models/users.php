@@ -19,7 +19,7 @@ class users extends Authenticatable
         'password',
         'role',
         'username',
-        'bergsbung'
+        'bergabung',
     ];
     public function getHashedPasswordAttribute()
     {

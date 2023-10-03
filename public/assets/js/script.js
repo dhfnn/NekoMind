@@ -150,7 +150,13 @@ function backpage() {
     //     $("#selectSK").select2();
     // });
 
-
+ $(document).ready(function() {
+        $('#dataTable').DataTable({
+            "paging": true,       // Aktifkan paging
+            "pageLength": 10,     // Batasi jumlah tampilan per halaman menjadi 10
+            // Konfigurasi lainnya sesuai kebutuhan
+        });
+    });
 
 
 

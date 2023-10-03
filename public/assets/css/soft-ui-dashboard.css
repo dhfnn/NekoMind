@@ -4767,7 +4767,7 @@ fieldset:disabled .btn {
 }
 
 .navbar-brand {
-  
+
   padding-top: var(--bs-navbar-brand-padding-y);
   padding-bottom: var(--bs-navbar-brand-padding-y);
   margin-right: var(--bs-navbar-brand-margin-end);
@@ -20746,7 +20746,47 @@ fieldset:disabled .btn {
   box-shadow: none;
   color: #e9ecef;
 }
+  .t-sep {
+    padding: 5px;
+    color: #009feb;
+    border-radius: 5px;
+    border: #009feb 1px solid;
+    font-weight: 700;
+    background-color: #00a1eb07;
+  }
 
+  .t-sep:hover {
+    transition: 0.3s ease-in;
+    color: white;
+    border-radius: 5px;
+    border: #009feb 1px solid;
+    font-weight: 700;
+    background-color: #009feb;
+  }
+  .t-sepd {
+    padding: 5px;
+    color:#dc3545;
+    border-radius: 5px;
+    border: #dc3545 1px solid;
+    font-weight: 700;
+    background-color: #00a1eb07;
+  }
+
+  .t-sepd:hover {
+    transition: 0.3s ease-in;
+    color: white;
+    border-radius: 5px;
+    border: #dc3545 1px solid;
+    font-weight: 700;
+    background-color: #dc3545;
+  }
+  .card-body .hs::-webkit-scrollbar {
+    width: 6px !important; /* Lebar scrollbar */
+}
+
+.card-body .hs::-webkit-scrollbar-thumb {
+    background-color: transparent !important; /* Warna thumb scrollbar */
+}
 .btn-dark:hover,
 .btn.bg-gradient-dark:hover {
   background-color: #344767;

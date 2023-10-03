@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\tes;
 use App\Http\Controllers\data;
+use App\Http\Controllers\Konfigdata;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashcontroller;
 use App\Http\Controllers\loregcontroller;
+use App\Http\Controllers\Materi;
 use App\Http\Controllers\Profilepengguna;
 use App\Http\Controllers\profilecontroller;
 
@@ -35,13 +37,22 @@ route::middleware(['auth'])->group(function(){
     Route::middleware(['roleakses:admin'])->group(function () {
         Route::get('/admin/dashboard', [dashcontroller::class, 'dashadmin'])->name('dashboard-admin');
         // bagian hal pelajaran
-        Route::get('/admin/pelajaran', function(){
-            $namepage = 'Pelajaran';
-            return view('admin.pelajaran' , compact('namepage'));
-        })->name('pelajaran');
+        Route::resource('materi' ,Materi::class);
+        Route::get('materi/{id}' ,[Materi::class, 'show']);
         // bagian hal data
         Route::resource('data', data::class);
         Route::get('data/{id}/edit', [data::class, 'edit'])->name('data.edit');
+        // Route::get('data/{id}', 'data@show');
+        Route::get('data/{id}', [data::class, 'show'])->name('data.show');
+        // Route::delete('/data/{id}', [data::class, 'destroy'])->name('data.destroy');
+
+
+
+        Route::resource('Konfigdata', Konfigdata::class);
+        Route::get('Konfigdata/{id}/edit', [Konfigdata::class,'edit']);
+        Route::delete('Konfigdata/{id}', [Konfigdata::class, 'destroy'])->name('data.delete');
+
+
 
 
 

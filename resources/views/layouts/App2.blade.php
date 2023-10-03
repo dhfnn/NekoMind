@@ -22,8 +22,6 @@
     <title>Soft UI Dashboard by Creative Tim</title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <!-- Font Awesome Icons -->
-    {{-- <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script> --}}
     <script src="https://kit.fontawesome.com/9494185896.js" crossorigin="anonymous"></script>
 
     <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
@@ -69,7 +67,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ $namepage === 'Data' ? 'active' :  '' }}" href="{{ $namepage === 'Data' ? '#' : url('/datapage') }}">
+            <a class="nav-link {{ $namepage === 'Data' ? 'active' :  '' }}" href="{{ $namepage === 'Data' ? '#' : url('data') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <title>office</title>
@@ -95,7 +93,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ $namepage === 'Pelajaran' ? 'active' : '' }}" href="{{ $namepage === 'Pelajaran' ? '#' : route('pelajaran') }}">
+            <a class="nav-link {{ $namepage === 'Materi' ? 'active' : '' }}" href="{{ $namepage === 'Materi' ? '#' : url('/materi') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <title>credit-card</title>
@@ -114,7 +112,7 @@
                   </g>
                 </svg>
               </div>
-              <span class="nav-link-text ms-1">Billing</span>
+              <span class="nav-link-text ms-1">Materi</span>
             </a>
           </li>
           <li class="nav-item mt-3">
@@ -212,6 +210,9 @@
 
 
 <!--   Core JS Files   -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script>{{asset('assets/js/script.js')}}</script>
 <script src="../assets/js/core/popper.min.js"></script>
 <script src="../assets/js/core/bootstrap.min.js"></script>
 <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>

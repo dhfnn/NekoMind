@@ -1,13 +1,13 @@
-@extends('more.editpengguna')
+@extends('more.edittmp')
 
 
 @section('addpage')
 
-<form action="{{url( 'data/'.$data->id)   }}" method="POST">
+<form action="{{  url('Konfigdata/') }}" method="POST">
     @csrf
-    @method('PUT')
+    {{-- @method('PUT') --}}
 
-<div class="row row-cols-1 py-md-3 px-3 wi-ep mt-5">
+<div class="row row-cols-1 py-md-3 px-3 wi-ep mt-2">
     <div class="col col-md-6 px-4 w-ep">
         <!-- <div class="col p-3" style="border: 1px black solid; border-radius: 10px;"> -->
           <span class="title-dp pb-4 position-absolute">Data Pribadi</span>
@@ -15,19 +15,32 @@
           <div class="d-flex justify-content-end d-md-none">
 CC
           </div>
-
+          <input type="text" value="{{ $userData->id }}" name="user_id">
             <div class="i-ep mt-3 mt-md-5">
-                <div class="col">
+                <div class="col d-flex justify-content-between">
                     <label for="" class="ji-ep">Nama Lengkap</label>
+                    @error('nama')
+                    <span class="mes-e">{{ $message }}</span>
+                    @enderror
                 </div>
                 <input class="ie-nama" placeholder="Nama Lengkap" type="text" name="nama" value="">
             </div>
             <div class="i-ep">
-                <label for="" class="ji-ep">Tanggal Lahir</label>
+                <div class="col d-flex justify-content-between">
+                    <label for="" class="ji-ep">Tanggal Lahir</label>
+                    @error('tanggallahir')
+                    <span class="mes-e">{{ $message }}</span>
+                    @enderror
+                </div>
                 <input class="ie-date"  type="Date" name="tanggallahir" value="">
             </div>
             <div class="i-ep">
-                <label for="" class="ji-ep">Jenis Kelamin</label>
+                <div class="col d-flex justify-content-between">
+                    <label for="" class="ji-ep">Jenis Kelamin</label>
+                    @error('jeniskelamin')
+                    <span class="mes-e">{{ $message }}</span>
+                    @enderror
+                </div>
                 <div class="radio">
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="jeniskelamin" id="lk" value="laki-laki"
@@ -45,7 +58,12 @@ CC
                 </div>
             </div>
             <div class="i-ep">
-                <label for="" class="ji-ep" >Kota/Kabupaten</label>
+                <div class="col d-flex justify-content-between">
+                    <label for="" class="ji-ep">Kota</label>
+                    @error('kota')
+                    <span class="mes-e">{{ $message }}</span>
+                    @enderror
+                </div>
                   <select class="w-select outline-none selectKT" name="kota" id="">
                       <option value="">PILIH KOTA</option>
                       @foreach ($dataKota as $kota )
@@ -55,11 +73,21 @@ CC
                   </select>
               </div>
             <div class="i-ep">
-                <label for="" class="ji-ep">Alamat</label>
+                <div class="col d-flex justify-content-between">
+                    <label for="" class="ji-ep">Alamat</label>
+                    @error('alamat')
+                    <span class="mes-e">{{ $message }}</span>
+                    @enderror
+                </div>
                 <textarea id="" class="ie-alamat" name="alamat"></textarea>
             </div>
            <div class="i-ep">
-            <label for="" class="ji-ep">No Handphone</label>
+            <div class="col d-flex justify-content-between">
+                <label for="" class="ji-ep">No Handphone</label>
+                @error('nohp')
+                <span class="mes-e">{{ $message }}</span>
+                @enderror
+            </div>
             <input type="number" id="" class="ie-no" placeholder="08XXXXXXXXXX" name="nohp" value="">
           </div>
         <!-- </div> -->
@@ -69,7 +97,12 @@ CC
       <span class="title-dp pb-4 position-absolute">Lainnya</span>
 
     <div class="i-ep mt-5">
-      <label for="" class="ji-ep">Nama Sekolah</label>
+        <div class="col d-flex justify-content-between">
+            <label for="" class="ji-ep">Nama Sekolah</label>
+            @error('namasekolah')
+            <span class="mes-e">{{ $message }}</span>
+            @enderror
+        </div>
       <div class="w-select" >
         <select class="ie-select" name="namasekolah">
           <option selected>Pilih Sekolah</option>
@@ -82,7 +115,12 @@ CC
 
     </div>
     <div class="i-ep">
-      <label for="" class="ji-ep">Kelas</label>
+        <div class="col d-flex justify-content-between">
+            <label for="" class="ji-ep">Kelas</label>
+            @error('kelas')
+            <span class="mes-e">{{ $message }}</span>
+            @enderror
+        </div>
       <div class="w-selectk">
         <select class="ie-select" name="kelas">
           <option>Pilih Kelas</option>
@@ -107,7 +145,12 @@ CC
     </div>
 
     <div class="i-ep">
-      <label for="" class="ji-ep">Jurusan</label>
+        <div class="col d-flex justify-content-between">
+            <label for="" class="ji-ep">Jurusan</label>
+            @error('jurusan')
+            <span class="mes-e">{{ $message }}</span>
+            @enderror
+        </div>
       <div class="w-selectk">
         <select class="ie-select" name="jurusan">
           <option value="">Pilih Jurusan</option>
@@ -120,7 +163,12 @@ CC
 
     </div>
     <div class="i-ep mt-5">
-      <label for="" class="ji-ep">Target Belajar</label>
+        <div class="col d-flex justify-content-between">
+            <label for="" class="ji-ep">Target Belajar</label>
+            @error('target')
+            <span class="mes-e">{{ $message }}</span>
+            @enderror
+        </div>
       <div class="w-select">
         <select class="ie-select" name="target">
           <option value="">Tentukan Targetmu</option>
@@ -136,7 +184,12 @@ CC
 
   <div class="i-ep">
     {{-- <div class="col"> --}}
-        <label for="" class="ji-ep">Pelajaran Favorit</label>
+        <div class="col d-flex justify-content-between">
+            <label for="" class="ji-ep">Pelajaran Favorit</label>
+            @error('')
+            <span class="mes-e">{{ $message }}</span>
+            @enderror
+        </div>
         <span class="ms-2" style="font-size: 13px; font-weight:600; color:rgb(231, 7, 7);">*maks 5</span>
     {{-- </div> --}}
     <div class="row  row-cols-2 row-cols-sm-3 mt-2">
@@ -223,11 +276,21 @@ CC
 
     </div>
     <div class="i-ep ">
-        <label for="" class="ji-ep">Motto</label>
+        <div class="col d-flex justify-content-between">
+            <label for="" class="ji-ep">Motto</label>
+            @error('motto')
+            <span class="mes-e">{{ $message }}</span>
+            @enderror
+        </div>
         <input class="ie-nama" placeholder="Keikan Mottomu" type="text" name="motto" value="">
     </div>
     </div>
     </div>
+</div>
+<div class="col d-flex justify-content-end mb-2">
+    <button class="t-sep me-3 me-md-0 mt-md-3" type="submit">
+        selesai
+      </button>
 </div>
 </form>
 @endsection

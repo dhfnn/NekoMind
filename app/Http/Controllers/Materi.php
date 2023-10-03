@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 
-class akun extends Controller
+class Materi extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.data');
+        $dataKelas = Kelas::all();
+        $namepage = 'Materi';
+        return view('admin.pelajaran',compact('namepage','dataKelas'));
     }
 
     /**
@@ -35,7 +38,8 @@ class akun extends Controller
      */
     public function show(string $id)
     {
-        //
+        $kelas = Kelas::where('id', $id)->first();
+    return $kelas->kelas;
     }
 
     /**

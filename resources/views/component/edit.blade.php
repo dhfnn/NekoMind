@@ -1,17 +1,17 @@
-@extends('more.editpengguna')
+@extends('more.edittmp')
 
 
 @section('addpage')
 <div class="container px-2" >
-    <form action="{{url( $data->id.'/data/'.$data->id)   }}" method="POST">
+    <form action="{{  url('Konfigdata/' .$userData->id ) }}" method="POST">
+
     @csrf
     @method('PUT')
 
-<div class="row row-cols-1 py-md-3 px-3 wi-ep mt-5">
+<div class="row row-cols-1 py-md-3 px-3 wi-ep mt-2">
     <div class="col col-md-6 px-4 w-ep">
         <!-- <div class="col p-3" style="border: 1px black solid; border-radius: 10px;"> -->
           <span class="title-dp pb-4 position-absolute">Data Pribadi</span>
-          <span class="pb-4 position-absolute fw-bold text-danger me-3" style="right: 0; font-size:10px;">{{ $peringatan }} </span>
 
           @if($errors->any())
 
@@ -28,23 +28,23 @@ CC
                 <div class="col">
                     <label for="" class="ji-ep">Nama Lengkap</label>
                 </div>
-                <input class="ie-nama" placeholder="Nama Lengkap" type="text" name="nama" value="{{ $datapengguna->nama }}">
+                <input class="ie-nama" placeholder="Nama Lengkap" type="text" name="nama" value="{{ $userData->datapengguna->nama }}">
             </div>
             <div class="i-ep">
                 <label for="" class="ji-ep">Tanggal Lahir</label>
-                <input class="ie-date"  type="Date" name="tanggallahir" value="{{ $datapengguna->tanggallahir}}">
+                <input class="ie-date"  type="Date" name="tanggallahir" value="{{ $userData->datapengguna->tanggallahir}}">
             </div>
             <div class="i-ep">
                 <label for="" class="ji-ep">Jenis Kelamin</label>
                 <div class="radio">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="jeniskelamin" id="lk" value="laki-laki" {{$datapengguna->jeniskelamin === 'laki-laki' ? 'checked' : '' }}
+                        <input class="form-check-input" type="radio" name="jeniskelamin" id="lk" value="laki-laki" {{$userData->datapengguna->jeniskelamin === 'laki-laki' ? 'checked' : '' }}
                         <label class="form-check-label" for="lk" >
                           Laki-Laki
                         </label>
                       </div>
                       <div class="form-check">
-                <input class="form-check-input" type="radio" name="jeniskelamin" id="pr" value="perempuan" {{ $datapengguna->jeniskelamin === 'perempuan' ? 'checked' : '' }}
+                <input class="form-check-input" type="radio" name="jeniskelamin" id="pr" value="perempuan" {{ $userData->datapengguna->jeniskelamin === 'perempuan' ? 'checked' : '' }}
                         <label class="form-check-label" for="pr">
                           Perempuan
                         </label>
@@ -63,11 +63,11 @@ CC
             </div>
             <div class="i-ep">
                 <label for="" class="ji-ep">Alamat</label>
-                <textarea id="" class="ie-alamat" name="alamat">{{$datapengguna->alamat}}</textarea>
+                <textarea id="" class="ie-alamat" name="alamat">{{$userData->datapengguna->alamat}}</textarea>
             </div>
            <div class="i-ep">
             <label for="" class="ji-ep">No Handphone</label>
-            <input type="number" id="" class="ie-no" placeholder="08XXXXXXXXXX" name="nohp" value="{{$datapengguna->nohp}}">
+            <input type="number" id="" class="ie-no" placeholder="08XXXXXXXXXX" name="nohp" value="{{$userData->datapengguna->nohp}}">
           </div>
         <!-- </div> -->
     </div>
@@ -77,11 +77,11 @@ CC
 
     <div class="i-ep mt-5">
       <label for="" class="ji-ep">Nama Sekolah</label>
-      <input class="ie-nama" placeholder="Nama Sekolah" type="text" name="namasekolah" value="{{ $datalainnya->namasekolah }}">
+      <input class="ie-nama" placeholder="Nama Sekolah" type="text" name="namasekolah" value="{{ $userData->datalainnya->namasekolah }}">
       {{-- <select class="w-select outline-none" name="kota" id="selectSK">
         <option value="">PILIH SEKOLAH</option>
-        @foreach ($dataSekolah as $item )
-        <option value="{{ $item['sekolah'] }}">{{ $item['sekolah'] }}</option>
+        @foreach ($userData->dataSekolah as $userData->item )
+        <option value="{{ $userData->item['sekolah'] }}">{{ $userData->item['sekolah'] }}</option>
         @endforeach
     </select> --}}
 
@@ -91,17 +91,17 @@ CC
       <div class="w-selectk">
         <select class="ie-select" name="kelas">
           <option>Pilih Kelas</option>
-          <option value="2" {{ $datalainnya->kelas === '2' ? 'selected' : '' }}>Kelas 2</option>
-          <option value="3" {{ $datalainnya->kelas === '3' ? 'selected' : '' }}>Kelas 3</option>
-          <option value="4" {{ $datalainnya->kelas === '4' ? 'selected' : '' }}>Kelas 4</option>
-          <option value="5" {{ $datalainnya->kelas === '5' ? 'selected' : '' }}>Kelas 5</option>
-          <option value="6" {{ $datalainnya->kelas === '6' ? 'selected' : '' }}>Kelas 6</option>
-          <option value="7" {{ $datalainnya->kelas === '7' ? 'selected' : '' }}>Kelas 7</option>
-          <option value="8" {{ $datalainnya->kelas === '8' ? 'selected' : '' }}>Kelas 8</option>
-          <option value="9" {{ $datalainnya->kelas === '9' ? 'selected' : '' }}>Kelas 9</option>
-          <option value="10" {{ $datalainnya->kelas === '10' ? 'selected' : '' }}>Kelas 10</option>
-          <option value="11" {{ $datalainnya->kelas === '11' ? 'selected' : '' }}>Kelas 11</option>
-          <option value="12" {{ $datalainnya->kelas === '12' ? 'selected' : '' }}>Kelas 12</option>
+          <option value="2" {{ $userData->datalainnya->kelas === '2' ? 'selected' : '' }}>Kelas 2</option>
+          <option value="3" {{ $userData->datalainnya->kelas === '3' ? 'selected' : '' }}>Kelas 3</option>
+          <option value="4" {{ $userData->datalainnya->kelas === '4' ? 'selected' : '' }}>Kelas 4</option>
+          <option value="5" {{ $userData->datalainnya->kelas === '5' ? 'selected' : '' }}>Kelas 5</option>
+          <option value="6" {{ $userData->datalainnya->kelas === '6' ? 'selected' : '' }}>Kelas 6</option>
+          <option value="7" {{ $userData->datalainnya->kelas === '7' ? 'selected' : '' }}>Kelas 7</option>
+          <option value="8" {{ $userData->datalainnya->kelas === '8' ? 'selected' : '' }}>Kelas 8</option>
+          <option value="9" {{ $userData->datalainnya->kelas === '9' ? 'selected' : '' }}>Kelas 9</option>
+          <option value="10" {{ $userData->datalainnya->kelas === '10' ? 'selected' : '' }}>Kelas 10</option>
+          <option value="11" {{ $userData->datalainnya->kelas === '11' ? 'selected' : '' }}>Kelas 11</option>
+          <option value="12" {{ $userData->datalainnya->kelas === '12' ? 'selected' : '' }}>Kelas 12</option>
 
 
         </select>
@@ -116,12 +116,12 @@ CC
         <select class="ie-select" name="jurusan">
           <option value="">Pilih Jurusan</option>
           <option value="IPA"
-        {{ $datalainnya->jurusan === 'IPA' ? 'selected' : '' }}
+        {{ $userData->datalainnya->jurusan === 'IPA' ? 'selected' : '' }}
             >IPA</option>
           <option value="IPS"
-          {{ $datalainnya->jurusan === 'IPS' ? 'selected' : '' }}>IPS</option>
+          {{ $userData->datalainnya->jurusan === 'IPS' ? 'selected' : '' }}>IPS</option>
           <option value="Kejurusan"
-          {{ $datalainnya->jurusan === 'Kejurusan' ? 'selected' : '' }}>Kejurusan</option>
+          {{ $userData->datalainnya->jurusan === 'Kejurusan' ? 'selected' : '' }}>Kejurusan</option>
         </select>
         <i class="fa-solid fa-chevron-down arrow-icon"></i>
       </div>
@@ -133,16 +133,16 @@ CC
         <select class="ie-select" name="target">
           <option value="">Tentukan Targetmu</option>
           <option value="UTBK"
-          {{ $datalainnya->target === 'UTBK' ? 'selected' : '' }}
+          {{ $userData->datalainnya->target === 'UTBK' ? 'selected' : '' }}
           >UTBK</option>
           <option value="UTS"
-          {{ $datalainnya->target === 'UTS' ? 'selected' : '' }}
+          {{ $userData->datalainnya->target === 'UTS' ? 'selected' : '' }}
           >UTS</option>
           <option value="UAS"
-          {{ $datalainnya->target === 'UAS' ? 'selected' : '' }}
+          {{ $userData->datalainnya->target === 'UAS' ? 'selected' : '' }}
           >UAS</option>
           <option value="OLIMPIADE"
-          {{ $datalainnya->target === 'Olimpiade' ? 'selected' : '' }}
+          {{ $userData->datalainnya->target === 'Olimpiade' ? 'selected' : '' }}
           >OLIMPIADE</option>
         </select>
         <i class="fa-solid fa-chevron-down arrow-icon"></i>
@@ -241,14 +241,16 @@ CC
     <div class="i-ep ">
         <label for="" class="ji-ep">Motto</label>
         <input class="ie-nama" placeholder="Keikan Mottomu" type="text" name="motto"
-        value="{{$datalainnya->motto}}">
+        value="{{$userData->datalainnya->motto}}">
     </div>
     </div>
     </div>
 </div>
-<button class="t-sep me-3 me-md-0 mt-md-3" type="submit">
-    selesai
-  </button>
+<div class="col d-flex justify-content-end mb-2">
+    <button class="t-sep me-3 me-md-0 mt-md-3" type="submit">
+        selesai
+      </button>
+</div>
 </form>
 </div>
 
