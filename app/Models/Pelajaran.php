@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Pelajaran extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     protected $table = 'pelajaran';
-    protected $fillable = ['id_semester', 'id_kelas', 'namapelajaran'];
+    protected $primaryKey = 'id';
+    protected $fillable = ['id_semester', 'id_kelas', 'namapelajaran','jenis'];
 
     public function semester()
     {

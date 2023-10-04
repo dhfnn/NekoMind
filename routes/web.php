@@ -37,8 +37,8 @@ route::middleware(['auth'])->group(function(){
     Route::middleware(['roleakses:admin'])->group(function () {
         Route::get('/admin/dashboard', [dashcontroller::class, 'dashadmin'])->name('dashboard-admin');
         // bagian hal pelajaran
-        Route::resource('materi' ,Materi::class);
-        Route::get('materi/{id}' ,[Materi::class, 'show']);
+        Route::resource('Materi' ,Materi::class);
+        Route::get('Materi/{id}' ,[Materi::class, 'show']);
         // bagian hal data
         Route::resource('data', data::class);
         Route::get('data/{id}/edit', [data::class, 'edit'])->name('data.edit');

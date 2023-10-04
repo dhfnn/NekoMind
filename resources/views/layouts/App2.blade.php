@@ -89,11 +89,11 @@
                   </g>
                 </svg>
               </div>
-              <span class="nav-link-text ms-1">Tables</span>
+              <span class="nav-link-text ms-1">Pengguna</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ $namepage === 'Materi' ? 'active' : '' }}" href="{{ $namepage === 'Materi' ? '#' : url('/materi') }}">
+            <a class="nav-link {{ $namepage === 'Materi' ? 'active' : '' }}" href="{{ $namepage === 'Materi' ? '#' : url('/Materi') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <title>credit-card</title>
@@ -187,7 +187,7 @@
 
 @yield('content')
 <!-- Button trigger modal -->
-
+@stack('script')
 
   <!-- Modal -->
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

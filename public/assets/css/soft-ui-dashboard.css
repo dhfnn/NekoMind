@@ -5954,6 +5954,9 @@ fieldset:disabled .btn {
   counter-increment: section;
 }
 
+.mes-e{
+    font-size: 12px; color: rgba(191, 9, 9, 0.883); text-decoration: none;
+}
 .list-group-item-action {
   width: 100%;
   color: var(--bs-list-group-action-color);
