@@ -11,6 +11,9 @@
     <script src="https://kit.fontawesome.com/9494185896.js" crossorigin="anonymous"></script>
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="../assets/js/color-modes.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   </head>
   <body>
     <header class="position-fixed fixed-top d-md-flex justify-content">
@@ -37,59 +40,63 @@
                 <div class="col col-md-6 px-4 w-ep">
                     <!-- <div class="col p-3" style="border: 1px black solid; border-radius: 10px;"> -->
                       <span class="title-dp pb-4 position-absolute">Data Pribadi</span>
+                      @if($errors->any())
+
+                      <span class="mes-e  me-4   position-absolute" style="font-weight: 700; right:0;">
+                        {{-- *Isi semua data yang tersedia ! --}}
+                        {{ $errors }}
+                      </span>
+                      @endif
                       <div class="d-flex justify-content-end d-md-none">
 CC
                       </div>
+                      <form action="{{ url('Profilepengguna/' . $userId) }}" method="POST">
+                        @csrf
+                        @method('PUT')
 
                         <div class="i-ep mt-3 mt-md-5">
                             <label for="" class="ji-ep">Nama Lengkap</label>
-                            <input class="ie-nama" placeholder="Nama Lengkap" type="text">
+                            <input class="ie-nama" value="{{ $dataPengguna ->nama }}" placeholder="Nama Lengkap" type="text" name="nama">
                         </div>
                         <div class="i-ep">
                             <label for="" class="ji-ep">Tanggal Lahir</label>
-                            <input class="ie-date"  type="Date">
+                            <input class="ie-date"  type="Date" value="{{ $dataPengguna ->tanggallahir }}" name="tanggallahir">
                         </div>
                         <div class="i-ep">
                             <label for="" class="ji-ep">Jenis Kelamin</label>
                             <div class="radio">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="JenisKelamin" id="lk" value="Laki-Laki" checked>
+                                    <input class="form-check-input" type="radio" name="jeniskelamin" id="lk" value="Laki-Laki" {{ $dataPengguna->jeniskelamin === 'laki-laki' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="lk">
-                                      Laki-Laki
+                                        Laki-Laki
                                     </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="JenisKelamin" id="pr" value="Perempuan">
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="jeniskelamin" id="pr" value="Perempuan" {{ $dataPengguna->jeniskelamin === 'Perempuan' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="pr">
-                                      Perempuan
+                                        Perempuan
                                     </label>
-                                  </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="i-ep">
-                          <label for="" class="ji-ep">Kota/Kabupaten</label>
-                          <div class="w-select">
-                            <select class="ie-select">
-                              <option selected>Pilih Kota</option>
-                              <option value="1">one</option>
-                              <option value="2">Two</option>
-                              <option value="3">Three</option>
-                            </select>
-                            <i class="fa-solid fa-chevron-down arrow-icon"></i>
-                          </div>
 
                         </div>
                         <div class="i-ep">
-                            <label for="" class="ji-ep">Alamat</label>
-                            <textarea name="" id="" class="ie-alamat"></textarea>
-                        </div>
+                            <label for="" class="ji-ep" >Kota/Kabupaten</label>
+                              <select class="w-select outline-none selectKT" name="kota" id="">
+                                  <option value="">PILIH KOTA</option>
+                                  @foreach ($dataKota as $kota )
+                                <option value="{{ $kota->city_name }}">{{ $kota->city_name }}</option>
+
+                                  @endforeach
+                              </select>
+                          </div>
                         <div class="i-ep">
-                          <label for="" class="ji-ep">Email</label>
-                          <input type="Email" name="" id="" class="ie-nama" placeholder="example@gmail.com">
-                       </div>
+                            <label for="" class="ji-ep">Alamat</label>
+                            <textarea name="alamat" id="alamat" class="ie-alamat">{{ $dataPengguna->alamat }}</textarea>
+                        </div>
                        <div class="i-ep">
                         <label for="" class="ji-ep">No Handphone</label>
-                        <input type="number" name="" id="" class="ie-no" placeholder="08XXXXXXXXXX">
+                        <input type="number" name="nohp" id="" class="ie-no" value="{{ $dataPengguna ->nohp }}" placeholder="08XXXXXXXXXX">
                       </div>
                     <!-- </div> -->
                 </div>
@@ -97,65 +104,69 @@ CC
                 <div class="col col-md-6 mt-5 mt-md-0 px-4 ">
                   <span class="title-dp pb-4 position-absolute">Lainnya</span>
 
-                <div class="i-ep mt-5">
-                  <label for="" class="ji-ep">Nama Sekolah</label>
-                  <div class="w-select">
-                    <select class="ie-select">
-                      <option selected>Pilih Sekolah</option>
-                      <option value="1">one</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                    <i class="fa-solid fa-chevron-down arrow-icon"></i>
+                  <div class="i-ep mt-5">
+                    <label for="" class="ji-ep">Nama Sekolah</label>
+                    <input class="ie-nama" placeholder="Nama Sekolah" name="namasekolah" value="{{ $dataLainnya->namasekolah }}">
+
+                  </div>
+                  <div class="i-ep">
+                    <label for="" class="ji-ep">Kelas</label>
+                    <div class="w-selectk">
+                      <select class="ie-select" name="kelas">
+                        <option>Pilih Kelas</option>
+          <option value="2" {{ $dataLainnya->kelas === '2' ? 'selected' : '' }}>Kelas 2</option>
+          <option value="3" {{ $dataLainnya->kelas === '3' ? 'selected' : '' }}>Kelas 3</option>
+          <option value="4" {{ $dataLainnya->kelas === '4' ? 'selected' : '' }}>Kelas 4</option>
+          <option value="5" {{ $dataLainnya->kelas === '5' ? 'selected' : '' }}>Kelas 5</option>
+          <option value="6" {{ $dataLainnya->kelas === '6' ? 'selected' : '' }}>Kelas 6</option>
+          <option value="7" {{ $dataLainnya->kelas === '7' ? 'selected' : '' }}>Kelas 7</option>
+          <option value="8" {{ $dataLainnya->kelas === '8' ? 'selected' : '' }}>Kelas 8</option>
+          <option value="9" {{ $dataLainnya->kelas === '9' ? 'selected' : '' }}>Kelas 9</option>
+          <option value="10" {{ $dataLainnya->kelas === '10' ? 'selected' : '' }}>Kelas 10</option>
+          <option value="11" {{ $dataLainnya->kelas === '11' ? 'selected' : '' }}>Kelas 11</option>
+          <option value="12" {{ $dataLainnya->kelas === '12' ? 'selected' : '' }}>Kelas 12</option>
+
+                      </select>
+                      <i class="fa-solid fa-chevron-down arrow-icon"></i>
+                    </div>
+
                   </div>
 
-                </div>
-                <div class="i-ep">
-                  <label for="" class="ji-ep">Kelas</label>
-                  <div class="w-selectk">
-                    <select class="ie-select">
-                      <option selected>Pilih Kelas</option>
-                      <option value="Kelas_1">Kelas 1</option>
-                      <option value="Kelas_2">Kelas 2</option>
-                      <option value="Kelas_3">Kelas 3</option>
-                      <option value="Kelas_4">Kelas 4</option>
-                      <option value="Kelas_5">Kelas 5</option>
-                      <option value="Kelas_6">Kelas 6</option>
-                      <option value="Kelas_7">Kelas 7</option>
-                      <option value="Kelas_8">Kelas 8</option>
-                      <option value="Kelas_9">Kelas 9</option>
-                      <option value="Kelas_10">Kelas 10</option>
-                      <option value="Kelas_11">Kelas 11</option>
-                      <option value="Kelas_12">Kelas 12</option>
-                    </select>
-                    <i class="fa-solid fa-chevron-down arrow-icon"></i>
+                  <div class="i-ep">
+                    <label for="" class="ji-ep">Jurusan</label>
+                    <div class="w-selectk">
+                      <select class="ie-select" name="jurusan">
+                        <option value="">Pilih Jurusan</option>
+                        <option value="IPA"
+                      {{ $dataLainnya->jurusan === 'IPA' ? 'selected' : '' }}
+                          >IPA</option>
+                        <option value="IPS"
+                        {{ $dataLainnya->jurusan === 'IPS' ? 'selected' : '' }}>IPS</option>
+                        <option value="Kejurusan"
+                        {{ $dataLainnya->jurusan === 'Kejurusan' ? 'selected' : '' }}>Kejurusan</option>
+                      </select>
+                      <i class="fa-solid fa-chevron-down arrow-icon"></i>
+                    </div>
+
                   </div>
-
-                </div>
-
-                <div class="i-ep">
-                  <label for="" class="ji-ep">Jurusan</label>
-                  <div class="w-selectk">
-                    <select class="ie-select">
-                      <option selected>Pilih Jurusan</option>
-                      <option value="1">one</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                    <i class="fa-solid fa-chevron-down arrow-icon"></i>
-                  </div>
-
-                </div>
                 <div class="i-ep mt-5">
                   <label for="" class="ji-ep">Target Belajar</label>
                   <div class="w-select">
-                    <select class="ie-select">
-                      <option selected>Tentukan Targetmu</option>
-                      <option value="UTBK">UTBK</option>
-                      <option value="UTS">UTS</option>
-                      <option value="UAS">UAS</option>
-                      <option value="OLIMPIADE">OLIMPIADE</option>
-                    </select>
+                    <select class="ie-select" name="target">
+                        <option value="">Tentukan Targetmu</option>
+                        <option value="UTBK"
+                        {{ $dataLainnya->target === 'UTBK' ? 'selected' : '' }}
+                        >UTBK</option>
+                        <option value="UTS"
+                        {{ $dataLainnya->target === 'UTS' ? 'selected' : '' }}
+                        >UTS</option>
+                        <option value="UAS"
+                        {{ $dataLainnya->target === 'UAS' ? 'selected' : '' }}
+                        >UAS</option>
+                        <option value="OLIMPIADE"
+                        {{ $dataLainnya->target === 'Olimpiade' ? 'selected' : '' }}
+                        >OLIMPIADE</option>
+                      </select>
                     <i class="fa-solid fa-chevron-down arrow-icon"></i>
                   </div>
               </div>
@@ -236,7 +247,7 @@ CC
                       </label>
                     </div>
                   </div>
-                  <div class="col mb-3">
+                  <div class="col ">
                     <div class="form-check dark">
                       <input class="form-check-input" type="checkbox" value="" id="Ekonomi">
                       <label class="form-check-label" for="Ekonomi">
@@ -246,14 +257,21 @@ CC
                   </div>
                 </div>
                 </div>
+                <div class="i-ep">
+                    <label for="" class="ji-ep">Motto </label>
+                    <input class="ie-nama" value="{{ $dataLainnya ->motto }}" placeholder="Nama Lengkap" type="text" name="motto">
+                </div>
                   <!-- </div> -->
                 </div>
             </div>
             <div class="d-flex justify-content-end mb-3 px-1 align-items-center">
-              <button class="t-sep me-3 me-md-0 mt-md-3">
+              <button class="t-sep me-3 me-md-0 mt-md-3" type="submit">
                 selesai
               </button>
             </div>
+
+                      </form>
+
 
         </div>
     </main>
@@ -262,6 +280,9 @@ CC
 
     </script>
   </body>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-    I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>

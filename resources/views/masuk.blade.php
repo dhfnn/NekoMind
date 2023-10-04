@@ -29,35 +29,59 @@
             </div>
             <div class="card bg-white text px-1 px-sm-4 py-1 py-sm-3 mt-3 card-masuk" >
                 <div class="card-body text-center">
+                    @if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
                     <div class="col-12 text-center py-1 py-sm-3">
                         <h1 class="fw-bolder pb-3 text-gradient text-info">Selamat Datang</h1>
                     </div>
                     <div class="col-12 d-flex flex-row justify-content-center">
-                        <div class="col-12 ps-2 text-start">
+                        <div class="col-12 ps-2 d-flex justify-content-between">
                             <span class="m" >Masukan Email dan Password untuk Login</span>
+                            @error('email')
+                            <span class="mes-e" style="">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
-                    <div class="col-12  d-flex flex-row justify-content-center ">
-                        <div class="col-12">
-                            <div class="form-floating mb-3">
-                                <input type="email" class="form-control"id="floatingInput" placeholder="name@example.com" >
-                                <label for="floatingInput" >Email address</label>
-                              </div>
-                              <div class="form-floating">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                                <label for="floatingPassword">Password</label>
-                              </div>
-                              <div class="col-12 text-end pt-2 pe-2">
-                                <a href="" style="font-size: 14px; color: rgba(0, 94, 255, 0.883); text-decoration: none; ">Lupa password?</a>
-                              </div>
-                        </div>
+                    <form action="" method="POST">
+                        @csrf
+                        <div class="col-12  d-flex flex-row justify-content-center ">
+                            <div class="col-12">
 
-                    </div>
-                    <div class="col-12">
-                        <button  class="sign-em">
-                            Masuk
-                        </button>
-                    </div>
+                                <div class="form-floating ">
+                                    <input type="email" class="form-control"id="floatingInput" placeholder="name@example.com" value="{{ old('email') }}" name="email" >
+                                    <label for="floatingInput" >Email address</label>
+                                  </div>
+                                  <div class="col p-0 d-flex align-items-start justify-content-end"  style="height:15px">
+                                  @error('password')
+                                    <span class="mes-e" style="" >{{ $message }}</span>
+                                  @enderror
+                                </div>
+
+
+                                  <div class="form-floating">
+                                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" value="{{ old('password') }}" name="password">
+                                    <label for="floatingPassword">Password</label>
+                                  </div>
+                                  <div class="col-12 text-end pt-2 pe-2">
+                                    <a href="" style="font-size: 14px; color: rgba(0, 94, 255, 0.883); text-decoration: none; ">Lupa password?</a>
+                                  </div>
+                            </div>
+
+                        </div>
+                        <div class="col-12">
+                            <button  class="sign-em">
+                                Masuk
+                            </button>
+                        </div>
+                    </form>
+
                     <div class="col-12 text-centbr  py-3">
                         <span class="">Atau</span>
                     </div>

@@ -88,7 +88,7 @@
 
 
 
-      <script type="text/javascript" src="../../assets/script.js"></script>
+      <script type="text/javascript" src="{{ asset('assets/js/script.js') }}"></script>
 </body>
 
 </html>

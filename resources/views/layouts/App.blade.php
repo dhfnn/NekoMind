@@ -11,7 +11,15 @@
     <script src="https://kit.fontawesome.com/9494185896.js" crossorigin="anonymous"></script>
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="../assets/js/color-modes.js"></script>
-  </head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      </head>
   <body>
     <header class="position-fixed fixed-top d-md-flex justify-content">
       <nav class="navbar navbar-light navbar-expand-md dash-nav d-none d-md-flex">
@@ -29,14 +37,20 @@
               <div class="menu-profile d-flex align-items-center">
                 <ul class="menu">
                   <li class="menu-item">
-                    <a href="{{ route('profile-pengguna') }}" class="ps-4 ps-xl-4 d-flex align-items-center a-putar">
+                    <a href="Profilepengguna" class="ps-4 ps-xl-4 d-flex align-items-center a-putar">
                       <i class="fa-solid fa-caret-down i-putar" style="color: #00000076"></i>
                       <i class="fa-solid fa-circle-user i-pd ms-1"></i>
                     </a>
                     <ul class="drop-menu">
-                      <li class="drop-menu-item"><a href="{{ route('profile-pengguna') }}">Akun</a></li>
-                      <li class="drop-menu-item"><a href="{{ route('editprofile-p') }}">Ubah Profile</a></li>
-                      <li class="drop-menu-item"><a href="" style="color: rgb(255, 0, 0) !important">Keluar</a></li>
+                      <li class="drop-menu-item"><a href="/Profilepengguna">Akun</a></li>
+                      <li class="drop-menu-item"><a href="{{ url('Profilepengguna/' . $userId . '/edit') }}">Ubah Profile</a></li>
+                      <li class="drop-menu-item">
+                        <form action="/logout" method="POST">
+                            @csrf
+                        <button type="submit " style="border: none; background-color:transparent; color: rgb(255, 0, 0) !important" >
+                            Keluar</button>
+                        </li>
+                        </form>
                     </ul>
                   </li>
                 </ul>
@@ -48,7 +62,7 @@
       </nav>
 
       <!-- navbar bagian bawah  -------------------------------------------------------------------------------->
-      <<div class="navbar navbar-multi d-md-none pb-2 px-4">
+      <div class="navbar navbar-multi d-md-none pb-2 px-4">
         <div class="nav-item d-flex flex-column align-items-center ps-3 tod">
           <a href="{{ Route::currentRouteName() === 'dashboard-pengguna' ? '#' : route('dashboard-pengguna') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
             <i class="fa-solid fa-house i-multi {{ Route::currentRouteName() === 'dashboard-pengguna' ? 'i-act' : '' }}"></i>
@@ -68,9 +82,9 @@
           </a>
         </div>
         <div class="nav-item d-flex flex-column align-items-center ps-0 pe-3">
-          <a href="{{ Route::currentRouteName() === 'profile-pengguna' ? '#' : route('profile-pengguna') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
-            <i class="fa-solid fa-circle-user i-multi {{ Route::currentRouteName() === 'profile-pengguna' ? 'i-act' : '' }} "></i>
-            <span class="i-multit {{ Route::currentRouteName() === 'profile-pengguna' ? 'i-act' : '' }} ">Profile</span>
+          <a href="{{ request()->is('Profilepengguna') ? '#' : route('Profilepengguna.index') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
+            <i class="fa-solid fa-circle-user i-multi {{ request()->is('Profilepengguna') ? 'i-act' : '' }}"></i>
+            <span class="i-multit {{ request()->is('Profilepengguna') ? '#' : ''}}">Profile</span>
           </a>
         </div>
       </div>
@@ -80,7 +94,11 @@
 
     <!-- main  -------------------------------------------------------------------------------->
     @yield('main')
-
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('assets/js/script.js') }}"></script>
   </body>
   <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>

@@ -15,7 +15,7 @@
   <body>
     <header class="position-fixed fixed-top d-md-flex justify-content">
       <!-- navbar bagian bawah  -------------------------------------------------------------------------------->
-      <<div class="navbar navbar-multi d-md-none pb-2 px-4">
+      <div class="navbar navbar-multi d-md-none pb-2 px-4">
         <div class="nav-item d-flex flex-column align-items-center ps-3 tod">
           <a href="{{ Route::currentRouteName() === 'dashboard-pengguna' ? '#' : route('dashboard-pengguna') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
             <i class="fa-solid fa-house i-multi {{ Route::currentRouteName() === 'dashboard-pengguna' ? 'i-act' : '' }}"></i>
@@ -35,11 +35,12 @@
           </a>
         </div>
         <div class="nav-item d-flex flex-column align-items-center ps-0 pe-3">
-          <a href="{{ Route::currentRouteName() === 'profile-pengguna' ? '#' : route('profile-pengguna') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
-            <i class="fa-solid fa-circle-user i-multi {{ Route::currentRouteName() === 'profile-pengguna' ? 'i-act' : '' }} "></i>
-            <span class="i-multit {{ Route::currentRouteName() === 'profile-pengguna' ? 'i-act' : '' }} ">Profile</span>
-          </a>
+            <a href="{{ $namepage === 'Profile' ? '#' : route('Profilepengguna.create') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
+                <i class="fa-solid fa-circle-user i-multi {{ $namepage === 'Profile' ? 'i-act' : '' }}"></i>
+                <span class="i-multit {{ $namepage === 'Profile' ? 'i-act' : '' }}">Profile</span>
+            </a>
         </div>
+
       </div>
       <!-- penutupan navbar bagian bawah  -------------------------------------------------------------------------------->
     </header>
@@ -60,7 +61,7 @@
                   <ul class="drop-menup">
                     <li class="p-2" style="font-weight: 700; color:#3c3c3c; font-size: 18px; border-bottom:  0.1px solid #3c3c3c14; ">Pengaturan</li>
 
-                    <li class="drop-menu-itemp"><a href="{{ route('editprofile-p') }}">Ubah Profile</a></li>
+                    <li class="drop-menu-itemp"><a href="{{ url('Profilepengguna/' . $userId . '/edit') }}">Ubah Profile</a></li>
                     <li class="drop-menu-itemp"><a href="editp.html">Ubah Kata Sandi</a></li>
                     <li class="drop-menu-itemp"><a href="editp.html">Kontak</a></li>
                     <li class="drop-menu-itemp"><a href="editp.html">Saran</a></li>
@@ -86,7 +87,7 @@
                       <div class="card-header">
                         <div class="card-cover"></div>
                         <div class="card-avatar"></div>
-                        <div class="card-fullname">Naufal dhafin ghani</div>
+                        <div class="card-fullname">{{ $dataPengguna->nama }}</div>
                         <div class="card-level">Level 12</div>
                       </div>
                       <div class="card-main  px-3 mt-3 mt-lg-5">
@@ -94,7 +95,7 @@
                           <div class="card-title">
                             Tentang Saya
                           </div>
-                          <p class="card-desc ">Saya sekolah di SMKN Bapak Penabur Kelas 1 IPA. Pelajaran yang saya sukai diantaranya Matematika,Kimia Fisika dan Biologi. Target Belajar saya adalah berhasil dalam Pelaksanaan UTBK.</p>
+                          <p class="card-desc ">Saya sekolah di {{ $dataLainnya-> namasekolah}} Kelas {{ $dataLainnya->kelas}}  {{ $dataLainnya->jurusan}}. Pelajaran yang saya sukai diantaranya Matematika,Kimia Fisika dan Biologi. Target Belajar saya adalah berhasil dalam Pelaksanaan {{ $dataLainnya->target}}.</p>
                         </div>
                         <!-- ini bagian card mooto -->
                         <div class="card-motto mt-2 px-4">
@@ -102,7 +103,8 @@
                             Motto
                           </div>
                           <p class="card-desc2">
-                            Kalau bisa Satu kenapa harus Satu
+                            {{-- Kalau bisa Satu kenapa harus Satu --}}
+                            {{ $dataLainnya->motto}}
                           </p>
                         </div>
                         <!-- ini bagian kontak -->
@@ -126,23 +128,23 @@
                     <div class="col px-3">
                       <div class="w-dp">
                         <label for="" class="j-dp">Nama</label>
-                        <span class="i-dp">Naufal Dhafin Ghani</span>
+                        <span class="i-dp">{{ $dataPengguna->nama }}</span>
                       </div>
                       <div class="w-dp">
                         <label for="" class="j-dp">Tanggal Lahir</label>
-                        <span class="i-dp">8-Agustus-2005</span>
+                        <span class="i-dp">{{ $dataPengguna->tanggallahir }}</span>
                       </div>
                       <div class="w-dp">
                         <label for="" class="j-dp">Jenis Kelamin</label>
-                        <span class="i-dp">Laki-Laki</span>
+                        <span class="i-dp">{{ $dataPengguna->jeniskelamin}}</span>
                       </div>
                       <div class="w-dp">
                         <label for="" class="j-dp">Kota/Kabupaten</label>
-                        <span class="i-dp">Kota Tasikmalaya</span>
+                        <span class="i-dp">{{ $dataPengguna->kota}}</span>
                       </div>
                       <div class="w-dp">
                         <label for="" class="j-dp">Alamat</label>
-                        <span class="i-dp">Jalan Cikunten Indah Rt. 05 Rw. 012 </span>
+                        <span class="i-dp">{{ $dataPengguna->alamat}} </span>
                       </div>
                     </div>
 
@@ -151,11 +153,11 @@
                     <div class="col px-3">
                       <div class="w-dp">
                         <label for="" class="j-dp">Email</label>
-                        <span class="i-dp">examples@gmail.com</span>
+                        <span class="i-dp">{{ $dataAkun->email}}</span>
                       </div>
                       <div class="w-dp">
                         <label for="" class="j-dp">No Handphone</label>
-                        <span class="i-dp">0899776655</span>
+                        <span class="i-dp">{{ $dataPengguna->nohp}}</span>
                       </div>
                     </div>
 
@@ -175,15 +177,15 @@
                     <div class="col px-3">
                       <div class="w-dp">
                         <label for="" class="j-dp">Nama Sekolah</label>
-                        <span class="i-dp">SMK Bapak Penabur</span>
+                        <span class="i-dp">{{ $dataLainnya->namasekolah}}</span>
                       </div>
                       <div class="w-dp">
                         <label for="" class="j-dp">Kelas</label>
-                        <span class="i-dp">11</span>
+                        <span class="i-dp">Kelas {{ $dataLainnya->kelas}}</span>
                       </div>
                       <div class="w-dp">
                         <label for="" class="j-dp">Jurusan</label>
-                        <span class="i-dp">IPA</span>
+                        <span class="i-dp">{{ $dataLainnya->jurusan}}</span>
                       </div>
                     </div>
 
@@ -192,15 +194,15 @@
                     <div class="col px-3">
                       <div class="w-dp">
                         <label for="" class="j-dp">Pelajaran Favorit</label>
-                        <span class="i-dp">Matematika, Fisika, Kimia, Biologi</span>
+                        <span class="i-dp">{{ $dataLainnya-> pelajaranfav}}</span>
                       </div>
                       <div class="w-dp">
                         <label for="" class="j-dp">Target Belajar</label>
-                        <span class="i-dp">UTBK</span>
+                        <span class="i-dp">{{ $dataLainnya->target}}</span>
                       </div>
                       <div class="w-dp">
                         <label for="" class="j-dp">Motto</label>
-                        <span class="i-dp">Kalau Bisa dua Kenapa harus satu</span>
+                        <span class="i-dp">{{ $dataLainnya->motto}}</span>
                       </div>
                     </div>
 

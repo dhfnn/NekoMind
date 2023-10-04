@@ -347,50 +347,7 @@
 
       <!-- FOOTER -->
 
-      <div class="container-fluid px-3 px-sm-5 pt-3 pt-sm-5 bg-dark text-white ">
-        <footer class="" >
-          <div class="row px-1 px-sm-5 justify-content-between">
-
-            <div class=" col-12  col-md-4 col-xl-3 d-flex justify-content-between  px-4 mt-3 mb-5 my-sm-0">
-
-              <div class="col-6 col-md-2 mb-sm-3">
-                <h5>Fitur</h5>
-                <ul class="nav flex-column ">
-                  <li class=" nav-foot mb-sm-2"><a href="#" class="nav-link p-0 text-abu" style="white-space: nowrap;">Rangkuman Materi</a></li>
-                  <li class=" nav-foot mb-sm-2"><a href="#" class="nav-link p-0 text-abu">Quiz</a></li>
-                  <li class=" nav-foot mb-sm-2"><a href="#" class="nav-link p-0 text-abu">TryOut</a></li>
-                  <li class=" nav-foot mb-sm-2"><a href="#" class="nav-link p-0 text-abu">Bank Soal</a></li>
-                </ul>
-              </div>
-
-              <div class="col-6 col-md-2 mb-3 ms-3 ms-sm-5 ms-sm-0 ps-md-5 ps-xl-0 me-xxl-5">
-                <h5>Kontak</h5>
-                <ul class="nav flex-column ">
-                  <li class=" nav-foot mb-sm-2 d-flex align-items-center "><i class="fa-brands fa-whatsapp " style="color: #25D366;"></i><a href="#" class="nav-link p-0 text-abu ms-1 WhatsApp">WhatsApp</a></li>
-                  <li class=" nav-foot mb-sm-2 d-flex align-items-center"><i class="fa-reguler fa-at"></i><a href="#" class="nav-link p-0 text-abu ms-1 Email">Email</a></li>
-                </ul>
-              </div>
-            </div>
-
-
-            <div class="col-md-5 offset-md-1 mb-3 align-items-end">
-              <form>
-                <h5>Subscribe to our newsletter</h5>
-                <p>Monthly digest of what's new and exciting from us.</p>
-                <div class="d-flex flex-column flex-sm-row w-100 gap-2">
-                  <label for="newsletter1" class="visually-hidden">Email address</label>
-                  <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                  <button class="btn btn-primary" type="button">Subscribe</button>
-                </div>
-              </form>
-            </div>
-          </div>
-
-          <div class="d-flex flex-column flex-sm-row justify-content-center py-3" style="border-top: 1px rgba(255, 255, 255, 0.475) solid;">
-            <p class="copy text-abu" >&copy; 2023 NekoMind, Inc. All rights reserved.</p>
-          </div>
-        </footer>
-      </div>
+      
     </main>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 

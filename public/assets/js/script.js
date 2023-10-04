@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-  
+
   //   untuk menu pengaturan
   const iElement = document.querySelector('.fa-gear');
   const dropMenupElement = document.querySelector('.drop-menup');
@@ -99,9 +99,9 @@ function backpage() {
     }
   }
 
-  
 
-  
+
+
 
 
 
@@ -112,14 +112,53 @@ function backpage() {
 
 
 // putar 180^
+
+
   const selectElement = document.querySelector('.ie-select');
     const arrowIcon = document.querySelector('.arrow-icon');
-  
+
     selectElement.addEventListener('blur', () => {
       // Setelah elemen select kehilangan fokus, kembalikan ikon ke posisi awal
       arrowIcon.style.transform = 'rotate(0deg)';
     });
 
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const checkboxes = document.querySelectorAll('input[name="checkboxtp"]');
+        const maxChecked = 5;
+
+        checkboxes.forEach(function (checkbox) {
+            checkbox.addEventListener('change', function () {
+                const checkedCheckboxes = document.querySelectorAll('input[name="checkboxtp"]:checked');
+                if (checkedCheckboxes.length > maxChecked) {
+                    this.checked = false;
+                }
+            });
+        });
+    });
+
+    // $(document).ready(function(){
+        // $("#selectKT").select2({
+
+        // });
+
+    // });
+    // In your Javascript (external .js resource or <script> tag)
+    $(document).ready(function() {
+        $(".selectKT").select2();
+    });
+
+    // $(document).ready(function() {
+    //     $("#selectSK").select2();
+    // });
+
+ $(document).ready(function() {
+        $('#dataTable').DataTable({
+            "paging": true,       // Aktifkan paging
+            "pageLength": 10,     // Batasi jumlah tampilan per halaman menjadi 10
+            // Konfigurasi lainnya sesuai kebutuhan
+        });
+    });
 
 
 
