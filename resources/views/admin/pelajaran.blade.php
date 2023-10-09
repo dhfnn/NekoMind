@@ -82,11 +82,16 @@
 
               <ul class="list-group px-2" style="height: 450px; overflow-y: auto;">
                 @foreach ($dataKelas as $kelas)
-                <a href="{{ url('Materi/' . $kelas->id) }}" class="" style=" cursor: pointer; ">
+                <a href="{{ route('materi.show', $kelas->id) }}" class="" style=" cursor: pointer; ">
                 <li class="list-group-item border-0 d-flex justify-content-between px-3 mb-2 border-radius-lg bg-gray-100" >
                     <div class="d-flex flex-column">
                       <h6 class="mb-1 text-dark font-weight-bold text-sm">Kelas {{ $kelas->kelas }}</h6>
-                      <span class="text-xs" style="color: #67748E;">6 Materi Tersedia</span>
+                      @if ( $kelas->jumlahMateri > 0 )
+
+                      <span class="text-xs" style="color: #67748E;">Ada {{ $kelas->jumlahMateri }} materi yang tersedia</span>
+                      @else
+                      <span class="text-xs" style="color: #67748E;">Belum ada materi satupun</span>
+                      @endif
                     </div>
                     <div class="d-flex align-items-center">
                             <i class="fa-solid fa-caret-right" style="color: #344767;"></i>
@@ -107,7 +112,7 @@
     <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
 </div> --}}
     </div>
-   
+
   </div>
 
 @endsection

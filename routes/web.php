@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashcontroller;
 use App\Http\Controllers\loregcontroller;
 use App\Http\Controllers\Materi;
+use App\Http\Controllers\Permateri;
 use App\Http\Controllers\Profilepengguna;
 use App\Http\Controllers\profilecontroller;
 
@@ -38,7 +39,11 @@ route::middleware(['auth'])->group(function(){
         Route::get('/admin/dashboard', [dashcontroller::class, 'dashadmin'])->name('dashboard-admin');
         // bagian hal pelajaran
         Route::resource('Materi' ,Materi::class);
-        Route::get('Materi/{id}' ,[Materi::class, 'show']);
+        Route::get('Materi/{materi}' ,[Materi::class, 'show'])->name('materi.show');
+        Route::put('Materi/{id}' ,[Materi::class, 'update'])->name('materi.update');
+        Route::delete('Materi/{Materi}' ,[Materi::class, 'destroy'])->name('materi.destroy');
+
+        // Route::get('Materi/{id}/edit' ,[Materi::class, '']);
         // bagian hal data
         Route::resource('data', data::class);
         Route::get('data/{id}/edit', [data::class, 'edit'])->name('data.edit');
@@ -46,6 +51,12 @@ route::middleware(['auth'])->group(function(){
         Route::get('data/{id}', [data::class, 'show'])->name('data.show');
         // Route::delete('/data/{id}', [data::class, 'destroy'])->name('data.destroy');
 
+        Route::resource('permateri ',Permateri::class);
+        // Route::get('permateri/{id}/create',Permateri::class);
+        Route::get('permateri/{id}', [Permateri::class, 'show'])->name('permateri.show');
+        Route::get('permateri/{permateri}', [Permateri::class, 'update'])->name('permateri.update');
+        // Route::get('permateri/{permateri}/edit', [Permateri::class, 'show']);
+//
 
 
         Route::resource('Konfigdata', Konfigdata::class);

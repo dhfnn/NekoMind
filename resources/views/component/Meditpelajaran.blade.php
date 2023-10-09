@@ -1,5 +1,5 @@
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+<div class="modal fade" id="editmodal{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
     <div class="modal-dialog  modal-dialog" role="document" >
       <div class="modal-content">
         <div class="modal-body py-0">
@@ -7,14 +7,15 @@
             <div class="" style="background-image: url('images/img_1.jpg');">
             </div>
             <div class="content-text p-1 pt-2">
-              <span class="jn-materi">Tambah Pelajaran</span>
+              <span class="jn-materi">Edit Pelajaran</span>
               {{-- <p>All their equipment and instruments are alive. The sky was cloudless and of a deep dark blue.</p> --}}
-              <form class="needs-validation" action="{{ url('Materi') }}" method="POST">
+                <form class="needs-validation" action="{{ route('materi.update' , $data->id) }}" method="POST">
+                    @method('PUT')
                 @csrf
                 <div class="col mt-2 px-2">
 
                     <div class="row">
-                      {{-- <label for="fname">Nama Pelajaran</label> --}}
+                      <label for="fname">Nama Pelajaran {{ $data->namapelajaran }} kelas {{$data->id_kelas}}  semester {{$data->id_semester}} </label>
                         <div class="col">
                             <div class="col">
                             <label for="" class="ji-ep">Nama Pelajaran</label>
@@ -51,16 +52,7 @@
                             </select>
 
                         </div>
-                        {{-- <div class="col">
-                            <div class="col">
-                                <label for="" class="ji-ep">Jenis Pelajaran</label>
-                                </div>
-                            <select class="form-select" name="jenis" required>
-                                <option value="" disabled selected>Pilih Jenis</option>
-                                <option value="pelajaran">Materi Pelajaran</option>
-                                <option value="utbk">Materi UTBK</option>
-                            </select>
-                        </div> --}}
+
                         <div class="col">
                             <div class="col">
                                 <label for="" class="ji-ep">Jenis Pelajaran</label>
@@ -71,6 +63,7 @@
                                 <option value="2"> Semester 2</option>
                             </select>
                             <input type="hidden" name="id_kelas" value="{{ $kelas->id }}">
+                            <input type="hidden" name="id" value="{{ $data->id }}">
                         </div>
 
                     </div>

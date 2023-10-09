@@ -20,7 +20,7 @@ class data extends Controller
 
     public function index(Request $request)
     {
-        // $id = auth()->user()->id;
+
 
         $namepage = 'Data';
         // $userData = users::get();

@@ -1,4 +1,5 @@
 @extends('layouts.App2')
+
 @section('content')
 
 <!-- End Navbar -->
@@ -11,43 +12,17 @@
           {{-- <div class="col"> --}}
             <div class=" d-flex justify-content-between align-items-center  me-2" style="max-height: 40px">
                     <style>
-                        .form-inputs{
-    height:35px;
 
-                            display: flex;
-                            align-items: center;
-    position:relative;
-    border:1px solid #F0F0F0;
-    border-radius:10px;
-}
-
-.form-inputs .form-control{
-    border: none;
-    height:32px ;
-
-}
-
-.form-inputs .form-control:focus{
-    box-shadow:none;
-    border: none
-
-}
-
-.form-inputs i{
-    font-size: 13px;
-    padding-right:10px;
-
-}
                     </style>
-                <div class=" form-inputs me-1" >
+                {{-- <div class=" form-inputs me-1" >
                     <form action="{{ url('data') }}" method="GET" class="d-flex align-items-center">
                     <input class="form-control " type="text" placeholder="Cari nama atau emalix" name="cari" value="{{ $request->get('cari') }}">
-                    {{-- <i class="bx bx-search"></i> --}}
+
                     <a href="" type="submit">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </a>
             </form>
-                </div>
+                </div> --}}
                 <a href="{{ url('/data/create') }}" class="p-2 d-flex justify-content-between align-items-center me-2" style="border: 1px solid rgba(0, 0, 0, 0.075); border-radius:10px ;color:black !important;">  <i class="fa-solid fa-plus"></i></a>
             </div>
 
@@ -56,7 +31,7 @@
         </div>
         <div class="card-body px-0 pt-0 pb-2">
           <div class="table-responsive p-0">
-            <table class="table align-items-center mb-0" id="dataTable">
+            <table class="table align-items-center mb-0 dataTablefiture px-5" id="dataTabledata">
               <thead>
                 <tr>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">PENGGUNA</th>
