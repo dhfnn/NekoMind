@@ -18,8 +18,8 @@ class Bab extends Model
         return $this->belongsTo(Pelajaran::class, 'id_pelajaran');
     }
 
-    public function materi()
+    public function MateriModel()
     {
-        return $this->hasMany(Materi::class, 'id_pelajaran');
+        return $this->hasMany(MateriModel::class, 'id_bab');
     }
 }

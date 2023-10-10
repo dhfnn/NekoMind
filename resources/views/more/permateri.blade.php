@@ -9,7 +9,7 @@
         @endif
       <div class="col-12">
         <div class="col d-flex justify-content-end">
-            <a href="{{ url('Materi/' . $pelajaran->id_kelas) }}" class="d-flex me-3" >
+            <a href="{{ url('Pelajaran/' . $pelajaran->id_kelas) }}" class="d-flex me-3" >
                 <h6 class="text-sm opacity-7 me-1">kembali</h6>
                 <i class="text-sm opacity-7 fa-solid fa-angle-right"></i>
             </a>
@@ -29,6 +29,7 @@
                   <tr class="">
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">BAB</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">JUDUL</th>
+                    {{-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">NAMA FILE MATERI</th> --}}
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
                   </tr>
                 </thead>
@@ -47,8 +48,12 @@
                     <td>
                       <p class="text-xs font-weight-bold mb-0">{{ $data->judul }}</p>
                     </td>
+                    
+                    {{-- <td>
+                      <p class="text-xs font-weight-bold mb-0">{{ $data->isi_materi }}</p>
+                    </td> --}}
                     <td class="align-middle text-center">
-                      <a href="{{ url('permateri.show/' . $data->id . '/' . $data->id) }}
+                      <a href="{{ url('Bab/' .$data->id) }}
                         " class="text-secondary text-xs font-weight-bold">
                         <span class="">
                           <i class="fa-solid fa-caret-right"></i>

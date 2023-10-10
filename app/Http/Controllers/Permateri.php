@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Bab;
 use App\Models\Kelas;
+use App\Models\MateriModel;
 use App\Models\Pelajaran;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Permateri extends Controller
 {
@@ -28,32 +30,46 @@ class Permateri extends Controller
     public function store(Request $request)
     {
         // Mencari data yang cocok berdasarkan kolom id_pelajaran, judul, dan subab
+        // $cek = Bab::where('id_pelajaran', $request->id_pelajaran)
+        //            ->where('judul', $request->judul)
+        //         //    ->where('subab', $request->subab)
+        //            ->first();
         $cek = Bab::where('id_pelajaran', $request->id_pelajaran)
-                   ->where('judul', $request->judul)
-                   ->where('subab', $request->subab)
-                   ->first();
+           ->where(function($query) use ($request) {
+               $query->where('judul', $request->judul)
+                     ->orWhere('subab', $request->subab);
+           })
+           ->first();
+
 
         if (!$cek) {
-            // Menemukan data terakhir berdasarkan id_pelajaran
             $dataTerakhir = Bab::where('id_pelajaran', $request->id_pelajaran)
                                ->orderBy('subab', 'desc')
                                ->first();
-
-            // Membuat data baru
             $data = [
                 'id_pelajaran' => $request->id_pelajaran,
                 'judul' => $request->judul,
-                'subab' => $dataTerakhir ? $dataTerakhir->subab + 1 : 1,
+                'subab' => $request->subab,
             ];
-
-            // Menyimpan data baru ke dalam tabel Bab
-            Bab::create($data);
+             Bab::create($data);
 
             return redirect('permateri/' . $request->id_pelajaran);
-        } else {
+            } else {
             return redirect('permateri/' . $request->id_pelajaran)->with('error', 'Data yang Anda masukkan sudah ada!!');
-        }
-    }
+            }
+            }
+// $file = $request->file('isi_materi');
+// $fileName = time() . '_' . $file->getClientOriginalName();
+// $file->move(public_path('materi'), $fileName);
+// $dataMateri = [
+//     'id_bab' => $newBab->id, // Menggunakan ID dari Bab yang baru saja dibuat
+//     'isi_materi' => $fileName, // Menyimpan nama file
+// ];
+
+// MateriModel::create($dataMateri);
+
+
+
 
 
     /**
@@ -63,7 +79,13 @@ class Permateri extends Controller
     {
         $kelas = Kelas::where('kelas', $id)->first();
         $pelajaran = Pelajaran::where('id', $id)->first();
-        $babs = Bab::where('id_pelajaran', $id)->get();
+        $babs = Bab::where('id_pelajaran' , $id)->get();
+
+        // $babs = DB::table('bab')
+        // ->leftJoin('materi', 'bab.id', '=', 'materi.id_bab')
+        // ->select('bab.*', 'materi.isi_materi')
+        // ->where('bab.id_pelajaran', $id)
+        // ->get();
 
         if (!$pelajaran) {
             // Handle ketika data tidak ditemukan

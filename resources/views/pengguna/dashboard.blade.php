@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-9 col-sm-10 pe-2 pe-sm-4 ps-2 ps-sm-3">
                   <div class="col-12 d-flex justify-content-between align-items-end py-sm-1" style="font-size: 15px; font-weight: 600">
-                    <label for="" class="ps-1 t-un">Mas Elon</label>
+                    <label for="" class="ps-1 t-un">{{ $datapengguna->nama}}</label>
                     <span class="pe-2 t-lvl">Level 99</span>
                   </div>
                   <div class="col-12" style="background-color: #cdd2dc51; height: 15px; border-radius: 5px">

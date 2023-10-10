@@ -30,8 +30,7 @@
             <div class="navbar navbar-hide me-md-4 d-none d-md-flex">
                 <a href="{{ Route::currentRouteName() === 'dashboard-pengguna' ? '#' : route('dashboard-pengguna') }}">Beranda</a>
 
-                <a href="{{ Route::currentRouteName() === 'materi' ? '#' : route('materi') }}" class="px-4">Materi</a>
-
+                <a href="{{ Request::is('MateriPengguna') ? '#' : url('MateriPengguna') }}" class="px-4">Materi</a>
                 <a href="{{ Route::currentRouteName() === 'soal' ? '#' : route('soal') }}">Soal</a>
               <!-- <a href="" class="ps-4 ps-xl-5"><i class="fa-solid fa-circle-user i-pd"></i></a> -->
               <div class="menu-profile d-flex align-items-center">
@@ -70,8 +69,8 @@
           </a>
         </div>
         <div class="nav-item d-flex flex-column align-items-center ps-0">
-          <a href="{{ Route::currentRouteName() === 'materi' ? '#' : route('materi') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
-            <i class="fa-brands fa-leanpub i-multi  {{ Route::currentRouteName() === 'materi' ? 'i-act' : '' }}   "></i>
+          <a href="{{ Request::is('MateriPengguna') ? '#' : url('MateriPengguna') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
+            <i class="fa-brands fa-leanpub i-multi  {{Request::is('MateriPengguna') ? 'i-act': '' }}   "></i>
             <span class="i-multit  {{ Route::currentRouteName() === 'materi' ? 'i-act' : '' }}   ">Materi</span>
           </a>
         </div>

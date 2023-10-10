@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\datalainnya;
 use App\Models\datapengguna;
+use App\Models\Pelajaran;
 use App\Models\users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +37,7 @@ class dashcontroller extends Controller
             if ($datalainnya &&  $datapengguna) {
                 // Jika kedua data ada, arahkan ke halaman dashboard
                 $userId = auth()->id();
-                return view('pengguna.dashboard',compact('userId'));
+                return view('pengguna.dashboard',compact('userId','datalainnya','datapengguna'));
             } else {
                 // Jika salah satu atau kedua data tidak ada, arahkan ke halaman tambah data
                 return redirect('/Profilepengguna/create');

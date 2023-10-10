@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Termwind\Components\Dd;
 
-class Materi extends Controller
+class MateriController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -65,9 +65,9 @@ class Materi extends Controller
 
         // Simpan data jika tidak ada duplikasi
         $tambah = Pelajaran::create($data);
-        return redirect('Materi/' . $request->id_kelas);
+        return redirect('Pelajaran/' . $request->id_kelas);
     } else {
-        return redirect('Materi/' . $request->id_kelas)->with('error', 'Data yang anda masuk sudah ada !!'); // Redirect dengan pesan error
+        return redirect('Pelajaran/' . $request->id_kelas)->with('error', 'Data yang anda masuk sudah ada !!'); // Redirect dengan pesan error
     }
 }
 
@@ -128,9 +128,9 @@ class Materi extends Controller
                 $pelajaran->jenis = 'pelajaran';
             }
             $pelajaran->save();
-            return redirect('Materi/' . $request->id_kelas);
+            return redirect('Pelajaran/' . $request->id_kelas);
         }else{
-            return redirect('Materi/' . $request->id_kelas)->with('error', 'Data yang anda ubah sama    !!');
+            return redirect('Pelajaran/' . $request->id_kelas)->with('error', 'Data yang anda ubah sama    !!');
         }
 
 
@@ -148,7 +148,7 @@ public function destroy(string $id)
     //     return redirect()->route('daftarmateri.index')->with('error', 'Pelajaran tidak ditemukan.');
     // }
     // $pelajaran->delete();
-    // return redirect('Materi/' . $request->id_kelas);
+    // return redirect('Pelajaran/' . $request->id_kelas);
     $pelajaran = Pelajaran::find($id);
 
 if ($pelajaran) {

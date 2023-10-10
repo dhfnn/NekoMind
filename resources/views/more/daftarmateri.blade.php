@@ -9,7 +9,7 @@
         @endif
       <div class="col-12">
         <div class="col d-flex justify-content-end">
-            <a href="{{ url('Materi') }} " class="d-flex me-3" >
+            <a href="{{ url('Pelajaran') }} " class="d-flex me-3" >
                 <h6 class="text-sm opacity-7 me-1">kembali</h6>
                 <i class="text-sm opacity-7 fa-solid fa-angle-right"></i>
             </a>

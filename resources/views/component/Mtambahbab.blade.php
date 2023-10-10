@@ -9,13 +9,13 @@
             <div class="content-text p-1 pt-2">
               <span class="jn-materi">Tambah BAB</span>
               {{-- <p>All their equipment and instruments are alive. The sky was cloudless and of a deep dark blue.</p> --}}
-              <form class="needs-validation" action="{{ url('permateri') }}" method="POST">
+              <form class="needs-validation" action="{{ url('permateri') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="col mt-2 px-2">
 
                     <div class="row">
                       {{-- <label for="fname">Nama Pelajaran</label> --}}
-                        <div class="col">
+                        <div class="col-7">
                             <div class="col">
                             <label for="" class="ji-ep">Nama Pelajaran</label>
                             </div>
@@ -23,16 +23,14 @@
                             <input  name="id_pelajaran"  type="hidden" value="{{ $pelajaran->id }}">
 
                         </div>
-                        {{-- <div class="col">
+                        <div class="col-5">
                             <div class="col">
-                                <label for="" class="ji-ep">Jenis Pelajaran</label>
-                                </div>
-                            <select class="form-select" name="jenis" required>
-                                <option value="" disabled selected>Pilih Jenis</option>
-                                <option value="pelajaran">Materi Pelajaran</option>
-                                <option value="utbk">Materi UTBK</option>
-                            </select>
-                        </div> --}}
+                            <label for="" class="ji-ep">subab</label>
+                            </div>
+                            <input type="number" class="form-control" name="subab" placeholder="">
+
+                        </div>
+
                     </div>
                     <div class="row mt-2">
                       {{-- <label for="fname">Nama Pelajaran</label> --}}

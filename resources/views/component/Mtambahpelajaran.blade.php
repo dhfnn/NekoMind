@@ -9,7 +9,7 @@
             <div class="content-text p-1 pt-2">
               <span class="jn-materi">Tambah Pelajaran</span>
               {{-- <p>All their equipment and instruments are alive. The sky was cloudless and of a deep dark blue.</p> --}}
-              <form class="needs-validation" action="{{ url('Materi') }}" method="POST">
+              <form class="needs-validation" action="{{ url('Pelajaran') }}" method="POST">
                 @csrf
                 <div class="col mt-2 px-2">
 
