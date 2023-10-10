@@ -52,12 +52,14 @@
                         <div class="col px-3 pt-3">
                             <span style="font-size: 10px; font-weight: 600; color: #316368;">*pilih bab materi yang ingin pelajari</span>
                         </div>
-                        <div class="col d-flex flex-column px-4">
+                        <div id="bab-list" class="col d-flex flex-column px-4">
+
                             @foreach ($dataBab->sortBy('subab') as $bab )
 
-                                <a href="" class="tdn t-bab">
-                                    <div class="bagan-bab px-3 py-3 mb-3">BAB {{ $bab->subab }} {{ $bab->judul }}</div>
-                                </a>
+                                <a href="#" data-bab="" class="tdn t-bab">
+                                    <div class="bagan-bab px-3 py-3 mb-3">BAB {{ $bab->subab }} {{ $bab->judul }}
+                                     {{ $bab->id }}</div>
+                                </a>    
                             @endforeach
 
                         </div>
@@ -74,6 +76,28 @@
 
 
       <script type="text/javascript" src="{{ asset('assets/js/script.js') }}"></script>
+      <script>
+       $(document).ready(function () {
+    $("#bab-list").on("click", ".tdn.t-bab", function (e) {
+        e.preventDefault(); // Mencegah tindakan default
+
+        var selectedBab = $(this).data("bab");
+        var pelajaranId = "{{ $pelajaran->id }}"; // Mengambil ID pelajaran
+
+        // Kirim permintaan Ajax dengan parameter bab dan ID pelajaran
+        $.ajax({
+            url: "/MateriPengguna/" + pelajaranId + "?bab=" + selectedBab,
+            type: "GET",
+            success: function (data) {
+                $("#hasil-filter").html(data);
+            }
+        });
+    });
+});
+
+    </script>
+
+
 </body>
 
 </html>

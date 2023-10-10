@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bab;
+use App\Models\MateriModel;
 use App\Models\Pelajaran;
 use Illuminate\Http\Request;
 
@@ -17,17 +18,21 @@ class materiPengguna extends Controller
 
         $selectedKelas = $request->input('kelas'); // Ambil kelas yang dipilih dari query string
 
-        // Filter dataPelajaran berdasarkan id_kelas jika kelas dipilih
         $dataPelajaran = Pelajaran::where('jenis', 'pelajaran');
         if ($selectedKelas) {
             $dataPelajaran->where('id_kelas', $selectedKelas);
         }
         $dataPelajaran = $dataPelajaran->get();
 
-        $dataUTBK = Pelajaran::where('jenis', 'utbk')->get();
+        $dataUTBK = Pelajaran::where('jenis', 'utbk');
+        if ($selectedKelas) {
+            $dataUTBK->where('id_kelas', $selectedKelas);
+        }
+        $dataUTBK = $dataUTBK->get();
 
         return view('pengguna.materi', compact('dataPelajaran', 'userId', 'dataUTBK'));
     }
+
 
 
     /**
@@ -49,11 +54,15 @@ class materiPengguna extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
         $pelajaran = Pelajaran::where('id', $id)->first();
+        $idbab = '31';
+        $materi = MateriModel::where('id_bab', $idbab)->first();
+        // dd($materi);
+
         $dataBab = Bab::where('id_pelajaran', $id)->get();
-        return  view('pengguna.materi-isi', compact('pelajaran','dataBab'));
+        return  view('pengguna.materi-isi', compact('pelajaran','dataBab','materi','idbab'));
     }
 
     /**
