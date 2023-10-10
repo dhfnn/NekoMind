@@ -11,13 +11,24 @@ class materiPengguna extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $userId = auth()->id();
-        $dataPelajaran = Pelajaran::where('jenis','pelajaran')->get();
-        $dataUTBK = Pelajaran::where('jenis','utbk')->get();
-        return view('pengguna.materi' ,compact('dataPelajaran','userId','dataUTBK'));
+
+        $selectedKelas = $request->input('kelas'); // Ambil kelas yang dipilih dari query string
+
+        // Filter dataPelajaran berdasarkan id_kelas jika kelas dipilih
+        $dataPelajaran = Pelajaran::where('jenis', 'pelajaran');
+        if ($selectedKelas) {
+            $dataPelajaran->where('id_kelas', $selectedKelas);
+        }
+        $dataPelajaran = $dataPelajaran->get();
+
+        $dataUTBK = Pelajaran::where('jenis', 'utbk')->get();
+
+        return view('pengguna.materi', compact('dataPelajaran', 'userId', 'dataUTBK'));
     }
+
 
     /**
      * Show the form for creating a new resource.

@@ -12,21 +12,23 @@
             <select
             class=""
             name=""
-            id=""
+            id="kelasFilter"
             style="height: 35px !important; width: 75px !important; font-size: 13px !important; border: none; color: rgb(100, 100, 100); padding: 1px; border-radius: 7px; outline: none; background-color: white; box-shadow:0 15px 27px 0 rgba(45, 45, 45, 0.05);"
           >
-            <option value="Kelas_1">Kelas 1</option>
-            <option value="Kelas_2">Kelas 2</option>
-            <option value="Kelas_3">Kelas 3</option>
-            <option value="Kelas_4">Kelas 4</option>
-            <option value="Kelas_5">Kelas 5</option>
-            <option value="Kelas_6">Kelas 6</option>
-            <option value="Kelas_7">Kelas 7</option>
-            <option value="Kelas_8">Kelas 8</option>
-            <option value="Kelas_9">Kelas 9</option>
-            <option value="Kelas_10">Kelas 10</option>
-            <option value="Kelas_11">Kelas 11</option>
-            <option value="Kelas_12">Kelas 12</option>
+          <option value="">PILIH</option>
+          {{-- <option value="semua">SEMUA</option> --}}
+          <option value="1">Kelas 1</option>
+            <option value="2">Kelas 2</option>
+            <option value="3">Kelas 3</option>
+            <option value="4">Kelas 4</option>
+            <option value="5">Kelas 5</option>
+            <option value="6">Kelas 6</option>
+            <option value="7">Kelas 7</option>
+            <option value="8">Kelas 8</option>
+            <option value="9">Kelas 9</option>
+            <option value="10">Kelas 10</option>
+            <option value="11">Kelas 11</option>
+            <option value="12">Kelas 12</option>
           </select>
           </div>
           <div class="col mt-4" style="">
@@ -57,9 +59,9 @@
 
                 <div class="col pb-3 d-flex flex-column align-items-center justify-content-center mt-">
                   <div class="k-lm d-flex align-items-center justify-content-center bg-white l-rm" style="">
-                    <img class="i-rm2" src="{{ asset('assets/ikon/'.$pelajaran->namapelajaran .'.svg') }}" alt="" />
+                    <img class="i-rm2" src="{{ asset('assets/ikon/'.$utbk->namapelajaran .'.svg') }}" alt="" />
                   </div>
-                  <span class="t-rm mt-1 mt-md-2 nw">{{ $pelajaran->namapelajaran }}</span>
+                  <span class="t-rm mt-1 mt-md-2 nw">{{ $utbk->namapelajaran }}</span>
                 </div>
                 @endforeach
 
