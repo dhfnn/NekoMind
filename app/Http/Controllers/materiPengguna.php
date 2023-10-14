@@ -56,13 +56,27 @@ class materiPengguna extends Controller
      */
     public function show(Request $request, string $id)
     {
-        $pelajaran = Pelajaran::where('id', $id)->first();
-        $idbab = '31';
-        $materi = MateriModel::where('id_bab', $idbab)->first();
-        // dd($materi);
+        // Ambil ID bab yang dipilih dari query string
+        $selectedBab = $request->input('bab');
 
+        // Inisialisasi variabel $idBab
+        $idBab = null;
+
+        // Jika ada ID bab yang dipilih, gunakan ID tersebut
+        if ($selectedBab) {
+            $idBab = $selectedBab;
+        }
+
+
+        // Ambil data materi sesuai dengan ID bab yang dipilih
+        $materi = MateriModel::where('id_bab', $idBab)->first();
+
+        // Ambil data pelajaran
+        $pelajaran = Pelajaran::where('id', $id)->first();
+
+        // Ambil data daftar bab yang mungkin digunakan dalam tampilan
         $dataBab = Bab::where('id_pelajaran', $id)->get();
-        return  view('pengguna.materi-isi', compact('pelajaran','dataBab','materi','idbab'));
+        return  view('pengguna.materi-isi', compact('pelajaran','dataBab','materi','idBab'));
     }
 
     /**

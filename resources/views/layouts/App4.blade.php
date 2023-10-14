@@ -16,7 +16,7 @@
     <nav class="navbar" style="background-color: white; padding: 0px !important;">
         <div class="container-fluid px-4 px-md-5 pt-4 pt-md-3  pb-3 pb-md-0 py-md-4 position-relative" style="display: flex !important; align-items: center !important;">
             <div class="col position-absolute">
-                <a href="javascript::void(0);" class="" onclick="backpage()" >
+                <a href="{{ url('MateriPengguna') }}" class="" >
                     <i class="fa-solid fa-arrow-left-long bck-materi" style=""></i>
                 </a>
             </div>
@@ -53,16 +53,19 @@
                             <span style="font-size: 10px; font-weight: 600; color: #316368;">*pilih bab materi yang ingin pelajari</span>
                         </div>
                         <div id="bab-list" class="col d-flex flex-column px-4">
-
-                            @foreach ($dataBab->sortBy('subab') as $bab )
-
-                                <a href="#" data-bab="" class="tdn t-bab">
-                                    <div class="bagan-bab px-3 py-3 mb-3">BAB {{ $bab->subab }} {{ $bab->judul }}
-                                     {{ $bab->id }}</div>
-                                </a>    
-                            @endforeach
-
+                            <select id="babDropdown" class="form-select py-3 wadah-materi">
+                                <option value="">
+                                    PILIH
+                                </option>
+                                @foreach ($dataBab->sortBy('subab') as $bab)
+                                    <option value="{{ $bab->id }}">
+                                        BAB {{ $bab->subab }} {{ $bab->judul }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
+
+
                     </div>
                 </div>
             </div>
@@ -75,27 +78,21 @@
 
 
 
-      <script type="text/javascript" src="{{ asset('assets/js/script.js') }}"></script>
       <script>
-       $(document).ready(function () {
-    $("#bab-list").on("click", ".tdn.t-bab", function (e) {
-        e.preventDefault(); // Mencegah tindakan default
-
-        var selectedBab = $(this).data("bab");
-        var pelajaranId = "{{ $pelajaran->id }}"; // Mengambil ID pelajaran
-
-        // Kirim permintaan Ajax dengan parameter bab dan ID pelajaran
-        $.ajax({
-            url: "/MateriPengguna/" + pelajaranId + "?bab=" + selectedBab,
-            type: "GET",
-            success: function (data) {
-                $("#hasil-filter").html(data);
-            }
-        });
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('babDropdown').addEventListener('change', function () {
+        var selectedBab = this.value;
+        var id = "{{$pelajaran->id}}"; // Mengambil ID pelajaran dari Blade
+        if (selectedBab !== "") {
+            window.location.href = '/MateriPengguna/' + id + '?bab=' + selectedBab;
+        }
     });
 });
 
     </script>
+    <script src="{{ asset('assets/js/script.js') }}"></script>
+
+
 
 
 </body>

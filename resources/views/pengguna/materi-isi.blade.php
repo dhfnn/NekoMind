@@ -13,7 +13,16 @@
         </div>
     </div>
     <div class=" wadah-materi p-3 ">
-{{ $materi->isi_materi }}
+        @if ($materi)
+        <div>
+            {!! $materi->isi_materi !!}
+        </div>
+    @else
+        <div>
+            Tidak ada isi materi yang tersedia.
+        </div>
+    @endif
+
     </div>
 </div>
 @endsection

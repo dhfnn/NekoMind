@@ -99,7 +99,7 @@
             if (selectedKelas === "") {
                      // Mengarahkan langsung ke /materi jika "SEMUA" dipilih
             } else {
-                window.location.href = '/MateriPengguna?kelas=' + selectedKelas;
+               php ar
             }
         });
     </script>
