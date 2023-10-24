@@ -58,7 +58,7 @@
                         </div>
                       </div>
                       <div class="col-8 d-flex flex-column">
-                        <span class="fw-bold j-d"> 4</span>
+                        <span class="fw-bold j-d"> {{ $jumlahSoal }}</span>
                         <label for="" class="j-d2">Soal selesai</label>
                       </div>
                     </div>
@@ -71,7 +71,7 @@
                         </div>
                       </div>
                       <div class="col-8 d-flex flex-column">
-                        <span class="fw-bold j-d"> 120</span>
+                        <span class="fw-bold j-d">{{  $totalSalah }}</span>
                         <label for="" class="j-d2">Jawaban Salah</label>
                       </div>
                     </div>
@@ -82,7 +82,7 @@
                         </div>
                       </div>
                       <div class="col-8 d-flex flex-column">
-                        <span class="fw-bold j-d"> 41</span>
+                        <span class="fw-bold j-d"> {{ $totalBenar }}</span>
                         <label for="" class="j-d2">Jawaban Benar</label>
                       </div>
                     </div>

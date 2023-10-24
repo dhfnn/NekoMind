@@ -16,6 +16,46 @@ li {
 .mes-e{
     font-size: 12px; color: rgba(191, 9, 9, 0.883); text-decoration: none;
 }
+
+.list-soal {
+    margin-top: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ffff;
+    border: 1px solid #3b73c5;
+    text-align: center;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* padding-top: 3px; */
+    font-size: 12px;
+    font-weight: 800;
+  }
+      .tnp{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 30px;
+          height:30px;
+          border-radius: 50%;
+          background-color: #3b73c5;
+      }
+      .bgn-opsi{
+          font-size: 13px;
+           font-weight: 700; color: #000000bd;
+           border-radius:10px ;
+            background-color: #F8F9FA;
+            box-shadow: 0px 3px 10px -5px rgba(0, 0, 0, 0.192);
+      }
+      .tombol-selesai{
+          border-radius:10px ;
+          color: white;
+          height: 30px;
+          width: 100px;
+          background-color: #3b73c5;
+      }
 /* GLOBAL STYLES
 -------------------------------------------------- */
 /* Padding below the footer and lighter body text */

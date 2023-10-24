@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Bab;
 use App\Models\Kelas;
 use App\Models\Pelajaran;
+use App\Models\soal;
+use App\Models\Ujian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Termwind\Components\Dd;
@@ -16,17 +18,19 @@ class MateriController extends Controller
      */
     public function index()
     {
-        $dataKelas = Kelas::all();
+        $namepage = 'Pelajaran';
 
+        $dataUjian = Ujian::all();
+
+
+        $dataKelas = Kelas::all();
         foreach ($dataKelas as $kelas) {
             $jumlahMateri = DB::table('pelajaran')
                 ->where('id_kelas', $kelas->id)
                 ->count();
             $kelas->jumlahMateri = $jumlahMateri;
         }
-
-        $namepage = 'Materi';
-        return view('admin.pelajaran',compact('namepage','dataKelas'));
+        return view('admin.pelajaran',compact('namepage','dataKelas','dataUjian'));
     }
 
     /**
@@ -34,7 +38,7 @@ class MateriController extends Controller
      */
     public function create()
     {
-
+        
     }
 
 

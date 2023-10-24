@@ -305,7 +305,7 @@
                             <div class="border rounded p-1">
                                 <div class="border rounded text-center k-3 p-4 bg-white flex-column t-e  ">
                                   <i class="fa-brands fa-leanpub mb-2 fs-5 fs-md-2" style="color: #3b72c5c8;"></i>
-                                    <h3 class="m-i" style="color: rgb(69, 69, 69); " data-toggle="counter-up">1234</h3>
+                                    <h3 class="m-i" style="color: rgb(69, 69, 69); " data-toggle="counter-up">{{ $totalMateri }}</h3>
                                     <p class="mb-0" style="font-weight: 600;">Materi</p>
                                 </div>
                             </div>
@@ -347,7 +347,7 @@
 
       <!-- FOOTER -->
 
-      
+
     </main>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 

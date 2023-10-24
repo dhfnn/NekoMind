@@ -35,6 +35,13 @@ class users extends Authenticatable
     public function datalainnya(){
         return $this->hasOne(Datalainnya::class,'user_id');
     }
+    public function nilai(){
+        return $this->hasOne(Nilai::class,'user_id');
+    }
+
+    public function users(){
+        return $this->hasOne(HistoryUjian::class, 'user_id');
+    }
 
 
 }

@@ -11,9 +11,6 @@
           <h6>Tabel Daftar Akun</h6>
           {{-- <div class="col"> --}}
             <div class=" d-flex justify-content-between align-items-center  me-2" style="max-height: 40px">
-                    <style>
-
-                    </style>
                 {{-- <div class=" form-inputs me-1" >
                     <form action="{{ url('data') }}" method="GET" class="d-flex align-items-center">
                     <input class="form-control " type="text" placeholder="Cari nama atau emalix" name="cari" value="{{ $request->get('cari') }}">

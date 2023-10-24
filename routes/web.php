@@ -12,7 +12,11 @@ use App\Http\Controllers\materiPengguna;
 use App\Http\Controllers\Permateri;
 use App\Http\Controllers\Profilepengguna;
 use App\Http\Controllers\profilecontroller;
+use App\Http\Controllers\quizController;
+use App\Http\Controllers\soalController;
+use App\Http\Controllers\ujianController;
 use App\Http\Controllers\wordController;
+use Illuminate\Contracts\Cache\Store;
 
 // use App\Http\Controllers\BabController;
 
@@ -38,15 +42,15 @@ route::middleware(['guest'])->group(function(){
     Route::post('/daftar',[loregcontroller::class,'register'])->name('register');
     Route::get('/daftar',[loregcontroller::class,'registerpage'])->name('daftar');
     Route::post('/masuk',[loregcontroller::class,'login'])->name('login');
-    Route::get('/', function () {
-        return view('index');
-    });
+    Route::get('/', [loregcontroller::class, 'index']);
 });
 route::middleware(['auth'])->group(function(){
     Route::middleware(['roleakses:admin'])->group(function () {
         Route::get('/admin/dashboard', [dashcontroller::class, 'dashadmin'])->name('dashboard-admin');
         // bagian hal pelajaran
         Route::resource('Pelajaran' ,MateriController::class);
+        Route::get('/tamah+soal', [soalController::class, 'create'])->name('pelajaran.create');
+        Route::post('Pelajaran/soal/{id}', [soalController::class, 'store'])->name('pelajaran.store');
         Route::get('Pelajaran/{materi}' ,[MateriController::class, 'show'])->name('materi.show');
         Route::put('Pelajaran/{id}' ,[MateriController::class, 'update'])->name('materi.update');
         Route::delete('Pelajaran/{Materi}' ,[MateriController::class, 'destroy'])->name('materi.destroy');
@@ -102,12 +106,13 @@ route::middleware(['auth'])->group(function(){
         // halaman materi
         Route::resource('MateriPengguna', materiPengguna::class);
         // halaman soal
-        Route::get('/pengguna/soal',function(){
-            return view('pengguna.soal');
-        })->name('soal');
-        Route::get('pengguna/soal/praujian', function () {
-            return view('pengguna.praujian');
-        })->name('praujian');
+        Route::resource('Soal' , ujianController::class);
+        Route::resource('Ujian' , quizController::class);
+        Route::post('Hasil/{id}' , [quizController::class , 'store']);
+        Route::get('/soall', [quizController::class, 'AmbilData']);
+        Route::get('/waktuu', [quizController::class, 'AmbilWaktu']);
+        Route::post('/submit-quiz', [quizController::class,'simpanNilai']);
+        Route::get('/soak', [tes::class, 'hai']);
         // halaman profile
         Route::resource('Profilepengguna', Profilepengguna::class);
         // Route::get('Profilepengguna/{userId}/edit', 'Profilepengguna@edit');
