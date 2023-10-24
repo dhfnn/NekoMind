@@ -49,12 +49,20 @@ route::middleware(['auth'])->group(function(){
         Route::get('/admin/dashboard', [dashcontroller::class, 'dashadmin'])->name('dashboard-admin');
         // bagian hal pelajaran
         Route::resource('Pelajaran' ,MateriController::class);
-        Route::get('/tamah+soal', [soalController::class, 'create'])->name('pelajaran.create');
-        Route::post('Pelajaran/soal/{id}', [soalController::class, 'store'])->name('pelajaran.store');
         Route::get('Pelajaran/{materi}' ,[MateriController::class, 'show'])->name('materi.show');
         Route::put('Pelajaran/{id}' ,[MateriController::class, 'update'])->name('materi.update');
         Route::delete('Pelajaran/{Materi}' ,[MateriController::class, 'destroy'])->name('materi.destroy');
 
+
+        Route::get('/tambah+soal', [soalController::class, 'create'])->name('pelajaran.create');
+        Route::get('/lihat/{id}', [soalController::class, 'show'])->name('pelajaran.show');
+        Route::put('/edit/{id}', [soalController::class, 'update'])->name('soal.update');
+        Route::put('/edit/ujian/{id}', [quizController::class, 'update'])->name('ujian.update');
+        Route::delete('/hapus/ujian/{id}', [quizController::class, 'destroy'])->name('ujian.delete');
+        Route::delete('/hapus/{id}', [SoalController::class, 'destroy'])->name('soal.delete');
+        Route::post('Pelajaran/soal/{id}', [soalController::class, 'store'])->name('pelajaran.store');
+
+        Route::post('/tambah+ujian',[quizController::class, 'tambahUjian'])->name('ujian.tambah');
         // Route::get('Pelajaran/{id}/edit' ,[Materi::class, '']);
         // bagian hal data
         Route::resource('data', data::class);

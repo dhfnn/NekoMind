@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\datalainnya;
 use App\Models\datapengguna;
 use App\Models\HistoryUjian;
+use App\Models\Level;
 use App\Models\Pelajaran;
 use App\Models\users;
 use Illuminate\Http\Request;
@@ -77,9 +78,19 @@ class dashcontroller extends Controller
 
                     // Menghitung berapa banyak ujian_id yang unik
                     $jumlahSoal = $data->count();
+                $level = Level::where('user_id', $userId)->first();
+                $exp=$level->exp;
+                $expLevel = $exp / 1200;
+                $sisaBagi = $exp % 1200;
+                $levelPengguna = number_format($expLevel);
 
+                if($sisaBagi !== 0){
+                $persentase = (1200/ $sisaBagi)*100;
 
-                return view('pengguna.dashboard',compact('userId','datalainnya','datapengguna','totalBenar', 'totalSalah','jumlahSoal'));
+                }else(
+                    $persentase = 0
+                );
+                return view('pengguna.dashboard',compact('userId','datalainnya','datapengguna','totalBenar', 'totalSalah','jumlahSoal','levelPengguna','sisaBagi','persentase'));
             } else {
                 // Jika salah satu atau kedua data tidak ada, arahkan ke halaman tambah data
                 return redirect('/Profilepengguna/create');

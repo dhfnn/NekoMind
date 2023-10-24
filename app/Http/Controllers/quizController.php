@@ -34,18 +34,21 @@ class quizController extends Controller
     {
         $userData = Auth::user();
         $user_id =$userData->id;
-
         $dataUjianid = session('dataUjianid');
-
-
-
         $data['user_id'] = $user_id;
         $data['ujian_id'] = $dataUjianid;
         $data['benar']= $request->benar;
         $data['salah'] = $request->salah;
         $data['nilai']= $request->nilai;
-
         $tambah = HistoryUjian::create($data);
+    }
+    public function tambahUjian(Request $request){
+        $data['judul'] =$request->judul;
+        $data['waktu'] = $request->waktu;
+        $data['jenis'] = $request->jenis;
+
+        Ujian::create($data);
+        return redirect()->back();
     }
 
     /**
@@ -61,14 +64,14 @@ class quizController extends Controller
     }
     public function AmbilData(){
         $dataUjianid = session('dataUjianid');
-        $soals = soal::where('ujian_id' , $dataUjianid)->get(); // Gantilah dengan cara Anda mengambil data soal
+        $soals = soal::where('ujian_id' , $dataUjianid)->get();
         return response()->json($soals);
     }
     public function AmbilWaktu(){
         $dataUjianid = session('dataUjianid');
 
         $waktuu = Ujian::where('id',$dataUjianid)->first();
-        // dd($waktu);
+
         if($waktuu) {
             return response()->json(['waktu' =>$waktuu->waktu]);
         }else{
@@ -99,7 +102,12 @@ class quizController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data['judul'] =$request->judul;
+        $data['waktu'] = $request->waktu;
+        $data['jenis'] = $request->jenis;
+
+        Ujian::where('id', $id)->update($data);
+        return redirect()->back();
     }
 
     /**
@@ -107,6 +115,10 @@ class quizController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        HistoryUjian::where('ujian_id', $id)->delete();
+        soal::where('ujian_id' ,$id)->delete();
+        Ujian::where('id' ,$id)->delete();
+
+        return redirect()->back();
     }
 }

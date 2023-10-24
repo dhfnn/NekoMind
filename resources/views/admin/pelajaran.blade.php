@@ -22,61 +22,76 @@
   <!-- End Navbar -->
   <div class="container-fluid py-1">
     <div class="row"style="max-height: 540px">
-      <div class="col-lg-8  ">
-        <div class="col d-flex justify-content-between">
-            <span>Ujian/Soal</span>
-                <a type="button" class="p-2 d-flex justify-content-between align-items-center me-2" style="border: 1px solid rgba(0, 0, 0, 0.075); border-radius:10px ;color:black !important;">  <i class="fa-solid fa-plus"></i>
-                </a>
+      <div class="col-lg-8">
+        <div class="col bg-white p-3">
+
+            <div class="col d-flex justify-content-between">
+                <span>Ujian/Soal</span>
+                    <a type="button" class="p-2 d-flex justify-content-between align-items-center me-2" style="border: 1px solid rgba(0, 0, 0, 0.075); border-radius:10px ;color:black !important;"data-bs-toggle="modal" data-bs-target="#ModalTambahUjian">  <i class="fa-solid fa-plus"></i>
+                    </a>
+                    @include('component.Mtambahujian')
+            </div>
+            <table class="table align-items-center mb-0 dataTablefiture px-5" id="dataTabledata">
+                <thead>
+                  <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">JUDUL</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">WAKTU</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">JENIS</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">aksi</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                    @foreach ($dataUjian as $data )
+                  <tr>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-sm">
+                            {{ $data->judul }}
+                        </h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0">
+                        {{ $data->waktu }}
+                    </p>
+                    </td>
+                    <td class="align-middle text-center text-sm">
+                      <span class="text-secondary text-xs font-weight-bold">
+                        {{  $data->jenis }}
+                        </span>
+                    </td>
+                    <td class="align-middle text-center text-sm d-flex">
+                            <form action="{{ route('ujian.delete', ['id'=>$data->id]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-link  text-danger text-gradient mb-0" style="font-size: 10px;" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</button>
+                            </form>
+                            <button class="btn btn-link  text-dark mb-0" style="font-size: 10px;"aria-hidden="true "data-bs-toggle="modal" data-bs-target="#ModalEditUjian"><i class="fas fa-pencil-alt text-dark me-2"  aria-hidden="true "data-bs-toggle="modal" data-bs-target="#ModalEditUjian"> </i>Edit</button>
+                            @include('component.Meditujian')
+                    </td>
+
+                    <td class="align-middle text-center">
+
+                        @if ($data->soal->isEmpty()) {{-- Cek apakah tidak ada data soal yang terkait --}}
+                        <button class="t-sep" style="font-size: 10px;" type="button" data-bs-toggle="modal" data-bs-target="#tambahpertanyaan" data-ujian="{{ $data->jenis }}" data-ujianid="{{ $data->id }}">Tambah</button>
+
+                      @else
+                      <a class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user" href="{{ route('pelajaran.show', ['id' => $data->id]) }}">Lihat</a>
+
+                      @endif
+
+
+
+
+                    </td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
         </div>
-        <table class="table align-items-center mb-0 dataTablefiture px-5" id="dataTabledata">
-            <thead>
-              <tr>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">JUDUL</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">WAKTU</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">JENIS</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-                @foreach ($dataUjian as $data )
-              <tr>
-                <td>
-                  <div class="d-flex px-2 py-1">
-                    <div class="d-flex flex-column justify-content-center">
-                      <h6 class="mb-0 text-sm">
-                        {{ $data->judul }}
-                    </h6>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <p class="text-xs font-weight-bold mb-0">
-                    {{ $data->waktu }}
-                </p>
-                </td>
-                <td class="align-middle text-center text-sm">
-                  <span class="text-secondary text-xs font-weight-bold">
-                    {{  $data->jenis }}
-                    </span>
-                </td>
-
-                <td class="align-middle text-center">
-
-                    @if ($data->soal->isEmpty()) {{-- Cek apakah tidak ada data soal yang terkait --}}
-                    <button class="t-sep" style="font-size: 10px;" type="button" data-bs-toggle="modal" data-bs-target="#tambahpertanyaan" data-ujian="{{ $data->jenis }}" data-ujianid="{{ $data->id }}">Tambah</button>
-
-                  @else
-                  <a class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user"  href="">Lihat</a>
-                  @endif
-
-
-
-
-                </td>
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
       </div>
       <div class="col-lg-4 mt-4 mt-lg-0" style="height: 540px;">
         <div class="card h-100">

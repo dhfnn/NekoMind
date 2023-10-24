@@ -251,7 +251,9 @@ body {
   /* -webkit-box-shadow: 11px 5px 20px -16px rgba(0,0,0,0.97);
   -moz-box-shadow: 11px 5px 20px -16px rgba(0,0,0,0.97); */
 }
-.bg-gradient-info {
+.bg-gradient-biru {
+  background-image: linear-gradient(310deg, #2152ff 0%, #21d4fd 100%);
+
 }
 .sign-em:hover {
   background-image: linear-gradient(310deg, #2152ff 0%, #21d4fd 100%);

@@ -106,7 +106,9 @@
     scroll-behavior: smooth;
   }
 }
-
+a{
+    text-decoration: none !important;
+}
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -5245,6 +5247,7 @@ fieldset:disabled .btn {
   background-clip: border-box;
   border: var(--bs-card-border-width) solid var(--bs-card-border-color);
   border-radius: var(--bs-card-border-radius);
+  border: none !important;
 }
 
 .card>hr {
@@ -5301,8 +5304,9 @@ fieldset:disabled .btn {
   padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
   margin-bottom: 0;
   color: var(--bs-card-cap-color);
-  background-color: var(--bs-card-cap-bg);
-  border-bottom: var(--bs-card-border-width) solid var(--bs-card-border-color);
+  background-color: white !important;
+  border-bottom: none !important;
+  /* border-bottom: var(--bs-card-border-width) solid var(--bs-card-border-color); */
 }
 
 .card-header:first-child {
@@ -5312,7 +5316,7 @@ fieldset:disabled .btn {
 .card-footer {
   padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
   color: var(--bs-card-cap-color);
-  background-color: var(--bs-card-cap-bg);
+  background-color: white;
   border-top: var(--bs-card-border-width) solid var(--bs-card-border-color);
 }
 
