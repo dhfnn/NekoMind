@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\soal;
+use App\Models\Ujian;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
@@ -28,6 +30,28 @@ class tes extends Controller
     //     return response()->json($data);
 
     // }
+    // public function index()
+    // {
+    //     session(['halo' => 'hai']);
+
+    //     $halo = session('halo');
+    //     dd($halo);
+    // }
+    public function index()
+    {
+
+        $soals = soal::where('id' , $id); // Gantilah dengan cara Anda mengambil data soal
+
+        return response()->json($soals);
+    }
+
+    public function hai()
+    {
+        $soal = soal::all();
+        $soals = json_encode($soal);
+        return view('more.RuangUjian');
+    }
+
     public function getDataSekolah(Request $request)
 {
       $page = 1;

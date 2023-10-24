@@ -8,17 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Bab extends Model
 {
     use HasFactory;
-    
+    public $timestamps = false;
+
     protected $table = 'bab';
-    protected $fillable = ['id_pelajaran', 'subbab'];
+    protected $fillable = ['id_pelajaran', 'judul','subab'];
 
     public function pelajaran()
     {
         return $this->belongsTo(Pelajaran::class, 'id_pelajaran');
     }
 
-    public function materi()
+    public function MateriModel()
     {
-        return $this->hasMany(Materi::class, 'id_pelajaran');
+        return $this->hasMany(MateriModel::class, 'id_bab');
     }
 }

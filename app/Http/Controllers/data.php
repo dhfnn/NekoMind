@@ -16,14 +16,21 @@ class data extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+        // $userData =  users::with('Datapengguna','Datalainnya')->get();
+
+    public function index(Request $request)
     {
-        // $id = auth()->user()->id;
+
 
         $namepage = 'Data';
-        $userData = users::with('Datapengguna','Datalainnya')->get();
+        // $userData = users::get();
+        $userData = new users;
 
-        return view('admin.data',compact('namepage','userData'));
+        if($request->get('cari')){
+            $userData = $userData->where('username','LIKE', $request->get('cari'). '%')->orWhere('email','LIKE', $request->get('cari'). '%');
+        }
+        $userData = $userData->get();
+        return view('admin.data',compact('namepage','userData','request'));
 
     }
 

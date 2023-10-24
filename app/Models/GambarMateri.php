@@ -11,8 +11,8 @@ class GambarMateri extends Model
     protected $table = 'gambarmateri';
     protected $fillable = ['id_materi', 'namafile', 'lokasifile'];
 
-    public function materi()
+    public function MateriModel()
     {
-        return $this->belongsTo(Materi::class, 'id_materi');
+        return $this->belongsTo(MateriModel::class, 'id_materi');
     }
 }

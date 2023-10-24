@@ -30,9 +30,8 @@
             <div class="navbar navbar-hide me-md-4 d-none d-md-flex">
                 <a href="{{ Route::currentRouteName() === 'dashboard-pengguna' ? '#' : route('dashboard-pengguna') }}">Beranda</a>
 
-                <a href="{{ Route::currentRouteName() === 'materi' ? '#' : route('materi') }}" class="px-4">Materi</a>
-
-                <a href="{{ Route::currentRouteName() === 'soal' ? '#' : route('soal') }}">Soal</a>
+                <a href="{{ Request::is('MateriPengguna') ? '#' : url('MateriPengguna') }}" class="px-4">Materi</a>
+                <a href="{{ Request::is('Soal')  ? '#' : url('Soal') }}">Soal</a>
               <!-- <a href="" class="ps-4 ps-xl-5"><i class="fa-solid fa-circle-user i-pd"></i></a> -->
               <div class="menu-profile d-flex align-items-center">
                 <ul class="menu">
@@ -70,15 +69,15 @@
           </a>
         </div>
         <div class="nav-item d-flex flex-column align-items-center ps-0">
-          <a href="{{ Route::currentRouteName() === 'materi' ? '#' : route('materi') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
-            <i class="fa-brands fa-leanpub i-multi  {{ Route::currentRouteName() === 'materi' ? 'i-act' : '' }}   "></i>
+          <a href="{{ Request::is('MateriPengguna') ? '#' : url('MateriPengguna') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
+            <i class="fa-brands fa-leanpub i-multi  {{Request::is('MateriPengguna') ? 'i-act': '' }}   "></i>
             <span class="i-multit  {{ Route::currentRouteName() === 'materi' ? 'i-act' : '' }}   ">Materi</span>
           </a>
         </div>
         <div class="nav-item d-flex flex-column align-items-center">
-          <a href="{{ Route::currentRouteName() === 'soal' ? '#' : route('soal') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
-            <i class="fa-solid fa-lines-leaning i-multi {{ Route::currentRouteName() === 'soal' ? 'i-act' : '' }}  "></i>
-            <span class="i-multit {{ Route::currentRouteName() === 'soal' ? 'i-act' : '' }}  ">Soal</span>
+          <a href="{{ Request::is('Soal') ? '#' : url('Soal') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
+            <i class="fa-solid fa-lines-leaning i-multi  {{Request::is('Soal') ? 'i-act': '' }}"></i>
+            <span class="i-multit  {{Request::is('Soal') ? 'i-act': '' }}  ">Soal</span>
           </a>
         </div>
         <div class="nav-item d-flex flex-column align-items-center ps-0 pe-3">
@@ -91,9 +90,21 @@
 
       <!-- penutupan navbar bagian bawah  -------------------------------------------------------------------------------->
     </header>
+    <body>
 
-    <!-- main  -------------------------------------------------------------------------------->
     @yield('main')
+    <script>
+        document.getElementById('kelasFilter').addEventListener('change', function () {
+            var selectedKelas = this.value;
+            if (selectedKelas === "") {
+                     // Mengarahkan langsung ke /materi jika "SEMUA" dipilih
+            } else {
+               php ar
+            }
+        });
+    </script>
+    </body>
+    <!-- main  -------------------------------------------------------------------------------->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>

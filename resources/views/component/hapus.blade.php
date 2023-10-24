@@ -9,7 +9,8 @@
             <p>Apakah anda yakin akan menghapus akun dari <b>{{ $userData->username }}</b> dengan email <b>'{{ $userData->email }}' </b> </p>
           </div>
           <div class="modal-footer border-top-0">
-            <button type="button" class="t-sepd me-3 me-md-0 mt-md-3" >hapus</button>
+            {{-- <button type="submit" class="t-sepd me-3 me-md-0 mt-md-3" >hapus</button> --}}
+            <button class="text-danger font-weight-bold text-xs" type="submit" data-toggle="tooltip" >Hapus</button>
           </div>
         </div>
       </div>

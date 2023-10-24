@@ -23,7 +23,7 @@
           </a>
         </div>
         <div class="nav-item d-flex flex-column align-items-center ps-0">
-          <a href="{{ Route::currentRouteName() === 'materi' ? '#' : route('materi') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
+          <a href="{{ Route::currentRouteName() === 'materi' ? '#' : url('Pelajaran') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
             <i class="fa-brands fa-leanpub i-multi  {{ Route::currentRouteName() === 'materi' ? 'i-act' : '' }}   "></i>
             <span class="i-multit  {{ Route::currentRouteName() === 'materi' ? 'i-act' : '' }}   ">Materi</span>
           </a>

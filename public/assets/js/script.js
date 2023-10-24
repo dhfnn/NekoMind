@@ -80,15 +80,6 @@ document.addEventListener("scroll", function() {
   wkls.style.display = "none";
 });
 });
-
-
-
-
-
-
-
-
-
 function backpage() {
     if (window.history.length > 1) {
       // Jika ada riwayat navigasi sebelumnya, kembali ke halaman sebelumnya
@@ -98,30 +89,15 @@ function backpage() {
       window.location.href = "dashboard.html";
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 // putar 180^
-
-
-  const selectElement = document.querySelector('.ie-select');
+document.addEventListener('DOMContentLoaded', function () {
+    const selectElement = document.querySelector('.ie-select');
     const arrowIcon = document.querySelector('.arrow-icon');
 
     selectElement.addEventListener('blur', () => {
-      // Setelah elemen select kehilangan fokus, kembalikan ikon ke posisi awal
-      arrowIcon.style.transform = 'rotate(0deg)';
+        arrowIcon.style.transform = 'rotate(0deg)';
     });
-
+});
 
     document.addEventListener('DOMContentLoaded', function () {
         const checkboxes = document.querySelectorAll('input[name="checkboxtp"]');
@@ -159,8 +135,5 @@ function backpage() {
             // Konfigurasi lainnya sesuai kebutuhan
         });
     });
-
-
-
 
 

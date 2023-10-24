@@ -124,13 +124,14 @@
         <form action="{{ url('Konfigdata/' . $userData->id) }}" method="POST">
             @csrf
             @method('DELETE')
-            <button class="t-sepd me-3 me-md-0 mt-md-3" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button class="t-sepd me-3 me-md-0 mt-md-3" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 hapus
               </button>
-        </form>
 
           <!-- Modal -->
          @include('component.hapus')
+        </form>
+
          <a href="{{ url('data') }}" class="t-sep me-3 me-md-0 mt-md-3 ms-2" >
             <span style="font-size: 15px; font-weight: 600;">Kembali</span>
         </a>

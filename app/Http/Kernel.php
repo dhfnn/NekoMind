@@ -44,6 +44,10 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
+    protected $except = [
+        'submit-quiz', // tambahkan rute yang ingin Anda kecualikan di sini
+    ];
+
 
     /**
      * The application's middleware aliases.

@@ -81,132 +81,32 @@
             </div>
           </div>
          <div class="row  row-cols-1 row-cols-md-2 row-cols-xl-3 row-cols-xxl-4 g-1 g-md-2 mt-1 mt-md-2 mb-5 pb-5">
-          <div class="col px-3 px-md-0">
-            <div class="row  mx-md-2 w-soal p-2 px-4 py-3">
-              <div class="col-9 p-0 ws-k">
-                <span class="wsk-j">PTS - B. Indonesia - Kelas 11</span>
-                <div class="wsk-p ">
-                  <i class="fa-regular fa-circle-question"></i>
-                <span class="ms-1">30 pertanyaan</span>
+            @foreach ($dataUjian as $data)
+
+            <div class="col px-3 px-md-0">
+              <div class="row  mx-md-2 w-soal p-2 px-4 py-3">
+                <div class="col-9 p-0 ws-k">
+                  <span class="wsk-j">{{ $data->judul }}</span>
+                  <div class="wsk-p ">
+                    <i class="fa-regular fa-circle-question"></i>
+                  <span class="ms-1"> - </span>
+                  </div>
+                  <div class="wsk-w">
+                    <i class="fa-solid fa-stopwatch"></i>
+                    <span class="ms-2 mt-1">{{ $data->waktu }} Menit</span>
+                  </div>
                 </div>
-                <div class="wsk-w">
-                  <i class="fa-solid fa-stopwatch"></i>
-                  <span class="ms-2 mt-1">120 Menit</span>
+                <div class="col p-0 w-st">
+                  <a href="{{ url('Soal/' .$data->id) }}" class="text-decoration-none d-flex align-items-center">
+                    <span class="me-1">mulai</span>
+                      <i class="fa-solid fa-angle-right" style="font-size: 10px;"></i>
+                  </a>
                 </div>
-              </div>
-              <div class="col p-0 w-st">
-                <a href="{{ route('praujian') }}" class="text-decoration-none d-flex align-items-center">
-                  <span class="me-1">mulai</span>
-                    <i class="fa-solid fa-angle-right" style="font-size: 10px;"></i>
-                </a>
               </div>
             </div>
-          </div>
-          <div class="col px-3 px-md-0">
-            <div class="row  mx-md-2 w-soal p-2 px-4 py-3">
-              <div class="col-9 p-0 ws-k">
-                <span class="wsk-j">PTS - B. Indonesia - Kelas 11</span>
-                <div class="wsk-p ">
-                  <i class="fa-regular fa-circle-question"></i>
-                <span class="ms-1">30 pertanyaan</span>
-                </div>
-                <div class="wsk-w">
-                  <i class="fa-solid fa-stopwatch"></i>
-                  <span class="ms-2 mt-1">120 Menit</span>
-                </div>
-              </div>
-              <div class="col p-0 w-st">
-                <a href="" class="text-decoration-none d-flex align-items-center">
-                  <span class="me-1">mulai</span>
-                    <i class="fa-solid fa-angle-right" style="font-size: 10px;"></i>
-                </a>
-              </div>
-            </div>
-           </div>
-          <div class="col px-3 px-md-0">
-            <div class="row  mx-md-2 w-soal p-2 px-4 py-3">
-              <div class="col-9 p-0 ws-k">
-                <span class="wsk-j">PTS - B. Indonesia - Kelas 11</span>
-                <div class="wsk-p ">
-                  <i class="fa-regular fa-circle-question"></i>
-                <span class="ms-1">30 pertanyaan</span>
-                </div>
-                <div class="wsk-w">
-                  <i class="fa-solid fa-stopwatch"></i>
-                  <span class="ms-2 mt-1">120 Menit</span>
-                </div>
-              </div>
-              <div class="col p-0 w-st">
-                <a href="" class="text-decoration-none d-flex align-items-center">
-                  <span class="me-1">mulai</span>
-                    <i class="fa-solid fa-angle-right" style="font-size: 10px;"></i>
-                </a>
-              </div>
-            </div>
-           </div>
-          <div class="col px-3 px-md-0">
-            <div class="row  mx-md-2 w-soal p-2 px-4 py-3">
-              <div class="col-9 p-0 ws-k">
-                <span class="wsk-j">PTS - B. Indonesia - Kelas 11</span>
-                <div class="wsk-p ">
-                  <i class="fa-regular fa-circle-question"></i>
-                <span class="ms-1">30 pertanyaan</span>
-                </div>
-                <div class="wsk-w">
-                  <i class="fa-solid fa-stopwatch"></i>
-                  <span class="ms-2 mt-1">120 Menit</span>
-                </div>
-              </div>
-              <div class="col p-0 w-st">
-                <a href="" class="text-decoration-none d-flex align-items-center">
-                  <span class="me-1">mulai</span>
-                    <i class="fa-solid fa-angle-right" style="font-size: 10px;"></i>
-                </a>
-              </div>
-            </div>
-           </div>
-          <div class="col px-3 px-md-0">
-            <div class="row  mx-md-2 w-soal p-2 px-4 py-3">
-              <div class="col-9 p-0 ws-k">
-                <span class="wsk-j">PTS - B. Indonesia - Kelas 11</span>
-                <div class="wsk-p ">
-                  <i class="fa-regular fa-circle-question"></i>
-                <span class="ms-1">30 pertanyaan</span>
-                </div>
-                <div class="wsk-w">
-                  <i class="fa-solid fa-stopwatch"></i>
-                  <span class="ms-2 mt-1">120 Menit</span>
-                </div>
-              </div>
-              <div class="col p-0 w-st">
-                <a href="" class="text-decoration-none d-flex align-items-center">
-                  <span class="me-1">mulai</span>
-                    <i class="fa-solid fa-angle-right" style="font-size: 10px;"></i>
-                </a>
-              </div>
-            </div>
-           </div>
-          <div class="col px-3 px-md-0">
-            <div class="row  mx-md-2 w-soal p-2 px-4 py-3">
-              <div class="col-9 p-0 ws-k">
-                <span class="wsk-j">PTS - B. Indonesia - Kelas 11</span>
-                <div class="wsk-p ">
-                  <i class="fa-regular fa-circle-question"></i>
-                <span class="ms-1">30 pertanyaan</span>
-                </div>
-                <div class="wsk-w">
-                  <i class="fa-solid fa-stopwatch"></i>
-                  <span class="ms-2 mt-1">120 Menit</span>
-                </div>
-              </div>
-              <div class="col p-0 w-st">
-                <a href="" class="text-decoration-none d-flex align-items-center">
-                  <span class="me-1">mulai</span>
-                    <i class="fa-solid fa-angle-right" style="font-size: 10px;"></i>
-                </a>
-              </div>
-            </div>
-           </div>
+            @endforeach
+
+
          </div>
        </div>
      </div>

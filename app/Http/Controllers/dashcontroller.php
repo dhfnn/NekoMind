@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\datalainnya;
 use App\Models\datapengguna;
+use App\Models\HistoryUjian;
+use App\Models\Level;
+use App\Models\Pelajaran;
 use App\Models\users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class dashcontroller extends Controller
 {
@@ -22,6 +26,7 @@ class dashcontroller extends Controller
     // }
 
     function dashpengguna(){
+
         // Mengecek apakah pengguna sudah login
         if (Auth::check()) {
             // Mengambil ID pengguna yang telah login
@@ -36,7 +41,56 @@ class dashcontroller extends Controller
             if ($datalainnya &&  $datapengguna) {
                 // Jika kedua data ada, arahkan ke halaman dashboard
                 $userId = auth()->id();
-                return view('pengguna.dashboard',compact('userId'));
+                $data = DB::table('historyujian')
+                ->select('ujian_id', 'id', 'user_id', 'benar', 'salah', 'nilai')
+                ->whereIn('id', function($query) use ($userId) {
+                    $query->select(DB::raw('MAX(id)'))
+                        ->from('historyujian')
+                        ->where('user_id', $userId)
+                        ->groupBy('ujian_id');
+                })
+                ->get();
+            $totalBenar = $data->sum('benar');
+
+            $data = DB::table('historyujian')
+                    ->select('ujian_id', 'id', 'user_id', 'benar', 'salah', 'nilai')
+                    ->whereIn('id', function($query) use ($userId) {
+                        $query->select(DB::raw('MAX(id)'))
+                            ->from('historyujian')
+                            ->where('user_id', $userId)
+                            ->groupBy('ujian_id');
+                    })
+                    ->get();
+
+                // Jumlahkan kolom "salah"
+                $totalSalah = $data->sum('salah');
+
+                $data = DB::table('historyujian')
+                        ->select('ujian_id', 'id', 'user_id', 'benar', 'salah', 'nilai')
+                        ->whereIn('id', function($query) use ($userId) {
+                            $query->select(DB::raw('MAX(id)'))
+                                ->from('historyujian')
+                                ->where('user_id', $userId)
+                                ->groupBy('ujian_id');
+                        })
+                        ->distinct('ujian_id')
+                        ->get();
+
+                    // Menghitung berapa banyak ujian_id yang unik
+                    $jumlahSoal = $data->count();
+                $level = Level::where('user_id', $userId)->first();
+                $exp=$level->exp;
+                $expLevel = $exp / 1200;
+                $sisaBagi = $exp % 1200;
+                $levelPengguna = number_format($expLevel);
+
+                if($sisaBagi !== 0){
+                $persentase = (1200/ $sisaBagi)*100;
+
+                }else(
+                    $persentase = 0
+                );
+                return view('pengguna.dashboard',compact('userId','datalainnya','datapengguna','totalBenar', 'totalSalah','jumlahSoal','levelPengguna','sisaBagi','persentase'));
             } else {
                 // Jika salah satu atau kedua data tidak ada, arahkan ke halaman tambah data
                 return redirect('/Profilepengguna/create');

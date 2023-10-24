@@ -1,17 +1,4 @@
-<!--
-=========================================================
-* Soft UI Dashboard - v1.0.7
-=========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -27,6 +14,10 @@
     <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
     <link id="pagestyle" href="{{ asset('assets/css/soft-ui-dashboard.css') }}" rel="stylesheet" />
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+  @include('component.css')
+
   </head>
 
   <body class="g-sidenav-show bg-gray-100">
@@ -93,7 +84,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ $namepage === 'Materi' ? 'active' : '' }}" href="{{ $namepage === 'Materi' ? '#' : url('/Materi') }}">
+            <a class="nav-link {{ $namepage === 'Materi' ? 'active' : '' }}" href="{{ $namepage === 'Materi' ? '#' : url('Pelajaran') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <title>credit-card</title>
@@ -186,6 +177,7 @@
       </nav>
 
 @yield('content')
+@include('component.Mtambahsoal')
 <!-- Button trigger modal -->
 @stack('script')
 
@@ -205,191 +197,60 @@
       </div>
     </div>
   </div>
-
 </main>
 
 
 <!--   Core JS Files   -->
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<script>{{asset('assets/js/script.js')}}</script>
+{{-- <script src="{{ asset('assets/js/script.js') }}"></script> --}}
 <script src="../assets/js/core/popper.min.js"></script>
 <script src="../assets/js/core/bootstrap.min.js"></script>
 <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
 <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
 <script src="../assets/js/plugins/chartjs.min.js"></script>
 <script>
-  var ctx = document.getElementById("chart-bars").getContext("2d");
-
-  new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-      datasets: [
-        {
-          label: "Sales",
-          tension: 0.4,
-          borderWidth: 0,
-          borderRadius: 4,
-          borderSkipped: false,
-          backgroundColor: "#fff",
-          data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
-          maxBarThickness: 6,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false,
-        },
-      },
-      interaction: {
-        intersect: false,
-        mode: "index",
-      },
-      scales: {
-        y: {
-          grid: {
-            drawBorder: false,
-            display: false,
-            drawOnChartArea: false,
-            drawTicks: false,
-          },
-          ticks: {
-            suggestedMin: 0,
-            suggestedMax: 500,
-            beginAtZero: true,
-            padding: 15,
-            font: {
-              size: 14,
-              family: "Open Sans",
-              style: "normal",
-              lineHeight: 2,
-            },
-            color: "#fff",
-          },
-        },
-        x: {
-          grid: {
-            drawBorder: false,
-            display: false,
-            drawOnChartArea: false,
-            drawTicks: false,
-          },
-          ticks: {
-            display: false,
-          },
-        },
-      },
-    },
-  });
-
-  var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-  var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-  gradientStroke1.addColorStop(1, "rgba(203,12,159,0.2)");
-  gradientStroke1.addColorStop(0.2, "rgba(72,72,176,0.0)");
-  gradientStroke1.addColorStop(0, "rgba(203,12,159,0)"); //purple colors
-
-  var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-  gradientStroke2.addColorStop(1, "rgba(20,23,39,0.2)");
-  gradientStroke2.addColorStop(0.2, "rgba(72,72,176,0.0)");
-  gradientStroke2.addColorStop(0, "rgba(20,23,39,0)"); //purple colors
-
-  new Chart(ctx2, {
-    type: "line",
-    data: {
-      labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-      datasets: [
-        {
-          label: "Mobile apps",
-          tension: 0.4,
-          borderWidth: 0,
-          pointRadius: 0,
-          borderColor: "#cb0c9f",
-          borderWidth: 3,
-          backgroundColor: gradientStroke1,
-          fill: true,
-          data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-          maxBarThickness: 6,
-        },
-        {
-          label: "Websites",
-          tension: 0.4,
-          borderWidth: 0,
-          pointRadius: 0,
-          borderColor: "#3A416F",
-          borderWidth: 3,
-          backgroundColor: gradientStroke2,
-          fill: true,
-          data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
-          maxBarThickness: 6,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false,
-        },
-      },
-      interaction: {
-        intersect: false,
-        mode: "index",
-      },
-      scales: {
-        y: {
-          grid: {
-            drawBorder: false,
-            display: true,
-            drawOnChartArea: true,
-            drawTicks: false,
-            borderDash: [5, 5],
-          },
-          ticks: {
-            display: true,
-            padding: 10,
-            color: "#b2b9bf",
-            font: {
-              size: 11,
-              family: "Open Sans",
-              style: "normal",
-              lineHeight: 2,
-            },
-          },
-        },
-        x: {
-          grid: {
-            drawBorder: false,
-            display: false,
-            drawOnChartArea: false,
-            drawTicks: false,
-            borderDash: [5, 5],
-          },
-          ticks: {
-            display: true,
-            color: "#b2b9bf",
-            padding: 20,
-            font: {
-              size: 11,
-              family: "Open Sans",
-              style: "normal",
-              lineHeight: 2,
-            },
-          },
-        },
-      },
-    },
-  });
 </script>
-<script>
+<script>document.addEventListener('DOMContentLoaded', function () {
+    var queryString = window.location.search;
+    var urlParams = new URLSearchParams(queryString);
+    var angka = urlParams.get("id");
+    var jenisUjian = urlParams.get("type");
+    fetch("{{ route('pelajaran.create') }}?id=" + angka + "&type=" + jenisUjian)
+        .then(response => {
+            console.log('berhasil');
+        })
+        .catch(error => {
+            console.error('Terjadi kesalahan: ', error);
+        });
+});
+
+var DataUjianIdElement = document.getElementById("DataUjianId");
+if (DataUjianIdElement) {
+    DataUjianIdElement.value = ujianId;
+}
+
+var tambahButton = document.getElementById("tambahpertanyaan");
+tambahButton.addEventListener("show.bs.modal", function (event) {
+    var button = event.relatedTarget;
+    var jenisUjian = button.getAttribute("data-ujian");
+    var idujian = button.getAttribute("data-ujianid");
+    document.getElementById("idujian").innerText = idujian;
+    document.getElementById("jenisUjian").value = jenisUjian;
+});
+
+// Tambahkan event listener untuk tombol "Tambah Soal" dalam modal
+document.getElementById("tambahButtonsoal").addEventListener("click", function () {
+    var angka = document.getElementById("idujian").innerText;
+    var jenisUjian = document.getElementById("jenisUjian").value;
+    window.location.href = "{{ route('pelajaran.create') }}?id=" + angka + "&type=" + jenisUjian;
+});
+
+
   var win = navigator.platform.indexOf("Win") > -1;
   if (win && document.querySelector("#sidenav-scrollbar")) {
     var options = {
@@ -397,10 +258,13 @@
     };
     Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
   }
+
 </script>
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+@include('component.script')
+
 </body>
 </html>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MateriModel;
+use App\Models\Ujian;
 use App\Models\users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,6 +11,13 @@ use Illuminate\Support\Facades\Hash;
 
 class loregcontroller extends Controller
 {
+    function index(){
+        $dataMateri = MateriModel::all();
+        $dataSoal = Ujian::all();
+        $totalMateri= $dataMateri->count();
+        $totalSoal= $dataSoal->count();
+        return view('index', compact('totalMateri','dataSoal'));
+    }
     function loginpage(){
         return view('masuk');
     }

@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Materi extends Model
+class MateriModel extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
     protected $table = 'materi';
-    protected $fillable = ['id_pelajaran', 'isimateri'];
+    protected $fillable = ['id_bab', 'isi_materi'];
 
     public function pelajaran()
     {
-        return $this->belongsTo(Pelajaran::class, 'id_pelajaran');
+        return $this->belongsTo(Bab::class, 'id_bab');
     }
 
     public function gambarmateri()
