@@ -9,13 +9,6 @@
       <div class="d-flex justify-content-center jr-d pt-5">
         <div class="row row-cols-1 dp d-flex justify-content-center">
           <div class="col col-lg-9">
-            <!-- logo neko  -------------------------------------------------------------------------------->
-            <!-- <div class="col-12 d-flex d-md-none justify-content-between align-items-center" style="background-color: #eaf0f6">
-              <label class="fw-bold fs-2 pt-3" style="color: #fe8d00">NekoMind</label>
-              <i class="fa-solid fa-magnifying-glass pt-4 pe-3" style="color: rgb(52, 52, 52); font-size: 15px"></i>
-            </div> -->
-
-            <!-- bagian profil di dash  -------------------------------------------------------------------------------->
             <div class="col-12 bg-white pt-2 px-3 mt-4 mt-md-0" style="border-radius: 7px; box-shadow: 3px 6px 7px -4px rgba(0, 0, 0, 0.201)">
               <div class="col d-flex align-items-center px-3 pt-2">
                 <div class="col-3 col-sm-2 bg-white d-flex justify-content-center pt-0 pt-sm-2 ps-sm-2" style="border-radius: 7px">
@@ -24,15 +17,18 @@
                 <div class="col-9 col-sm-10 pe-2 pe-sm-4 ps-2 ps-sm-3">
                   <div class="col-12 d-flex justify-content-between align-items-end py-sm-1" style="font-size: 15px; font-weight: 600">
                     <label for="" class="ps-1 t-un">{{ $datapengguna->nama}}</label>
-                    <span class="pe-2 t-lvl">Level 99</span>
+                    <span class="pe-2 t-lvl">Level {{ $levelPengguna }}</span>
                   </div>
                   <div class="col-12" style="background-color: #cdd2dc51; height: 15px; border-radius: 5px">
-                    <div class="gariss d-flex justify-content-center align-items-center" style="width: 95%; background-color: #b8cbf2; height: 15px; border-radius: 5px">
+                    {{-- <div class="gariss d-flex justify-content-center align-items-center" style="width: 95%; background-color: #b8cbf2; height: 15px; border-radius: 5px">
                       <!-- <span>-</span>  -------------------------------------------------------------------------------->
-                    </div>
+                    </div> --}}
+                    <div class="progress" role="progressbar"  aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="border-radius: 10px;">
+                        <div class="progress-bar bg-gradient-biru" style="width: {{ $persentase }}%" style=""></div>
+                      </div>
                   </div>
                   <div class="col-12 d-flex justify-content-end pe-2 pt-1">
-                    <span style="font-size: 10px; font-weight: 600; color: #4a4a4a">1140/1200XP</span>
+                    <span style="font-size: 10px; font-weight: 600; color: #4a4a4a">{{ $sisaBagi }}/1200EXP</span>
                   </div>
                 </div>
               </div>

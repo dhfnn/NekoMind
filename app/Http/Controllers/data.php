@@ -23,9 +23,7 @@ class data extends Controller
 
 
         $namepage = 'Data';
-        // $userData = users::get();
         $userData = new users;
-
         if($request->get('cari')){
             $userData = $userData->where('username','LIKE', $request->get('cari'). '%')->orWhere('email','LIKE', $request->get('cari'). '%');
         }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\datalainnya;
 use App\Models\datapengguna;
 use App\Models\HistoryUjian;
+use App\Models\Level;
 use App\Models\Pelajaran;
 use App\Models\users;
 use Illuminate\Http\Request;
@@ -77,9 +78,19 @@ class dashcontroller extends Controller
 
                     // Menghitung berapa banyak ujian_id yang unik
                     $jumlahSoal = $data->count();
+                $level = Level::where('user_id', $userId)->first();
+                $exp=$level->exp;
+                $expLevel = $exp / 1200;
+                $sisaBagi = $exp % 1200;
+                $levelPengguna = number_format($expLevel);
 
+                if($sisaBagi !== 0){
+                $persentase = ($sisaBagi/1200 )*100;
 
-                return view('pengguna.dashboard',compact('userId','datalainnya','datapengguna','totalBenar', 'totalSalah','jumlahSoal'));
+                }else(
+                    $persentase = 0
+                );
+                return view('pengguna.dashboard',compact('userId','datalainnya','datapengguna','totalBenar', 'totalSalah','jumlahSoal','levelPengguna','sisaBagi','persentase'));
             } else {
                 // Jika salah satu atau kedua data tidak ada, arahkan ke halaman tambah data
                 return redirect('/Profilepengguna/create');
@@ -88,5 +99,41 @@ class dashcontroller extends Controller
             // Jika pengguna belum login, arahkan ke halaman login atau halaman lain yang sesuai
             return redirect('/login'); // Ganti dengan rute login yang sesuai
         }
+    }
+    public function peringkat(){
+        $namepage = 'Dashboard';
+        $userId = Auth::id();
+        $userDataPeringkat = Users::with('datalainnya', 'historyujian', 'level','poin')
+        ->where('role', 'pengguna')
+        ->get();
+        $hasil = [];
+        $nomor = 1; // Variabel untuk nomor indeks
+
+        foreach($userDataPeringkat as $data) {
+            $benar = $data->historyujian->benar;
+            $salah = $data->historyujian->salah;
+            $totalUjian = $benar + $salah;
+            $persentase = ($benar / $totalUjian) * 100;
+
+            $hasil[] = [
+                'no' => 1, // Menggunakan nomor dan kemudian menambahkannya
+                'foto' => 2,
+                'username' => $data->username,
+                'level' => $data->level->exp/1200,
+                'persentase' => $persentase,
+                'poin' => $data->poin->poin
+            ];
+        }
+
+        // Sekarang, $hasil akan berisi nomor (indeks) yang berurutan pada setiap elemen.
+
+        return view('pengguna.peringkat',compact('namepage','userId','hasil'));
+    }
+
+    public function getDataPeringkat(){
+        $userData = Users::with('datalainnya', 'historyujian', 'level','poin')
+        ->where('role', 'pengguna')
+        ->get();
+       return response()->json($userData);
     }
 }

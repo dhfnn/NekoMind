@@ -29,9 +29,9 @@
           </a>
         </div>
         <div class="nav-item d-flex flex-column align-items-center">
-          <a href="{{ Route::currentRouteName() === 'soal' ? '#' : route('soal') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
-            <i class="fa-solid fa-lines-leaning i-multi {{ Route::currentRouteName() === 'soal' ? 'i-act' : '' }}  "></i>
-            <span class="i-multit {{ Route::currentRouteName() === 'soal' ? 'i-act' : '' }}  ">Soal</span>
+            <a href="{{ Request::is('Soal') ? '#' : url('Soal') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
+                <i class="fa-solid fa-lines-leaning i-multi  {{Request::is('Soal') ? 'i-act': '' }}"></i>
+                <span class="i-multit  {{Request::is('Soal') ? 'i-act': '' }}  ">Soal</span>
           </a>
         </div>
         <div class="nav-item d-flex flex-column align-items-center ps-0 pe-3">

@@ -29,14 +29,6 @@ class SoalController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi request sesuai kebutuhan Anda
-        // $validatedData = $request->validate([
-        //     'pertanyaan.*' => 'required',
-        //     'opsi.*' => 'required',
-        //     'jawaban.*' => 'required',
-        // ]);
-    //     for ($i = 0; $i < count($request->pertanyaan); $i++) {
-
         $opsiString = implode(', ', $request->opsi);
 
         // Kemudian, Anda dapat mengatur data seperti ini
@@ -49,15 +41,16 @@ class SoalController extends Controller
         return redirect('Pelajaran');
 
     }
-
-
-
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+        $urutan  = 1;
+        $dataSoal = soal::where('ujian_id', $id)->get();
+        $ujianId = $id;
+        $namepage =  'Materi';
+        return view('more.soal', compact('dataSoal','namepage' ,'urutan','ujianId'));
     }
 
     /**
@@ -73,7 +66,14 @@ class SoalController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $opsiString = implode(', ', $request->opsi);
+     $data['ujian_id']= $request->ujianid;
+     $data['opsi'] = $opsiString;
+     $data['pertanyaan']= $request->pertanyaan;
+     $data['jawaban']= $request->jawaban;
+
+        soal::where('id', $id)->update($data);
+        return redirect()->back();
     }
 
     /**
@@ -81,6 +81,7 @@ class SoalController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        soal::where('ujian_id', $id)->delete();
+        return redirect('Pelajaran');
     }
 }

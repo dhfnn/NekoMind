@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Ujian extends Model
 {
     use HasFactory;
+        public $timestamps = false;
 
         protected $table = 'ujian';
-        protected $fillable = [ 'judul', 'waktu'];
+        protected $fillable = [ 'judul', 'waktu','jenis'];
 
         public function nilai(){
             return $this->hasOne(Nilai::class,'ujian_id');
