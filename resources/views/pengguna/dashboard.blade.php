@@ -102,7 +102,7 @@
          border-radius: 8px; padding-bottom: px; height: 250px">
             <div class="col-12">
               <div class="col py-2 d-flex justify-content-between align-items-center" style="border-bottom: 1px solid rgba(0, 0, 0, 0.161)">
-                <span class="tjb">Jadwal belajarku</span>
+                <span class="tjb">Misi Harian</span>
                 <a href="" class="text-decoration-none d-flex align-items-center p-1" style="border: 1px solid #009feb; border-radius: 8px"
                   ><i class="fa-solid fa-plus pe-1" style="color: #009feb"> </i><span class="ti-j">Tambah Jadwal</span></a
                 >

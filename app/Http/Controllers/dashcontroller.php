@@ -83,13 +83,13 @@ class dashcontroller extends Controller
                 $expLevel = $exp / 1200;
                 $sisaBagi = $exp % 1200;
                 $levelPengguna = number_format($expLevel);
-
                 if($sisaBagi !== 0){
-                $persentase = ($sisaBagi/1200 )*100;
+                    $persentase = ($sisaBagi/1200 )*100;
 
                 }else(
                     $persentase = 0
                 );
+                // dd($per);
                 return view('pengguna.dashboard',compact('userId','datalainnya','datapengguna','totalBenar', 'totalSalah','jumlahSoal','levelPengguna','sisaBagi','persentase'));
             } else {
                 // Jika salah satu atau kedua data tidak ada, arahkan ke halaman tambah data
@@ -103,7 +103,7 @@ class dashcontroller extends Controller
     public function peringkat(){
         $namepage = 'Dashboard';
         $userId = Auth::id();
-        $userDataPeringkat = Users::with('datalainnya', 'historyujian', 'level','poin')
+        $userDataPeringkat = Users::with('datalainnya','datapengguna', 'historyujian', 'level','poin')
         ->where('role', 'pengguna')
         ->get();
         $hasil = [];
@@ -118,7 +118,7 @@ class dashcontroller extends Controller
             $hasil[] = [
                 'no' => 1, // Menggunakan nomor dan kemudian menambahkannya
                 'foto' => 2,
-                'username' => $data->username,
+                'username' => $data->datapengguna->nama,
                 'level' => $data->level->exp/1200,
                 'persentase' => $persentase,
                 'poin' => $data->poin->poin
