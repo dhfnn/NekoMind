@@ -31,6 +31,9 @@ class users extends Authenticatable
         return $this->hasOne(Datapengguna::class,'user_id');
     }
 
+    public function histortambahpoin(){
+         return $this->hasOne(historytambahpoin::class, 'user_id');
+    }
     //relasi ke datalainnya
     public function datalainnya(){
         return $this->hasOne(Datalainnya::class,'user_id');

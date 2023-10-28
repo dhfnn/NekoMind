@@ -101,14 +101,49 @@
           <div class="col col-lg-5" style="background-color: white; box-shadow: 0 20px 37px 0 rgba(0, 0, 0, 0.05);
          border-radius: 8px; padding-bottom: px; height: 250px">
             <div class="col-12">
-              <div class="col py-2 d-flex justify-content-between align-items-center" style="border-bottom: 1px solid rgba(0, 0, 0, 0.161)">
-                <span class="tjb">Misi Harian</span>
-                <a href="" class="text-decoration-none d-flex align-items-center p-1" style="border: 1px solid #009feb; border-radius: 8px"
-                  ><i class="fa-solid fa-plus pe-1" style="color: #009feb"> </i><span class="ti-j">Tambah Jadwal</span></a
-                >
+              <div class="col pt-2 d-flex justify-content-between align-items-center" style="border-bottom: 1px solid rgba(0, 0, 0, 0.096)">
+                <span class="tjb" style="color: #FE8D00;">Misi Harian</span>
               </div>
-              <div class="col px-2 py-2" style="margin-top: 10px; width: 100%; height: 180px; overflow: auto; box-sizing: border-box">
-                <div class="isi-j" style="position: relative"></div>
+              <div class="col px-2 py-2" style="margin-top: 10px; width: 100%; height: 180px; overflow: auto; box-sizing: border-box; ">
+                <div class="isi-j" style="position: relative">
+                    <div class="col ">
+                        <div class="col  bg-white px-3 py-1" style="box-shadow: 1px 6px 9px 4px rgba(0, 0, 0, 0.035); border-radius:5px; border:1px rgba(0, 0, 0, 0.107) solid;">
+                            <div class="col d-flex justify-content-between">
+                                <span class="t-lvl fw-bold">
+                                    @if ($ListdataMisi->jenis === "soal")
+                                    #UJIAN/LATIHAN/QUIZ
+                                    @else
+                                    #MATERI
+                                    @endif
+                                </span>
+                                    {{-- <span class="" style="color: #FE8D00;"> target : 90</span> --}}
+                            </div>
+                            <div class="col d-flex">
+
+                            <div class="col "  style="color: ;">
+                                <div class="col ps-4" >
+                                    <span class="t-lvl " style="font-size: 9px !imporntant;">
+                                        {{ $ListdataMisi->misi }}
+                                        <span>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="col d-flex">
+                                <div class="col">
+                                    <span  class="fw-bolder" style="font-size: 12px; color:rgba(0, 0, 0, 0.419);"> target : {{ $ListdataMisi->target }}</span>
+                                </div>
+                                <div class=" d-flex">
+                                    <div class="px-1 fw-bolder text-end" style="border-right:1px rgba(0, 0, 0, 0.076) solid;">
+                                        <span class="" style="color:#fe8d00; font-size: 9px;">Poin : {{ $ListdataMisi->poin }}</span>
+                                    </div>
+                                    <div class="px-1 fw-bolder">
+                                        <span class="" style="color:#fe8d00; font-size: 9px">Exp : {{ $ListdataMisi->exp }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
               </div>
             </div>
           </div>

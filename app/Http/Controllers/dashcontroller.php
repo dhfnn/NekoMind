@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\datalainnya;
 use App\Models\datapengguna;
+use App\Models\HistoryMisi;
+use App\Models\Historytambahpoin;
 use App\Models\HistoryUjian;
 use App\Models\Level;
+use App\Models\Misi;
 use App\Models\Pelajaran;
+use App\Models\Poin;
 use App\Models\users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,20 +30,11 @@ class dashcontroller extends Controller
     // }
 
     function dashpengguna(){
-
-        // Mengecek apakah pengguna sudah login
         if (Auth::check()) {
-            // Mengambil ID pengguna yang telah login
             $userId = Auth::id();
-
-            // Mengecek apakah data pengguna ada dalam tabel 'datapengguna'
             $datapengguna = datapengguna::where('user_id', $userId)->first();
-
-            // Mengecek apakah data lainnya ada dalam tabel 'datalainnya'
             $datalainnya = datalainnya::where('user_id', $userId)->first();
-
             if ($datalainnya &&  $datapengguna) {
-                // Jika kedua data ada, arahkan ke halaman dashboard
                 $userId = auth()->id();
                 $data = DB::table('historyujian')
                 ->select('ujian_id', 'id', 'user_id', 'benar', 'salah', 'nilai')
@@ -62,7 +57,6 @@ class dashcontroller extends Controller
                     })
                     ->get();
 
-                // Jumlahkan kolom "salah"
                 $totalSalah = $data->sum('salah');
 
                 $data = DB::table('historyujian')
@@ -89,15 +83,65 @@ class dashcontroller extends Controller
                 }else(
                     $persentase = 0
                 );
-                // dd($per);
-                return view('pengguna.dashboard',compact('userId','datalainnya','datapengguna','totalBenar', 'totalSalah','jumlahSoal','levelPengguna','sisaBagi','persentase'));
+
+
+
+
+                $sekarang= date('Y-m-d');
+                $dataMisi = Misi::all()->first();
+                if($dataMisi->tanggal === $sekarang){
+                    // dd('data ada');
+                }else{
+                    $dataMisi = Misi::all()->first();
+                    $dataMisi->update(['tanggal'=>$sekarang]);
+                }
+                $hariini = date('Y-m-d');
+                // lamun aya data dina hostory misi anu tanggal poe ayeuna jd user_id
+                if(HistoryMisi::where('tanggal', $hariini)->where('user_id', $userId)->exists()){
+                   $dataHistory = HistoryMisi::where('tanggal' ,$hariini)
+                                ->where('user_id' ,$userId)
+                                ->first();
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+                                if(Historytambahpoin::where('user_id', $userId)->where('misi_id', $dataMisi->id)->where('tanggal', $hariini)->exists()){
+                                    // dd('data tersedia tak perlu di tambahkan');
+                                }else{
+                                $data['user_id'] = $userId;
+                                $data['misi_id'] =$dataMisi->id;
+                                $data['tanggal'] = $hariini;
+                                $data['jumlahpoin'] = $dataMisi->poin;
+                                $dataArray = $data->toArray();
+                                $tambahhitorypoin = HistoryTambahPoin::create($dataArray);
+                                if($tambahhitorypoin){
+                                    $datatambahpoin = Historytambahpoin::where('user_id', $userId)->where('misi_id', $dataMisi->id)->where('tanggal', $hariini)->first();
+
+                                    $poin = Poin::where('user_id', $userId)->first();
+                                    $poin->update(['poin'=> $poin->poin+$datatambahpoin->jumlahpoin]);
+                                    // dd($poin);
+
+                                }else{
+                                    dd('data gagal di tambahkan');
+                                }
+                                }
+///////////////////////////////////////////////////////////////////////////////////
+
+                }else{
+                    // bagian untuk menajalanan sistem misi
+                //    dd('data tidak ada') ;
+                    $ListdataMisi = Misi::all()->first();
+                    if ($ListdataMisi->jenis === "soal") {
+                        // $today = date('Y-m-d');
+                        dd($hariini);
+                    }else{
+                        dd('INI MISINYA JENIS BACA MATERI');
+                    }
+                }
+
+                return view('pengguna.dashboard',compact('userId','datalainnya','datapengguna','totalBenar', 'totalSalah','jumlahSoal','levelPengguna','sisaBagi','persentase', 'ListdataMisi'));
             } else {
-                // Jika salah satu atau kedua data tidak ada, arahkan ke halaman tambah data
                 return redirect('/Profilepengguna/create');
             }
         } else {
-            // Jika pengguna belum login, arahkan ke halaman login atau halaman lain yang sesuai
-            return redirect('/login'); // Ganti dengan rute login yang sesuai
+            return redirect('/login');
         }
     }
     public function peringkat(){

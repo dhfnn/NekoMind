@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Poin extends Model
 {
     use HasFactory;
-    public $timestamp = false;
+    public $timestamps = false;
+
     protected $table = 'poinpengguna';
     protected $primaryKey = 'id';
-    protected $fillabel = [
+    protected $fillable = [
         'user_id',
-        'poin'
+        'poin',
     ];
 
     public function users(){

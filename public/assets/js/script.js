@@ -68,7 +68,6 @@ mkls.addEventListener("click", function(event) {
   }
 });
 document.addEventListener("click", function(event) {
-// && event.target !== mkls
   if (wkls.style.display === "block" && !wkls.contains(event.target) ) {
     wkls.style.display = "none";
     ikputar.classList.remove('putar-ik');
@@ -82,10 +81,8 @@ document.addEventListener("scroll", function() {
 });
 function backpage() {
     if (window.history.length > 1) {
-      // Jika ada riwayat navigasi sebelumnya, kembali ke halaman sebelumnya
       window.history.back();
     } else {
-      // Jika tidak ada riwayat, arahkan ke halaman "dashboard.html"
       window.location.href = "dashboard.html";
     }
   }
