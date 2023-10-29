@@ -42,8 +42,8 @@ class users extends Authenticatable
         return $this->hasOne(Nilai::class,'user_id');
     }
 
-    public function historyujian(){
-        return $this->hasOne(HistoryUjian::class, 'user_id');
+    public function hasilujian(){
+        return $this->hasOne(hasilujian::class, 'user_id');
     }
     public function level(){
         return $this->hasOne(level::class, 'user_id');

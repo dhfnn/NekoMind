@@ -109,6 +109,7 @@ route::middleware(['auth'])->group(function(){
 
     Route::middleware(['roleakses:pengguna'])->group(function () {
         Route::get('/pengguna/dashboard', [dashcontroller::class, 'dashpengguna'])->name('dashboard-pengguna');
+        Route::post('/terimadataTanggal', [dashcontroller::class, 'terimadataTanggal']);
         // halaman materi
         Route::resource('MateriPengguna', materiPengguna::class);
         // halaman soal

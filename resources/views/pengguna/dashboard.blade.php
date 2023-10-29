@@ -107,6 +107,9 @@
               <div class="col px-2 py-2" style="margin-top: 10px; width: 100%; height: 180px; overflow: auto; box-sizing: border-box; ">
                 <div class="isi-j" style="position: relative">
                     <div class="col ">
+                        @if ($ListdataMisi === '0')
+                            <span>data tidak tersedia</span>
+                        @else
                         <div class="col  bg-white px-3 py-1" style="box-shadow: 1px 6px 9px 4px rgba(0, 0, 0, 0.035); border-radius:5px; border:1px rgba(0, 0, 0, 0.107) solid;">
                             <div class="col d-flex justify-content-between">
                                 <span class="t-lvl fw-bold">
@@ -142,6 +145,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
               </div>

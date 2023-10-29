@@ -11,12 +11,13 @@
     <script src="https://kit.fontawesome.com/9494185896.js" crossorigin="anonymous"></script>
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="../assets/js/color-modes.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
       </head>
   <body class=""  style="background-color: #F8F9FA !important;">
     <header class="position-fixed fixed-top d-md-flex justify-content">
@@ -93,19 +94,57 @@
 
     @yield('main')
     <script>
-        document.getElementById('kelasFilter').addEventListener('change', function () {
-            var selectedKelas = this.value;
-            if (selectedKelas === "") {
-                     // Mengarahkan langsung ke /materi jika "SEMUA" dipilih
-            } else {
-               php ar
-            }
-        });
+// Memeriksa apakah ada elemen dengan id "kelasFilter"
+var kelasFilterElement = document.getElementById('kelasFilter');
+
+if (kelasFilterElement) {
+    // Jika elemen dengan id "kelasFilter" ditemukan, tambahkan event listener
+    kelasFilterElement.addEventListener('change', function () {
+        var selectedKelas = this.value;
+
+        if (selectedKelas === "") {
+            // Jika "PILIH" dipilih, Anda dapat mengatur tindakan yang sesuai, misalnya kembali ke URL asal
+            window.location.href = window.location.materi;
+        } else {
+            // Jika pilihan lain dipilih, maka ubah URL dengan parameter "kelas"
+            window.location.search = `kelas=${selectedKelas}`;
+        }
+    });
+}
+
+
+function kirimTanggalKeController(tanggalParameter) {
+    var tanggalSekarang = new Date();
+    var tahun = tanggalSekarang.getFullYear();
+    var bulan = tanggalSekarang.getMonth() + 1;
+    var tanggal = tanggalSekarang.getDate();
+    var tanggalFormat = tahun + '-' + (bulan < 10 ? '0' : '') + bulan + '-' + (tanggal < 10 ? '0' : '') + tanggal;
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'POST',
+        url: '/terimadataTanggal', // Ganti dengan URL endpoint controller Anda
+        data: { tanggal: tanggalFormat },
+        success: function(response) {
+            console.log(response.pesan);
+        },
+        error: function(xhr, status, error) {
+            console.error('Terjadi kesalahan: ' + error);
+        }
+    });
+}
+kirimTanggalKeController(tanggalFormat);
+
+
+
     </script>
     </body>
 
 
     <!-- main  -------------------------------------------------------------------------------->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
   //   untuk menu pengaturan
   const iElement = document.querySelector('.fa-gear');
   const dropMenupElement = document.querySelector('.drop-menup');
-
+  if (iElement && dropMenupElement) {
   iElement.addEventListener("click", function(event) {
     event.stopPropagation();
     if (dropMenupElement.style.display === "none" || dropMenupElement.style.display === "") {
@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.addEventListener("scroll", function() {
     dropMenupElement.style.display = "none";
   });
+}
 
 });
 
@@ -56,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const wkls = document.querySelector('.w-kls');
   const ikputar = document.querySelector('.ik-putar');
 
+  if (mkls && wkls && ikputar) {
 mkls.addEventListener("click", function(event) {
   event.stopPropagation();
   if (wkls.style.display === "none" || wkls.style.display === "") {
@@ -67,16 +69,23 @@ mkls.addEventListener("click", function(event) {
 
   }
 });
-document.addEventListener("click", function(event) {
-  if (wkls.style.display === "block" && !wkls.contains(event.target) ) {
-    wkls.style.display = "none";
-    ikputar.classList.remove('putar-ik');
-
   }
-});
+
+  document.addEventListener("click", function(event) {
+    const wkls = document.querySelector('.w-kls'); // Pindahkan deklarasi ini ke dalam event handler
+    if (wkls) {
+      if (wkls.style.display === "block" && !wkls.contains(event.target)) {
+        wkls.style.display = "none";
+        ikputar.classList.remove('putar-ik');
+      }
+    }
+  });
+-
 
 document.addEventListener("scroll", function() {
+    if (wkls) {
   wkls.style.display = "none";
+    }
 });
 });
 function backpage() {
@@ -90,11 +99,14 @@ function backpage() {
 document.addEventListener('DOMContentLoaded', function () {
     const selectElement = document.querySelector('.ie-select');
     const arrowIcon = document.querySelector('.arrow-icon');
-
-    selectElement.addEventListener('blur', () => {
-        arrowIcon.style.transform = 'rotate(0deg)';
-    });
+    if(selectElement){
+        selectElement.addEventListener('blur', () => {
+            arrowIcon.style.transform = 'rotate(0deg)';
+        });
+    }
 });
+
+
 
     document.addEventListener('DOMContentLoaded', function () {
         const checkboxes = document.querySelectorAll('input[name="checkboxtp"]');
@@ -117,8 +129,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // });
     // In your Javascript (external .js resource or <script> tag)
+
     $(document).ready(function() {
+        if ($('.selectKt').length > 0) {
         $(".selectKT").select2();
+        }
     });
 
     // $(document).ready(function() {

@@ -6,7 +6,8 @@ use App\Models\datalainnya;
 use App\Models\datapengguna;
 use App\Models\HistoryMisi;
 use App\Models\Historytambahpoin;
-use App\Models\HistoryUjian;
+use App\Models\hasilujian;
+use App\Models\Historyujian;
 use App\Models\Level;
 use App\Models\Misi;
 use App\Models\Pelajaran;
@@ -28,6 +29,11 @@ class dashcontroller extends Controller
     // function dashpengguna(){
     //     return view('pengguna.dashboard');
     // }
+    function terimadataTanggal(Request $request){
+        $tanggal = $request->input('tanggal');
+        dd($tanggal);
+
+    }
 
     function dashpengguna(){
         if (Auth::check()) {
@@ -36,22 +42,22 @@ class dashcontroller extends Controller
             $datalainnya = datalainnya::where('user_id', $userId)->first();
             if ($datalainnya &&  $datapengguna) {
                 $userId = auth()->id();
-                $data = DB::table('historyujian')
+                $data = DB::table('hasilujian')
                 ->select('ujian_id', 'id', 'user_id', 'benar', 'salah', 'nilai')
                 ->whereIn('id', function($query) use ($userId) {
                     $query->select(DB::raw('MAX(id)'))
-                        ->from('historyujian')
+                        ->from('hasilujian')
                         ->where('user_id', $userId)
                         ->groupBy('ujian_id');
                 })
                 ->get();
             $totalBenar = $data->sum('benar');
 
-            $data = DB::table('historyujian')
+            $data = DB::table('hasilujian')
                     ->select('ujian_id', 'id', 'user_id', 'benar', 'salah', 'nilai')
                     ->whereIn('id', function($query) use ($userId) {
                         $query->select(DB::raw('MAX(id)'))
-                            ->from('historyujian')
+                            ->from('hasilujian')
                             ->where('user_id', $userId)
                             ->groupBy('ujian_id');
                     })
@@ -59,11 +65,11 @@ class dashcontroller extends Controller
 
                 $totalSalah = $data->sum('salah');
 
-                $data = DB::table('historyujian')
+                $data = DB::table('hasilujian')
                         ->select('ujian_id', 'id', 'user_id', 'benar', 'salah', 'nilai')
                         ->whereIn('id', function($query) use ($userId) {
                             $query->select(DB::raw('MAX(id)'))
-                                ->from('historyujian')
+                                ->from('hasilujian')
                                 ->where('user_id', $userId)
                                 ->groupBy('ujian_id');
                         })
@@ -95,24 +101,28 @@ class dashcontroller extends Controller
                     $dataMisi = Misi::all()->first();
                     $dataMisi->update(['tanggal'=>$sekarang]);
                 }
-                $hariini = date('Y-m-d');
+                $sekarang = date('Y-m-d');
                 // lamun aya data dina hostory misi anu tanggal poe ayeuna jd user_id
-                if(HistoryMisi::where('tanggal', $hariini)->where('user_id', $userId)->exists()){
-                   $dataHistory = HistoryMisi::where('tanggal' ,$hariini)
+                if(HistoryMisi::where('tanggal', $sekarang)->where('user_id', $userId)->exists()){
+                   $dataHistory = HistoryMisi::where('tanggal' ,$sekarang)
                                 ->where('user_id' ,$userId)
                                 ->first();
+                    $ListdataMisi = "0";
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-                                if(Historytambahpoin::where('user_id', $userId)->where('misi_id', $dataMisi->id)->where('tanggal', $hariini)->exists()){
+                                if(Historytambahpoin::where('user_id', $userId)->where('misi_id', $dataMisi->id)->where('tanggal', $sekarang)->exists()){
+
                                     // dd('data tersedia tak perlu di tambahkan');
                                 }else{
                                 $data['user_id'] = $userId;
                                 $data['misi_id'] =$dataMisi->id;
-                                $data['tanggal'] = $hariini;
+                                $data['tanggal'] = $sekarang;
                                 $data['jumlahpoin'] = $dataMisi->poin;
                                 $dataArray = $data->toArray();
                                 $tambahhitorypoin = HistoryTambahPoin::create($dataArray);
                                 if($tambahhitorypoin){
-                                    $datatambahpoin = Historytambahpoin::where('user_id', $userId)->where('misi_id', $dataMisi->id)->where('tanggal', $hariini)->first();
+                                    $datatambahpoin = Historytambahpoin::where('user_id', $userId)->where('misi_id', $dataMisi->id)->where('tanggal', $sekarang)->first();
 
                                     $poin = Poin::where('user_id', $userId)->first();
                                     $poin->update(['poin'=> $poin->poin+$datatambahpoin->jumlahpoin]);
@@ -130,7 +140,28 @@ class dashcontroller extends Controller
                     $ListdataMisi = Misi::all()->first();
                     if ($ListdataMisi->jenis === "soal") {
                         // $today = date('Y-m-d');
-                        dd($hariini);
+                        // dd($sekarang);
+                        $dataHistoryUjian=Historyujian::where('waktu', $sekarang)->where('user_id', $userId)->get();
+                        $periksanilai = false;
+                        foreach($dataHistoryUjian as $data){
+                            if ($data->nilai >= $ListdataMisi->target){
+                                $periksanilai = true;
+                                break;
+                            }
+                        }
+                        if($periksanilai){
+                            $data = [
+                                'misi_id' => $ListdataMisi->id,
+                                'user_id' => $userId,
+                                'tanggal' => $sekarang,
+                                'poin' => $ListdataMisi->poin,
+                                'exp' => $ListdataMisi->exp,
+                            ];
+                            HistoryMisi::create($data);
+                        }else{
+                            dd('dataTidak tersedia');
+                        }
+
                     }else{
                         dd('INI MISINYA JENIS BACA MATERI');
                     }
@@ -147,15 +178,15 @@ class dashcontroller extends Controller
     public function peringkat(){
         $namepage = 'Dashboard';
         $userId = Auth::id();
-        $userDataPeringkat = Users::with('datalainnya','datapengguna', 'historyujian', 'level','poin')
+        $userDataPeringkat = Users::with('datalainnya','datapengguna', 'hasilujian', 'level','poin')
         ->where('role', 'pengguna')
         ->get();
         $hasil = [];
         $nomor = 1; // Variabel untuk nomor indeks
 
         foreach($userDataPeringkat as $data) {
-            $benar = $data->historyujian->benar;
-            $salah = $data->historyujian->salah;
+            $benar = $data->hasilujian->benar;
+            $salah = $data->hasilujian->salah;
             $totalUjian = $benar + $salah;
             $persentase = ($benar / $totalUjian) * 100;
 
@@ -175,7 +206,7 @@ class dashcontroller extends Controller
     }
 
     public function getDataPeringkat(){
-        $userData = Users::with('datalainnya', 'historyujian', 'level','poin')
+        $userData = Users::with('datalainnya', 'hasilujian', 'level','poin')
         ->where('role', 'pengguna')
         ->get();
        return response()->json($userData);

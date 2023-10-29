@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class HistoryMisi extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+
     protected $table = 'historymisi';
 
-    protected $fillable = ['misi_id', 'user_id', 'tanggal', 'poin'];
+    protected $fillable = ['misi_id', 'user_id', 'tanggal', 'poin', 'exp'];
 
     public function misi()
     {

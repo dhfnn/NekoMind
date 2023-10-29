@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\HistoryUjian;
+use App\Models\hasilujian;
 use App\Models\soal;
 use App\Models\Ujian;
 use Illuminate\Http\Request;
@@ -40,7 +40,7 @@ class quizController extends Controller
         $data['benar']= $request->benar;
         $data['salah'] = $request->salah;
         $data['nilai']= $request->nilai;
-        $tambah = HistoryUjian::create($data);
+        $tambah = hasilujian::create($data);
     }
     public function tambahUjian(Request $request){
         $data['judul'] =$request->judul;
@@ -115,7 +115,7 @@ class quizController extends Controller
      */
     public function destroy(string $id)
     {
-        HistoryUjian::where('ujian_id', $id)->delete();
+        hasilujian::where('ujian_id', $id)->delete();
         soal::where('ujian_id' ,$id)->delete();
         Ujian::where('id' ,$id)->delete();
 
