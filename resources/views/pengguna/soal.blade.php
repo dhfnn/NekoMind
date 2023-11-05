@@ -10,14 +10,14 @@
               <span class="t-bjs ms-1 d-none d-lg-block">Jumlah ujian yang sudah kamu selesaikan sebanyak :</span>
               <span class="t-bjs ms-2 d-block d-lg-none">Ujian yang diselesaikan :</span>
             </div>
-            <span class="fw-bold" style="color: #3b72c5c9;font-size: 16px;">10 Ujian</span>
+            <span class="fw-bold" style="color: #3b72c5c9;font-size: 16px;">{{ $jumlahSoal }} Ujian</span>
           </div>
-          <div class="col-4 col-md bagan-js p-0 ms-md-2 fw-bold d-flex justify-content-center" style="color: #3b72c5c9;">Benar:25 </div>
-          <div class="col-4 col-md bagan-js p-0 ms-md-2 fw-bold d-flex justify-content-center" style="color: #3b72c5c9;">Salah:72 </div>
+          <div class="col-4 col-md bagan-js p-0 ms-md-2 fw-bold d-flex justify-content-center" style="color: #3b72c5c9;">Benar:{{ $totalBenar }} </div>
+          <div class="col-4 col-md bagan-js p-0 ms-md-2 fw-bold d-flex justify-content-center" style="color: #3b72c5c9;">Salah:{{ $totalSalah }} </div>
           <div class="col-3 col-md ms-md-2 p-0 position-relative m-kls">
-            <div class="col ms-md-2 bagan-ks fw-bold p-0 px-3 mb-3">
+            <div class="col ms-md-2 d-flex bagan-ks fw-bold p-0 px-1 mb-3">
               <!-- <button class="px-3"> -->
-                <span style="color: #3b73c5;">Kelas</span> <i class="fa-solid fa-angle-down ik-putar" style="color: #3b73c5;"></i>
+                <span style="color: #3b73c5;">Kelas {{ $filterkelas }}</span> <i class="fa-solid fa-angle-down ik-putar" style="color: #3b73c5;"></i>
               <!-- </button> -->
             </div>
             <div class="col p-2 ps-3  position-absolute pt-1 w-kls" style="">
@@ -26,42 +26,43 @@
               </div>
               <div class="content">
                 <div class=" row row-cols-3 row-cols-sm-4">
-                  <div class="col p-0">
-                    <button class="btn-osk mb-2">Kelas 1</button>
-                  </div>
-                  <div class="col p-0">
-                    <button class="btn-osk mb-2">Kelas 2</button>
-                  </div>
-                  <div class="col p-0">
-                    <button class="btn-osk mb-2">Kelas 3</button>
-                  </div>
-                  <div class="col p-0">
-                    <button class="btn-osk mb-2">Kelas 4</button>
-                  </div>
-                  <div class="col p-0">
-                    <button class="btn-osk mb-2">Kelas 5</button>
-                  </div>
-                  <div class="col p-0">
-                    <button class="btn-osk mb-2">Kelas 6</button>
-                  </div>
-                  <div class="col p-0">
-                    <button class="btn-osk mb-2">Kelas 7</button>
-                  </div>
-                  <div class="col p-0">
-                    <button class="btn-osk mb-2">Kelas 8</button>
-                  </div>
-                  <div class="col p-0">
-                    <button class="btn-osk mb-2">Kelas 9</button>
-                  </div>
-                  <div class="col p-0">
-                    <button class="btn-osk mb-2">Kelas 10</button>
-                  </div>
-                  <div class="col p-0">
-                    <button class="btn-osk mb-2">Kelas 11</button>
-                  </div>
-                  <div class="col p-0">
-                    <button class="btn-osk mb-2">Kelas 12</button>
-                  </div>
+                    <div class="col p-0">
+                        <button class="btn-osk mb-2" onclick="kirimdataKelas(1)">Kelas 1</button>
+                      </div>
+                      <div class="col p-0">
+                        <button class="btn-osk mb-2" onclick="kirimdataKelas(2)">Kelas 2</button>
+                      </div>
+                      <div class="col p-0">
+                        <button class="btn-osk mb-2" onclick="kirimdataKelas(3)">Kelas 3</button>
+                      </div>
+                      <div class="col p-0">
+                        <button class="btn-osk mb-2" onclick="kirimdataKelas(4)">Kelas 4</button>
+                      </div>
+                      <div class="col p-0">
+                        <button class="btn-osk mb-2" onclick="kirimdataKelas(5)">Kelas 5</button>
+                      </div>
+                      <div class="col p-0">
+                        <button class="btn-osk mb-2" onclick="kirimdataKelas(6)">Kelas 6</button>
+                      </div>
+                      <div class="col p-0">
+                        <button class="btn-osk mb-2" onclick="kirimdataKelas(7)">Kelas 7</button>
+                      </div>
+                      <div class="col p-0">
+                        <button class="btn-osk mb-2" onclick="kirimdataKelas(8)">Kelas 8</button>
+                      </div>
+                      <div class="col p-0">
+                        <button class="btn-osk mb-2" onclick="kirimdataKelas(9)">Kelas 9</button>
+                      </div>
+                      <div class="col p-0">
+                        <button class="btn-osk mb-2" onclick="kirimdataKelas(10)">Kelas 10</button>
+                      </div>
+                      <div class="col p-0">
+                        <button class="btn-osk mb-2" onclick="kirimdataKelas(11)">Kelas 11</button>
+                      </div>
+                      <div class="col p-0">
+                        <button class="btn-osk mb-2" onclick="kirimdataKelas(12)">Kelas 12</button>
+                      </div>
+
                 </div>
               </div>
 
@@ -72,39 +73,49 @@
        <div class="col mt-4">
         <div class="col">
             <div class=" d-flex  ">
-               <div class="opsi-soal">
-                   <button class="btn-os btn-act p-sm-1 px-sm-3 me-1">Semua</button>
-                   <button class="btn-os p-sm-1 px-sm-3 me-1">Latihan soal</button>
-                   <button class="btn-os p-sm-1 px-sm-3 me-1">Ujian</button>
-                   <button class="btn-os p-sm-1 px-sm-3 me-1">UTBK</button>
-               </div>
+                <div class="opsi-soal">
+                    <button class="btn-os p-sm-1 px-sm-3 me-1 {{ request()->is('Soal*') && !request()->has('jenis') ? 'btn-act' : '' }}" onclick="resetURL()">Semua</button>
+
+
+                    <button class="btn-os p-sm-1 px-sm-3 me-1 {{ $filterjenis === 'LATIHAN' ? 'btn-act' : '' }}" onclick="redirectToJenis('LATIHAN')">Latihan soal</button>
+                    <button class="btn-os p-sm-1 px-sm-3 me-1 {{ $filterjenis === 'UJIAN' ? 'btn-act' : '' }}" onclick="redirectToJenis('UJIAN')">Ujian</button>
+                    <button class="btn-os p-sm-1 px-sm-3 me-1 {{ $filterjenis === 'UTBK' ? 'btn-act' : '' }}" onclick="redirectToJenis('UTBK')">UTBK</button>
+
+                  </div>
             </div>
           </div>
          <div class="row  row-cols-1 row-cols-md-2 row-cols-xl-3 row-cols-xxl-4 g-1 g-md-2 mt-1 mt-md-2 mb-5 pb-5">
+            @if (count($dataUjian)== 0)
+            <div class="col">
+                <span>Tidak tersedia</span>
+            </div>
+        @else
             @foreach ($dataUjian as $data)
 
-            <div class="col px-3 px-md-0">
-              <div class="row  mx-md-2 w-soal p-2 px-4 py-3">
-                <div class="col-9 p-0 ws-k">
-                  <span class="wsk-j">{{ $data->judul }}</span>
-                  <div class="wsk-p ">
-                    <i class="fa-regular fa-circle-question"></i>
-                  <span class="ms-1"> - </span>
-                  </div>
-                  <div class="wsk-w">
-                    <i class="fa-solid fa-stopwatch"></i>
-                    <span class="ms-2 mt-1">{{ $data->waktu }} Menit</span>
-                  </div>
+                <div class="col px-3 px-md-0">
+                    <div class="row mx-md-2 w-soal p-2 px-4 py-3">
+                        <div class="col-9 p-0 ws-k">
+                            <span class="wsk-j">{{ $data->judul }}</span>
+                            <div class="wsk-p">
+                                <i class="fa-regular fa-circle-question"></i>
+                                <span class="ms-2"> {{ $totalSoal }} Pertanyaan</span>
+                            </div>
+                            <div class="wsk-w">
+                                <i class="fa-solid fa-stopwatch"></i>
+                                <span class="ms-2 mt-1">{{ $data->waktu }} Menit</span>
+                            </div>
+                        </div>
+                        <div class="col p-0 w-st">
+                            <a href="{{ url('Soal/' .$data->id) }}" class="text-decoration-none d-flex align-items-center">
+                                <span class="me-1">mulai</span>
+                                <i class="fa-solid fa-angle-right" style="font-size: 10px;"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col p-0 w-st">
-                  <a href="{{ url('Soal/' .$data->id) }}" class="text-decoration-none d-flex align-items-center">
-                    <span class="me-1">mulai</span>
-                      <i class="fa-solid fa-angle-right" style="font-size: 10px;"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
             @endforeach
+        @endif
+
 
 
          </div>

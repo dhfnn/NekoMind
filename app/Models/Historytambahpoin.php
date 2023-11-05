@@ -17,6 +17,7 @@ class Historytambahpoin extends Model
         'misi_id',
         'tanggal',
         'jumlahpoin',
+        'jumlahexp'
     ];
 
     // Definisikan relasi dengan model User

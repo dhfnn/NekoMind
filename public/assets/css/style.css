@@ -347,13 +347,13 @@ body {
   font-size: 12px;
 }
 .gam-p {
-  width: 50px;
-  height: 50px;
-  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqOXNvC675g54koWoicV-qJ4zzm54XQs83aA&usqp=CAU");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
+    width: 50px;
+    height: 55px;
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqOXNvC675g54koWoicV-qJ4zzm54XQs83aA&usqp=CAU");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 
 .dp {
   width: 100%;
@@ -380,13 +380,14 @@ body {
 }
 
 .l-d {
-  width: 30px;
-  height: 30px;
-}
-.i-ld{
-  font-size: 13px;
-  color: white;
-}
+    width: 30px;
+    height: 30px;
+    box-shadow:0px 20px 37px 0px rgba(0, 0, 0, 0.05);
+  }
+  .i-ld{
+    font-size: 13px;
+    color: #FE9A34;
+  }
 .to {
   color: #fe8d00;
 }
@@ -418,9 +419,6 @@ body {
   /* background-color: white; border-radius: 10px; box-shadow: 0 10px 7px 10px rgba(0, 0, 0, 0.05); */
   background-color: white; border-radius: 10px; box-shadow: 0 15px 27px 0 rgba(45, 45, 45, 0.05);
   transition: .3s;
-
-
-
 }
 .l-rm:hover{
   transition: .3s;
@@ -463,6 +461,24 @@ body {
   font-weight: 500;
   color: #4e4e4e;
 }
+.typing-animation {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid #000;
+    margin: 0;
+    padding: 0;
+    animation: typing 1s steps(40, end), blink-caret 0.5s step-end infinite;
+  }
+
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  @keyframes blink-caret {
+    from, to { border-color: transparent; }
+  }
 .tjb {
   font-size: 15px;
   font-weight: bold;
@@ -1521,10 +1537,13 @@ background-color: #3b73c5;
   .l-d {
     width: 40px;
     height: 40px;
+  box-shadow:0px 20px 37px 0px rgba(0, 0, 0, 0.05);
+
   }
   .i-ld{
-    font-size: 18px;
-    color: white;
+    font-size: 22px;
+  color: #FE9A34;
+
   }
   .p-rm {
     padding: 0px 70px 70px 70px !important;
@@ -1766,9 +1785,10 @@ font-weight: 600;
     font-size: 15px;
   }
   .l-rm {
-    width: 95px;
-    height: 95px;
+    width: 55px;
+    height: 55px;
   }
+
 
   .card-avatar {
     bottom: -20%;
@@ -1978,8 +1998,8 @@ font-weight: 600;
     font-size: 25px;
   }
   .gam-p {
-    width: 95px;
-    height: 95px;
+    width: 65px;
+    height:65px;
   }
   .card-p {
     /* width: 340px; */

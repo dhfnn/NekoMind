@@ -9,9 +9,11 @@ use App\Models\Historytambahpoin;
 use App\Models\hasilujian;
 use App\Models\Historyujian;
 use App\Models\Level;
+use App\Models\MateriModel;
 use App\Models\Misi;
 use App\Models\Pelajaran;
 use App\Models\Poin;
+use App\Models\Ujian;
 use App\Models\users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,8 +23,13 @@ class dashcontroller extends Controller
 {
     function dashadmin(){
         $jumlahPengguna = users::count();
+        $jumlahUjian = Ujian::count();
+        $jumlahMateri = MateriModel::count();
+        $dataLevel = Level::with('users','poin')
+        ->get();
+        // dd($dataLevel);
         $namepage = 'Dashboard';
-        return view('admin.dashboard', compact('namepage','jumlahPengguna'));
+        return view('admin.dashboard', compact('namepage','jumlahPengguna','jumlahUjian','jumlahMateri','dataLevel'));
     }
 
 
@@ -93,7 +100,8 @@ class dashcontroller extends Controller
 
 
 
-                $sekarang= date('Y-m-d');
+                // $sekarang= date('Y-m-d');
+                $sekarang = date('Y-m-d');
                 $dataMisi = Misi::all()->first();
                 if($dataMisi->tanggal === $sekarang){
                     // dd('data ada');
@@ -101,7 +109,6 @@ class dashcontroller extends Controller
                     $dataMisi = Misi::all()->first();
                     $dataMisi->update(['tanggal'=>$sekarang]);
                 }
-                $sekarang = date('Y-m-d');
                 // lamun aya data dina hostory misi anu tanggal poe ayeuna jd user_id
                 if(HistoryMisi::where('tanggal', $sekarang)->where('user_id', $userId)->exists()){
                    $dataHistory = HistoryMisi::where('tanggal' ,$sekarang)
@@ -114,18 +121,31 @@ class dashcontroller extends Controller
                                 if(Historytambahpoin::where('user_id', $userId)->where('misi_id', $dataMisi->id)->where('tanggal', $sekarang)->exists()){
 
                                     // dd('data tersedia tak perlu di tambahkan');
+                                    // dd($sekarang);
                                 }else{
                                 $data['user_id'] = $userId;
                                 $data['misi_id'] =$dataMisi->id;
                                 $data['tanggal'] = $sekarang;
                                 $data['jumlahpoin'] = $dataMisi->poin;
+                                $data['jumlahexp'] = $dataMisi->exp;
+                                // dd($dataMisi->exp);
                                 $dataArray = $data->toArray();
+                                // dd($dataArray);
                                 $tambahhitorypoin = HistoryTambahPoin::create($dataArray);
                                 if($tambahhitorypoin){
                                     $datatambahpoin = Historytambahpoin::where('user_id', $userId)->where('misi_id', $dataMisi->id)->where('tanggal', $sekarang)->first();
 
+                                    $level = Level::where('user_id', $userId)->first();
+                                    // dd($level->exp+$datatambahpoin->jumlahexp);
+                                  $updatelevel =   $level->update(['exp'=>$level->exp+$datatambahpoin->jumlahexp ]);
+                                //   if($updatelevel){
                                     $poin = Poin::where('user_id', $userId)->first();
                                     $poin->update(['poin'=> $poin->poin+$datatambahpoin->jumlahpoin]);
+
+                                //     dd('berhaso;');
+                                //   }else{
+                                //     dd('gaga');
+                                //   }
                                     // dd($poin);
 
                                 }else{
@@ -159,7 +179,8 @@ class dashcontroller extends Controller
                             ];
                             HistoryMisi::create($data);
                         }else{
-                            dd('dataTidak tersedia');
+                            // dd('dataTidak tersedia');
+                            // dd($sekarang);
                         }
 
                     }else{

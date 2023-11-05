@@ -20,6 +20,9 @@ class Poin extends Model
     public function users(){
         return $this->belongsTo(users::class, 'user_id');
     }
-
+    public function level()
+    {
+        return $this->hasOne(Level::class, 'user_id');
+    }
 
 }

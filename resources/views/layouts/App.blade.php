@@ -26,12 +26,15 @@
           <!-- bagian nav atas   -------------------------------------------------------------------------------->
           <div class="col-12 d-none d-md-flex justify-content-between align-items-center">
             <a class="navbar-brand ps-1 ps-sm-3 pe-5" href="#" style="color: #fe8d00; font-weight: 700; font-size: 25px">NekoMind</a>
-            <div class="navbar navbar-hide me-md-4 d-none d-md-flex">
-                <a href="{{ Route::currentRouteName() === 'dashboard-pengguna' ? '#' : route('dashboard-pengguna') }}">Beranda</a>
+            <div class="navbar navbar-hide me-md-4 d-none d-md-flex " >
+                <a href="{{ Route::currentRouteName() === 'dashboard-pengguna' ? '#' : route('dashboard-pengguna') }}"  {{ Route::currentRouteName() === 'dashboard-pengguna' ? 'style=color:#5484CC;' : ''}}  >Beranda</a>
 
-                <a href="{{ Request::is('MateriPengguna') ? '#' : url('MateriPengguna') }}" class="px-4">Materi</a>
-                <a href="{{ Request::is('Soal')  ? '#' : url('Soal') }}" class="pe-4">Soal</a>
-                <a href="{{ Request::is('peringkat')  ? '#' : url('peringkat') }}">Peringkat</a>
+                <a href="{{ Request::is('MateriPengguna') ? '#' : url('MateriPengguna') }}" class="px-4"
+                {{ Request::is('MateriPengguna') ? 'style=color:#5484CC;' : '' }} >Materi</a>
+                <a href="{{ Request::is('Soal')  ? '#' : url('Soal') }}" class="pe-4"
+                {{ Request::is('Soal')  ? 'style=color:#5484CC;' : '' }}>Soal</a>
+                <a href="{{ Request::is('peringkat')  ? '#' : url('peringkat') }}"
+                {{ Request::is('peringkat')  ? 'style=color:#5484CC;' : '' }}>Peringkat</a>
               <!-- <a href="" class="ps-4 ps-xl-5"><i class="fa-solid fa-circle-user i-pd"></i></a> -->
               <div class="menu-profile d-flex align-items-center">
                 <ul class="menu">
@@ -93,6 +96,7 @@
     <body>
 
     @yield('main')
+    <script src=""></script>
     <script>
 // Memeriksa apakah ada elemen dengan id "kelasFilter"
 var kelasFilterElement = document.getElementById('kelasFilter');
@@ -111,30 +115,66 @@ if (kelasFilterElement) {
         }
     });
 }
+function kirimdataKelas(kelas) {
+    updateURLParameter('kelas', kelas);
+  }
+
+  var button = document.querySelector(`button[data-kelas="${kelas}"]`);
+    if (button) {
+      button.classList.add("bt-act");
+    }
+
+  function redirectToJenis(jenis) {
+    updateURLParameter('jenis', jenis);
+  }
+
+  function updateURLParameter(key, value) {
+    var url = window.location.href;
+    var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+    var separator = url.indexOf('?') !== -1 ? "&" : "?";
+
+    if (url.match(re)) {
+      url = url.replace(re, '$1' + key + "=" + value + '$2');
+    } else {
+      url = url + separator + key + "=" + value;
+    }
+
+    window.location.href = url;
+  }
+  function resetURL() {
+      window.location.href = window.location.origin + window.location.pathname;
 
 
-function kirimTanggalKeController(tanggalParameter) {
-    var tanggalSekarang = new Date();
-    var tahun = tanggalSekarang.getFullYear();
-    var bulan = tanggalSekarang.getMonth() + 1;
-    var tanggal = tanggalSekarang.getDate();
-    var tanggalFormat = tahun + '-' + (bulan < 10 ? '0' : '') + bulan + '-' + (tanggal < 10 ? '0' : '') + tanggal;
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        type: 'POST',
-        url: '/terimadataTanggal', // Ganti dengan URL endpoint controller Anda
-        data: { tanggal: tanggalFormat },
-        success: function(response) {
-            console.log(response.pesan);
-        },
-        error: function(xhr, status, error) {
-            console.error('Terjadi kesalahan: ' + error);
-        }
-    });
-}
-kirimTanggalKeController(tanggalFormat);
+  }
+
+
+
+
+
+
+
+// function kirimTanggalKeController(tanggalParameter) {
+//     var tanggalSekarang = new Date();
+//     var tahun = tanggalSekarang.getFullYear();
+//     var bulan = tanggalSekarang.getMonth() + 1;
+//     var tanggal = tanggalSekarang.getDate();
+//     var tanggalFormat = tahun + '-' + (bulan < 10 ? '0' : '') + bulan + '-' + (tanggal < 10 ? '0' : '') + tanggal;
+//     $.ajax({
+//         headers: {
+//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//         },
+//         type: 'POST',
+//         url: '/terimadataTanggal', // Ganti dengan URL endpoint controller Anda
+//         data: { tanggal: tanggalFormat },
+//         success: function(response) {
+//             console.log(response.pesan);
+//         },
+//         error: function(xhr, status, error) {
+//             console.error('Terjadi kesalahan: ' + error);
+//         }
+//     });
+// }
+// kirimTanggalKeController(tanggalFormat);
 
 
 

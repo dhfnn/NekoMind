@@ -10,7 +10,7 @@ class hasilujian extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table  = 'hasilujian';
-    protected $fillable = ['user_id', 'benar', 'salah', 'nilai', 'ujian_id'];
+    protected $fillable = ['user_id', 'benar', 'salah', 'nilai', 'ujian_id', 'waktu'];
 
     public function users(){
         return $this->belongsTo(users::class);

@@ -76,7 +76,7 @@ class loregcontroller extends Controller
         $data['username'] = $request->username;
         $data['email']    = $request->email;
         $data['password'] = Hash::make($request->password);
-        $data['role']     = 'pengguna';
+        $data['role']     = 'admin';
         $data['bergabung']= date('Y-m-d');
         users::create($data);
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\hasilujian;
+use App\Models\Historyujian;
 use App\Models\soal;
 use App\Models\Ujian;
 use Illuminate\Http\Request;
@@ -32,6 +33,7 @@ class quizController extends Controller
      */
     public function store(Request $request)
     {
+        $hariini = date('Y-m-d');
         $userData = Auth::user();
         $user_id =$userData->id;
         $dataUjianid = session('dataUjianid');
@@ -40,7 +42,12 @@ class quizController extends Controller
         $data['benar']= $request->benar;
         $data['salah'] = $request->salah;
         $data['nilai']= $request->nilai;
-        $tambah = hasilujian::create($data);
+        $data['waktu']= $hariini;
+        if (hasilujian::where('user_id', $user_id)->where('waktu' ,$hariini)->where('ujian_id', $user_id)->first()) {
+            $tambahhistory  = Historyujian::create($data);
+        }else{
+            $tambah = hasilujian::create($data);
+        }
     }
     public function tambahUjian(Request $request){
         $data['judul'] =$request->judul;

@@ -1,22 +1,23 @@
 <?php
 
-use App\Http\Controllers\BabController;
 use App\Http\Controllers\tes;
 use App\Http\Controllers\data;
-use App\Http\Controllers\Konfigdata;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\dashcontroller;
-use App\Http\Controllers\loregcontroller;
-use App\Http\Controllers\MateriController;
-use App\Http\Controllers\materiPengguna;
+use App\Http\Middleware\roleakses;
 use App\Http\Controllers\Permateri;
-use App\Http\Controllers\Profilepengguna;
-use App\Http\Controllers\profilecontroller;
+use App\Http\Controllers\Konfigdata;
+use Illuminate\Contracts\Cache\Store;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BabController;
+use App\Http\Controllers\dashcontroller;
+use App\Http\Controllers\materiPengguna;
 use App\Http\Controllers\quizController;
 use App\Http\Controllers\soalController;
-use App\Http\Controllers\ujianController;
 use App\Http\Controllers\wordController;
-use Illuminate\Contracts\Cache\Store;
+use App\Http\Controllers\loregcontroller;
+use App\Http\Controllers\Profilepengguna;
+use App\Http\Controllers\ujianController;
+use App\Http\Controllers\MateriController;
+use App\Http\Controllers\profilecontroller;
 
 // use App\Http\Controllers\BabController;
 

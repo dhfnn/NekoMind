@@ -30,7 +30,7 @@
               <div class="container">
                 <!-- bagian nav atas   -------------------------------------------------------------------------------->
                 <div class="col-12 d-flex justify-content-between align-items-center  mt-2 ">
-                  <a class=" p-md-2 px-md-3 a-back bg-white"  href="javascript:void(0);" onclick="backpage()">
+                  <a class=" p-md-2 px-md-3 a-back bg-white"  href="{{ url('/Soal') }}" >
 
                       <i class="fa-solid fa-arrow-left"></i>
                       <span class="d-none d-md-inline">Kembali</span>
@@ -98,7 +98,7 @@
                    </Span>
                    <div class=" l-sp mt-lg-3 ms-1 ms-lg-3">
                      <i class="fa-solid fa-circle-question"></i>
-                   <span class="ms-md-1 ">30 pertanyaan</span>
+                   <span class="ms-md-1 ">{{ $jumlahSoal }} pertanyaan</span>
                    </div>
                    <div class="pe-md-4 ms-md-3  ">
                     <p class="p-sp" style=" text-align: justify;">
@@ -129,18 +129,18 @@
                 <div class="bagan-sp p-2 px-4 py-3">
                   <div class=" t-tsp">
                     <!-- <i class="fa-solid fa-brain"></i> -->
-                  <img class="d-none d-lg-inline "src="../../assets/paw.svg" style="height: 18px; width: 18px;" alt="">
+                  <img class="d-none d-lg-inline "src="{{ asset('assets/ikon/paw.svg') }}" style="height: 18px; width: 18px;" alt="">
 
                     <p class="m-0 ms-md-2">Kamu sudah siap untuk melakukan ujian? <span> Upgrade pengetahuanmu di Bank Materi</span></p>
                   </div>
                   <div class="d-flex d-lg-none justify-content-end mt-md-1">
                     <div class=" col-4  col-md-3 col-lg t-kbm  px-md-2">
-                      <a href="" class="d-none d-md-inline">Pergi ke bank materi</a>
-                      <a href="" class="d-md-none ">Bank Materi</a>
+                      <a href="{{ url('/MateriPengguna') }}" class="d-none d-md-inline">Pergi ke materi</a>
+                      <a href="{{ url('/MateriPengguna') }}" class="d-md-none ">Materi</a>
                     </div>
                   </div>
                   <div class="d-none d-lg-flex t-kbm  px-2">
-                    <a href="">Pergi ke bank materi</a>
+                    <a href="{{ url('/MateriPengguna') }}">Pergi ke materi</a>
                   </div>
 
                 </div>

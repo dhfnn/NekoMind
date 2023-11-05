@@ -11,12 +11,15 @@ class Ujian extends Model
         public $timestamps = false;
 
         protected $table = 'ujian';
-        protected $fillable = [ 'judul', 'waktu','jenis'];
+        protected $fillable = [ 'judul', 'waktu','jenis', 'kelas_id'];
 
         public function nilai(){
             return $this->hasOne(Nilai::class,'ujian_id');
         }
         public function soal(){
             return $this->hasMany(soal::class,'ujian_id');
+        }
+        public function kelas(){
+            return $this->hasOne(Kelas::class,'kelas_id');
         }
 }
