@@ -19,7 +19,7 @@
 
                       <!-- Modal -->
                      @include('component.Mtambahpelajaran')
-    
+
 
                 </div>
             </div>
@@ -132,7 +132,7 @@
           </div>
         </div>
 
-        <div class="col-12 pb-5">
+        {{-- <div class="col-12 pb-5">
           <div class="col pt-4">
             <h4 class="fs-5" style="color: #4e4e4e; font-weight: bold">Materi UTBK</h4>
           </div>
@@ -164,7 +164,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> --}}
       </div>
     </div>
 

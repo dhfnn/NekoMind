@@ -17,8 +17,8 @@ class materiPengguna extends Controller
         $userId = auth()->id();
 
         $selectedKelas = $request->input('kelas');
-
-        $dataPelajaran = Pelajaran::where('jenis', 'pelajaran');
+        $semester = '1';
+        $dataPelajaran = Pelajaran::where('jenis', 'pelajaran')->where('id_semester', $semester);
         if ($selectedKelas) {
             $dataPelajaran->where('id_kelas', $selectedKelas);
         }

@@ -54,33 +54,6 @@
             </div>
           </div>
         </div>
-
-        <div class="col-12 pb-5">
-          <div class="col pt-4">
-            <h4 class="fs-5" style="color: #4e4e4e; font-weight: bold">Materi UTBK</h4>
-          </div>
-          <div class="col pt-3" style="">
-            <div class="row px-2 row-cols-3 row-cols-sm-4" style="background-color: none">
-                @if(count($dataUTBK) > 0)
-
-                @foreach ($dataUTBK as $utbk)
-
-                <div class="col pb-3 d-flex flex-column align-items-center justify-content-center mt-">
-                  <div class="k-lm d-flex align-items-center justify-content-center bg-white l-rm" style="">
-                    <img class="i-rm2" src="{{ asset('assets/ikon/'.$utbk->namapelajaran .'.svg') }}" alt="" />
-                  </div>
-                  <span class="t-rm mt-1 mt-md-2 nw">{{ $utbk->namapelajaran }}</span>
-                </div>
-                @endforeach
-                @else
-                <div class=" text-center" style="color:#4e4e4e; font-size:13px;">
-                    <p>Tidak tersedia</p>
-                </div>
-                @endif
-
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </main>

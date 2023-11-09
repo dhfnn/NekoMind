@@ -125,8 +125,8 @@
             <span class="navbar-toggler-icon"></span>
           </button>
 
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mx-auto mb-2 mb-md-0">
+          <div class="collapse navbar-collapse   justify-content-end" id="navbarCollapse">
+            {{-- <ul class="navbar-nav mx-auto mb-2 mb-md-0">
               <li class="nav-item d-sm-flex align-items-center pe-sm-3">
                 <a class="n-link" aria-current="page" href="#">Fitur</a>
               </li>
@@ -136,7 +136,7 @@
               <li class="nav-item d-sm-flex align-items-center ps-sm-3">
                 <a class="n-link" aria-disabled="true">Kontak</a>
               </li>
-            </ul>
+            </ul> --}}
 
             <ul class="navbar-nav end-0 mb-2 mb-md-0">
               <button class="btn btn-sm" style="font-size: 16px; font-weight: 700; color: #3b73c5">
@@ -154,12 +154,13 @@
 
       <div class="container-fluid pt-4 pt-sm-5 bc-biru">
         <div class="row align-items-center pt-5 px-3 px-sm-5 ">
-          <div class="col-xxl-7 px-xl-5">
+          <div class="col-xxl-8 px-xl-5">
             <div class="text-center text-xxl-start pt-3 pt-sm-5">
               <h1 class="text-start text-sm-start display-3 fw-bolder text-white pt-3"><span class="text-gradient d-inline">Tahun Ajaran Baru Jangan Sampai Tersesat!</span></h1>
               <div>
-                <div class="text-start text-sm-start fw-light text-white t-tam">Blablaba akan siap membantumu untuk Jadi Apapun yang Kamu Mau!</div>
-                <div class="text-end text-sm-start tagar pb-5" style="color: #fe8d00">#TenangAjaAdaBlabla</div>
+
+                {{-- <div class="text-start text-sm-start fw-light text-white t-tam">Blablaba akan siap membantumu untuk Jadi Apapun yang Kamu Mau!</div> --}}
+                <div class="text-end text-sm-start tagar pb-5 fw-bold" style="color: #fe8d00">Nekomind akan siap membantumu untuk Jadi Apapun yang Kamu Mau!</div>
               </div>
 
               <div class="d-flex justify-content-end gap-3 d-sm-flex justify-content-sm-end justify-content-xxl-start mb-5 py-1 py-sm-5">
@@ -167,13 +168,13 @@
               </div>
             </div>
           </div>
-          <div class="col-xxl-5">
+          <div class="col-xxl-4">
             <!-- Header profile picture-->
             <div class="d-flex justify-content-center mt-5 mt-xxl-0">
               <div class="profile bg-gradient-primary-to-secondary">
                 <!-- TIP: For best results, use a photo with a transparent background like the demo example below-->
                 <!-- Watch a tutorial on how to do this on YouTube (link)-->
-                <img class="profile-img" src="assets/profile.png" alt="..." />
+                <img class="profile-img" src="{{ asset('assets/ikon/cat2.png') }}" alt="..." />
               </div>
             </div>
           </div>

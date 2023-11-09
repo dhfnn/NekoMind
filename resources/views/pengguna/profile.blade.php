@@ -63,8 +63,6 @@
 
                     <li class="drop-menu-itemp"><a href="{{ url('Profilepengguna/' . $userId . '/edit') }}">Ubah Profile</a></li>
                     <li class="drop-menu-itemp"><a href="editp.html">Ubah Kata Sandi</a></li>
-                    <li class="drop-menu-itemp"><a href="editp.html">Kontak</a></li>
-                    <li class="drop-menu-itemp"><a href="editp.html">Saran</a></li>
                     <li class="drop-menu-itemp"><a href="" style="color: rgb(255, 0, 0) !important">Keluar</a></li>
                   </ul>
                 </li>

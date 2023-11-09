@@ -30,10 +30,10 @@
             <div class="col pindah-semester">
                 <div class="row text-center t-semester">
                     <div class="col py-1 pilih-sa" id="semester1">
-                        <a class="tdn" href="#">Semester 1</a>
+                        <button class="tdn">Semester 1</button>
                     </div>
                     <div class="col py-1 pilih-s" id="semester2">
-                        <a href="#" class="tdn">Semester 2</a>
+                        <button class="tdn">Semester 2</button>
                     </div>
                 </div>
             </div>
@@ -79,15 +79,15 @@
 
 
       <script>
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('babDropdown').addEventListener('change', function () {
-        var selectedBab = this.value;
-        var id = "{{$pelajaran->id}}"; // Mengambil ID pelajaran dari Blade
-        if (selectedBab !== "") {
-            window.location.href = '/MateriPengguna/' + id + '?bab=' + selectedBab;
-        }
+    // Dapatkan elemen select
+    var babDropdown = document.getElementById('babDropdown');
+    babDropdown.addEventListener('change', function() {
+        var selectedValue = babDropdown.value;
+        var id ="{{ $pelajaran->id }}";
+        var newUrl = "{{ url('MateriPengguna') }}?bab=" + selectedValue;
+        window.location.href = newUrl;
     });
-});
+
 
     </script>
     <script src="{{ asset('assets/js/script.js') }}"></script>

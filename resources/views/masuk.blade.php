@@ -82,7 +82,7 @@
                         </div>
                     </form>
 
-                    <div class="col-12 text-centbr  py-3">
+                    {{-- <div class="col-12 text-centbr  py-3">
                         <span class="">Atau</span>
                     </div>
 
@@ -93,7 +93,7 @@
                                         font-size: 16px;
                                         margin-left: 5px;">Masuk dengan Google</span>
                         </button>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

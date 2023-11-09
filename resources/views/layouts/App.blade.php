@@ -100,20 +100,28 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-         let teksArray = ["Sel saraf manusia dapat mengirimkan sinyal dengan kecepatan hingga 120 meter per detik.", "Umurku 18 tahun"];
-    let index = 0;
+let teksArray = ["Sel saraf manusia dapat mengirimkan sinyal dengan kecepatan hingga 120 meter per detik.", "Umurku 18 tahun"];
+let index = 0;
 
-    function gantiTeks() {
-      document.getElementById("teks-ubah").textContent = teksArray[index];
-      index = (index + 1) % teksArray.length;
-      setTimeout(hapusTeks, 10000);
-    }
+function gantiTeks() {
+  const teksUbah = document.getElementById("teks-ubah");
+  if (teksUbah) {
+    teksUbah.textContent = teksArray[index];
+    index = (index + 1) % teksArray.length;
+    setTimeout(hapusTeks, 10000);
+  }
+}
 
-    function hapusTeks() {
-      document.getElementById("teks-ubah").textContent = '';
-      setTimeout(gantiTeks, 0);
-    }
-    gantiTeks();
+function hapusTeks() {
+  const teksUbah = document.getElementById("teks-ubah");
+  if (teksUbah) {
+    teksUbah.textContent = '';
+    setTimeout(gantiTeks, 0);
+  }
+}
+if (document.getElementById("teks-ubah")) {
+  gantiTeks();
+}
 
 
 
@@ -161,7 +169,7 @@ if (isset($rataQuiz)) {
   }
 });
  }
- <?php
+<?php
 }
 ?>
 // chart Rekap nilai
@@ -274,8 +282,6 @@ function kirimdataKelas(kelas) {
   }
   function resetURL() {
       window.location.href = window.location.origin + window.location.pathname;
-
-
   }
 
 
