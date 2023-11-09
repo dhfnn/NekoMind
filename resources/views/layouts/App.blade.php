@@ -19,7 +19,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
       </head>
-  <body class=""  style="background-color: #F8F9FA !important;">
+  <body class=""  style="background-color: #F8F9FA !important;" >
     <header class="position-fixed fixed-top d-md-flex justify-content">
       <nav class="navbar navbar-light navbar-expand-md dash-nav d-none d-md-flex">
         <div class="col container-fluid">
@@ -96,18 +96,149 @@
     <body>
 
     @yield('main')
-    <script src=""></script>
+    {{-- ini bagian script --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script>
-// Memeriksa apakah ada elemen dengan id "kelasFilter"
+         let teksArray = ["Sel saraf manusia dapat mengirimkan sinyal dengan kecepatan hingga 120 meter per detik.", "Umurku 18 tahun"];
+    let index = 0;
+
+    function gantiTeks() {
+      document.getElementById("teks-ubah").textContent = teksArray[index];
+      index = (index + 1) % teksArray.length;
+      setTimeout(hapusTeks, 10000);
+    }
+
+    function hapusTeks() {
+      document.getElementById("teks-ubah").textContent = '';
+      setTimeout(gantiTeks, 0);
+    }
+    gantiTeks();
+
+
+
+const ctx = document.getElementById('myChart');
+<?php
+if (isset($rataQuiz)) {
+    ?>
+ if (ctx) {
+    new Chart(ctx, {
+    type: 'bar',
+  data: {
+    labels: ['Quiz', 'Latihan', 'Ujian', 'TryOut'],
+    datasets: [{
+      label: 'Rata-Rata Nilai',
+      data: [{{ $rataQuiz }},{{ $rataLatihan }} ,  {{ $rataUjian }}, {{ $rataTryout }}],
+      borderWidth: 1,
+      borderRadius: 5,
+      backgroundColor: '#3b73c5',
+    }
+]
+  },
+  options: {
+    scales: {
+      x: {
+        beginAtZero: true,
+        title: {
+          display: false,
+        },
+        grid: {
+    display: false
+  }
+      },
+      y: {
+        beginAtZero: true,
+        title: {
+          display: false,
+        },
+        ticks: {
+          // display: false,
+          max: 100,
+          stepSize: 25,
+        }
+      }
+    }
+  }
+});
+ }
+ <?php
+}
+?>
+// chart Rekap nilai
+
+const dat = document.getElementById('myChart2');
+
+<?php
+if (isset($arrayQuiz)) {
+    ?>
+
+    new Chart(dat, {
+  type: 'line',
+  data: {
+    labels: ['3', '2', '1', 'Terbaru'],
+    datasets: [{
+      label: 'Quiz',
+      data: {!! json_encode($arrayQuiz) !!},
+      borderColor: '#fe8d00',
+      backgroundColor: '#fe8d00',
+    },{
+      label: 'Latihan',
+      data: {!! json_encode($arrayLatihan) !!},
+      borderColor: '#3b73c5',
+      backgroundColor: '#3b73c5',
+    },{
+      label: 'Ujian',
+      data: {!! json_encode($arrayUjian) !!},
+      borderColor: '#009feb',
+      backgroundColor: '#009feb',
+    },{
+      label: 'TryOut',
+      data: {!! json_encode($arrayTryout) !!},
+      borderColor: '#3b73c5',
+      backgroundColor: '#3b73c5',
+    }
+]
+  },
+  options: {
+    scales: {
+      x: {
+        beginAtZero: true,
+        title: {
+          display: false,
+        },
+        grid: {
+    display: false
+  }
+      },
+      y: {
+        beginAtZero: true,
+        title: {
+          display: false,
+        },
+        ticks: {
+          // display: false,
+          max: 100,
+          stepSize: 25,
+        }
+      }
+    }
+  }
+});
+
+<?php
+}
+?>
+
+
+
+
 var kelasFilterElement = document.getElementById('kelasFilter');
 
 if (kelasFilterElement) {
-    // Jika elemen dengan id "kelasFilter" ditemukan, tambahkan event listener
     kelasFilterElement.addEventListener('change', function () {
         var selectedKelas = this.value;
 
         if (selectedKelas === "") {
-            // Jika "PILIH" dipilih, Anda dapat mengatur tindakan yang sesuai, misalnya kembali ke URL asal
             window.location.href = window.location.materi;
         } else {
             // Jika pilihan lain dipilih, maka ubah URL dengan parameter "kelas"
@@ -116,14 +247,14 @@ if (kelasFilterElement) {
     });
 }
 function kirimdataKelas(kelas) {
+  if (kelas) {
     updateURLParameter('kelas', kelas);
-  }
-
-  var button = document.querySelector(`button[data-kelas="${kelas}"]`);
+    var button = document.querySelector(`button[data-kelas="${kelas}"]`);
     if (button) {
       button.classList.add("bt-act");
     }
-
+  }
+}
   function redirectToJenis(jenis) {
     updateURLParameter('jenis', jenis);
   }
@@ -146,8 +277,6 @@ function kirimdataKelas(kelas) {
 
 
   }
-
-
 
 
 

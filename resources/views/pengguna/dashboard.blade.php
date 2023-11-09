@@ -105,9 +105,9 @@
 
                 </div>
                 <div class="col d-flex mt-4">
-                  <div class="col ps-5 pe-3">
+                  <div class="col ps-5 pe-3" onload="ubahTeks()">
                     <span class="j-d2 fw-bold" style="color: #009feb;" >TAHUKAH KAMU ?</span>
-                    <p class="t-j" style="text-align: justify;"  id="SekilasFakta"></p>
+                    <p class="t-j" style="text-align: justify;"  id="teks-ubah"></p>
                   </div>
                   <div class="mt-4 col-4   d-flex justify-content-end align-items-end" style="">
                     <img  src="{{ asset('assets/ikon/cat2pn.png') }}" class="" style="height: 180px;" alt="">
@@ -117,7 +117,8 @@
               <div class="col bg-white mt-3 d-flex justify-content-between align-items-center px-4" style="border-radius: 10px; box-shadow: 3px 6px 7px -4px rgba(0, 0, 0, 0.201);">
               <!-- <img src="../../assets/bookicon1.png" style="height:40px; color: #fe8d00;" alt="">  -->
                 <span class="tjb" style="color: #3b73c5; font-weight: 500 !important;">Tunggu apalagi,ayo perluas pemahamanmu</span>
-                <button class="btn-os fw-bold" style="height: 30px;">Pergi ke Materi</button>
+                <button class="btn-os fw-bold" style="height: 30px;" onclick="window.location.href = '{{ url('MateriPengguna') }}';">Mulai Belajar</button>
+
               </div>
 
           </div>
@@ -211,39 +212,17 @@
       <div class="container-fluid d-flex flex-column justify-content-center p-rm" style="background-color: #EAF0F6">
        <div class="col px-5">
         <div class="col-12 bg-white mt-5 p-3" style="border-radius: 8px">
-          <div class="col-12 px-md-4"><h5 class="j-rm">Rekomendasi Materi</h5></div>
+          <div class="col-12 px-md-4"><h5 class="j-rm">Pelajaran yang anda sukai</h5></div>
           <div class="col-12 px-md-5">
             <div class="row row-cols-4 gap-4 d-md-flex justify-content-center my-3">
-              <div class="col col-md-2 d-flex flex-column align-items-center justify-content-center">
-                <div class="rounded-circle d-flex align-items-center justify-content-center bg-white l-rm" style="border: 1px rgba(0, 0, 0, 0.285) solid">
-                  <img class="i-rm2" src="../../assets/fisika.svg" alt="" />
-                </div>
-                <span class="t-rm mt-1 mt-md-2">Fisika</span>
-              </div>
-              <div class="col col-md-2 d-flex flex-column align-items-center justify-content-center">
-                <div class="rounded-circle d-flex align-items-center justify-content-center bg-white l-rm" style="border: 1px rgba(0, 0, 0, 0.285) solid">
-                  <img class="i-rm2" src="../../assets/kimia.svg" alt="" />
-                </div>
-                <span class="t-rm mt-1 mt-md-2">kimia</span>
-              </div>
-              <div class="col col-md-2 d-flex flex-column align-items-center justify-content-center">
-                <div class="rounded-circle d-flex align-items-center justify-content-center bg-white l-rm" style="border: 1px rgba(0, 0, 0, 0.285) solid">
-                  <img class="i-rm2" src="../../assets/biologi.svg" alt="" />
-                </div>
-                <span class="t-rm mt-1 mt-md-2">biologi</span>
-              </div>
-              <div class="col col-md-2 d-flex flex-column align-items-center justify-content-center">
-                <div class="rounded-circle d-flex align-items-center justify-content-center bg-white l-rm" style="border: 1px rgba(0, 0, 0, 0.285) solid">
-                  <img class="i-rm" src="../../assets/mate.svg" alt="" />
-                </div>
-                <span class="t-rm nw mt-1 mt-md-2">Matematika Minat</span>
-              </div>
-              <div class="col col-md-2 d-flex flex-column align-items-center justify-content-center">
-                <div class="rounded-circle d-flex align-items-center justify-content-center bg-white l-rm" style="border: 1px rgba(0, 0, 0, 0.285) solid">
-                  <img class="i-rm" src="../../assets/mate.svg" alt="" />
-                </div>
-                <span class="t-rm nw mt-1 mt-md-2">Matematika Wajib</span>
-              </div>
+                @foreach ($pel as $item)
+                <div class="col col-md-2 d-flex flex-column align-items-center justify-content-center">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center bg-white l-rm" style="border: 1px rgba(0, 0, 0, 0.285) solid">
+                      <img class="i-rm2" src="{{ asset('assets/ikon/'.$item.'.svg') }}" alt="" />
+                    </div>
+                    <span class="t-rm mt-1 mt-md-2">{{ $item }} </span>
+                  </div>
+                @endforeach
             </div>
           </div>
         </div>
@@ -256,19 +235,19 @@
             </div>
             <div class="col d-flex align-items-end">
               <div class="col">
-                <span class="j-j ">Mengukur Kemampuanmu</span>
+                <span class="j-rm " style="color: #fe8d00;">Mengukur Kemampuanmu</span>
                 <p class="t-j px-3 pt-2  " style="text-align: justify;">
                   Di sini, kamu akan menemukan berbagai macam soal yang dirancang untuk mengukur dan meningkatkan kemampuan kamu, ada latihan ujian dan quiz yang siap menantangmu.
                 </p>
                 <div class="col d-flex justify-content-end pt-2">
-                <button class="btn-os fw-bolder p-1 px-3">MULAI </button>
+                <button class="btn-os fw-bolder p-1 px-3" onclick="window.location.href  ='/Soal';">MULAI </button>
 
                 </div>
               </div>
             </div>
           </div>
-          <div class="col py-2  bg-white" style="border-radius: 8px">
-            <span>Rekap Nilai</span>
+          <div class="col d-flex flex-column justify-content-between py-2 bg-white" style="border-radius: 8px">
+            <span class="tjb" style="color: #009feb">Rekap Nilai</span>
             <canvas id="myChart2" style="max-height: 300px;">
             </canvas>
           </div>

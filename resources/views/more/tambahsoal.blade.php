@@ -18,14 +18,7 @@
                 </div>
                 <input type="hidden" value="" name="DataUjianId" id="DataUjianId">
                 <div class="card-body px-0 pt-0 pb-2 d-flex align-items-center flex-column"  >
-                    {{-- @if(request('type') === 'QUIZ')
-                        @include('component.formquiz')
-                    @elseif(request('type') === 'ujian')
-                        @include('component.formquiz')
-
-                    @elseif(request('type') === 'latihan')
-                        @include('component.formlatihan')
-                    @endif --}}
+                    {{-- inii ada banyak --}}
                     @include('component.formquiz')
 
                     </div>

@@ -12,4 +12,8 @@ class Historyujian extends Model
     protected $table = 'historyujian';
     protected $fillable = ['user_id', 'benar', 'salah' , 'ujian_id','nilai', 'waktu'];
 
+    public function ujian(){
+        return $this->belongsTo(Ujian::class, 'ujian_id');
+    }
+
 }

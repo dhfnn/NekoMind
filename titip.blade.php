@@ -158,7 +158,7 @@
       <!-- rekomendasi Materi   -------------------------------------------------------------------------------->
       <div class="container-fluid d-flex justify-content-center p-rm" style="background-color: #3b73c5">
         <div class="col-12 bg-white my-5 p-3" style="border-radius: 8px">
-          <div class="col-12 px-md-4"><h5 class="j-rm">Rekomendasi Materi</h5></div>
+          <div class="col-12 px-md-4"><h5 class="j-rm">Pelajaran Favorit</h5></div>
           <div class="col-12 px-md-5">
             <div class="row row-cols-4 gap-4 d-md-flex justify-content-center my-3">
               <div class="col col-md-2 d-flex flex-column align-items-center justify-content-center">

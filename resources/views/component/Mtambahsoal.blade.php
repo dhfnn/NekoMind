@@ -13,17 +13,14 @@
                       <div class="row">
 
                           <div class="col">
-                              <div class="col d-flex text-start">
-                                  <label for="" class="ji-ep">Jumlah Soal</label>
-                                  </div>
-                                  <span id="idujian"></span>
-                              <input type="text" id="jenisUjian" readonly>
+                                  <span id="idujian" style="display:none ;"></span>
+                             <span> Anda akan menambahkan soal untuk <span id="jenisUjian"></span> ( <span id="judulUjian"></span> }</span>
                           </div>
 
                       </div>
                       <div class="col d-flex justify-content-end mb-2">
                           <button class="t-sep me-3 me-md-0 mt-md-3" id="tambahButtonsoal">
-                              selesai
+                              Lanjutkan
                             </button>
                       </div>
               </div>

@@ -15,12 +15,12 @@
           </div>
         </div>
         <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-          <div class="nav-wrapper position-relative text-end">
+          {{-- <div class="nav-wrapper position-relative text-end">
             <a href="{{ url('Konfigdata/' . $userData->id . '/edit') }}">
 
                 <h6>Ubah Profile</h6>
             </a>
-          </div>
+          </div> --}}
         </div>
       </div>
     </div>

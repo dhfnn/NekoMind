@@ -64,46 +64,86 @@
       <i class="fa-solid fa-magnifying-glass pt-4 pe-3" style="color: rgb(52, 52, 52); font-size: 15px"></i>
     </div>
     <div class="container-fluid text-dark  pt-0 pt-md-5 mt-5 px-5" style="">
-        <div class="col ">
-            <div class="col">
-                <span>Papan Peringkat</span>
-            </div>
-            <div class="col">
-                <div class="row gap-3">
-                    <div class="col-8 bg-white p-3" style="border-radius:10px;    box-shadow: 0 20px 37px 0 rgba(0, 0, 0, 0.068);">
-                        <table class="table align-items-center mb-0 dataTablefiture px-5" id="datatabelPeringkat">
-                            <thead>
-                              <tr>
-                                <th class="text-center ">no</th>
-                                <th class="text-center">Foto</th>
-                                <th class="text-center">Username</th>
-                                <th class="text-center">Level</th>
-                                <th class="text-center">Persentase</th>
-                                <th class="text-center">Poin</th>
-                                <th class="text-center"></th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                                @php $nomor = 1; @endphp
-                                @foreach ($hasil as $data)
-                                    <tr>
-                                        <td class="text-center">{{ $nomor }}</td>
-                                        <td class="text-center"></td>
-                                        <td class="text-center">{{ $data['username'] }}</td>
-                                        <td class="text-center">{{ intval($data['level']) }}</td>
-                                        <td class="text-center fw-bold" style="color:rgb(19, 230, 0);">{{ intval($data['persentase']) }}% <span style="font-size:13px;">Benar</span></td>
-                                        <td class="text-center">{{ $data['poin'] }}</td>
-                                        <td class="text-center">lihat</td>
-                                    </tr>
-                                    @php $nomor++; @endphp <!-- Menambahkan 1 ke nomor setelah setiap iterasi -->
-                                @endforeach
+        <div class="col">
+            <div class="col-9">
+                <div class="card p-3">
+                    <div class=" " style="padding-bottom: 0px !imporntant;">
+                      <h6>Projects table</h6>
+                    </div>
+                    <div class="card-body px-0 pt-0 pb-2">
+                      <div class="table-responsive p-0">
+                        <table class="table  align-items-center justify-content-center mb-0">
+                          <thead>
+                            <tr>
+                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">PENGGUNA</th>
+                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">LEVEL</th>
+                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">PERSENTASE</th>
+                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">POIN</th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            @php $nomor = 1; @endphp
+                            @foreach ($hasil as $data)
+                            <tr>
+                              <td>
+                                <div class="d-flex align-items-center px-2">
+                                    <span class="text-xs font-weight-bold">{{ $nomor }}</span>
+{{-- 
+                                  <div class="ms-3">
+                                    <img src="../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm rounded-circle me-2" alt="spotify" />
+                                  </div> --}}
 
-                            </tbody>
-                          </table>
+
+                                  <div class="my-auto">
+                                    <h6 class="mb-0 text-sm">
+                                        @if ($data['username'] ===$username)
+                                        Saya
+                                        @else
+                                        {{ $data['username'] }}
+                                        @endif
+
+                                    </h6>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>
+                                <p class="text-sm font-weight-bold mb-0">
+                                    {{ intval($data['level']) }}
+                                </p>
+                              </td>
+                              <td>
+                                @if (intval($data['persentase']) < 78)
+                                <span class="text-xs font-weight-bold"  style="color: red;">{{ intval($data['persentase']) }}%</span>
+                            @elseif (intval($data['persentase']) < 85)
+                                <span class="text-xs font-weight-bold" style="color:rgb(211, 226, 0);">{{ intval($data['persentase']) }}%</span>
+                            @else
+                                <span class="text-xs font-weight-bold" style="color:rgb(19, 230, 0);">{{ intval($data['persentase']) }}%</span>
+
+                            @endif
+                              </td>
+                              <td class="align-middle text-center">
+                                <div class="d-flex align-items-center justify-content-center">
+                                  <span class="me-2 text-xs font-weight-bold">{{ $data['poin'] }}</span>
+                                  <div>
+                                    <div class="progress">
+                                      <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td class="align-middle">
+                                <i class="fa-solid fa-caret-right"></i>
+                              </td>
+                            </tr>
+                            @php $nomor++; @endphp <!-- Menambahkan 1 ke nomor setelah setiap iterasi -->
+                            @endforeach
+
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
-                    <div class="col bg-white p-3" style="border-radius:10px;    box-shadow: 0 20px 37px 0 rgba(0, 0, 0, 0.068);">
-                    </div>
-                </div>
+                  </div>
             </div>
         </div>
     </div>

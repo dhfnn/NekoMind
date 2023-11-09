@@ -1,5 +1,8 @@
 @extends('layouts.App')
 @section('main')
+@php
+    use App\Models\soal;
+@endphp
 <main class="">
     <div class="container-fluid px-md-5 mt-md-5 pt-3">
      <div class="col mt-1 mt-md-4 px-lg-5">
@@ -76,10 +79,11 @@
                 <div class="opsi-soal">
                     <button class="btn-os p-sm-1 px-sm-3 me-1 {{ request()->is('Soal*') && !request()->has('jenis') ? 'btn-act' : '' }}" onclick="resetURL()">Semua</button>
 
-
+                    <button class="btn-os p-sm-1 px-sm-3 me-1 {{ $filterjenis === 'QUIZ' ? 'btn-act' : '' }}" onclick="redirectToJenis('QUIZ')">Quiz</button>
                     <button class="btn-os p-sm-1 px-sm-3 me-1 {{ $filterjenis === 'LATIHAN' ? 'btn-act' : '' }}" onclick="redirectToJenis('LATIHAN')">Latihan soal</button>
+
                     <button class="btn-os p-sm-1 px-sm-3 me-1 {{ $filterjenis === 'UJIAN' ? 'btn-act' : '' }}" onclick="redirectToJenis('UJIAN')">Ujian</button>
-                    <button class="btn-os p-sm-1 px-sm-3 me-1 {{ $filterjenis === 'UTBK' ? 'btn-act' : '' }}" onclick="redirectToJenis('UTBK')">UTBK</button>
+                    <button class="btn-os p-sm-1 px-sm-3 me-1 {{ $filterjenis === 'TRYOUT' ? 'btn-act' : '' }}" onclick="redirectToJenis('TRYOUT')">Try Out</button>
 
                   </div>
             </div>
@@ -91,28 +95,32 @@
             </div>
         @else
             @foreach ($dataUjian as $data)
-
-                <div class="col px-3 px-md-0">
-                    <div class="row mx-md-2 w-soal p-2 px-4 py-3">
-                        <div class="col-9 p-0 ws-k">
-                            <span class="wsk-j">{{ $data->judul }}</span>
-                            <div class="wsk-p">
-                                <i class="fa-regular fa-circle-question"></i>
-                                <span class="ms-2"> {{ $totalSoal }} Pertanyaan</span>
-                            </div>
-                            <div class="wsk-w">
-                                <i class="fa-solid fa-stopwatch"></i>
-                                <span class="ms-2 mt-1">{{ $data->waktu }} Menit</span>
-                            </div>
+            @php
+            $totalSoal = soal::where('ujian_id', $data->id)->count();
+        @endphp
+               @if ($totalSoal>0)
+               <div class="col px-3 px-md-0">
+                <div class="row mx-md-2 w-soal p-2 px-4 py-3">
+                    <div class="col-9 p-0 ws-k">
+                        <span class="wsk-j">{{ $data->judul }}</span>
+                        <div class="wsk-p">
+                            <i class="fa-regular fa-circle-question"></i>
+                            <span class="ms-2"> {{ $totalSoal}} Pertanyaan</span>
                         </div>
-                        <div class="col p-0 w-st">
-                            <a href="{{ url('Soal/' .$data->id) }}" class="text-decoration-none d-flex align-items-center">
-                                <span class="me-1">mulai</span>
-                                <i class="fa-solid fa-angle-right" style="font-size: 10px;"></i>
-                            </a>
+                        <div class="wsk-w">
+                            <i class="fa-solid fa-stopwatch"></i>
+                            <span class="ms-2 mt-1">{{ $data->waktu }} Menit</span>
                         </div>
                     </div>
+                    <div class="col p-0 w-st">
+                        <a href="{{ url('Soal/' .$data->id) }}" class="text-decoration-none d-flex align-items-center">
+                            <span class="me-1">mulai</span>
+                            <i class="fa-solid fa-angle-right" style="font-size: 10px;"></i>
+                        </a>
+                    </div>
                 </div>
+            </div>
+               @endif
             @endforeach
         @endif
 

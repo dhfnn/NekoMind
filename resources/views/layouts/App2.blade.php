@@ -15,7 +15,7 @@
     <link id="pagestyle" href="{{ asset('assets/css/soft-ui-dashboard.css') }}" rel="stylesheet" />
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    
+
   @include('component.css')
 
   </head>
@@ -239,14 +239,16 @@ tambahButton.addEventListener("show.bs.modal", function (event) {
     var button = event.relatedTarget;
     var jenisUjian = button.getAttribute("data-ujian");
     var idujian = button.getAttribute("data-ujianid");
+    var judulUjian = button.getAttribute("data-judul");
+    document.getElementById("judulUjian").innerText = judulUjian;
     document.getElementById("idujian").innerText = idujian;
-    document.getElementById("jenisUjian").value = jenisUjian;
+    document.getElementById("jenisUjian").innerText = jenisUjian;
 });
 
-// Tambahkan event listener untuk tombol "Tambah Soal" dalam modal
+// buat nambahan parameter url
 document.getElementById("tambahButtonsoal").addEventListener("click", function () {
     var angka = document.getElementById("idujian").innerText;
-    var jenisUjian = document.getElementById("jenisUjian").value;
+    var jenisUjian = document.getElementById("jenisUjian").innerText;
     window.location.href = "{{ route('pelajaran.create') }}?id=" + angka + "&type=" + jenisUjian;
 });
 

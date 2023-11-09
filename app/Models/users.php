@@ -51,6 +51,9 @@ class users extends Authenticatable
     public function poin(){
         return $this->hasOne(Poin::class, 'user_id');
     }
+    public function historyadmin(){
+        return $this->hasOne(historyadmin::class, 'user_id');
+    }
 
 
 }

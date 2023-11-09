@@ -52,14 +52,13 @@ class ujianController extends Controller
                         ->get();
 
                     // Menghitung berapa banyak ujian_id yang unik
-                    $jumlahSoal = $data->count();
+        $jumlahSoal = $data->count();
         $userId = auth()->id();
         $filterkelas = $request->query('kelas');
         $filterjenis = $request->query('jenis');
         $dataUjianQuery = Ujian::query();
-
         if (!empty($filterkelas)) {
-            $dataUjianQuery->where('kelas_id', $filterkelas);
+            $dataUjianQuery->where('id_kelas', $filterkelas);
         }
 
         if (!empty($filterjenis)) {
@@ -67,11 +66,11 @@ class ujianController extends Controller
         }
 
         $dataUjian = $dataUjianQuery->get();
-        $totalSoal = 0;
-        foreach ($dataUjian as $ujian) {
-            $totalSoal += Soal::where('ujian_id', $ujian->id)->count();
-        }
-        return view('pengguna.soal' , compact('userId','dataUjian' ,'filterkelas','filterjenis','totalSoal','totalBenar','totalSalah','jumlahSoal'));
+        // $totalSoal = 0;
+        // foreach ($dataUjian as $ujian) {
+        //     $totalSoal += soal::where('ujian_id', $ujian->id)->count();
+        // }
+        return view('pengguna.soal' , compact('userId','dataUjian' ,'filterkelas','filterjenis','totalBenar','totalSalah','jumlahSoal'));
     }
 
     /**

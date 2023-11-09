@@ -7,6 +7,7 @@ use App\Models\datapengguna;
 use App\Models\HistoryMisi;
 use App\Models\Historytambahpoin;
 use App\Models\hasilujian;
+use App\Models\Historyadmin;
 use App\Models\Historyujian;
 use App\Models\Level;
 use App\Models\MateriModel;
@@ -22,14 +23,17 @@ use Illuminate\Support\Facades\DB;
 class dashcontroller extends Controller
 {
     function dashadmin(){
+
         $jumlahPengguna = users::count();
         $jumlahUjian = Ujian::count();
         $jumlahMateri = MateriModel::count();
         $dataLevel = Level::with('users','poin')
         ->get();
+        $dataAdmin = Historyadmin::with('user')->orderBy('id' , 'desc')->take(7)->get();
+        // dd($dataAdmin);
         // dd($dataLevel);
         $namepage = 'Dashboard';
-        return view('admin.dashboard', compact('namepage','jumlahPengguna','jumlahUjian','jumlahMateri','dataLevel'));
+        return view('admin.dashboard', compact('namepage','jumlahPengguna','jumlahUjian','jumlahMateri','dataLevel', 'dataAdmin'));
     }
 
 
@@ -43,10 +47,157 @@ class dashcontroller extends Controller
     }
 
     function dashpengguna(){
+
         if (Auth::check()) {
+            $userId = Auth::user()->id;
+
+            $ujianTerbaru = Historyujian::with('ujian')
+            ->where('user_id', $userId)
+            ->whereHas('ujian', function ($query) {
+                $query->where('jenis', 'UJIAN');
+            })
+            ->orderBy('waktu' ,'desc')
+            ->take(4)
+            ->get();
+            $jumlahAujian = count($ujianTerbaru);
+            $arrayUjian = [];
+            if (!$ujianTerbaru->isEmpty()) {
+                for ($i=0; $i <$jumlahAujian ; $i++) {
+                    $arrayUjian[] = $ujianTerbaru[$i]->nilai;
+                }
+
+            }else{
+
+                $arrayUjian = [
+                    '0', '0', '0', '0'
+                ];
+
+            }
+
+            $quizTerbaru = Historyujian::with('ujian')
+            ->where('user_id', $userId)
+            ->whereHas('ujian', function ($query){
+                $query->where('jenis', 'QUIZ');
+            })
+            ->take(4)
+            ->get();
+            $jumlahQuiz = count($quizTerbaru);
+            $arrayQuiz = [];
+            if (!$quizTerbaru->isEmpty()) {
+                for ($i = 0; $i < $jumlahQuiz; $i++) {
+                    $arrayQuiz[] = $quizTerbaru[$i]->nilai;
+                }
+
+            }else{
+
+                $arrayQuiz = [
+                ];
+            }
+
+
+            $latihanTerbaru = Historyujian::with('ujian')
+            ->where('user_id', $userId)
+            ->whereHas('ujian', function ($query){
+                $query->where('jenis', 'LATIHAN');
+            })
+            ->take(4)
+            ->get();
+            $jumlahLatihan = count($latihanTerbaru);
+            // dd($jumlahLatihan);
+            $arrayLatihan = [];
+            if(!$latihanTerbaru->isEmpty()){
+                for ($i=0; $i < $jumlahLatihan ; $i++) {
+                    $arrayLatihan[] =$latihanTerbaru[$i]->nilai;
+                }
+            }else{
+
+                $arrayLatihan = [
+
+                ];
+            }
+
+            $tryoutTerbaru = Historyujian::with('ujian')
+            ->where('user_id', $userId)
+            ->whereHas('ujian', function ($query){
+                $query->where('jenis', 'TRYOUT');
+            })
+            ->take(4)
+            ->get();
+            if(!$tryoutTerbaru->isEmpty()){
+                $arrayTryout = [
+
+                    $tryoutTerbaru[0]->nilai,
+                    $tryoutTerbaru[1]->nilai,
+                    $tryoutTerbaru[2]->nilai,
+                    $tryoutTerbaru[3]->nilai,
+                ];
+            }else{
+
+                $arrayTryout = [
+
+                ];
+            }
+
+
+
+
+            $ujianRata = Historyujian::with('ujian')
+            ->where('user_id', $userId)
+            ->whereHas('ujian', function ($query) {
+                $query->where('jenis', 'UJIAN');
+            })
+            ->get();
+        $nilaiArrayujian = $ujianRata->pluck('nilai')->toArray();
+        $rataUjian = count($nilaiArrayujian) > 0 ? intval(array_sum($nilaiArrayujian) / count($nilaiArrayujian)) : 0;
+
+
+
+
+            $quizRata = Historyujian::with('ujian')
+            ->where('user_id', $userId)
+            ->whereHas('ujian', function ($query) {
+                $query->where('jenis', 'QUIZ');
+            })
+            ->get();
+        $nilaiArrayquiz = $quizRata->pluck('nilai')->toArray();
+        $rataQuiz = count($nilaiArrayquiz) > 0 ? intval(array_sum($nilaiArrayquiz) / count($nilaiArrayquiz)) : 0;
+
+
+
+            $latihanRata = Historyujian::with('ujian')
+            ->where('user_id', $userId)
+            ->whereHas('ujian', function ($query) {
+                $query->where('jenis', 'LATIHAN');
+            })
+            ->get();
+        $nilaiArraylatihan = $latihanRata->pluck('nilai')->toArray();
+        $rataLatihan = count($nilaiArraylatihan) > 0 ? intval(array_sum($nilaiArraylatihan) / count($nilaiArraylatihan)) : 0;
+
+
+
+
+            $tryoutRata = Historyujian::with('ujian')
+            ->where('user_id', $userId)
+            ->whereHas('ujian', function ($query) {
+                $query->where('jenis', 'TRYOUT');
+            })
+            ->get();
+        $nilaiArrayTryout = $tryoutRata->pluck('nilai')->toArray();
+        $rataTryout = count($nilaiArrayTryout) > 0 ? intval(array_sum($nilaiArrayTryout) / count($nilaiArrayTryout)) : 0;
+
+
+
+
+
+
+
+
             $userId = Auth::id();
             $datapengguna = datapengguna::where('user_id', $userId)->first();
             $datalainnya = datalainnya::where('user_id', $userId)->first();
+            $pelfav = $datalainnya->pelajaranfav;
+            $pel = explode(', ', $pelfav);
+            // dd($pelfav);
             if ($datalainnya &&  $datapengguna) {
                 $userId = auth()->id();
                 $data = DB::table('hasilujian')
@@ -96,12 +247,10 @@ class dashcontroller extends Controller
                 }else(
                     $persentase = 0
                 );
-
-
-
-
                 // $sekarang= date('Y-m-d');
-                $sekarang = date('Y-m-d');
+        $tanggal = now()->setTimezone('Asia/Jakarta')->toDateString();
+
+                $sekarang = $tanggal;
                 $dataMisi = Misi::all()->first();
                 if($dataMisi->tanggal === $sekarang){
                     // dd('data ada');
@@ -188,7 +337,7 @@ class dashcontroller extends Controller
                     }
                 }
 
-                return view('pengguna.dashboard',compact('userId','datalainnya','datapengguna','totalBenar', 'totalSalah','jumlahSoal','levelPengguna','sisaBagi','persentase', 'ListdataMisi'));
+                return view('pengguna.dashboard',compact('userId','datalainnya','datapengguna','totalBenar', 'totalSalah','jumlahSoal','levelPengguna','sisaBagi','persentase', 'ListdataMisi','pel','arrayUjian','arrayQuiz','arrayLatihan', 'arrayTryout','rataUjian', 'rataLatihan', 'rataQuiz', 'rataTryout'));
             } else {
                 return redirect('/Profilepengguna/create');
             }
@@ -196,9 +345,57 @@ class dashcontroller extends Controller
             return redirect('/login');
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function peringkat(){
         $namepage = 'Dashboard';
         $userId = Auth::id();
+        $username =  Auth::user()->username;
+        // dd($username);
         $userDataPeringkat = Users::with('datalainnya','datapengguna', 'hasilujian', 'level','poin')
         ->where('role', 'pengguna')
         ->get();
@@ -223,7 +420,7 @@ class dashcontroller extends Controller
 
         // Sekarang, $hasil akan berisi nomor (indeks) yang berurutan pada setiap elemen.
 
-        return view('pengguna.peringkat',compact('namepage','userId','hasil'));
+        return view('pengguna.peringkat',compact('namepage','userId','hasil', 'username'));
     }
 
     public function getDataPeringkat(){

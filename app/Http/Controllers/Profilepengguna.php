@@ -36,9 +36,21 @@ class profilepengguna extends Controller
     public function create()
     {
         $dataKota = Kota::all();
+        $checkboxItems = [
+            ['value' => 'Indonesia', 'id' => 'Indonesia', 'label' => 'B. Indonesia'],
+            ['value' => 'Inggris', 'id' => 'Inggris', 'label' => 'B. Inggris'],
+            ['value' => 'Sejarah', 'id' => 'Sejarah', 'label' => 'Sejarah'],
+            ['value' => 'Matematika', 'id' => 'Matematika', 'label' => 'Matematika'],
+            ['value' => 'Kimia', 'id' => 'Kimia', 'label' => 'Kimia'],
+            ['value' => 'Biologi', 'id' => 'Biologi', 'label' => 'Biologi'],
+            ['value' => 'Fisika', 'id' => 'Fisika', 'label' => 'Fisika'],
+            ['value' => 'Sosiologi', 'id' => 'Sosiologi', 'label' => 'Sosiologi'],
+            ['value' => 'Geografi', 'id' => 'Geografi', 'label' => 'Geografi'],
+            ['value' => 'Ekonomi', 'id' => 'Ekonomi', 'label' => 'Ekonomi'],
+        ];
 
         $namepage = 'Profile'; // Menginisialisasi variabel $namepage dengan nilai 'Profile'
-        return view('more.tambahdata', compact('namepage','dataKota'));
+        return view('more.tambahdata', compact('namepage','dataKota','checkboxItems'));
     }
 
     /**
@@ -48,6 +60,8 @@ class profilepengguna extends Controller
     {
         // return ' BJHK';
         // @dd($request->all());
+        // $Fav = $request->input('pelajaran');
+        // dd($selectedPelajaran);
         $request->validate([
             'nama' => 'required',
             'tanggallahir' => 'required',
@@ -73,11 +87,11 @@ class profilepengguna extends Controller
             'kelas.required' => ' Kelas harus diisi.',
             'jurusan.required' => ' Jurusan harus diisi.',
             'target.required' => ' Target harus diisi.',
-            // 'checkboxtp[].required' => 'Minimal satu opsi harus dipilih.',
+            'checkboxtp[].required' => 'Minimal satu opsi harus dipilih.',
             'motto.required' => ' Motto harus diisi.',
         ]);
 
-        // $user_id = Auth::user()->id;
+        $user_id = Auth::user()->id;
 
 
         $hallo = Auth::user()->id;
@@ -87,11 +101,13 @@ $data2['user_id'] = $hallo;
 
         // $hallo = Auth::user()->id;
         // $data['user_id']=$hallo;
+        $favpel = implode(', ', $request->input('pelajaran'));
+
         $data2['namasekolah'] = $request->namasekolah;
         $data2['kelas'] = $request->kelas;
         $data2['jurusan'] = $request->jurusan;
         $data2['target'] = $request->target;
-        $data2['pelajaranfav'] = 'Matematika';
+        $data2['pelajaranfav'] = $favpel ;
         $data2['motto'] = $request->motto;
 
 
@@ -107,8 +123,8 @@ $data2['user_id'] = $hallo;
 
         $savedData = Datapengguna::create($data);
 
-        // Simpan data kedua
         $savedData2 = Datalainnya::create($data2);
+        // Simpan data kedua
 
         if ($savedData && $savedData2) {
             // Jika berhasil, alihkan ke halaman dashboard
@@ -136,6 +152,18 @@ $data2['user_id'] = $hallo;
      */
     public function edit(string $id)
     {
+                $checkboxItems = [
+            ['value' => 'Indonesia', 'id' => 'Indonesia', 'label' => 'B. Indonesia'],
+            ['value' => 'Inggris', 'id' => 'Inggris', 'label' => 'B. Inggris'],
+            ['value' => 'Sejarah', 'id' => 'Sejarah', 'label' => 'Sejarah'],
+            ['value' => 'Matematika', 'id' => 'Matematika', 'label' => 'Matematika'],
+            ['value' => 'Kimia', 'id' => 'Kimia', 'label' => 'Kimia'],
+            ['value' => 'Biologi', 'id' => 'Biologi', 'label' => 'Biologi'],
+            ['value' => 'Fisika', 'id' => 'Fisika', 'label' => 'Fisika'],
+            ['value' => 'Sosiologi', 'id' => 'Sosiologi', 'label' => 'Sosiologi'],
+            ['value' => 'Geografi', 'id' => 'Geografi', 'label' => 'Geografi'],
+            ['value' => 'Ekonomi', 'id' => 'Ekonomi', 'label' => 'Ekonomi'],
+        ];
         $userId = auth()->id(); // Mendapatkan user_id pengguna yang login.
         $dataKota = Kota::all();
 
@@ -146,7 +174,7 @@ $data2['user_id'] = $hallo;
 
         // return $dataPengguna;
         $namepage = 'Profile'; // Menginisialisasi variabel $namepage dengan nilai 'Profile'
-        return view('pengguna.editprofile', compact('namepage','dataPengguna','dataLainnya', 'dataAkun','userId','dataKota'));
+        return view('pengguna.editprofile', compact('namepage','dataPengguna','dataLainnya', 'dataAkun','userId','dataKota','checkboxItems'));
     }
 
     /**
@@ -154,23 +182,39 @@ $data2['user_id'] = $hallo;
      */
     public function update(Request $request, string $id)
     {
-        // $request->validate([
-        //     'nama'=>'required',
-        //     'tanggallahir'=>'required',
-        //     'jeniskelamin'=>'required',
-        //     // 'kota'=>'required',
-        //     'alamat'=>'required',
-        //     'nohp'=>'required',
-        //     'namasekolah'=>'required',
-        //     'kelas'=>'required',
-        //     'jurusan'=>'required',
-        //     'target'=>'required',
-        //     // 'checkboxtp[]'=>'required',
-        //     'motto'=> 'required',
-        // ]);
+        $request->validate([
+            'nama' => 'required',
+            'tanggallahir' => 'required',
+            'jeniskelamin' => 'required',
+            'kota' => 'required',
+            'alamat' => 'required',
+            'nohp' => 'required|min:11',
+            'namasekolah' => 'required',
+            'kelas' => 'required',
+            'jurusan' => 'required',
+            'target' => 'required',
+            'checkboxtp[]' => 'required',
+            'motto' => 'required',
+        ], [
+            'nama.required' => ' Nama harus diisi.',
+            'tanggallahir.required' => ' Tanggal Lahir harus diisi.',
+            'jeniskelamin.required' => ' Jenis Kelamin harus diisi.',
+            'kota.required' => ' Kota harus diisi.',
+            'alamat.required' => ' Alamat harus diisi.',
+            'nohp.required' => ' Nomor HP harus diisi.',
+            'nohp.min' => '  min-11',
+            'namasekolah.required' => ' Nama Sekolah harus diisi.',
+            'kelas.required' => ' Kelas harus diisi.',
+            'jurusan.required' => ' Jurusan harus diisi.',
+            'target.required' => ' Target harus diisi.',
+            'checkboxtp[].required' => 'Minimal satu opsi harus dipilih.',
+            'motto.required' => ' Motto harus diisi.',
+        ]);
         $hallo = Auth::user()->id;
         $datap = Datapengguna::where('user_id', $hallo)->first();
         $data2p = Datalainnya::where('user_id', $hallo)->first();
+        $favpel = implode(', ', $request->input('pelajaran'));
+
         $data['user_id'] = $hallo;
         $data2['user_id'] = $hallo;
 
@@ -178,7 +222,7 @@ $data2['user_id'] = $hallo;
         $data2['kelas'] = $request->kelas ?: $data2p->kelas;
         $data2['jurusan'] = $request->jurusan ?: $data2p->jurusan;
         $data2['target'] = $request->target ?: $data2p->target;
-        $data2['pelajaranfav'] = 'Matematika';
+        $data2['pelajaranfav'] = $favpel ?:$data2p->pelajaranfav;
         $data2['motto'] = $request->motto ?: $data2p->motto;
 
         $data['nama'] = $request->nama ?: $datap->nama;

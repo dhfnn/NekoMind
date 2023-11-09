@@ -18,7 +18,7 @@
   <body>
     <!-- dashboard  -------------------------------------------------------------------------------->
     <main class="pt-3 ">
-        <form action="/Profilepengguna" method="POST">
+        <form action="/Profilepengguna" method="POST" id="pelajaranForm">
             @csrf
 
 
@@ -198,86 +198,16 @@ CC
                     <span class="ms-2" style="font-size: 13px; font-weight:600; color:rgb(231, 7, 7);">*maks 5</span>
                 {{-- </div> --}}
                 <div class="row  row-cols-2 row-cols-sm-3 mt-2">
-                  <div class="col mb-3">
-                    <div class="form-check dark">
-                      <input class="form-check-input" type="checkbox" name="checkboxtp[]" value="Indonesia" id="Indonesia">
-                      <label class="form-check-label" for="Indonesia">
-                        B. Indonesia
-                      </label>
+                    @foreach ($checkboxItems as $item)
+                    <div class="col mb-3">
+                        <div class="form-check dark">
+                            <input class="form-check-input" type="checkbox" name="pelajaran[]" value="{{ $item['value'] }}" id="{{ $item['id'] }}">
+                            <label class="form-check-label" for="{{ $item['id'] }}">
+                                {{ $item['label'] }}
+                            </label>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col mb-3">
-                    <div class="form-check dark">
-                      <input class="form-check-input" type="checkbox" name="checkboxtp[]" value="Inggris" id="Inggris">
-                      <label class="form-check-label" for="Inggris">
-                        B. Inggris
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col mb-3">
-                    <div class="form-check dark">
-                      <input class="form-check-input" type="checkbox" name="checkboxtp[]" value="Sejarah" id="Sejarah">
-                      <label class="form-check-label" for="Sejarah">
-                        Sejarah
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col mb-3">
-                    <div class="form-check dark">
-                      <input class="form-check-input" type="checkbox" name="checkboxtp[]" value="Matematika" id="Matematika">
-                      <label class="form-check-label" for="Matematika">
-                        Matematika
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col mb-3">
-                    <div class="form-check dark">
-                      <input class="form-check-input" type="checkbox" name="checkboxtp[]" value="Kimia" id="Kimia">
-                      <label class="form-check-label" for="Kimia">
-                        Kimia
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col mb-3">
-                    <div class="form-check dark">
-                      <input class="form-check-input" type="checkbox" name="checkboxtp[]" value="Biologi" id="Biologi">
-                      <label class="form-check-label" for="Biologi">
-                      Biologi
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col mb-3">
-                    <div class="form-check dark">
-                      <input class="form-check-input" type="checkbox" name="checkboxtp[]" value="Fisika" id="Fisika">
-                      <label class="form-check-label" for="Fisika">
-                        Fisika
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col mb-3">
-                    <div class="form-check dark">
-                      <input class="form-check-input" type="checkbox" name="checkboxtp[]" value="Sosiologi" id="Sosiologi">
-                      <label class="form-check-label" for="Sosiologi">
-                        Sosiologi
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col mb-3">
-                    <div class="form-check dark">
-                      <input class="form-check-input" type="checkbox" name="checkboxtp[]" value="Geografi" id="Geografi">
-                      <label class="form-check-label" for="Geografi">
-                        Geografi
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col mb-3">
-                    <div class="form-check dark">
-                      <input class="form-check-input" type="checkbox" name="checkboxtp[]" value="Ekonomi" id="Ekonomi">
-                      <label class="form-check-label" for="Ekonomi">
-                        Ekonomi
-                      </label>
-                    </div>
-                  </div>
+                @endforeach
 
                 </div>
                 <div class="i-ep ">
@@ -304,6 +234,26 @@ CC
 
     <script src="{{ asset('assets/js/script.js') }}">
 
+    </script>
+    <script>
+          const form = document.getElementById('pelajaranForm');
+        const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+        let checkedCount = 0;
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                if (checkbox.checked) {
+                    checkedCount++;
+                } else {
+                    checkedCount--;
+                }
+
+                if (checkedCount > 5) {
+                    checkbox.checked = false;
+                    checkedCount--;
+                }
+            });
+        });
     </script>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
