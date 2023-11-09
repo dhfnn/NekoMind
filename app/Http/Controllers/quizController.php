@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\HistoryUjian;
+use App\Models\hasilujian;
+use App\Models\Historyujian;
 use App\Models\soal;
 use App\Models\Ujian;
 use Illuminate\Http\Request;
@@ -32,6 +33,9 @@ class quizController extends Controller
      */
     public function store(Request $request)
     {
+        $tanggal = now()->setTimezone('Asia/Jakarta')->toDateString();
+
+        // $hariini = $tanggal;
         $userData = Auth::user();
         $user_id =$userData->id;
         $dataUjianid = session('dataUjianid');
@@ -40,7 +44,32 @@ class quizController extends Controller
         $data['benar']= $request->benar;
         $data['salah'] = $request->salah;
         $data['nilai']= $request->nilai;
-        $tambah = HistoryUjian::create($data);
+
+        $data['waktu']= $tanggal;
+        if (hasilujian::where('user_id', $user_id)->where('waktu' ,$tanggal)->where('ujian_id', $dataUjianid)->first()) {
+            $tambahhistory  = Historyujian::create($data);
+        }else{
+            $tambah = hasilujian::create($data);
+        }
+        return view('pengguna.soal');
+    }
+    public function tambahUjian(Request $request){
+        $data['judul'] =$request->judul;
+        $data['id_kelas'] = $request->idkelas;
+        $data['jenis'] = $request->jenis;
+        if ($request->jenis === 'QUIZ') {
+            $data['waktu'] = '10';
+        }elseif ($request->jenis === 'LATIHAN') {
+            $data['waktu'] = '30';
+        }elseif($request->jenis === 'UJIAN'){
+            $data['waktu'] = '60';
+        }elseif($request->jenis === 'TRYOUT'){
+            $data['waktu'] = '120';
+        }
+
+        Ujian::create($data);
+        return redirect()->back();
+
     }
     public function tambahUjian(Request $request){
         $data['judul'] =$request->judul;
@@ -102,8 +131,11 @@ class quizController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+
         $data['judul'] =$request->judul;
-        $data['waktu'] = $request->waktu;
+        $data['id_kelas'] = $request->idkelas;
+
         $data['jenis'] = $request->jenis;
 
         Ujian::where('id', $id)->update($data);
@@ -115,7 +147,9 @@ class quizController extends Controller
      */
     public function destroy(string $id)
     {
-        HistoryUjian::where('ujian_id', $id)->delete();
+
+        hasilujian::where('ujian_id', $id)->delete();
+
         soal::where('ujian_id' ,$id)->delete();
         Ujian::where('id' ,$id)->delete();
 

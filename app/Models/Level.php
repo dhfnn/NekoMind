@@ -11,10 +11,14 @@ class Level extends Model
     use HasFactory;
     protected $table = 'level';
     protected $fillable = ['user_id', 'exp'];
-
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(users::class,'user_id');
     }
+    public function poin()
+    {
+        return $this->belongsTo(Poin::class, 'user_id');
+    }
+
 
 }

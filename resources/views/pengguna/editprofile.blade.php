@@ -50,7 +50,7 @@
                       <div class="d-flex justify-content-end d-md-none">
 CC
                       </div>
-                      <form action="{{ url('Profilepengguna/' . $userId) }}" method="POST">
+                      <form action="{{ url('Profilepengguna/' . $userId) }}" method="POST" id="pelajaranFormedit">
                         @csrf
                         @method('PUT')
 
@@ -175,86 +175,17 @@ CC
               <div class="i-ep">
                 <label for="" class="ji-ep">Pelajaran Favorit</label>
                 <div class="row  row-cols-2 row-cols-sm-3 mt-2">
-                  <div class="col mb-3">
-                    <div class="form-check dark">
-                      <input class="form-check-input" type="checkbox" value="" id="Indonesia">
-                      <label class="form-check-label" for="Indonesia">
-                        B. Indonesia
-                      </label>
+                    @foreach ($checkboxItems as $item)
+                    <div class="col mb-3">
+                        <div class="form-check dark">
+                            <input class="form-check-input checkbox" type="checkbox"  name="pelajaran[]" value="{{ $item['value'] }}" id="{{ $item['id'] }}" >
+                            <label class="form-check-label" for="{{ $item['id'] }}">
+                                {{ $item['label'] }}
+                            </label>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col mb-3">
-                    <div class="form-check dark">
-                      <input class="form-check-input" type="checkbox" value="" id="Inggris">
-                      <label class="form-check-label" for="Inggris">
-                        B. Inggris
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col mb-3">
-                    <div class="form-check dark">
-                      <input class="form-check-input" type="checkbox" value="" id="Sejarah">
-                      <label class="form-check-label" for="Sejarah">
-                        Sejarah
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col mb-3">
-                    <div class="form-check dark">
-                      <input class="form-check-input" type="checkbox" value="" id="Matematika">
-                      <label class="form-check-label" for="Matematika">
-                        Matematika
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col mb-3">
-                    <div class="form-check dark">
-                      <input class="form-check-input" type="checkbox" value="" id="Kimia">
-                      <label class="form-check-label" for="Kimia">
-                        Kimia
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col mb-3">
-                    <div class="form-check dark">
-                      <input class="form-check-input" type="checkbox" value="" id="Biologi">
-                      <label class="form-check-label" for="Biologi">
-                      Biologi
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col mb-3">
-                    <div class="form-check dark">
-                      <input class="form-check-input" type="checkbox" value="" id="Fisika">
-                      <label class="form-check-label" for="Fisika">
-                        Fisika
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col mb-3">
-                    <div class="form-check dark">
-                      <input class="form-check-input" type="checkbox" value="" id="Sosiologi">
-                      <label class="form-check-label" for="Sosiologi">
-                        Sosiologi
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col mb-3">
-                    <div class="form-check dark">
-                      <input class="form-check-input" type="checkbox" value="" id="Geografi">
-                      <label class="form-check-label" for="Geografi">
-                        Geografi
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col ">
-                    <div class="form-check dark">
-                      <input class="form-check-input" type="checkbox" value="" id="Ekonomi">
-                      <label class="form-check-label" for="Ekonomi">
-                        Ekonomi
-                      </label>
-                    </div>
-                  </div>
+                @endforeach
+
                 </div>
                 </div>
                 <div class="i-ep">
@@ -278,6 +209,31 @@ CC
 
     <script src="{{ asset('assets/js/script.js') }}">
 
+    </script>
+    <script>
+          // Mengambil semua checkbox dengan class 'checkbox'
+    const checkboxes = document.querySelectorAll('.checkbox');
+
+// Menginisialisasi variabel untuk melacak jumlah checkbox yang dipilih
+let selectedCount = 0;
+
+// Mendengarkan perubahan pada checkbox
+checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+            selectedCount++;
+        } else {
+            selectedCount--;
+        }
+
+        // Batasi pemilihan menjadi maksimal 5 checkbox
+        if (selectedCount > 5) {
+            checkbox.checked = false; // Batalkan pemilihan jika lebih dari 5
+            selectedCount--;
+        }
+    });
+});
+        console.log('halo');
     </script>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>

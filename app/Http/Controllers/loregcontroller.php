@@ -59,6 +59,8 @@ class loregcontroller extends Controller
     }
     function register(Request $request){
         // dd($request->all());
+        $tanggal = now()->setTimezone('Asia/Jakarta')->toDateString();
+
         $request->validate([
             'email'=>'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed',
@@ -77,7 +79,7 @@ class loregcontroller extends Controller
         $data['email']    = $request->email;
         $data['password'] = Hash::make($request->password);
         $data['role']     = 'pengguna';
-        $data['bergabung']= date('Y-m-d');
+        $data['bergabung']= $tanggal;
         users::create($data);
 
         $infologin = [

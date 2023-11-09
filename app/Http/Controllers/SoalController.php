@@ -20,8 +20,19 @@ class SoalController extends Controller
      */
     public function create(Request $request) {
         $ujianId = $request->input('id');
+        $type = $request->input('type');
+        if($type === 'QUIZ'){
+            $jumlahSoal = '10';
+        }elseif($type === 'UJIAN'){
+            $jumlahSoal = '40';
+        }elseif($type === 'LATIHAN'){
+            $jumlahSoal = '20';
+        }elseif($type === 'TRYOUT'){
+            $jumlahSoal = '40';
+        }
         $namepage = 'Materi';
-        return view('more.tambahsoal', compact('namepage', 'ujianId'));
+        return view('more.tambahsoal', compact('namepage', 'ujianId', 'jumlahSoal', 'type'));
+
     }
 
     /**
@@ -29,18 +40,40 @@ class SoalController extends Controller
      */
     public function store(Request $request)
     {
-        $opsiString = implode(', ', $request->opsi);
 
-        // Kemudian, Anda dapat mengatur data seperti ini
-        $data['pertanyaan'] = $request->pertanyaan;
-        $data['opsi'] = $opsiString;
-        $data['jawaban'] = $request->jawaban;
-        $data['ujian_id'] = $request->ujianid;
+        $jumlahSoal = 0;
+        $type = $request->type;
+        // dd($type);
+        if($type === 'QUIZ'){
+            $jumlahSoal = '10';
+        }elseif($type === 'UJIAN'){
+            $jumlahSoal = '40';
+        }elseif($type === 'LATIHAN'){
+            $jumlahSoal = '20';
+        }elseif($type === 'TRYOUT'){
+            $jumlahSoal = '40';
+        }
+            for ($i = 1; $i <= $jumlahSoal; $i++) {
 
-        $addData = soal::create($data);
-        return redirect('Pelajaran');
+        $opsiString = implode(', ', $request->input("opsi{$i}"));
+
+
+        $data = [
+            'pertanyaan' => $request->input("pertanyaan{$i}"),
+            'opsi' =>$opsiString,
+            'jawaban' => $request->input("jawaban{$i}"),
+            'ujian_id' => $request->input('ujianid'),
+        ];
+
+        soal::create($data);
+        // dd($data);
 
     }
+
+            return redirect('Pelajaran');
+
+    }
+
     /**
      * Display the specified resource.
      */

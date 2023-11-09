@@ -31,6 +31,9 @@ class users extends Authenticatable
         return $this->hasOne(Datapengguna::class,'user_id');
     }
 
+    public function histortambahpoin(){
+         return $this->hasOne(historytambahpoin::class, 'user_id');
+    }
     //relasi ke datalainnya
     public function datalainnya(){
         return $this->hasOne(Datalainnya::class,'user_id');
@@ -39,8 +42,17 @@ class users extends Authenticatable
         return $this->hasOne(Nilai::class,'user_id');
     }
 
-    public function users(){
-        return $this->hasOne(HistoryUjian::class, 'user_id');
+    public function hasilujian(){
+        return $this->hasOne(hasilujian::class, 'user_id');
+    }
+    public function level(){
+        return $this->hasOne(level::class, 'user_id');
+    }
+    public function poin(){
+        return $this->hasOne(Poin::class, 'user_id');
+    }
+    public function historyadmin(){
+        return $this->hasOne(historyadmin::class, 'user_id');
     }
 
 

@@ -6,7 +6,12 @@ use App\Models\Kota;
 use App\Models\users;
 use App\Models\Datalainnya;
 use App\Models\Datapengguna;
+use App\Models\hasilujian;
+use App\Models\Historyadmin;
+use App\Models\Level;
+use App\Models\Poin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Konfigdata extends Controller
@@ -187,17 +192,35 @@ class Konfigdata extends Controller
      */
     public function destroy(string $id)
     {
-        try {
-            DB::beginTransaction();
-            Datalainnya::where('user_id', $id)->delete();
-            Datapengguna::where('user_id', $id)->delete();
-            Users::find($id)->delete();
+        // try {
+        //     DB::beginTransaction();
+        //     Datalainnya::where('user_id', $id)->delete();
+        //     Datapengguna::where('user_id', $id)->delete();
+        //     Users::find($id)->delete();
 
-            DB::commit();
-            return redirect('data');
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
+        //     DB::commit();
+        //     return redirect('data');
+        // } catch (\Exception $e) {
+        //     DB::rollBack();
+        // }
+        $data1 =  Users::where('id' , $id)->first();
+        $tanggal = now()->setTimezone('Asia/Jakarta')->toDateString();
+
+        $idadmin = Auth::user()->id;
+        $data2['user_id'] = $idadmin;
+        $data2['isi'] = "Hapus Pengguna  ( {$data1->username} )";
+
+        $data2['tanggal'] = $tanggal;
+       $tambah =  Historyadmin::create($data2);
+            if ($tambah) {
+                Datalainnya::where('user_id', $id)->delete();
+                hasilujian::where('user_id', $id)->delete();
+                Level::where('user_id', $id)->delete();
+                Poin::where('user_id', $id)->delete();
+                Datapengguna::where('user_id', $id)->delete();
+                Users::find($id)->delete();
+            }
+            return view('admin.data');
     }
 }
 

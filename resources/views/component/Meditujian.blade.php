@@ -6,13 +6,17 @@
           <div class="col ">
             <div class="" style="background-image: url('images/img_1.jpg');">
             </div>
-            <div class="content-text p-1 pt-2">
-              <span class="jn-materi">Tambah Ujian</span>
+
+            <div class="content-text p-1 pt-2 text-start">
+              <span class="jn-materi">Edit Data Ujian</span>
+
               <form class="needs-validation" action="{{ route('ujian.update' ,['id'=> $data->id]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="col mt-2 px-2">
-                    <div class="col">
+
+                    <div class="row">
+
                         <div class="col">
                             <div class="col">
                             <label for="" class="ji-ep">Judul</label>
@@ -20,31 +24,33 @@
                             <input type="text" class="form-control" name="judul" value="{{ $data->judul }}" placeholder="Masukan judul ">
                             <input  name="id_pelajaran"  type="hidden" value="">
                         </div>
-                        <div class="row">
+
+                        {{-- <div class="row"> --}}
                             <div class="col">
                                 <div class="col">
-                                <label for="" class="ji-ep">Waktu</label>
+                                <label for="" class="ji-ep">Kelas</label>
                                 </div>
-                                <input type="number" class="form-control" name="waktu" value="{{ $data->waktu }}" placeholder="-- menit ">
-                            </div>
-                            <div class="col">
-                                <div class="col">
-                                <label for="" class="ji-ep">Jenis</label>
-                                </div>
-                                <select name="jenis" class="form-select">
-                                    <option value="">Pilih</option>
-                                    <option value="QUIZ" {{ $data->jenis == 'QUIZ' ? 'selected' : '' }}>QUIZ</option>
-                                    <option value="LATIHAN" {{ $data->jenis == 'LATIHAN' ? 'selected' : '' }}>LATIHAN</option>
-                                    <option value="UJIAN" {{ $data->jenis == 'UJIAN' ? 'selected' : '' }}>UJIAN</option>
-                                    <option value="TRYOUT" {{ $data->jenis == 'TRYOUT' ? 'selected' : '' }}>TRYOUT</option>
+                                <select class="form-select" name="idkelas" id="" required title="Pilih jenis ujian">
+                                    <option value="">Pilih Kelas</option>
+                                    <option value="1">Kelas 1</option>
+                                    <option value="2">Kelas 2</option>
+                                    <option value="3">Kelas 3</option>
+                                    <option value="4">Kelas 4</option>
+                                    <option value="5">Kelas 5</option>
+                                    <option value="6">Kelas 6</option>
+                                    <option value="7">Kelas 7</option>
+                                    <option value="8">Kelas 8</option>
+                                    <option value="9">Kelas 9</option>
+                                    <option value="10">Kelas 10</option>
+                                    <option value="11">Kelas 11</option>
+                                    <option value="12">Kelas 12</option>
+
                                 </select>
 
                             </div>
+                        {{-- </div> --}}
+                    </div>
 
-                        </div>
-                    </div>
-                    <div class="row mt-2">
-                    </div>
                     <div class="col d-flex justify-content-end mb-2">
                         <button class="t-sep me-3 me-md-0 mt-md-3" type="submit">
                             selesai

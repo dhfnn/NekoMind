@@ -239,14 +239,16 @@ tambahButton.addEventListener("show.bs.modal", function (event) {
     var button = event.relatedTarget;
     var jenisUjian = button.getAttribute("data-ujian");
     var idujian = button.getAttribute("data-ujianid");
+    var judulUjian = button.getAttribute("data-judul");
+    document.getElementById("judulUjian").innerText = judulUjian;
     document.getElementById("idujian").innerText = idujian;
-    document.getElementById("jenisUjian").value = jenisUjian;
+    document.getElementById("jenisUjian").innerText = jenisUjian;
 });
 
-// Tambahkan event listener untuk tombol "Tambah Soal" dalam modal
+// buat nambahan parameter url
 document.getElementById("tambahButtonsoal").addEventListener("click", function () {
     var angka = document.getElementById("idujian").innerText;
-    var jenisUjian = document.getElementById("jenisUjian").value;
+    var jenisUjian = document.getElementById("jenisUjian").innerText;
     window.location.href = "{{ route('pelajaran.create') }}?id=" + angka + "&type=" + jenisUjian;
 });
 

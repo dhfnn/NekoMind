@@ -7,7 +7,7 @@ fetch("/soall")
             const opsiArray = item.opsi.split(",");
             return {
                 pertanyaan: item.pertanyaan,
-                opsi: opsiArray, // Gunakan array yang telah dibagi
+                opsi: opsiArray,
                 jawaban: item.jawaban,
             };
         });
@@ -28,7 +28,7 @@ fetch("/soall")
             console.log(item.jawaban);
         });
     }
-    var currentQuestion = 0;
+    var urutanPertanyaan = 0;
     var selectedAnswers = new Array(soals.length).fill(-1);
     var score = 0;
     var quizStarted = false;
@@ -76,7 +76,7 @@ fetch("/soall")
       }
   function showQuestion() {
     var wadahSoal = document.getElementById("wadahSoal");
-    var soal = soals[currentQuestion];
+    var soal = soals[urutanPertanyaan];
 
     var opsiElement = document.getElementById("opsi");
     var tombolKembali = document.getElementById("tombolKembali");
@@ -87,13 +87,13 @@ fetch("/soall")
     soalElement.textContent = soal.pertanyaan;
 
 
-    if (currentQuestion >= soals.length) {
+    if (urutanPertanyaan >= soals.length) {
       wadahSoal.style.display = "none";
     } else {
       wadahSoal.style.display = "block";
 
       var judulPertanyaan = document.getElementById("judulPertanyaan");
-      judulPertanyaan.innerText = "Pertanyaan Ke-" + (currentQuestion + 1);
+      judulPertanyaan.innerText = "Pertanyaan Ke-" + (urutanPertanyaan + 1);
 
 
       while (opsiElement.firstChild) {
@@ -106,14 +106,14 @@ fetch("/soall")
 
         var radio = document.createElement("input");
         radio.type = "radio";
-        radio.name = "answer" + currentQuestion; // Menggunakan nama berdasarkan indeks pertanyaan
+        radio.name = "answer" + urutanPertanyaan;
         radio.value = i;
 
-        // Tambahkan event listener untuk menangani klik pada elemen div
+
         div.addEventListener("click", function () {
-            var relatedRadio = this.querySelector("input[type=radio]");
-            relatedRadio.checked = true;
-            selectedAnswers[currentQuestion] = parseInt(relatedRadio.value);
+            var RadioPertanyaan = this.querySelector("input[type=radio]");
+            RadioPertanyaan.checked = true;
+            selectedAnswers[urutanPertanyaan] = parseInt(RadioPertanyaan.value);
         });
 
         var choice = document.createTextNode(soal.opsi[i]);
@@ -123,43 +123,50 @@ fetch("/soall")
         opsiElement.appendChild(div);
       }
 
-      if (currentQuestion === 1) {
+      if (urutanPertanyaan === 0) {
         tombolKembali.style.display = "none !important";
-        var icon = document.createElement("i");
-        icon.className = "fa-solid fa-angle-left text-white";
-        tombolKembali.innerHTML = ''; // Menghapus semua konten sebelumnya
-        tombolKembali.appendChild(icon);
+        var tombolKembali = document.getElementById("tombolKembali");
+        if (tombolKembali) {
+          tombolKembali.parentNode.removeChild(tombolKembali);
+        }
+        console.log(urutanPertanyaan);
 
       } else {
-        tombolKembali.style.display = "none";
+        tombolKembali.style.display = "flex";
+                var icon = document.createElement("i");
+        icon.className = "fa-solid fa-angle-left text-white";
+        tombolKembali.classList.add("tnp");
+        tombolKembali.innerHTML = '';
+        tombolKembali.appendChild(icon);
+        console.log(urutanPertanyaan);
 
       }
 
 
-      if (currentQuestion === soals.length - 1) {
-        tombolLanjut.classList.add("tombol-selesai"); // Menambahkan class "tombol-selesai"
-        tombolLanjut.innerHTML = 'Selesai'; // Menetapkan teks "Selesai"
+      if (urutanPertanyaan === soals.length - 1) {
+        tombolLanjut.classList.add("tombol-selesai");
+        tombolLanjut.innerHTML = 'Selesai';
       } else {
         tombolLanjut.classList.remove("tombol-selesai");
         tombolLanjut.innerText = "";
         var icon = document.createElement("i");
         icon.className = "fa-solid fa-angle-right text-white";
-        tombolLanjut.innerHTML = '' ; // Menghapus semua konten sebelumnya
+        tombolLanjut.innerHTML = '' ; 
         tombolLanjut.appendChild(icon);
       }
 
 
-      var selectedAnswer = selectedAnswers[currentQuestion];
+      var selectedAnswer = selectedAnswers[urutanPertanyaan];
       var radioButtons = document.getElementsByName("answer");
 
       if (selectedAnswer !== -1 && selectedAnswer < radioButtons.length) {
           radioButtons[selectedAnswer].checked = true;
       } else {
-          selectedAnswers[currentQuestion] = -1;
+          selectedAnswers[urutanPertanyaan] = -1;
       }
 
 
-      wadahWaktu.innerText = "Waktu Tersisa: " + time + " detik"; // Perbarui teks waktu yang tersisa
+      wadahWaktu.innerText = "Waktu Tersisa: " + time + " detik";
     }
   }
 
@@ -169,18 +176,18 @@ fetch("/soall")
         daftarSoal.removeChild(daftarSoal.firstChild);
       }
 
-      // Tambahkan pertanyaan-pertanyaan ke daftar
+      // Tambahkan pertanyaan-pertanyaan ke tampail
       for (var i = 0; i < soals.length; i++) {
         var div = document.createElement("div");
         div.className = "list-soal";
-        div.textContent = " " + (i + 1); // Menampilkan urutan pertanyaan
-        div.dataset.soalIndex = i; // Menyimpan indeks pertanyaan pada elemen li
+        div.textContent = " " + (i + 1);
+        div.dataset.soalIndex = i;
 
-        // Cek apakah pertanyaan ini telah dijawab
+        //Buat  Cek apakah pertanyaan ini sudah dijawabbbbbbbbbbbbbbbb
         if (selectedAnswers[i] !== -1) {
-          div.style.color = "green"; // Jika sudah dijawab, beri warna hijau
+          div.style.color = "green";
         } else {
-          div.style.color = "white"; // Jika belum dijawab, beri warna merah
+          div.style.color = "white";
         }
 
 
@@ -233,7 +240,7 @@ fetch("/soall")
         $("#scoreModal").modal("show");
     }
   function restartQuiz() {
-    currentQuestion = 0;
+    urutanPertanyaan = 0;
     selectedAnswers = new Array(soals.length).fill(-1);
     score = 0;
     fetch('/waktuu')
@@ -258,15 +265,15 @@ fetch("/soall")
 
   document.getElementById("startButton").addEventListener("click", startQuiz);
   document.getElementById("tombolKembali").addEventListener("click", function () {
-    currentQuestion--;
+    urutanPertanyaan--;
     showQuestion();
   });
 
   document.getElementById("tombolLanjut").addEventListener("click", function () {
-    if (currentQuestion === soals.length - 1) {
+    if (urutanPertanyaan === soals.length - 1) {
       endQuiz();
     } else {
-      currentQuestion++;
+      urutanPertanyaan++;
       showQuestion();
     }
   });
@@ -280,7 +287,7 @@ fetch("/soall")
     if (event.target && event.target.tagName === "DIV") {
       var clickedQuestionIndex = Array.from(daftarSoal.children).indexOf(event.target);
       if (clickedQuestionIndex !== -1) {
-        currentQuestion = clickedQuestionIndex;
+        urutanPertanyaan = clickedQuestionIndex;
         showQuestion();
       }
     }

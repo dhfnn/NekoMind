@@ -13,6 +13,7 @@
         <script src="https://kit.fontawesome.com/9494185896.js" crossorigin="anonymous"></script>
         <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
         <script src="../assets/js/color-modes.js"></script>
+        <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
       </head>
       <style>
     .list-soal {
@@ -57,12 +58,20 @@
       </style>
 <body style="background-color: #F8F9FA;">
     <div class="container  d-flex justify-content-center vh-100 d-flex align-items-center">
-        <div class="col-4 p-2 bg-primary" id="home">
-            <div class="col">hai</div>
-            <div class="col" >
-                <button id="startButton">Mulai Kuis</button>
-              </div>
-        </div>
+            <div class="col-5 p-2 px-3" id="home"  style="border:1px solid #00000036; border-radius:5px">
+                <div class="col">
+                    <span class="t-jsp">Perhatiaan !!</span>
+                </div>
+                <div class="col px-2">
+                    <p class="p-sp" style="text-align: justify;">
+                        Apakah kamu yakin untuk mulai mengerjakan? Waktu akan terus berjalan. Try Out harus diselesaikan sejak menekan tombol start.
+                    </p>
+                </div>
+                   <div class="col d-flex justify-content-end">
+                    <button id="startButton" class="t-mu px-2" style="border: none;">Mulai Kuis</button>
+
+                   </div>
+            </div>
         <div class="col-10"  id="quiz" style="display: none;">
             <div class="row gap-1" >
                 <div class="col-9"  >
@@ -88,7 +97,7 @@
                         </div>
                     </div>
                     <div class="col d-flex justify-content-end m-3">
-                        <div class="tnp d-flex justify-content-center align-items-center me-2" id="tombolKembali" style="display: none !important;" ></div>
+                        <div class="  justify-content-center align-items-center me-2" id="tombolKembali"  ></div>
                         <!-- <div class="d-flex align-items-center px-2">1</div> -->
                         <div class="tnp" id="tombolLanjut"><i class="fa-solid fa-angle-right text-white"></i></div>
                     </div>

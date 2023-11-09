@@ -1,22 +1,23 @@
 <?php
 
-use App\Http\Controllers\BabController;
 use App\Http\Controllers\tes;
 use App\Http\Controllers\data;
-use App\Http\Controllers\Konfigdata;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\dashcontroller;
-use App\Http\Controllers\loregcontroller;
-use App\Http\Controllers\MateriController;
-use App\Http\Controllers\materiPengguna;
+use App\Http\Middleware\roleakses;
 use App\Http\Controllers\Permateri;
-use App\Http\Controllers\Profilepengguna;
-use App\Http\Controllers\profilecontroller;
+use App\Http\Controllers\Konfigdata;
+use Illuminate\Contracts\Cache\Store;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BabController;
+use App\Http\Controllers\dashcontroller;
+use App\Http\Controllers\materiPengguna;
 use App\Http\Controllers\quizController;
 use App\Http\Controllers\soalController;
-use App\Http\Controllers\ujianController;
 use App\Http\Controllers\wordController;
-use Illuminate\Contracts\Cache\Store;
+use App\Http\Controllers\loregcontroller;
+use App\Http\Controllers\Profilepengguna;
+use App\Http\Controllers\ujianController;
+use App\Http\Controllers\MateriController;
+use App\Http\Controllers\profilecontroller;
 
 // use App\Http\Controllers\BabController;
 
@@ -52,8 +53,6 @@ route::middleware(['auth'])->group(function(){
         Route::get('Pelajaran/{materi}' ,[MateriController::class, 'show'])->name('materi.show');
         Route::put('Pelajaran/{id}' ,[MateriController::class, 'update'])->name('materi.update');
         Route::delete('Pelajaran/{Materi}' ,[MateriController::class, 'destroy'])->name('materi.destroy');
-
-
         Route::get('/tambah+soal', [soalController::class, 'create'])->name('pelajaran.create');
         Route::get('/lihat/{id}', [soalController::class, 'show'])->name('pelajaran.show');
         Route::put('/edit/{id}', [soalController::class, 'update'])->name('soal.update');
@@ -61,7 +60,6 @@ route::middleware(['auth'])->group(function(){
         Route::delete('/hapus/ujian/{id}', [quizController::class, 'destroy'])->name('ujian.delete');
         Route::delete('/hapus/{id}', [SoalController::class, 'destroy'])->name('soal.delete');
         Route::post('Pelajaran/soal/{id}', [soalController::class, 'store'])->name('pelajaran.store');
-
         Route::post('/tambah+ujian',[quizController::class, 'tambahUjian'])->name('ujian.tambah');
         // Route::get('Pelajaran/{id}/edit' ,[Materi::class, '']);
         // bagian hal data
@@ -111,9 +109,12 @@ route::middleware(['auth'])->group(function(){
 
     Route::middleware(['roleakses:pengguna'])->group(function () {
         Route::get('/pengguna/dashboard', [dashcontroller::class, 'dashpengguna'])->name('dashboard-pengguna');
+        Route::post('/terimadataTanggal', [dashcontroller::class, 'terimadataTanggal']);
         // halaman materi
         Route::resource('MateriPengguna', materiPengguna::class);
         // halaman soal
+        Route::get('/peringkat' ,[dashcontroller::class , 'peringkat'])->name('peringkat');
+        Route::get('/ambilDataPeringkat', [dashcontroller::class, 'getDataPeringkat'])->name('ambilData.peringkat');
         Route::resource('Soal' , ujianController::class);
         Route::resource('Ujian' , quizController::class);
         Route::post('Hasil/{id}' , [quizController::class , 'store']);

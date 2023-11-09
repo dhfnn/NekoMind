@@ -55,7 +55,8 @@
                     </td>
                     <td>
                       <p class="text-xs font-weight-bold mb-0">
-                        {{ $data->waktu }}
+                        {{ $data->waktu }} menit
+
                     </p>
                     </td>
                     <td class="align-middle text-center text-sm">
@@ -75,11 +76,13 @@
 
                     <td class="align-middle text-center">
 
-                        @if ($data->soal->isEmpty()) {{-- Cek apakah tidak ada data soal yang terkait --}}
-                        <button class="t-sep" style="font-size: 10px;" type="button" data-bs-toggle="modal" data-bs-target="#tambahpertanyaan" data-ujian="{{ $data->jenis }}" data-ujianid="{{ $data->id }}">Tambah</button>
+
+                        @if ($data->soal)
+                        <a class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user" href="{{ route('pelajaran.show', ['id' => $data->id]) }}">Lihat</a>
 
                       @else
-                      <a class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user" href="{{ route('pelajaran.show', ['id' => $data->id]) }}">Lihat</a>
+                      <button class="t-sep" style="font-size: 10px;" type="button" data-bs-toggle="modal" data-bs-target="#tambahpertanyaan" data-ujian="{{ $data->jenis }}" data-ujianid="{{ $data->id }}" data-judul="{{ $data->judul}}">Tambah</button>
+
 
                       @endif
 

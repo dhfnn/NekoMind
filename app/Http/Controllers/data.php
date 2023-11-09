@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Datalainnya;
 use App\Models\Datapengguna;
+use App\Models\Historyadmin;
 use App\Models\Kota;
 use App\Models\sekolah;
 use App\Models\users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 
@@ -23,9 +25,7 @@ class data extends Controller
 
 
         $namepage = 'Data';
-        // $userData = users::get();
         $userData = new users;
-
         if($request->get('cari')){
             $userData = $userData->where('username','LIKE', $request->get('cari'). '%')->orWhere('email','LIKE', $request->get('cari'). '%');
         }
@@ -39,8 +39,8 @@ class data extends Controller
      */
     public function create()
     {
-
         return view('more.tambahpengguna');
+
     }
 
     /**
@@ -63,13 +63,25 @@ class data extends Controller
             'role.required'=>'role belum disi'
 
         ]);
+        $tanggal = now()->setTimezone('Asia/Jakarta')->toDateString();
         $data['username'] = $request->username;
         $data['email']    = $request->email;
         // $data['password'] = Hash:make($request->password);
         $data['password'] =Hash::make($request->password);
         $data['role']     = $request->role;
-        $data['bergabung']= date('Y-m-d');
-        users::create($data);
+        $data['bergabung']= $tanggal;
+        $datatambah = users::create($data);
+
+        $idadmin = Auth::user()->id;
+
+        if ($datatambah) {
+            $data2['user_id'] = $idadmin;
+            $data2['isi'] = "Tambah Pengguna Baru ( {$datatambah->username} )";
+
+            $data2['tanggal'] = $tanggal;
+            Historyadmin::create($data2);
+        }
+
         return redirect('data');
     }
     public function show(string $id)
@@ -112,6 +124,8 @@ class data extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $tanggal = now()->setTimezone('Asia/Jakarta')->toDateString();
+
             $dataC = users::where('id', $id)->first();
 
             $data3p = users::where('id', $id)->first();
@@ -124,6 +138,17 @@ class data extends Controller
                 $data3['password'] = $data3p->password;
             }
             $updatedata3 = users::where('id', $id)->update($data3);
+            $idadmin = Auth::user()->id;
+
+            if ($updatedata3) {
+                $data3pUpdated = users::where('id', $id)->first();
+                $data2['user_id'] = $idadmin;
+                $data2['isi'] = "Edit Data Pengguna  ( {$data3pUpdated->username} )";
+
+                $data2['tanggal'] = $tanggal;
+           Historyadmin::create($data2);
+
+            }
             return redirect('data');
 
             // if ($updatedata3) {

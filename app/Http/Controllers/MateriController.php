@@ -18,9 +18,10 @@ class MateriController extends Controller
      */
     public function index()
     {
+
         $namepage = 'Pelajaran';
 
-        $dataUjian = Ujian::all();
+        $dataUjian = Ujian::with('soal')->get();
 
 
         $dataKelas = Kelas::all();
@@ -38,7 +39,7 @@ class MateriController extends Controller
      */
     public function create()
     {
-        
+
     }
 
 
@@ -67,7 +68,6 @@ class MateriController extends Controller
             $data['jenis'] = 'pelajaran';
         }
 
-        // Simpan data jika tidak ada duplikasi
         $tambah = Pelajaran::create($data);
         return redirect('Pelajaran/' . $request->id_kelas);
     } else {
