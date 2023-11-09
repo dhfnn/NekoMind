@@ -44,6 +44,7 @@ class quizController extends Controller
         $data['benar']= $request->benar;
         $data['salah'] = $request->salah;
         $data['nilai']= $request->nilai;
+
         $data['waktu']= $tanggal;
         if (hasilujian::where('user_id', $user_id)->where('waktu' ,$tanggal)->where('ujian_id', $dataUjianid)->first()) {
             $tambahhistory  = Historyujian::create($data);
@@ -65,6 +66,15 @@ class quizController extends Controller
         }elseif($request->jenis === 'TRYOUT'){
             $data['waktu'] = '120';
         }
+
+        Ujian::create($data);
+        return redirect()->back();
+
+    }
+    public function tambahUjian(Request $request){
+        $data['judul'] =$request->judul;
+        $data['waktu'] = $request->waktu;
+        $data['jenis'] = $request->jenis;
 
         Ujian::create($data);
         return redirect()->back();
@@ -122,8 +132,10 @@ class quizController extends Controller
     public function update(Request $request, string $id)
     {
 
+
         $data['judul'] =$request->judul;
         $data['id_kelas'] = $request->idkelas;
+
         $data['jenis'] = $request->jenis;
 
         Ujian::where('id', $id)->update($data);
@@ -135,7 +147,9 @@ class quizController extends Controller
      */
     public function destroy(string $id)
     {
+
         hasilujian::where('ujian_id', $id)->delete();
+
         soal::where('ujian_id' ,$id)->delete();
         Ujian::where('id' ,$id)->delete();
 

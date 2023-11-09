@@ -12,6 +12,7 @@ use App\Models\Historyujian;
 use App\Models\Level;
 use App\Models\MateriModel;
 use App\Models\Misi;
+
 use App\Models\Pelajaran;
 use App\Models\Poin;
 use App\Models\Ujian;
@@ -241,12 +242,15 @@ class dashcontroller extends Controller
                 $expLevel = $exp / 1200;
                 $sisaBagi = $exp % 1200;
                 $levelPengguna = number_format($expLevel);
+
                 if($sisaBagi !== 0){
                     $persentase = ($sisaBagi/1200 )*100;
+
 
                 }else(
                     $persentase = 0
                 );
+
                 // $sekarang= date('Y-m-d');
         $tanggal = now()->setTimezone('Asia/Jakarta')->toDateString();
 
@@ -338,6 +342,7 @@ class dashcontroller extends Controller
                 }
 
                 return view('pengguna.dashboard',compact('userId','datalainnya','datapengguna','totalBenar', 'totalSalah','jumlahSoal','levelPengguna','sisaBagi','persentase', 'ListdataMisi','pel','arrayUjian','arrayQuiz','arrayLatihan', 'arrayTryout','rataUjian', 'rataLatihan', 'rataQuiz', 'rataTryout'));
+
             } else {
                 return redirect('/Profilepengguna/create');
             }

@@ -60,7 +60,6 @@ route::middleware(['auth'])->group(function(){
         Route::delete('/hapus/ujian/{id}', [quizController::class, 'destroy'])->name('ujian.delete');
         Route::delete('/hapus/{id}', [SoalController::class, 'destroy'])->name('soal.delete');
         Route::post('Pelajaran/soal/{id}', [soalController::class, 'store'])->name('pelajaran.store');
-
         Route::post('/tambah+ujian',[quizController::class, 'tambahUjian'])->name('ujian.tambah');
         // Route::get('Pelajaran/{id}/edit' ,[Materi::class, '']);
         // bagian hal data

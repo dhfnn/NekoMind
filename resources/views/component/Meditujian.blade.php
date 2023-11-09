@@ -6,13 +6,17 @@
           <div class="col ">
             <div class="" style="background-image: url('images/img_1.jpg');">
             </div>
+
             <div class="content-text p-1 pt-2 text-start">
               <span class="jn-materi">Edit Data Ujian</span>
+
               <form class="needs-validation" action="{{ route('ujian.update' ,['id'=> $data->id]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="col mt-2 px-2">
+
                     <div class="row">
+
                         <div class="col">
                             <div class="col">
                             <label for="" class="ji-ep">Judul</label>
@@ -20,6 +24,7 @@
                             <input type="text" class="form-control" name="judul" value="{{ $data->judul }}" placeholder="Masukan judul ">
                             <input  name="id_pelajaran"  type="hidden" value="">
                         </div>
+
                         {{-- <div class="row"> --}}
                             <div class="col">
                                 <div class="col">
@@ -39,12 +44,10 @@
                                     <option value="10">Kelas 10</option>
                                     <option value="11">Kelas 11</option>
                                     <option value="12">Kelas 12</option>
+
                                 </select>
 
                             </div>
-
-
-
                         {{-- </div> --}}
                     </div>
 

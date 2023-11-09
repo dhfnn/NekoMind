@@ -19,6 +19,7 @@
                 <input type="hidden" value="" name="DataUjianId" id="DataUjianId">
                 <div class="card-body px-0 pt-0 pb-2 d-flex align-items-center flex-column"  >
                     {{-- inii ada banyak --}}
+
                     @include('component.formquiz')
 
                     </div>

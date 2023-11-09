@@ -40,6 +40,7 @@ class SoalController extends Controller
      */
     public function store(Request $request)
     {
+
         $jumlahSoal = 0;
         $type = $request->type;
         // dd($type);
@@ -56,6 +57,7 @@ class SoalController extends Controller
 
         $opsiString = implode(', ', $request->input("opsi{$i}"));
 
+
         $data = [
             'pertanyaan' => $request->input("pertanyaan{$i}"),
             'opsi' =>$opsiString,
@@ -67,9 +69,11 @@ class SoalController extends Controller
         // dd($data);
 
     }
+
             return redirect('Pelajaran');
 
     }
+
     /**
      * Display the specified resource.
      */

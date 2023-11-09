@@ -16,12 +16,15 @@
                             <div class="col">
                             <label for="" class="ji-ep">Judul</label>
                             </div>
+
                             <input type="text" class="form-control" name="judul" placeholder="Masukan judul " required title="Judul Masih Kosong">
+
                             <input  name="id_pelajaran"  type="hidden" value="">
                         </div>
                         <div class="row">
                             <div class="col">
                                 <div class="col">
+
                                 <label for="" class="ji-ep">Jenis</label>
                                 </div>
                                 <select class="form-select" name="jenis" id="" required title="Pilih jenis ujian">
