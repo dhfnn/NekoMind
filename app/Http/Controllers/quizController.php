@@ -71,14 +71,7 @@ class quizController extends Controller
         return redirect()->back();
 
     }
-    public function tambahUjian(Request $request){
-        $data['judul'] =$request->judul;
-        $data['waktu'] = $request->waktu;
-        $data['jenis'] = $request->jenis;
 
-        Ujian::create($data);
-        return redirect()->back();
-    }
 
     /**
      * Display the specified resource.
