@@ -56,7 +56,7 @@ class BabController extends Controller
     }
 
     public function showdua(String $id){
-        
+
     }
 
     /**
@@ -96,16 +96,13 @@ class BabController extends Controller
      */
     public function destroy(string $id)
     {
-        $deletedata2 = MateriModel::where('id_bab' , $id)->delete();
-        $deletedata = Bab::where('id' , $id)->delete();
+        $deletedata2 = MateriModel::where('id_bab', $id)->delete();
 
-
-        if($deletedata && $deletedata2){
+        // if ($deletedata2 > 0) {
             return redirect()->back();
-        }else{
-            return ' gagal';
-        }
-
+        // } else {
+        //     return 'gagal';
+        // }
 
     }
 }

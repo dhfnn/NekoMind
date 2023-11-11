@@ -2,33 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\datalainnya;
-use App\Models\datapengguna;
-use App\Models\HistoryMisi;
-use App\Models\Historytambahpoin;
-use App\Models\hasilujian;
-use App\Models\Historyadmin;
-use App\Models\Historyujian;
-use App\Models\Level;
-use App\Models\MateriModel;
 use App\Models\Misi;
-
-use App\Models\Pelajaran;
 use App\Models\Poin;
+use App\Models\Level;
 use App\Models\Ujian;
 use App\Models\users;
+use App\Models\Pelajaran;
+use App\Models\hasilujian;
+use App\Models\datalainnya;
+use App\Models\HistoryMisi;
+use App\Models\MateriModel;
+
+use App\Models\Chatpengguna;
+use App\Models\datapengguna;
+use App\Models\Historyadmin;
+use App\Models\Historyujian;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Historytambahpoin;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class dashcontroller extends Controller
 {
     function dashadmin()
     {
+        $userId = auth()->id();
+
+        $datachat=  Chatpengguna::with('user')->get();
+        $userdata = users::where('id', $userId)->first();
+        // dd($userdata);
+
         $jumlahPengguna = users::count();
         $jumlahUjian = Ujian::count();
         $jumlahMateri = MateriModel::count();
-        $dataLevel = Level::with('users', 'poin')->get();
+        $dataLevel = Level::join('users', 'users.id', '=', 'level.user_id')
+        ->join('poinpengguna', 'poinpengguna.user_id', '=', 'level.user_id')
+        ->select('level.*', 'users.*', 'poinpengguna.*')
+        ->get();
+
+
+        // dd($dataLevel);
         $dataAdmin = Historyadmin::with('user')
             ->orderBy('id', 'desc')
             ->take(7)
@@ -36,7 +49,7 @@ class dashcontroller extends Controller
         // dd($dataAdmin);
         // dd($dataLevel);
         $namepage = 'Dashboard';
-        return view('admin.dashboard', compact('namepage', 'jumlahPengguna', 'jumlahUjian', 'jumlahMateri', 'dataLevel', 'dataAdmin'));
+        return view('admin.dashboard', compact('namepage', 'jumlahPengguna', 'jumlahUjian', 'jumlahMateri', 'dataLevel', 'dataAdmin','datachat','userdata','userId'));
     }
 
     // function dashpengguna(){
@@ -52,7 +65,7 @@ class dashcontroller extends Controller
     {
         if (Auth::check()) {
             $userId = Auth::user()->id;
-
+            $usersData =users::where('id', $userId)->first();
             $ujianTerbaru = Historyujian::with('ujian')
                 ->where('user_id', $userId)
                 ->whereHas('ujian', function ($query) {
@@ -158,10 +171,11 @@ class dashcontroller extends Controller
             $userId = Auth::id();
             $datapengguna = datapengguna::where('user_id', $userId)->first();
             $datalainnya = datalainnya::where('user_id', $userId)->first();
-            $pelfav = $datalainnya->pelajaranfav;
-            $pel = explode(', ', $pelfav);
+
             // dd($pelfav);
             if ($datalainnya && $datapengguna) {
+                $pelfav = $datalainnya->pelajaranfav;
+                $pel = explode(', ', $pelfav);
                 $userId = auth()->id();
                 $data = DB::table('hasilujian')
                     ->select('ujian_id', 'id', 'user_id', 'benar', 'salah', 'nilai')
@@ -281,12 +295,8 @@ class dashcontroller extends Controller
                     }
                     ///////////////////////////////////////////////////////////////////////////////////
                 } else {
-                    // bagian untuk menajalanan sistem misi
-                    //    dd('data tidak ada') ;
                     $ListdataMisi = Misi::all()->first();
                     if ($ListdataMisi->jenis === 'soal') {
-                        // $today = date('Y-m-d');
-                        // dd($sekarang);
                         $dataHistoryUjian = Historyujian::where('waktu', $sekarang)
                             ->where('user_id', $userId)
                             ->get();
@@ -315,7 +325,7 @@ class dashcontroller extends Controller
                     }
                 }
 
-                return view('pengguna.dashboard', compact('userId', 'datalainnya', 'datapengguna', 'totalBenar', 'totalSalah', 'jumlahSoal', 'levelPengguna', 'sisaBagi', 'persentase', 'ListdataMisi', 'pel', 'arrayUjian', 'arrayQuiz', 'arrayLatihan', 'arrayTryout', 'rataUjian', 'rataLatihan', 'rataQuiz', 'rataTryout'));
+                return view('pengguna.dashboard', compact('userId', 'datalainnya', 'datapengguna', 'totalBenar', 'totalSalah', 'jumlahSoal', 'levelPengguna', 'sisaBagi', 'persentase', 'ListdataMisi', 'pel', 'arrayUjian', 'arrayQuiz', 'arrayLatihan', 'arrayTryout', 'rataUjian', 'rataLatihan', 'rataQuiz', 'rataTryout','usersData'));
             } else {
                 return redirect('/Profilepengguna/create');
             }
@@ -326,36 +336,58 @@ class dashcontroller extends Controller
 
     public function peringkat()
     {
+
+        // ->whereHas('users', function ($query) {
+        //     $query->where('role', 'pengguna');
+        // })
         $namepage = 'Dashboard';
         $userId = Auth::id();
         $username = Auth::user()->username;
-        $userDataPeringkat = users::with('datalainnya', 'datapengguna', 'hasilujian', 'level', 'poin')
-        ->where('role', 'pengguna')
-        ->has('datalainnya')
-        ->has('datapengguna')
-        ->has('hasilujian')
-        ->has('level')
-        ->has('poin')
+        $userDataPeringkat = DB::table('level')
+        ->join('users', 'level.user_id', '=', 'users.id')
+        ->join('poinpengguna', 'level.user_id', '=', 'poinpengguna.user_id')
+        ->join('datapengguna', 'level.user_id', '=', 'datapengguna.user_id')
+        ->join('datalainnyas', 'level.user_id', '=', 'datalainnyas.user_id')
+        ->select('level.*', 'users.*', 'poinpengguna.*', 'datapengguna.*', 'datalainnyas.*')
         ->get();
+
+
 
         $hasil = [];
         $nomor = 1;
-        // dd($userDataPeringkat);
-        foreach ($userDataPeringkat as $data) {
-            $benar = $data->hasilujian->benar;
-            $salah = $data->hasilujian->salah;
-            $totalUjian = $benar + $salah;
-            $persentase = ($benar / $totalUjian) * 100;
+        $jumlahBenarPerUser = HasilUjian::select('user_id', \DB::raw('SUM(benar) as totalBenar'))
+        ->groupBy('user_id')
+        ->get();
 
+    $jumlahSalahPerUser = HasilUjian::select('user_id', \DB::raw('SUM(salah) as totalSalah'))
+        ->groupBy('user_id')
+        ->get();
+
+    if (!$jumlahBenarPerUser->isEmpty() && !$jumlahSalahPerUser->isEmpty()) {
+        // Jalankan kode jika $jumlahBenarPerUser dan $jumlahSalahPerUser memiliki nilai atau data
+
+        $hasil = [];
+
+        foreach ($userDataPeringkat as $data) {
+            $totalBenar = $jumlahBenarPerUser->where('user_id', $data->user_id)->first()->totalBenar;
+            $totalSalah = $jumlahSalahPerUser->where('user_id', $data->user_id)->first()->totalSalah;
+            $totalUjian = $totalBenar + $totalSalah;
+            $persentase = ($totalBenar / $totalUjian) * 100;
+
+            // Now you can use $totalBenar in your calculations or display
             $hasil[] = [
                 'no' => 1, // Menggunakan nomor dan kemudian menambahkannya
                 'foto' => 2,
-                'username' => $data->datapengguna->nama,
-                'level' => $data->level->exp / 1200,
+                'username' => $data->username,
+                'level' => $data->exp / 1200,
                 'persentase' => $persentase,
-                'poin' => $data->poin->poin,
+                'poin' => $data->poin,
             ];
         }
+
+        // Lakukan sesuatu dengan $hasil atau tampilkan hasilnya
+    }
+
 
         // Sekarang, $hasil akan berisi nomor (indeks) yang berurutan pada setiap elemen.
 

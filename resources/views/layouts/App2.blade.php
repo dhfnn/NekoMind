@@ -19,6 +19,22 @@
   @include('component.css')
 
   </head>
+  <style>#chat2 .form-control {
+    border-color: transparent;
+    }
+
+    #chat2 .form-control:focus {
+    border-color: transparent;
+    box-shadow: inset 0px 0px 0px 1px transparent;
+    }
+
+    .divider:after,
+    .divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+    }</style>
 
   <body class="g-sidenav-show bg-gray-100">
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
@@ -185,14 +201,23 @@
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog d-flex justify-content-center" style="border: none !important;">
       <div class="modal-content" style="max-width: 300px">
+            <div class="modal-body">
+                <div class="col"><p>Apakah kamu yakin akan keluar ?</p></div>
+                <div class="col d-flex justify-content-end">
+                    <button class="nav-link p-0" type="button" style="background-color:transparent;" class="" data-bs-dismiss="modal">
+                        <span>Kembali</span></button>
+                        <form method="POST" action="/logout">
+                          @csrf
+                          <button class="t-sepd me-3 " type="submit" style="background-color:transparent;">
+                            <span class="nav-link-text">Keluar</span>
+                          </button>
+                      </form>
+                </div>
+            </div>
         <div class="modal-footer" style="border: none !important">
-            <button type="button" style="background-color: #;" class="" data-bs-dismiss="modal">Close</button>
-            <form method="POST" action="/logout">
-              @csrf
-              <button class="nav-link p-0" type="submit" style="display:flex !important;   border:none; background-color: transparent; ">
-                <span class="nav-link-text">Keluar</span>
-              </button>
-          </form>
+
+
+
           </div>
       </div>
     </div>
@@ -202,19 +227,19 @@
 
 <!--   Core JS Files   -->
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 {{-- <script src="{{ asset('assets/js/script.js') }}"></script> --}}
-<script src="../assets/js/core/popper.min.js"></script>
-<script src="../assets/js/core/bootstrap.min.js"></script>
-<script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-<script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-<script src="../assets/js/plugins/chartjs.min.js"></script>
-<script>
-</script>
+<script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
+<script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
+<script src="{{ asset('assets/js/soft-ui-dashboard.js') }}"></script>
+
 <script>document.addEventListener('DOMContentLoaded', function () {
     var queryString = window.location.search;
     var urlParams = new URLSearchParams(queryString);
@@ -264,8 +289,8 @@ document.getElementById("tambahButtonsoal").addEventListener("click", function (
 </script>
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
 @include('component.script')
 
 </body>

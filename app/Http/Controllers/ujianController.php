@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\hasilujian;
+use App\Models\Historyujian;
 use App\Models\soal;
 use App\Models\Ujian;
 use Illuminate\Http\Request;
@@ -53,6 +55,7 @@ class ujianController extends Controller
 
                     // Menghitung berapa banyak ujian_id yang unik
         $jumlahSoal = $data->count();
+        // dd($jumlahSoal);
         $userId = auth()->id();
         $filterkelas = $request->query('kelas');
         $filterjenis = $request->query('jenis');
@@ -122,6 +125,20 @@ class ujianController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $history = Historyujian::where('id' ,$id)->first();
+        $ujian_id = $history->ujian_id;
+        $waktu = $history->waktu;
+
+
+        if (hasilujian::where('ujian_id',$ujian_id)
+                        ->where('waktu' ,$waktu)
+                        ->exists())
+        {
+        hasilujian::where('ujian_id', $ujian_id)->delete();
+        Historyujian::where('id', $id)->delete();
+        }else {
+            Historyujian::where('id', $id)->delete();
+
+        }
     }
 }

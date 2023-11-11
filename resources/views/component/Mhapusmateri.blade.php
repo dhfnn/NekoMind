@@ -13,7 +13,8 @@
             <form action="{{ url('Bab/' .$bab->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button class="text-danger font-weight-bold text-xs" type="submit" data-toggle="tooltip" >Hapus</button>
+                <button class="t-sepd me-3 me-md-0 mt-md-3" type="submit" data-toggle="tooltip" >Hapus</button>
+
             </form>
           </div>
         </div>

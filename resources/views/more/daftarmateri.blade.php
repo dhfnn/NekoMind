@@ -69,7 +69,7 @@
             </td>
             @include('component.Meditpelajaran')
                     <td class="align-middle text-center">
-                        <a href="{{ route('permateri.show', $data->id )}}" class="text-secondary text-xs font-weight-bold">Teks Link</a>
+                        <a href="{{ route('permateri.show', $data->id )}}" class="text-secondary text-xs font-weight-bold">Lihat</a>
 
                         <span class="p-3">
                           <i class="fa-solid fa-caret-right"></i>

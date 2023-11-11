@@ -72,7 +72,7 @@
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                       <div class="table-responsive p-0">
-                        <table class="table  align-items-center justify-content-center mb-0">
+                        <table class="table  align-items-center justify-content-center mb-0" id="datatabelPeringkat">
                           <thead>
                             <tr>
                               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">PENGGUNA</th>
@@ -89,7 +89,7 @@
                               <td>
                                 <div class="d-flex align-items-center px-2">
                                     <span class="text-xs font-weight-bold">{{ $nomor }}</span>
-{{-- 
+{{--
                                   <div class="ms-3">
                                     <img src="../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm rounded-circle me-2" alt="spotify" />
                                   </div> --}}
@@ -136,7 +136,7 @@
                                 <i class="fa-solid fa-caret-right"></i>
                               </td>
                             </tr>
-                            @php $nomor++; @endphp <!-- Menambahkan 1 ke nomor setelah setiap iterasi -->
+
                             @endforeach
 
                           </tbody>
@@ -148,16 +148,9 @@
         </div>
     </div>
 </main>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script>
-    $(document).ready(function () {
-            $('#datatabelPeringkat').DataTable({
-                "order": [[4, 'asc']],
-                "columnDefs": [
-                { "searchable": false, "targets": [3] }, // Kolom yang tidak dapat dicari
-                { "orderable": false, "targets": [1,6] }
-            ]
-            });
-        });
+
     </script>
 
 @endsection

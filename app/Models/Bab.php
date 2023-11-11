@@ -11,7 +11,7 @@ class Bab extends Model
     public $timestamps = false;
 
     protected $table = 'bab';
-    protected $fillable = ['id_pelajaran', 'judul','subab'];
+    protected $fillable = ['id_pelajaran', 'judul','subab','semester'];
 
     public function pelajaran()
     {

@@ -8,7 +8,7 @@
         <div class="form-check dark chm d-none d-md-block" >
             <input class="form-check-input me-1 chm" type="checkbox" value="" id="Focus" >
             <label class="form-check-label mt-1 chm " for="Focus" style="font-size: 12px; color: #009feb; font-weight: 700;" >
-
+SEMBUNYIKAN
             </label>
         </div>
     </div>

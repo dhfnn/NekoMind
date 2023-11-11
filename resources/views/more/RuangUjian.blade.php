@@ -8,7 +8,7 @@
         <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <script src="https://kit.fontawesome.com/9494185896.js" crossorigin="anonymous"></script>
         <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />

@@ -15,5 +15,8 @@ class Historyujian extends Model
     public function ujian(){
         return $this->belongsTo(Ujian::class, 'ujian_id');
     }
+    public function users(){
+        return $this->belongsTo(users::class, 'ujian_id');
+    }
 
 }

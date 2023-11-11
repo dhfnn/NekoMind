@@ -20,6 +20,9 @@ class Datalainnya extends Model
     public function users(){
         return $this->belongsTo(users::class,'user_id');
     }
+    public function poin(){
+        return $this->belongsTo(Poin::class,'user_id');
+    }
 
 
 }

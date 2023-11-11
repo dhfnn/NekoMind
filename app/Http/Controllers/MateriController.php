@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bab;
+use App\Models\Historyujian;
 use App\Models\Kelas;
 use App\Models\Pelajaran;
 use App\Models\soal;
@@ -19,7 +20,7 @@ class MateriController extends Controller
     public function index()
     {
 
-        $namepage = 'Pelajaran';
+        $namepage = 'Materi';
 
         $dataUjian = Ujian::with('soal')->get();
 
@@ -31,7 +32,13 @@ class MateriController extends Controller
                 ->count();
             $kelas->jumlahMateri = $jumlahMateri;
         }
-        return view('admin.pelajaran',compact('namepage','dataKelas','dataUjian'));
+        $history = Historyujian::with('users','ujian')
+        ->has('users')
+        ->has('ujian')
+        ->orderBy('waktu', 'desc')
+        ->get();
+        // dd($history);
+        return view('admin.pelajaran',compact('namepage','dataKelas','dataUjian','history'));
     }
 
     /**

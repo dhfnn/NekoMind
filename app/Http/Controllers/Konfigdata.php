@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chatpengguna;
 use App\Models\Kota;
 use App\Models\users;
 use App\Models\Datalainnya;
@@ -192,17 +193,7 @@ class Konfigdata extends Controller
      */
     public function destroy(string $id)
     {
-        // try {
-        //     DB::beginTransaction();
-        //     Datalainnya::where('user_id', $id)->delete();
-        //     Datapengguna::where('user_id', $id)->delete();
-        //     Users::find($id)->delete();
 
-        //     DB::commit();
-        //     return redirect('data');
-        // } catch (\Exception $e) {
-        //     DB::rollBack();
-        // }
         $data1 =  Users::where('id' , $id)->first();
         $tanggal = now()->setTimezone('Asia/Jakarta')->toDateString();
 
@@ -218,10 +209,27 @@ class Konfigdata extends Controller
                 Level::where('user_id', $id)->delete();
                 Poin::where('user_id', $id)->delete();
                 Datapengguna::where('user_id', $id)->delete();
-                Users::find($id)->delete();
+                if ($data1->role = 'admin') {
+                    Historyadmin::where('user_id', $id)->delete();
+                }else{
+                    dd('anda bukan admin');
+                }
+                Chatpengguna::where('user_id', $id)->delete();
+               $hapus=  Users::find($id)->delete();
+               if ($hapus) {
+                return redirect('data');
+
+               }else{
+                dd('gagal');
+               }
+                }else{
+
+                    dd('halo');
+                }
+
+
             }
-            return view('admin.data');
-    }
+
 }
 
 // $dataUser->delete();

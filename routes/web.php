@@ -8,6 +8,7 @@ use App\Http\Controllers\Konfigdata;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BabController;
+use App\Http\Controllers\Chatgrup;
 use App\Http\Controllers\dashcontroller;
 use App\Http\Controllers\materiPengguna;
 use App\Http\Controllers\quizController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\Profilepengguna;
 use App\Http\Controllers\ujianController;
 use App\Http\Controllers\MateriController;
 use App\Http\Controllers\profilecontroller;
+use App\Models\Chatpengguna;
 
 // use App\Http\Controllers\BabController;
 
@@ -108,6 +110,7 @@ route::middleware(['auth'])->group(function(){
 
 
     Route::middleware(['roleakses:pengguna'])->group(function () {
+
         Route::get('/pengguna/dashboard', [dashcontroller::class, 'dashpengguna'])->name('dashboard-pengguna');
         Route::post('/terimadataTanggal', [dashcontroller::class, 'terimadataTanggal']);
         // halaman materi
@@ -128,9 +131,9 @@ route::middleware(['auth'])->group(function(){
         Route::get('profilepengguna/{userId}/edit', [Profilepengguna::class, 'edit']);
 
         Route::post('/pengguna/profile/tambah',[profilecontroller::class,'tambahdata'])->name('tambahdataprofile');
-
         // Rute-rute pengguna lainnya
     });
+    Route::resource('chatpengguna', Chatgrup::class);
 
     Route::post('/logout',[loregcontroller::class,'logout']);
 });

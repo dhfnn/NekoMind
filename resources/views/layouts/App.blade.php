@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
+
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
     <script src="https://kit.fontawesome.com/9494185896.js" crossorigin="anonymous"></script>
-    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <script src="../assets/js/color-modes.js"></script>
+    {{-- <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="../assets/js/color-modes.js"></script> --}}
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
@@ -93,34 +94,47 @@
 
       <!-- penutupan navbar bagian bawah  -------------------------------------------------------------------------------->
     </header>
-    <body>
+    <>
 
     @yield('main')
     {{-- ini bagian script --}}
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+  <script src="{{ asset('assets/js/script.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+
 let teksArray = ["Sel saraf manusia dapat mengirimkan sinyal dengan kecepatan hingga 120 meter per detik.", "Umurku 18 tahun"];
 let index = 0;
 
 function gantiTeks() {
-  const teksUbah = document.getElementById("teks-ubah");
-  if (teksUbah) {
-    teksUbah.textContent = teksArray[index];
-    index = (index + 1) % teksArray.length;
-    setTimeout(hapusTeks, 10000);
-  }
+const teksUbah = document.getElementById("teks-ubah");
+if (teksUbah) {
+  teksUbah.textContent = teksArray[index];
+  index = (index + 1) % teksArray.length;
+  setTimeout(hapusTeks, 10000);
+}
 }
 
 function hapusTeks() {
-  const teksUbah = document.getElementById("teks-ubah");
-  if (teksUbah) {
-    teksUbah.textContent = '';
-    setTimeout(gantiTeks, 0);
-  }
+const teksUbah = document.getElementById("teks-ubah");
+if (teksUbah) {
+  teksUbah.textContent = '';
+  setTimeout(gantiTeks, 0);
+}
 }
 if (document.getElementById("teks-ubah")) {
-  gantiTeks();
+gantiTeks();
 }
 
 
@@ -128,47 +142,47 @@ if (document.getElementById("teks-ubah")) {
 const ctx = document.getElementById('myChart');
 <?php
 if (isset($rataQuiz)) {
-    ?>
- if (ctx) {
-    new Chart(ctx, {
-    type: 'bar',
-  data: {
-    labels: ['Quiz', 'Latihan', 'Ujian', 'TryOut'],
-    datasets: [{
-      label: 'Rata-Rata Nilai',
-      data: [{{ $rataQuiz }},{{ $rataLatihan }} ,  {{ $rataUjian }}, {{ $rataTryout }}],
-      borderWidth: 1,
-      borderRadius: 5,
-      backgroundColor: '#3b73c5',
-    }
-]
-  },
-  options: {
-    scales: {
-      x: {
-        beginAtZero: true,
-        title: {
-          display: false,
-        },
-        grid: {
-    display: false
+  ?>
+if (ctx) {
+  new Chart(ctx, {
+  type: 'bar',
+data: {
+  labels: ['Quiz', 'Latihan', 'Ujian', 'TryOut'],
+  datasets: [{
+    label: 'Rata-Rata Nilai',
+    data: [{{ $rataQuiz }},{{ $rataLatihan }} ,  {{ $rataUjian }}, {{ $rataTryout }}],
+    borderWidth: 1,
+    borderRadius: 5,
+    backgroundColor: '#3b73c5',
   }
+]
+},
+options: {
+  scales: {
+    x: {
+      beginAtZero: true,
+      title: {
+        display: false,
       },
-      y: {
-        beginAtZero: true,
-        title: {
-          display: false,
-        },
-        ticks: {
-          // display: false,
-          max: 100,
-          stepSize: 25,
-        }
+      grid: {
+  display: false
+}
+    },
+    y: {
+      beginAtZero: true,
+      title: {
+        display: false,
+      },
+      ticks: {
+        // display: false,
+        max: 100,
+        stepSize: 25,
       }
     }
   }
+}
 });
- }
+}
 <?php
 }
 ?>
@@ -178,59 +192,59 @@ const dat = document.getElementById('myChart2');
 
 <?php
 if (isset($arrayQuiz)) {
-    ?>
+  ?>
 
-    new Chart(dat, {
-  type: 'line',
-  data: {
-    labels: ['3', '2', '1', 'Terbaru'],
-    datasets: [{
-      label: 'Quiz',
-      data: {!! json_encode($arrayQuiz) !!},
-      borderColor: '#fe8d00',
-      backgroundColor: '#fe8d00',
-    },{
-      label: 'Latihan',
-      data: {!! json_encode($arrayLatihan) !!},
-      borderColor: '#3b73c5',
-      backgroundColor: '#3b73c5',
-    },{
-      label: 'Ujian',
-      data: {!! json_encode($arrayUjian) !!},
-      borderColor: '#009feb',
-      backgroundColor: '#009feb',
-    },{
-      label: 'TryOut',
-      data: {!! json_encode($arrayTryout) !!},
-      borderColor: '#3b73c5',
-      backgroundColor: '#3b73c5',
-    }
-]
-  },
-  options: {
-    scales: {
-      x: {
-        beginAtZero: true,
-        title: {
-          display: false,
-        },
-        grid: {
-    display: false
+  new Chart(dat, {
+type: 'line',
+data: {
+  labels: ['3', '2', '1', 'Terbaru'],
+  datasets: [{
+    label: 'Quiz',
+    data: {!! json_encode($arrayQuiz) !!},
+    borderColor: '#fe8d00',
+    backgroundColor: '#fe8d00',
+  },{
+    label: 'Latihan',
+    data: {!! json_encode($arrayLatihan) !!},
+    borderColor: '#3b73c5',
+    backgroundColor: '#3b73c5',
+  },{
+    label: 'Ujian',
+    data: {!! json_encode($arrayUjian) !!},
+    borderColor: '#009feb',
+    backgroundColor: '#009feb',
+  },{
+    label: 'TryOut',
+    data: {!! json_encode($arrayTryout) !!},
+    borderColor: '#3b73c5',
+    backgroundColor: '#3b73c5',
   }
+]
+},
+options: {
+  scales: {
+    x: {
+      beginAtZero: true,
+      title: {
+        display: false,
       },
-      y: {
-        beginAtZero: true,
-        title: {
-          display: false,
-        },
-        ticks: {
-          // display: false,
-          max: 100,
-          stepSize: 25,
-        }
+      grid: {
+  display: false
+}
+    },
+    y: {
+      beginAtZero: true,
+      title: {
+        display: false,
+      },
+      ticks: {
+        // display: false,
+        max: 100,
+        stepSize: 25,
       }
     }
   }
+}
 });
 
 <?php
@@ -243,91 +257,45 @@ if (isset($arrayQuiz)) {
 var kelasFilterElement = document.getElementById('kelasFilter');
 
 if (kelasFilterElement) {
-    kelasFilterElement.addEventListener('change', function () {
-        var selectedKelas = this.value;
+  kelasFilterElement.addEventListener('change', function () {
+      var selectedKelas = this.value;
 
-        if (selectedKelas === "") {
-            window.location.href = window.location.materi;
-        } else {
-            // Jika pilihan lain dipilih, maka ubah URL dengan parameter "kelas"
-            window.location.search = `kelas=${selectedKelas}`;
-        }
-    });
+      if (selectedKelas === "") {
+          window.location.href = window.location.materi;
+      } else {
+          // Jika pilihan lain dipilih, maka ubah URL dengan parameter "kelas"
+          window.location.search = `kelas=${selectedKelas}`;
+      }
+  });
 }
 function kirimdataKelas(kelas) {
-  if (kelas) {
-    updateURLParameter('kelas', kelas);
-    var button = document.querySelector(`button[data-kelas="${kelas}"]`);
-    if (button) {
-      button.classList.add("bt-act");
-    }
+if (kelas) {
+  updateURLParameter('kelas', kelas);
+  var button = document.querySelector(`button[data-kelas="${kelas}"]`);
+  if (button) {
+    button.classList.add("bt-act");
   }
 }
-  function redirectToJenis(jenis) {
-    updateURLParameter('jenis', jenis);
+}
+function redirectToJenis(jenis) {
+  updateURLParameter('jenis', jenis);
+}
+
+function updateURLParameter(key, value) {
+  var url = window.location.href;
+  var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+  var separator = url.indexOf('?') !== -1 ? "&" : "?";
+
+  if (url.match(re)) {
+    url = url.replace(re, '$1' + key + "=" + value + '$2');
+  } else {
+    url = url + separator + key + "=" + value;
   }
 
-  function updateURLParameter(key, value) {
-    var url = window.location.href;
-    var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
-    var separator = url.indexOf('?') !== -1 ? "&" : "?";
-
-    if (url.match(re)) {
-      url = url.replace(re, '$1' + key + "=" + value + '$2');
-    } else {
-      url = url + separator + key + "=" + value;
-    }
-
-    window.location.href = url;
-  }
-  function resetURL() {
-      window.location.href = window.location.origin + window.location.pathname;
-  }
-
-
-
-
-
-// function kirimTanggalKeController(tanggalParameter) {
-//     var tanggalSekarang = new Date();
-//     var tahun = tanggalSekarang.getFullYear();
-//     var bulan = tanggalSekarang.getMonth() + 1;
-//     var tanggal = tanggalSekarang.getDate();
-//     var tanggalFormat = tahun + '-' + (bulan < 10 ? '0' : '') + bulan + '-' + (tanggal < 10 ? '0' : '') + tanggal;
-//     $.ajax({
-//         headers: {
-//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//         },
-//         type: 'POST',
-//         url: '/terimadataTanggal', // Ganti dengan URL endpoint controller Anda
-//         data: { tanggal: tanggalFormat },
-//         success: function(response) {
-//             console.log(response.pesan);
-//         },
-//         error: function(xhr, status, error) {
-//             console.error('Terjadi kesalahan: ' + error);
-//         }
-//     });
-// }
-// kirimTanggalKeController(tanggalFormat);
-
-
-
-    </script>
-    </body>
-
-
-    <!-- main  -------------------------------------------------------------------------------->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-</body>
-  <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
-  <script src="{{ asset('assets/js/script.js') }}"></script>
+  window.location.href = url;
+}
+function resetURL() {
+    window.location.href = window.location.origin + window.location.pathname;
+}
+  </script>
   </html>

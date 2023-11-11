@@ -48,15 +48,15 @@
                     <td>
                       <p class="text-xs font-weight-bold mb-0">{{ $data->judul }}</p>
                     </td>
-                    
+
                     {{-- <td>
                       <p class="text-xs font-weight-bold mb-0">{{ $data->isi_materi }}</p>
                     </td> --}}
                     <td class="align-middle text-center">
                       <a href="{{ url('Bab/' .$data->id) }}
                         " class="text-secondary text-xs font-weight-bold">
-                        <span class="">
-                          <i class="fa-solid fa-caret-right"></i>
+                        <span class="py-3 px-4">
+                         <span>Lihat</span> <i class="fa-solid fa-caret-right"></i>
                         </span>
                       </a>
                     </td>

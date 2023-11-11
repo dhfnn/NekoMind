@@ -22,7 +22,18 @@ class Poin extends Model
     }
     public function level()
     {
-        return $this->hasOne(Level::class, 'user_id');
+        return $this->belongsTo(Level::class, 'user_id');
+    }
+    public function datalainnya(){
+        return $this->belongsTo(Datalainnya::class, 'user_id');
+    }
+    public function datapengguna()
+    {
+        return $this->hasOne(Datapengguna::class, 'user_id');
+    }
+    public function hasilujian()
+    {
+        return $this->hasOne(hasilujian::class, 'user_id');
     }
 
 }

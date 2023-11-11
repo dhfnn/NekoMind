@@ -46,10 +46,12 @@ class Permateri extends Controller
             $dataTerakhir = Bab::where('id_pelajaran', $request->id_pelajaran)
                                ->orderBy('subab', 'desc')
                                ->first();
+                               $u = Pelajaran::where('id' ,$request->id_pelajaran)->first();
             $data = [
                 'id_pelajaran' => $request->id_pelajaran,
                 'judul' => $request->judul,
                 'subab' => $request->subab,
+                'semester' => $u->id_semester
             ];
              Bab::create($data);
 
