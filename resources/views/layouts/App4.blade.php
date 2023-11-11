@@ -29,17 +29,15 @@
         <div class="container-fluid pt-3  px-5">
             <div class="col pindah-semester">
                 <div class="row text-center t-semester">
-                    <div class="col py-1 pilih-sa" id="semester1">
-                        <button class="tdn">Semester 1</button>
+                    <div class="col py-1 {{ $ids == 1 ? 'pilih-sa' : 'pilih-s' }}" id="semester1">
+                        <a class="tdn" type="submit">Semester 1</a>
                     </div>
-                    <div class="col py-1 pilih-s" id="semester2">
-                        <button class="tdn">Semester 2</button>
+                    <div class="col py-1 {{ $ids == 2 ? 'pilih-sa' : 'pilih-s' }}" id="semester2">
+                        <a class="tdn" type="submit">Semester 2</a>
                     </div>
                 </div>
             </div>
         </div>
-
-
         </nav>
 
 
@@ -58,9 +56,10 @@
                                     PILIH
                                 </option>
                                 @foreach ($dataBab->sortBy('subab') as $bab)
-                                    <option value="{{ $bab->id }}">
-                                        BAB {{ $bab->subab }} {{ $bab->judul }}
-                                    </option>
+                                <option value="{{ $bab->id }}" {{ $bab->id == $idb ? 'selected' : '' }}>
+                                    BAB {{ $bab->subab }} {{ $bab->judul }}
+                                </option>
+
                                 @endforeach
                             </select>
                         </div>
@@ -79,17 +78,52 @@
 
 
       <script>
-    // Dapatkan elemen select
-    var babDropdown = document.getElementById('babDropdown');
-    babDropdown.addEventListener('change', function() {
-        var selectedValue = babDropdown.value;
-        var id ="{{ $pelajaran->id }}";
-        var newUrl = "{{ url('MateriPengguna') }}?bab=" + selectedValue;
-        window.location.href = newUrl;
-    });
+        document.addEventListener("DOMContentLoaded", function() {
+            // Ambil elemen dropdown BAB
+            var babDropdown = document.getElementById("babDropdown");
 
+            // Ambil elemen-elemen button semester
+            var semester1Button = document.getElementById("semester1");
+            var semester2Button = document.getElementById("semester2");
 
+            // Tambahkan event listener untuk perubahan nilai dropdown BAB
+            babDropdown.addEventListener("change", function() {
+                var selectedBab = babDropdown.value;
+                updateAndReloadUrl('semester', getSelectedSemester(), 'bab', selectedBab);
+            });
+
+            // Tambahkan event listener untuk tombol semester
+            semester1Button.addEventListener("click", function() {
+                updateAndReloadUrl('semester', '1', 'bab', getSelectedBab());
+            });
+
+            semester2Button.addEventListener("click", function() {
+                updateAndReloadUrl('semester', '2', 'bab', getSelectedBab());
+            });
+
+            // Fungsi untuk mendapatkan nilai semester yang terpilih dari URL
+            function getSelectedSemester() {
+                var url = new URL(window.location.href);
+                return url.searchParams.get('semester') || ""; // Mengembalikan nilai kosong jika parameter tidak ada
+            }
+
+            // Fungsi untuk mendapatkan nilai dropdown BAB yang terpilih
+            function getSelectedBab() {
+                return babDropdown.value;
+            }
+
+            // Fungsi untuk memperbarui parameter URL dan me-reload halaman
+            function updateAndReloadUrl(semesterKey, semesterValue, babKey, babValue) {
+                var url = new URL(window.location.href);
+                url.searchParams.set(semesterKey, semesterValue);
+                url.searchParams.set(babKey, babValue);
+                window.history.replaceState({}, '', url);
+                location.reload();
+            }
+        });
     </script>
+
+
     <script src="{{ asset('assets/js/script.js') }}"></script>
 
 

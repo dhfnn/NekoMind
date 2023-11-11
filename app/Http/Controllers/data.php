@@ -6,6 +6,8 @@ use App\Models\Datalainnya;
 use App\Models\Datapengguna;
 use App\Models\Historyadmin;
 use App\Models\Kota;
+use App\Models\Level;
+use App\Models\Poin;
 use App\Models\sekolah;
 use App\Models\users;
 use Illuminate\Http\Request;
@@ -22,15 +24,14 @@ class data extends Controller
 
     public function index(Request $request)
     {
-
-
         $namepage = 'Data';
         $userData = new users;
         if($request->get('cari')){
             $userData = $userData->where('username','LIKE', $request->get('cari'). '%')->orWhere('email','LIKE', $request->get('cari'). '%');
         }
         $userData = $userData->get();
-        return view('admin.data',compact('namepage','userData','request'));
+        $userId = Auth::user()->id;
+        return view('admin.data',compact('namepage','userData','request','userId'));
 
     }
 
@@ -70,6 +71,7 @@ class data extends Controller
         $data['password'] =Hash::make($request->password);
         $data['role']     = $request->role;
         $data['bergabung']= $tanggal;
+        $data['foto']= $data['foto'] = ($request->role === 'admin') ? 'admin' : 'pplvl1';
         $datatambah = users::create($data);
 
         $idadmin = Auth::user()->id;
@@ -80,6 +82,15 @@ class data extends Controller
 
             $data2['tanggal'] = $tanggal;
             Historyadmin::create($data2);
+        }
+        if ($request->role === 'pengguna') {
+            $data1['user_id'] = $datatambah->id;
+            $data1['poin'] = '0';
+            Poin::create($data1);
+
+            $data5['user_id'] = $datatambah->id;
+            $data5['exp'] = '0';
+            Level::create($data5);
         }
 
         return redirect('data');

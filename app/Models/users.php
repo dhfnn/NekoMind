@@ -20,6 +20,7 @@ class users extends Authenticatable
         'role',
         'username',
         'bergabung',
+        'foto'
     ];
     public function getHashedPasswordAttribute()
     {
@@ -53,6 +54,9 @@ class users extends Authenticatable
     }
     public function historyadmin(){
         return $this->hasOne(historyadmin::class, 'user_id');
+    }
+    public function historyujian(){
+        return $this->hasOne(Historyujian::class, 'user_id');
     }
 
 

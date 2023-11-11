@@ -19,6 +19,19 @@ class Level extends Model
     {
         return $this->belongsTo(Poin::class, 'user_id');
     }
+    public function datapengguna()
+    {
+        return $this->belongsTo(Datapengguna::class, 'user_id');
+    }
+    public function hasilujian()
+    {
+        return $this->belongsTo(hasilujian::class, 'user_id');
+    }
+    public function datalainnya()
+    {
+        return $this->belongsTo(Datalainnya::class, 'user_id');
+    }
+
 
 
 }

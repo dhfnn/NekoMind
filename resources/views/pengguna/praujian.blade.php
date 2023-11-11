@@ -14,7 +14,7 @@
     <script src="https://kit.fontawesome.com/9494185896.js" crossorigin="anonymous"></script>
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="../assets/js/color-modes.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
   </head>
   <body style="background-color: #F8F9FA;">
@@ -150,7 +150,16 @@
                  <div class="col col-md-4 col-lg-2 t-mu ">
                   <a href="#mymodal"  class="tdn text-white" data-bs-toggle="modal" data-bs-target="#mymodal">
                   Mulai Ujian
+
                   </a>
+
+                </div>
+                 <div class="col col-md-4 col-lg-2 ">
+                  <a href="#mymodalnilai"  class="tdn  t-mu2"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Lihat nilai
+
+                  </a>
+
                 </div>
                 <div class="modal fade" id="mymodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                   <div class="modal-dialog" style="max-width: 500px;">
@@ -177,15 +186,9 @@
                       </div>
                       <div class="modal-footer px-2 pt-0 py-2" style="border: none;">
                         <div class="col d-flex justify-content-end">
-
-    {{-- <div class="col"  >
-        <button id="ilang" data-bs-dismiss="modal">Mulai Kuis</button>
-      </div> --}}
-
       <a type="button" href="{{ url('Ujian/' .$dataUjian->id) }}" class="col col-md-5 col-lg-3 t-mu tdn" style="border: none;">Masuk</a>
 {{-- </div> --}}
                         </div>
-                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
                       </div>
                     </div>
                   </div>
@@ -195,22 +198,86 @@
             </div>
            </div>
         </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" style="max-width: 500px;">
+                <div class="modal-content">
+                  <div class="modal-header px-3 py-1 pt-2" style="border: none;">
+                    <div class="col" style="position: relative;">
+                      <div class="col text-end" style="position: absolute; top: 0; right: 0; padding: 10px; z-index: 1;">
+                          <a type="button" class="tdn" data-bs-dismiss="modal" aria-label="Close">
+                              <i class="fa-solid fa-xmark fs-4" style="color: #636363;"></i>
+                          </a>
+                      </div>
+                      <div class="col w-100 text-start position-absolute mt-2" style="top: 0; left: 0; z-index: 0;">
+                          <span class="ji-sp" id="staticBackdropLabel">Nilai Ujian</span>
+                      </div>
+                  </div>
+
+                  </div>
+                  <div class="modal-body py-1 mt-5 px-4 " style="text-align: justify;">
+                      <span class="p-sp " style="text-align: justify;">
+                        Hasil perngerjaan yang telah kamu lakukan sebelumnya, kamu mendapatkan nilai sebesar 100 dengan total jawaban benar 10 dan total jawaban salah 0.
+                        Terus tingaktkan kemampuanmu agar menjadi lebih baik lagi !!
+                      </span>
+
+                      <table class="table  align-items-center justify-content-center mb-0" id="datatabelPeringkat mt-3">
+                        <thead>
+                          <tr>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">WAKTU</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">NILAI</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">BENAR</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">SALAH</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                          <tr>
+                            <td>
+                              <div class="d-flex align-items-center px-2">
+                                  <span class="text-xs font-weight-bold"></span>
+                                <div class="my-auto">
+                                  <h6 class="mb-0 text-sm">
+
+
+                                  </h6>
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <p class="text-sm font-weight-bold mb-0">
+
+                              </p>
+                            </td>
+                            <td>
+                              <span class="text-xs font-weight-bold"  style="color: red;"></span>
+                            </td>
+                            <td class="align-middle text-center">
+                              <div class="d-flex align-items-center justify-content-center">
+                                <span class="me-2 text-xs font-weight-bold"></span>
+                                <div>
+                                  <div class="progress">
+                                    <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%"></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                            <td class="align-middle">
+                              <i class="fa-solid fa-caret-right"></i>
+                            </td>
+                          </tr>
+
+
+                        </tbody>
+                      </table>
+                  </div>
+                  </div>
+                </div>
+          </div>
         </div>
     @include('more.quiz')
        </main>
-    {{-- <script src="{{ asset('assets/js/script.js') }}"></script> --}}
-{{-- <script >
-    function mulaiKuis() {
-    var homeElement = document.getElementById("home");
-    var contElement = document.getElementById("cont");
-
-    if (homeElement && contElement) {
-        homeElement.style.display = "block";
-        contElement.style.display = "none";
-    }
-}
-</script> --}}
-
   </body>
   <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

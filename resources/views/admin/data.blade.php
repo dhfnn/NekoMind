@@ -47,10 +47,16 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
-                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1" />
+                        <img src="{{ asset('assets/pp/'  .$user->foto.'.jpg') }}" class="avatar avatar-sm me-3" alt="user1" />
                       </div>
                       <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">{{ $user->username }}</h6>
+                        <h6 class="mb-0 text-sm">@if ($user->id === $userId)
+                            Saya
+
+                        @else
+                            {{ $user->username }}
+                            @endif
+                    </h6>
                       </div>
                     </div>
                   </td>

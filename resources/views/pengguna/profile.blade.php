@@ -83,8 +83,10 @@
 
                     <div class="card-p bg-white pb-3" style="" >
                       <div class="card-header">
-                        <div class="card-cover"></div>
-                        <div class="card-avatar"></div>
+                        <div class="card-cover" style="background-image: url('{{ asset('assets/pp/' . $dataAkun->foto . '.jpg') }}')"></div>
+
+                        <div class="card-avatar" style="background-image: url('{{ asset('assets/pp/' . $dataAkun->foto . '.jpg') }}')"></div>
+
                         <div class="card-fullname">{{ $dataPengguna->nama }}</div>
                         <div class="card-level">Level 12</div>
                       </div>

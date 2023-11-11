@@ -34,6 +34,8 @@ class quizController extends Controller
     public function store(Request $request)
     {
         $tanggal = now()->setTimezone('Asia/Jakarta')->toDateString();
+        // $tanggal = now()->setTimezone('Asia/Jakarta')->format('Y-m-d H');
+
 
         // $hariini = $tanggal;
         $userData = Auth::user();
@@ -46,12 +48,17 @@ class quizController extends Controller
         $data['nilai']= $request->nilai;
 
         $data['waktu']= $tanggal;
-        if (hasilujian::where('user_id', $user_id)->where('waktu' ,$tanggal)->where('ujian_id', $dataUjianid)->first()) {
+        if ($hai = hasilujian::where('user_id', $user_id)->where('waktu' ,$tanggal)->where('ujian_id', $dataUjianid)->first()) {
             $tambahhistory  = Historyujian::create($data);
+            // dd($hai);
         }else{
+            // dd('tidak ada');
             $tambah = hasilujian::create($data);
+            $tambahhistory  = Historyujian::create($data);
+
         }
-        return view('pengguna.soal');
+        return redirect('Soal/' . $dataUjianid);
+
     }
     public function tambahUjian(Request $request){
         $data['judul'] =$request->judul;

@@ -21,7 +21,7 @@
 
               <div class="col d-flex align-items-center px-3 pt-2">
                 <div class="col-3 col-sm-2 bg-white d-flex justify-content-center pt-0 pt-sm-2 ps-sm-2" style="border-radius: 7px">
-                  <div class="rounded-circle gam-p"></div>
+                  <div class="rounded-circle gam-p" style="background-image:url({{ asset('assets/pp/' .$usersData->foto .'.jpg') }}) " ></div>
                 </div>
                 <div class="col-9 col-sm-10 pe-2 pe-sm-4 ps-2 ps-sm-3">
                   <div class="col-12 d-flex justify-content-between align-items-end py-sm-1" style="font-size: 15px; font-weight: 600">

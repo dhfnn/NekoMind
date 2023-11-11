@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bab;
+use App\Models\Chatpengguna;
 use App\Models\MateriModel;
 use App\Models\Pelajaran;
+use App\Models\users;
 use Illuminate\Http\Request;
 
 class materiPengguna extends Controller
@@ -15,6 +17,8 @@ class materiPengguna extends Controller
     public function index(Request $request)
     {
         $userId = auth()->id();
+        $userdata = users::where('id', $userId)->first();
+        $datachat=  Chatpengguna::with('user')->get();
 
         $selectedKelas = $request->input('kelas');
         $semester = '1';
@@ -30,7 +34,7 @@ class materiPengguna extends Controller
         }
         $dataUTBK = $dataUTBK->get();
 
-        return view('pengguna.materi', compact('dataPelajaran', 'userId', 'dataUTBK'));
+        return view('pengguna.materi', compact('dataPelajaran', 'userId', 'dataUTBK','datachat', 'userdata'));
     }
 
 
@@ -56,27 +60,28 @@ class materiPengguna extends Controller
      */
     public function show(Request $request, string $id)
     {
-        // Ambil ID bab yang dipilih dari query string
-        $selectedBab = $request->input('bab');
+        $idb = $request->input('bab');
+        $ids = $request->input('semester');
 
-        // Inisialisasi variabel $idBab
-        $idBab = null;
+if (empty($ids)) {
+    $ids = 1;
+}
 
-        // Jika ada ID bab yang dipilih, gunakan ID tersebut
-        if ($selectedBab) {
-            $idBab = $selectedBab;
-        }
+if ($ids == 1) {
+    $pelajaran = Pelajaran::where('id', $id)->where('id_semester', $ids)->first();
+    $dataBab = Bab::where('id_pelajaran', $id)->get();
+    // dd($dataBab);
 
+}
 
-        // Ambil data materi sesuai dengan ID bab yang dipilih
-        $materi = MateriModel::where('id_bab', $idBab)->first();
-
-        // Ambil data pelajaran
-        $pelajaran = Pelajaran::where('id', $id)->first();
-
-        // Ambil data daftar bab yang mungkin digunakan dalam tampilan
-        $dataBab = Bab::where('id_pelajaran', $id)->get();
-        return  view('pengguna.materi-isi', compact('pelajaran','dataBab','materi','idBab'));
+if ($ids == 2) {
+    $u = Pelajaran::where('id', $id)->where('id_semester', '1')->first();
+    $pelajaran = Pelajaran::where('namapelajaran', $u->namapelajaran)->where('id_kelas', $u->id_kelas)->where('id_semester', '2')->first();
+    $idp = $pelajaran->id;
+    $dataBab = Bab::where('id_pelajaran', $idp)->get();
+}
+    $materi = MateriModel::where('id_bab' ,$idb)->first();
+        return  view('pengguna.materi-isi', compact('pelajaran','dataBab','materi', 'idb','ids'));
     }
 
     /**

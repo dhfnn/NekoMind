@@ -5,8 +5,8 @@
 @endsection
 <main class="" style="background-color: #F8F9FA;">
     <div class="container py-4">
-      <div class="col mt-5">
-        <div class="col-12 pb-2 pb-md-5">
+      <div class="row mt-5">
+        <div class="col-8 pb-2 pb-md-5">
           <div class="d-flex justify-content-between pt-4 pe-1">
             <h4 class="fs-5" style="color: #4e4e4e; font-weight: bold">Materi Pelajaran</h4>
             <select
@@ -53,6 +53,68 @@
 
             </div>
           </div>
+        </div>
+        <div class="col-4">
+                <div class="container " style="border-radius: 15px; ">
+
+                  <div class="row d-flex justify-content-center">
+                    <div class="col">
+
+                      <div class="card" id="chat2" style="box-shadow: 0 20px 37px 0 rgba(0, 0, 0, 0.05)">
+                        <div class=" d-flex justify-content-between align-items-center p-3">
+                          <h5 class="mb-0">Diskusi Bersama</h5>
+                        </div>
+                        <div class="card-body" data-mdb-perfect-scrollbar="true" style="position: relative; height: 400px; overflow-y: auto;">
+
+                            @foreach ($datachat as $item)
+                            @if ($item->user->id === $userId)
+                            <div class="d-flex flex-row justify-content-end mb-4 pt-1">
+                                <div>
+                                  <p class="small me-3 mb-0 rounded-3 text-muted d-flex justify-content-end">{{ $item->user->username === $userdata->username ? 'Saya' : '' }}
+                                </p>
+                                <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">{{ $item->pesan }}</p>
+                              </div>
+                              <img src="{{ asset('assets/pp/' .$item->user->foto .'.jpg') }} "
+                                alt="avatar 1" style="width: 45px; height: 100%;" class="rounded-circle">
+                            </div>
+                            @else
+
+                            <div class="d-flex flex-row mb-3 justify-content-start">
+                                <img src="{{ asset('assets/pp/' .$item->user->foto .'.jpg') }} " class="rounded-circle"
+                                alt="avatar 1" style="width: 45px; height: 100%;">
+                                <div>
+                                    <p class="small ms-3 mb-0 rounded-3 text-muted">{{ $item->user->username }}</p>
+                              <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;">{{ $item->pesan }}</p>
+
+                                </div>
+                            </div>
+                            @endif
+                        @endforeach
+
+
+
+
+
+
+                        </div>
+                        <div class="card-footer bg-white text-muted d-flex justify-content-start align-items-start p-3">
+                          <img class="rounded-circle" src="{{ asset('assets/pp/' .$userdata->foto. '.jpg') }}"
+                            alt="avatar 3" style="width: 40px; height: 100%;">
+                            <form class="d-flex" action="{{ url('chatpengguna') }}" method="POST">
+                            @csrf
+                          <input type="text" class="form-control form-control-lg" name="pesan" id="exampleFormControlInput1"
+                            placeholder="Masukan pesan">
+
+                          <button class="ms-3" type="submit" style="border: none; background:white;"><i class="fas fa-paper-plane" style="color: blue"></i></button>
+                        </form>
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
         </div>
       </div>
     </div>
