@@ -191,7 +191,7 @@
                           @endif
                       @endforeach
                       </div>
-                      <div class="card-footer bg-white text-muted d-flex justify-content-start align-items-start p-3">
+                      <div class="card-footer bg-white text-muted d-flex justify-content-start align-items-start px-3">
                         <img class="rounded-circle" src="{{ asset('assets/pp/' .$userdata->foto. '.jpg') }}"
                           alt="avatar 3" style="width: 40px; height: 100%;">
                           <form class="d-flex" action="{{ url('chatpengguna') }}" method="POST">

@@ -632,6 +632,13 @@ body {
     background-position: center;
     background-repeat: no-repeat;
   }
+.gam-p2 {
+    width: 50px;
+    height: 55px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 
 .dp {
   width: 100%;
@@ -2290,6 +2297,10 @@ font-weight: 600;
   .gam-p {
     width: 65px;
     height:65px;
+  }
+  .gam-p2 {
+    width: 45px;
+    height:45px;
   }
   .card-p {
     /* width: 340px; */

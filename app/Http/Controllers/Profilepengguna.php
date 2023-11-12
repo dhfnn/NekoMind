@@ -6,6 +6,7 @@ use App\Models\Kota;
 use App\Models\users;
 use App\Models\Datalainnya;
 use App\Models\Datapengguna;
+use App\Models\Level;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,13 +21,16 @@ class profilepengguna extends Controller
         $userId = auth()->id(); // Mendapatkan user_id pengguna yang login.
 
         // Mengambil data pengguna berdasarkan user_id.
+        $level = Level::where('user_id', $userId)->first();
+        $levelpengguna = $level->exp/1200;
         $dataAkun = users::where('id',$userId)->first();
+        $foto = $dataAkun->foto;
         $dataPengguna = Datapengguna::where('user_id', $userId)->first();
         $dataLainnya = Datalainnya::where('user_id', $userId)->first();
 
         // return $dataPengguna;
         $namepage = 'Profile'; // Menginisialisasi variabel $namepage dengan nilai 'Profile'
-        return view('pengguna.profile', compact('namepage','dataPengguna','dataLainnya', 'dataAkun','userId'));
+        return view('pengguna.profile', compact('namepage','dataPengguna','dataLainnya', 'dataAkun','userId','levelpengguna','foto'));
 
     }
 

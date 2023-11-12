@@ -24,5 +24,8 @@ class profilecontroller extends Controller
     function isidata(){
         return view('more.tambahdata');
     }
+    function edit(){
+        dd('hai');
+    }
 
 }

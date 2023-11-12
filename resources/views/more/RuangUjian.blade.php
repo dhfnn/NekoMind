@@ -97,8 +97,7 @@
                         </div>
                     </div>
                     <div class="col d-flex justify-content-end m-3">
-                        <div class="  justify-content-center align-items-center me-2" id="tombolKembali"  ></div>
-                        <!-- <div class="d-flex align-items-center px-2">1</div> -->
+                        <div class="tnp" id="tombolKembali"><i class="fa-solid fa-angle-left text-white"></i></div>
                         <div class="tnp" id="tombolLanjut"><i class="fa-solid fa-angle-right text-white"></i></div>
                     </div>
                 </div>

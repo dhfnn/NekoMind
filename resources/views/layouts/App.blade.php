@@ -94,7 +94,6 @@
 
       <!-- penutupan navbar bagian bawah  -------------------------------------------------------------------------------->
     </header>
-    <>
 
     @yield('main')
     {{-- ini bagian script --}}
