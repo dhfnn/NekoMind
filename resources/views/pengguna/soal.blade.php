@@ -80,7 +80,7 @@
                     <button class="btn-os p-sm-1 px-sm-3 me-1 {{ request()->is('Soal*') && !request()->has('jenis') ? 'btn-act' : '' }}" onclick="resetURL()">Semua</button>
 
                     <button class="btn-os p-sm-1 px-sm-3 me-1 {{ $filterjenis === 'QUIZ' ? 'btn-act' : '' }}" onclick="redirectToJenis('QUIZ')">Quiz</button>
-                    <button class="btn-os p-sm-1 px-sm-3 me-1 {{ $filterjenis === 'LATIHAN' ? 'btn-act' : '' }}" onclick="redirectToJenis('LATIHAN')">Latihan soal</button>
+                    <button class="btn-os p-sm-1 px-sm-3 me-1 {{ $filterjenis === 'LATIHAN' ? 'btn-act' : '' }}" onclick="redirectToJenis('LATIHAN')">Latihan</button>
 
                     <button class="btn-os p-sm-1 px-sm-3 me-1 {{ $filterjenis === 'UJIAN' ? 'btn-act' : '' }}" onclick="redirectToJenis('UJIAN')">Ujian</button>
                     <button class="btn-os p-sm-1 px-sm-3 me-1 {{ $filterjenis === 'TRYOUT' ? 'btn-act' : '' }}" onclick="redirectToJenis('TRYOUT')">Try Out</button>

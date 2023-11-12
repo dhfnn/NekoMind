@@ -4,9 +4,9 @@
 
 @endsection
 <main class="" style="background-color: #F8F9FA;">
-    <div class="container py-4">
+    <div class="container-fluid py-4 px-5">
       <div class="row mt-5">
-        <div class="col-8 pb-2 pb-md-5">
+        <div class="col pb-2 pb-md-5">
           <div class="d-flex justify-content-between pt-4 pe-1">
             <h4 class="fs-5" style="color: #4e4e4e; font-weight: bold">Materi Pelajaran</h4>
             <select
@@ -54,7 +54,7 @@
             </div>
           </div>
         </div>
-        <div class="col-4">
+        <div class="col-12 col-xl-4">
                 <div class="container " style="border-radius: 15px; ">
 
                   <div class="row d-flex justify-content-center">
@@ -97,10 +97,10 @@
 
 
                         </div>
-                        <div class="card-footer bg-white text-muted d-flex justify-content-start align-items-start p-3">
+                        <div class="card-footer bg-white text-muted d-flex justify-content-start align-items-start px-3">
                           <img class="rounded-circle" src="{{ asset('assets/pp/' .$userdata->foto. '.jpg') }}"
                             alt="avatar 3" style="width: 40px; height: 100%;">
-                            <form class="d-flex" action="{{ url('chatpengguna') }}" method="POST">
+                            <form class="d-flex w-100" action="{{ url('chatpengguna') }}" method="POST">
                             @csrf
                           <input type="text" class="form-control form-control-lg" name="pesan" id="exampleFormControlInput1"
                             placeholder="Masukan pesan">

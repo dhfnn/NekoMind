@@ -89,6 +89,7 @@ class dashcontroller extends Controller
                 ->whereHas('ujian', function ($query) {
                     $query->where('jenis', 'QUIZ');
                 })
+                ->orderBy('waktu' ,'desc')
                 ->take(4)
                 ->get();
             $jumlahQuiz = count($quizTerbaru);
@@ -100,12 +101,16 @@ class dashcontroller extends Controller
             } else {
                 $arrayQuiz = [];
             }
+            // dd($arrayQuiz);
+
+            // dd($arrayQuiz);
 
             $latihanTerbaru = Historyujian::with('ujian')
                 ->where('user_id', $userId)
                 ->whereHas('ujian', function ($query) {
                     $query->where('jenis', 'LATIHAN');
                 })
+                ->orderBy('waktu' ,'desc')
                 ->take(4)
                 ->get();
             $jumlahLatihan = count($latihanTerbaru);
@@ -120,17 +125,23 @@ class dashcontroller extends Controller
             }
 
             $tryoutTerbaru = Historyujian::with('ujian')
-                ->where('user_id', $userId)
-                ->whereHas('ujian', function ($query) {
-                    $query->where('jenis', 'TRYOUT');
-                })
-                ->take(4)
-                ->get();
-            if (!$tryoutTerbaru->isEmpty()) {
-                $arrayTryout = [$tryoutTerbaru[0]->nilai, $tryoutTerbaru[1]->nilai, $tryoutTerbaru[2]->nilai, $tryoutTerbaru[3]->nilai];
-            } else {
-                $arrayTryout = [];
+            ->where('user_id', $userId)
+            ->whereHas('ujian', function ($query) {
+                $query->where('jenis', 'TRYOUT');
+            })
+            ->orderBy('waktu' ,'desc')
+            ->take(4)
+            ->get();
+        $jumlahTryout = count($tryoutTerbaru);
+        // dd($jumlahTryout);
+        $arrayTryout = [];
+        if (!$tryoutTerbaru->isEmpty()) {
+            for ($i = 0; $i < $jumlahTryout; $i++) {
+                $arrayTryout[] = $tryoutTerbaru[$i]->nilai;
             }
+        } else {
+            $arrayLatihan = [];
+        }
 
             $ujianRata = Historyujian::with('ujian')
                 ->where('user_id', $userId)
@@ -340,6 +351,20 @@ class dashcontroller extends Controller
         // ->whereHas('users', function ($query) {
         //     $query->where('role', 'pengguna');
         // })
+        $userId = Auth::user()->id;
+        $level = Level::where('user_id', $userId)->first();
+        $exp = $level->exp;
+        $expLevel = $exp / 1200;
+        $sisaBagi = $exp % 1200;
+        if ($sisaBagi !== 0) {
+            $persentase = ($sisaBagi / 1200) * 100;
+        } else {
+            $persentase = 0;
+        }
+        $levelPengguna = number_format($expLevel);
+    $datapengguna = datapengguna::where('user_id', $userId)->first();
+        $usersData =users::where('id', $userId)->first();
+
         $namepage = 'Dashboard';
         $userId = Auth::id();
         $username = Auth::user()->username;
@@ -350,9 +375,13 @@ class dashcontroller extends Controller
         ->join('datalainnyas', 'level.user_id', '=', 'datalainnyas.user_id')
         ->select('level.*', 'users.*', 'poinpengguna.*', 'datapengguna.*', 'datalainnyas.*')
         ->get();
-
-
-
+        $urutan = -1;
+foreach ($userDataPeringkat as $index => $user) {
+    if ($user->user_id == $userId) {
+        $urutan = $index + 1; // Karena indeks dimulai dari 0
+        break;
+    }
+}
         $hasil = [];
         $nomor = 1;
         $jumlahBenarPerUser = HasilUjian::select('user_id', \DB::raw('SUM(benar) as totalBenar'))
@@ -367,22 +396,46 @@ class dashcontroller extends Controller
         // Jalankan kode jika $jumlahBenarPerUser dan $jumlahSalahPerUser memiliki nilai atau data
 
         $hasil = [];
-
+// dd($userDataPeringkat);
         foreach ($userDataPeringkat as $data) {
             $totalBenar = $jumlahBenarPerUser->where('user_id', $data->user_id)->first()->totalBenar;
             $totalSalah = $jumlahSalahPerUser->where('user_id', $data->user_id)->first()->totalSalah;
             $totalUjian = $totalBenar + $totalSalah;
             $persentase = ($totalBenar / $totalUjian) * 100;
+            $pelajaranfavArray = explode(' ', $data->pelajaranfav); // Ubah spasi sesuai dengan pemisah yang sesuai
+ // Ambil kata pertama// Ubah spasi sesuai dengan pemisah yang sesuai
+            $satu = $pelajaranfavArray[0];
+            $dua = $pelajaranfavArray[1];
+            $tiga = $pelajaranfavArray[2];
+            $empat = $pelajaranfavArray[3];
+ $satuKataTanpaKoma = trim($satu, ',');
+ $duaKataTanpaKoma = trim($dua, ',');
+ $tigaKataTanpaKoma = trim($tiga, ',');
+ $empatKataTanpaKoma = trim($empat, ',');
+
 
             // Now you can use $totalBenar in your calculations or display
             $hasil[] = [
                 'no' => 1, // Menggunakan nomor dan kemudian menambahkannya
-                'foto' => 2,
+                'foto' => $data->foto,
                 'username' => $data->username,
                 'level' => $data->exp / 1200,
                 'persentase' => $persentase,
                 'poin' => $data->poin,
+                'nama' => $data->nama,
+                'namasekolah' => $data->namasekolah,
+                'jeniskelamin'=>$data->jeniskelamin,
+                'kelas'=>$data->kelas,
+                'jurusan'=>$data->jurusan,
+                'target'=>$data->target,
+                'motto'=>$data->motto,
+                'pel1' =>$satuKataTanpaKoma,
+                'pel2' =>$duaKataTanpaKoma,
+                'pel3' =>$tigaKataTanpaKoma,
+                'pel4' =>$empatKataTanpaKoma
             ];
+            // dd($hasil);
+
         }
 
         // Lakukan sesuatu dengan $hasil atau tampilkan hasilnya
@@ -391,7 +444,7 @@ class dashcontroller extends Controller
 
         // Sekarang, $hasil akan berisi nomor (indeks) yang berurutan pada setiap elemen.
 
-        return view('pengguna.peringkat', compact('namepage', 'userId', 'hasil', 'username'));
+        return view('pengguna.peringkat', compact('namepage', 'userId', 'hasil', 'username','usersData','datapengguna' ,'level' ,'exp', 'expLevel','sisaBagi','levelPengguna','persentase','urutan'));
     }
 
     public function getDataPeringkat()

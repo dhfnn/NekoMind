@@ -12,7 +12,7 @@
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="../assets/js/color-modes.js"></script>
   </head>
-  <body>
+  <body style="background-color: #F8F9FA;">
     <header class="position-fixed fixed-top d-md-flex justify-content">
       <!-- navbar bagian bawah  -------------------------------------------------------------------------------->
       <div class="navbar navbar-multi d-md-none pb-2 px-4">
@@ -46,7 +46,7 @@
     </header>
 
     <!-- dashboard  -------------------------------------------------------------------------------->
-    <main style="background-color: #F8F9FA;">
+    <main style="">
       <div class="container-fluid px-3 px-sm-5 py-1">
         <nav class="navbar navbar-light navbar-expand-md d-flex justify-content-between align-items-center">
           <div class="container-fluid" style="display: flex !important; align-items: center !   ;">
@@ -103,14 +103,183 @@
                             Motto
                           </div>
                           <p class="card-desc2">
-                            {{-- Kalau bisa Satu kenapa harus Satu --}}
                             {{ $dataLainnya->motto}}
                           </p>
                         </div>
-                        <!-- ini bagian kontak -->
                       </div>
                     </div>
-                    <!-- <div class="col text-">hai</div> -->
+                    <div class="col d-flex justify-content-start">
+                        <button class="mt-3" style="border-radius:10px; background: white; border:none;box-shadow:0 10px 27px 0 rgba(0, 0, 0, 0.05);" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            <i class="fa-solid fa-rotate" style="color: #4e4e4e;"></i><span class="title-dp ms-1">Ganti Foto</span></button>
+                    </div>
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="col">
+                                    <div class="col d-flex justify-content-between">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Ganti Foto</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="row  px-3  row-cols-2">
+                                        <form action="{{ url('foto/' .$dataAkun->id  ) }}" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                        <div class="col p-2 px-4 mt-2 d-flex justify-content-between align-items-center" style="border-radius:10px; box-shadow:0 10px 27px 0 rgba(0, 0, 0, 0.075);">
+                                                <img class="rounded-circle" height="50px" src="{{ asset('assets/pp/pplvl1.jpg') }}" alt="">
+
+                                            <div class="">
+                                                @if ($dataAkun->foto == 'pplvl1')
+                                                <span>Dipilih</span>
+                                            @else
+                                                @if ($levelpengguna > 1)
+                                                    <button class="btn-os fw-bolder ms-3 p-1 px-3">Pilih</button>
+                                                    <input type="hidden" name="foto" value="pplvl1">
+                                                @else
+                                                    <span style="color: #7a7a7a">Level 1 <i class="fa-solid fa-lock"></i></span>
+                                                @endif
+                                            @endif
+
+                                                <input type="hidden" name="foto" value="pplvl1">
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <form action="{{ url('foto/' .$dataAkun->id  ) }}" method="post">
+                                        @method('PUT')
+                                        @csrf
+                                        <div class="col p-2 px-4 mt-2 d-flex justify-content-between align-items-center" style="border-radius:10px; box-shadow:0 10px 27px 0 rgba(0, 0, 0, 0.075);">
+                                            <img class="rounded-circle" height="50px" src="{{ asset('assets/pp/pplvl2.jpg') }}" alt="">
+
+                                        <div class="">
+                                          @if ($dataAkun->foto == 'pplvl2')
+                                              <span>Dipilih</span>
+                                          @else
+                                                @if ($levelpengguna > 2)
+                                                <button class="btn-os fw-bolder ms-3 p-1 px-3">Pilih</button>
+                                                <input type="hidden" name="foto" value="pplvl2">
+                                            @else
+                                            <span style="color: #7a7a7a">Level 2 <i class="fa-solid fa-lock"></i></span>
+                                                @endif
+                                          @endif
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                                <form action="{{ url('foto/' .$dataAkun->id  ) }}" method="post">
+                                    @method('PUT')
+                                    @csrf
+                                        <div class="col p-2 px-4 mt-2 d-flex justify-content-between align-items-center" style="border-radius:10px; box-shadow:0 10px 27px 0 rgba(0, 0, 0, 0.075);">
+                                            <img class="rounded-circle" height="50px" src="{{ asset('assets/pp/pplvl5.jpg') }}" alt="">
+
+                                        <div class="">
+                                            @if ($dataAkun->foto == 'pplvl5')
+                                            <span>Dipilih</span>
+                                        @else
+                                            @if ($levelpengguna > 5)
+                                                <button class="btn-os fw-bolder ms-3 p-1 px-3">Pilih</button>
+                                                <input type="hidden" name="foto" value="pplvl5">
+                                            @else
+                                                <span style="color: #7a7a7a">Level 5 <i class="fa-solid fa-lock"></i></span>
+                                            @endif
+                                        @endif
+
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <form action="{{ url('foto/' .$dataAkun->id  ) }}" method="post">
+                                    @method('PUT')
+                                    @csrf
+                                        <div class="col p-2 px-4 mt-2 d-flex justify-content-between align-items-center" style="border-radius:10px; box-shadow:0 10px 27px 0 rgba(0, 0, 0, 0.075);">
+                                            <img class="rounded-circle" height="50px" src="{{ asset('assets/pp/pplvl10.jpg') }}" alt="">
+
+                                        <div class="">
+                                            @if ($dataAkun->foto == 'pplvl10')
+                                            <span>Dipilih</span>
+                                        @else
+                                            @if ($levelpengguna > 10)
+                                                <button class="btn-os fw-bolder ms-3 p-1 px-3">Pilih</button>
+                                                <input type="hidden" name="foto" value="pplvl10">
+                                            @else
+                                                <span style="color: #7a7a7a">Level 10 <i class="fa-solid fa-lock"></i></span>
+                                            @endif
+                                        @endif
+
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <form action="{{ url('foto/' .$dataAkun->id  ) }}" method="post">
+                                    @method('PUT')
+                                    @csrf
+                                        <div class="col p-2 px-4 mt-2 d-flex justify-content-between align-items-center" style="border-radius:10px; box-shadow:0 10px 27px 0 rgba(0, 0, 0, 0.075);">
+                                            <img class="rounded-circle" height="50px" src="{{ asset('assets/pp/pplvl12.jpg') }}" alt="">
+
+                                        <div class="">
+                                            @if ($dataAkun->foto == 'pplvl12')
+                                            <span>Dipilih</span>
+                                        @else
+                                            @if ($levelpengguna > 12)
+                                                <button class="btn-os fw-bolder ms-3 p-1 px-3">Pilih</button>
+                                                <input type="hidden" name="foto" value="pplvl12">
+                                            @else
+                                                <span style="color: #7a7a7a">Level 12 <i class="fa-solid fa-lock"></i></span>
+                                            @endif
+                                        @endif
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <form action="{{ url('foto/' .$dataAkun->id  ) }}" method="post">
+                                    @method('PUT')
+                                    @csrf
+                                        <div class="col p-2 px-4 mt-2 d-flex justify-content-between align-items-center" style="border-radius:10px; box-shadow:0 10px 27px 0 rgba(0, 0, 0, 0.075);">
+                                            <img class="rounded-circle" height="50px" src="{{ asset('assets/pp/pplvl15.jpg') }}" alt="">
+
+                                        <div class="">
+                                            @if ($dataAkun->foto == 'pplvl15')
+                                            <span>Dipilih</span>
+                                        @else
+                                            @if ($levelpengguna > 15)
+                                                <button class="btn-os fw-bolder ms-3 p-1 px-3">Pilih</button>
+                                                <input type="hidden" name="foto" value="pplvl15">
+                                            @else
+                                                <span style="color: #7a7a7a">Level 15 <i class="fa-solid fa-lock"></i></span>
+                                            @endif
+                                        @endif
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                                <form action="{{ url('foto/' .$dataAkun->id  ) }}" method="post">
+                                    @method('PUT')
+                                    @csrf
+                                        <div class="col p-2 px-4 mt-2 d-flex justify-content-between align-items-center" style="border-radius:10px; box-shadow:0 10px 27px 0 rgba(0, 0, 0, 0.075);">
+                                            <img class="rounded-circle" height="50px" src="{{ asset('assets/pp/pplvl20.jpg') }}" alt="">
+
+                                        <div class="">
+                                            @if ($dataAkun->foto == 'pplvl20')
+                                            <span>Dipilih</span>
+                                        @else
+                                            @if ($levelpengguna > 20)
+                                                <button class="btn-os fw-bolder ms-3 p-1 px-3">Pilih</button>
+                                                <input type="hidden" name="foto" value="pplvl20">
+                                            @else
+                                                <span style="color: #7a7a7a">Level 20 <i class="fa-solid fa-lock"></i></span>
+                                            @endif
+                                        @endif
+                                        </div>
+                                    </div>
+                                </form>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                 </div>
 
 

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BabController;
 use App\Http\Controllers\Chatgrup;
 use App\Http\Controllers\dashcontroller;
+use App\Http\Controllers\foto;
 use App\Http\Controllers\materiPengguna;
 use App\Http\Controllers\quizController;
 use App\Http\Controllers\soalController;
@@ -110,11 +111,11 @@ route::middleware(['auth'])->group(function(){
 
 
     Route::middleware(['roleakses:pengguna'])->group(function () {
-
         Route::get('/pengguna/dashboard', [dashcontroller::class, 'dashpengguna'])->name('dashboard-pengguna');
         Route::post('/terimadataTanggal', [dashcontroller::class, 'terimadataTanggal']);
         // halaman materi
         Route::resource('MateriPengguna', materiPengguna::class);
+        Route::resource('foto', foto::class);
         // halaman soal
         Route::get('/peringkat' ,[dashcontroller::class , 'peringkat'])->name('peringkat');
         Route::get('/ambilDataPeringkat', [dashcontroller::class, 'getDataPeringkat'])->name('ambilData.peringkat');
