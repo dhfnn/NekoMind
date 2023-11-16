@@ -19,6 +19,7 @@ use App\Models\Historyadmin;
 use App\Models\Historyujian;
 use Illuminate\Http\Request;
 use App\Models\Historytambahpoin;
+use App\Models\Materibaca;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,7 +28,6 @@ class dashcontroller extends Controller
     function dashadmin()
     {
         $userId = auth()->id();
-
         $datachat=  Chatpengguna::with('user')->get();
         $userdata = users::where('id', $userId)->first();
         // dd($userdata);
@@ -52,6 +52,67 @@ class dashcontroller extends Controller
         return view('admin.dashboard', compact('namepage', 'jumlahPengguna', 'jumlahUjian', 'jumlahMateri', 'dataLevel', 'dataAdmin','datachat','userdata','userId'));
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // function dashpengguna(){
     //     return view('pengguna.dashboard');
     // }
@@ -65,6 +126,8 @@ class dashcontroller extends Controller
     {
         if (Auth::check()) {
             $userId = Auth::user()->id;
+        $jumlahBaca = Materibaca::where('user_id', $userId)->count();
+
             $usersData =users::where('id', $userId)->first();
             $ujianTerbaru = Historyujian::with('ujian')
                 ->where('user_id', $userId)
@@ -336,7 +399,7 @@ class dashcontroller extends Controller
                     }
                 }
 
-                return view('pengguna.dashboard', compact('userId', 'datalainnya', 'datapengguna', 'totalBenar', 'totalSalah', 'jumlahSoal', 'levelPengguna', 'sisaBagi', 'persentase', 'ListdataMisi', 'pel', 'arrayUjian', 'arrayQuiz', 'arrayLatihan', 'arrayTryout', 'rataUjian', 'rataLatihan', 'rataQuiz', 'rataTryout','usersData'));
+                return view('pengguna.dashboard', compact('userId', 'datalainnya', 'datapengguna', 'totalBenar', 'totalSalah', 'jumlahSoal', 'levelPengguna', 'sisaBagi', 'persentase', 'ListdataMisi', 'pel', 'arrayUjian', 'arrayQuiz', 'arrayLatihan', 'arrayTryout', 'rataUjian', 'rataLatihan', 'rataQuiz', 'rataTryout','usersData','jumlahBaca'));
             } else {
                 return redirect('/Profilepengguna/create');
             }
@@ -388,6 +451,7 @@ foreach ($userDataPeringkat as $index => $user) {
         $jumlahBenarPerUser = HasilUjian::select('user_id', \DB::raw('SUM(benar) as totalBenar'))
         ->groupBy('user_id')
         ->get();
+        // dd($jumlahBenarPerUser);
     $jumlahSalahPerUser = HasilUjian::select('user_id', \DB::raw('SUM(salah) as totalSalah'))
         ->groupBy('user_id')
         ->get();
@@ -404,7 +468,7 @@ foreach ($userDataPeringkat as $index => $user) {
         foreach ($userDataPeringkat as $data) {
                 //             $totalBenar = '1';
                 // $totalSalah = '2';
-                                    $benarData = $jumlahBenarPerUser->where('user_id', '21')->first();
+                                    $benarData = $jumlahBenarPerUser->where('user_id',)->first();
 
 
                     $salahData = $jumlahSalahPerUser->where('user_id', $data->user_id)->first();
@@ -412,9 +476,6 @@ foreach ($userDataPeringkat as $index => $user) {
                     if ($benarData && $salahData) {
                         $totalBenar = $benarData->totalBenar;
                         $totalSalah = $salahData->totalSalah;
-
-                        // Your existing code for calculations
-
 
                     }
             $totalUjian = $totalBenar + $totalSalah;

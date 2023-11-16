@@ -9,7 +9,11 @@ use App\Models\Datalainnya;
 use App\Models\Datapengguna;
 use App\Models\hasilujian;
 use App\Models\Historyadmin;
+use App\Models\HistoryMisi;
+use App\Models\Historytambahpoin;
+use App\Models\Historyujian;
 use App\Models\Level;
+use App\Models\Materibaca;
 use App\Models\Poin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -209,6 +213,10 @@ class Konfigdata extends Controller
                 Level::where('user_id', $id)->delete();
                 Poin::where('user_id', $id)->delete();
                 Datapengguna::where('user_id', $id)->delete();
+                Materibaca::where('user_id' ,$id)->delete();
+                HistoryMisi::where('user_id', $id)->delete();
+                Historytambahpoin::where('user_id', $id)->delete();
+                Historyujian::where('user_id', $id)->delete();
                 if ($data1->role = 'admin') {
                     Historyadmin::where('user_id', $id)->delete();
                 }else{

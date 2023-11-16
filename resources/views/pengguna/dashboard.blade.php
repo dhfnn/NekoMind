@@ -46,7 +46,7 @@
                         </div>
                       </div>
                       <div class="col-8 d-flex flex-column">
-                        <span class="fw-bold j-d"> 10</span>
+                        <span class="fw-bold j-d"> {{ $jumlahBaca }}</span>
                         <label for="" class="j-d2">Materi yang dibaca</label>
                       </div>
                     </div>

@@ -145,10 +145,22 @@ class data extends Controller
             $data3['role'] = $data3p->role;
             $data3['email'] = $request->email;
             if ($request->has('password') && !empty($request->password)) {
-                $data3['password'] = hash::make($request->password);
+                if (strlen($request->password) >= 8 && $request->password == $request->konfirmasi) {
+                    // Password sesuai, hash dan simpan
+                    $data3['password'] = Hash::make($request->password);
+                } elseif (strlen($request->password) < 8) {
+                    // Tampilkan pesan error jika panjang password kurang dari 8 huruf
+                    return redirect()->back()->with('error', 'Password harus terdiri dari minimal 8 huruf');
+                } else {
+                    // Tampilkan pesan error jika password tidak sesuai dengan konfirmasi
+                    return redirect()->back()->with('error', 'Password harus sama');
+                }
             } else {
+                // Jika tidak ada perubahan password, gunakan password yang ada
                 $data3['password'] = $data3p->password;
             }
+
+
             $updatedata3 = users::where('id', $id)->update($data3);
             $idadmin = Auth::user()->id;
 

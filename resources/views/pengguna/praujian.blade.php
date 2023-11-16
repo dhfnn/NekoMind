@@ -5,7 +5,6 @@
 <html lang="en">
   <head>
     <link rel="shortcut icon" href="{{ asset('assets/ikon/logon.png') }}" type="image/x-icon">
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
@@ -146,20 +145,13 @@
                </div>
               </div>
               <div class="row mt-md-5">
-                 <div class="col col-md-4 col-lg-2 t-mu ">
-                  <a href="#mymodal"  class="tdn text-white" data-bs-toggle="modal" data-bs-target="#mymodal">
-                  Mulai Ujian
+                <div class="col col-md-4 col-lg-2 t-mu ">
+                    <a href="#mymodal"  class="tdn text-white" data-bs-toggle="modal" data-bs-target="#mymodal">
+                    Mulai Ujian
 
-                  </a>
+                    </a>
 
-                </div>
-                 <div class="col col-md-4 col-lg-2 ">
-                  <a href="#mymodalnilai"  class="tdn  t-mu2"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background: transparent;">
-                  Lihat nilai
-
-                  </a>
-
-                </div>
+                  </div>
                 <div class="modal fade" id="mymodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                   <div class="modal-dialog" style="max-width: 500px;">
                     <div class="modal-content">
@@ -178,7 +170,7 @@
                       </div>
                       <div class="modal-body py-1 mt-5 text-center px-4 ">
                           <span class="p-sp  text-center">
-                            Apakah kamu yakin untuk mulai mengerjakan? Waktu akan terus berjalan. Try Out harus diselesaikan sejak menekan tombol start
+                            Apakah kamu yakin untuk mulai mengerjakan? Waktu akan terus berjalan, soal harus diselesaikan sejak menekan tombol start
 
 
                           </span>
@@ -191,90 +183,101 @@
                       </div>
                     </div>
                   </div>
-                </div>
 
+                </div>
+                @if(isset($hasilujian))
+                <div class="col col-md-4 col-lg-2 ">
+                 <a href="#mymodalnilai"  class="tdn  t-mu2"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background: transparent;">
+                 Lihat nilai
+
+                 </a>
+
+               </div>
+
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="max-width: 500px;">
+                        <div class="modal-content">
+                          <div class="modal-header px-3 py-1 pt-2" style="border: none;">
+                            <div class="col" style="position: relative;">
+                              <div class="col text-end" style="position: absolute; top: 0; right: 0; padding: 10px; z-index: 1;">
+                                  <a type="button" class="tdn" data-bs-dismiss="modal" aria-label="Close">
+                                      <i class="fa-solid fa-xmark fs-4" style="color: #636363;"></i>
+                                  </a>
+                              </div>
+                              <div class="col w-100 text-start position-absolute mt-2" style="top: 0; left: 0; z-index: 0;">
+                                  <span class="wsk-j" id="staticBackdropLabel"style="color: #3b73c5;">Nilai   {{ $dataUjian->jenis }}</span>
+                              </div>
+                          </div>
+
+                          </div>
+                          <div class="modal-body py-1 mt-5 px-4 pb-3" style="text-align: justify;">
+                              <span class="p-sp " style="text-align: justify;">
+                                Hasil perngerjaan yang telah kamu lakukan, kamu mendapatkan nilai sebesar  <b>{{ $hasilujian->nilai }} </b> dengan total jawaban benar sebanyak <b>{{ $hasilujian->benar }} </b> dan total jawaban salah sebanyak <b>{{ $hasilujian->salah }}</b> .
+                                Terus tingaktkan kemampuanmu agar menjadi lebih baik lagi !!
+                              </span>
+                              <div class="col mt-3  ">
+                              <span class="wsk-j"  style="color: #3b73c5;" id="staticBackdropLabel">Rekap Nilai</span>
+
+                              </div>
+                              <table class="table  align-items-center justify-content-center mb-0" id="datatabelPeringkat mt-3">
+                                <thead>
+                                  <tr>
+                                    <th style="font-size: 13px !important;" class="text-uppercase text-secondary text-sm opacity-7">WAKTU</th>
+                                    <th style="font-size: 13px !important;" class="text-uppercase text-secondary text-sm opacity-7 ps-2">NILAI</th>
+                                    <th style="font-size: 13px !important;" class="text-uppercase text-secondary text-sm opacity-7 ps-2">BENAR</th>
+                                    <th style="font-size: 13px !important;" class="text-uppercase text-secondary text-sm text-center opacity-7 ps-2">SALAH</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($historyujian as $data)
+
+                                  <tr>
+                                    <td>
+                                      <div class="d-flex align-items-center px-2">
+                                          <span class="text-xs font-weight-bold"></span>
+                                        <div class="my-auto">
+                                          <h6 class="mb-0 text-sm">
+                                            {{ $data->waktu }}
+
+                                          </h6>
+                                        </div>
+                                      </div>
+                                    </td>
+                                    <td>
+                                      <p class="text-sm font-weight-bold mb-0">
+                                        {{ $data->nilai }}
+                                      </p>
+                                    </td>
+                                    <td>
+                                      <span class="text-xs font-weight-bold">
+                                        {{ $data->benar }}
+                                    </span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                      <div class="d-flex align-items-center justify-content-center">
+                                        <span class="me-2 text-xs font-weight-bold">
+                                            {{ $data->salah }}
+                                        </span>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  @endforeach
+
+
+
+                                </tbody>
+                              </table>
+                          </div>
+                          </div>
+                        </div>
+                  </div>
+                @endif
               </div>
             </div>
            </div>
         </div>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" style="max-width: 500px;">
-                <div class="modal-content">
-                  <div class="modal-header px-3 py-1 pt-2" style="border: none;">
-                    <div class="col" style="position: relative;">
-                      <div class="col text-end" style="position: absolute; top: 0; right: 0; padding: 10px; z-index: 1;">
-                          <a type="button" class="tdn" data-bs-dismiss="modal" aria-label="Close">
-                              <i class="fa-solid fa-xmark fs-4" style="color: #636363;"></i>
-                          </a>
-                      </div>
-                      <div class="col w-100 text-start position-absolute mt-2" style="top: 0; left: 0; z-index: 0;">
-                          <span class="wsk-j" id="staticBackdropLabel"style="color: #3b73c5;">Nilai   {{ $dataUjian->jenis }}</span>
-                      </div>
-                  </div>
 
-                  </div>
-                  <div class="modal-body py-1 mt-5 px-4 pb-3" style="text-align: justify;">
-                      <span class="p-sp " style="text-align: justify;">
-                        Hasil perngerjaan yang telah kamu lakukan, kamu mendapatkan nilai sebesar  <b>{{ $hasilujian->nilai }} </b> dengan total jawaban benar sebanyak <b>{{ $hasilujian->benar }} </b> dan total jawaban salah sebanyak <b>{{ $hasilujian->salah }}</b> .
-                        Terus tingaktkan kemampuanmu agar menjadi lebih baik lagi !!
-                      </span>
-                      <div class="col mt-3  ">
-                      <span class="wsk-j"  style="color: #3b73c5;" id="staticBackdropLabel">Rekap Nilai</span>
-
-                      </div>
-                      <table class="table  align-items-center justify-content-center mb-0" id="datatabelPeringkat mt-3">
-                        <thead>
-                          <tr>
-                            <th style="font-size: 13px !important;" class="text-uppercase text-secondary text-sm opacity-7">WAKTU</th>
-                            <th style="font-size: 13px !important;" class="text-uppercase text-secondary text-sm opacity-7 ps-2">NILAI</th>
-                            <th style="font-size: 13px !important;" class="text-uppercase text-secondary text-sm opacity-7 ps-2">BENAR</th>
-                            <th style="font-size: 13px !important;" class="text-uppercase text-secondary text-sm text-center opacity-7 ps-2">SALAH</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($historyujian as $data)
-
-                          <tr>
-                            <td>
-                              <div class="d-flex align-items-center px-2">
-                                  <span class="text-xs font-weight-bold"></span>
-                                <div class="my-auto">
-                                  <h6 class="mb-0 text-sm">
-                                    {{ $data->waktu }}
-
-                                  </h6>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                              <p class="text-sm font-weight-bold mb-0">
-                                {{ $data->nilai }}
-                              </p>
-                            </td>
-                            <td>
-                              <span class="text-xs font-weight-bold">
-                                {{ $data->benar }}
-                            </span>
-                            </td>
-                            <td class="align-middle text-center">
-                              <div class="d-flex align-items-center justify-content-center">
-                                <span class="me-2 text-xs font-weight-bold">
-                                    {{ $data->salah }}
-                                </span>
-                              </div>
-                            </td>
-                          </tr>
-                          @endforeach
-
-
-
-                        </tbody>
-                      </table>
-                  </div>
-                  </div>
-                </div>
-          </div>
         </div>
     @include('more.quiz')
        </main>

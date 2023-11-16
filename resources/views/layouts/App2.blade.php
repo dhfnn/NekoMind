@@ -9,6 +9,8 @@
     <title>Nekomind</title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+
     <script src="https://kit.fontawesome.com/9494185896.js" crossorigin="anonymous"></script>
 
     <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
@@ -122,10 +124,10 @@
               <span class="nav-link-text ms-1">Materi</span>
             </a>
           </li>
-          <li class="nav-item mt-3">
+          {{-- <li class="nav-item mt-3">
             <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
-          </li>
-          <li class="nav-item">
+          </li> --}}
+          {{-- <li class="nav-item">
             <a class="nav-link {{ $namepage === 'Profile' ? 'active' : '' }}" href="{{ $namepage === 'Profile' ? '#' : route('profile-admin') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -151,7 +153,7 @@
               </div>
               <span class="nav-link-text ms-1">Profile</span>
             </a>
-          </li>
+          </li> --}}
         </ul>
       </div>
       <ul class="navbar-nav position-absolute w-100 mb-2" style="bottom: 0; ">
@@ -202,23 +204,18 @@
     <div class="modal-dialog d-flex justify-content-center" style="border: none !important;">
       <div class="modal-content" style="max-width: 300px">
             <div class="modal-body">
-                <div class="col"><p>Apakah kamu yakin akan keluar ?</p></div>
+                <div class="col"><p class="fw-bold">Apakah kamu yakin akan keluar ?</p></div>
                 <div class="col d-flex justify-content-end">
                     <button class="nav-link p-0" type="button" style="background-color:transparent;" class="" data-bs-dismiss="modal">
                         <span>Kembali</span></button>
                         <form method="POST" action="/logout">
                           @csrf
-                          <button class="t-sepd me-3 " type="submit" style="background-color:transparent;">
+                          <button class="t-sepd ms-3" type="submit" style="">
                             <span class="nav-link-text">Keluar</span>
                           </button>
                       </form>
                 </div>
             </div>
-        <div class="modal-footer" style="border: none !important">
-
-
-
-          </div>
       </div>
     </div>
   </div>
@@ -228,7 +225,7 @@
 <!--   Core JS Files   -->
 
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

@@ -129,10 +129,10 @@
                     <form action="{{ url('Hasil/' .$UjianData->id ) }}" method="POST" >
                         @csrf
                         <p id="modalScoreDisplay"></p>
-                        <input type="number" name="benar" id="jawabanBenarInput" value="" readonly>
-                        <input type="number" name="salah" id="jawabanSalahInput" value="" readonly>
-                        <input type="number" name="skore" id="expInput" value="" readonly>
-                        <input type="number" name="nilai" id="NilaiInput" value="" readonly>
+                        <input type="hidden" name="benar" id="jawabanBenarInput" value="" readonly>
+                        <input type="hidden" name="salah" id="jawabanSalahInput" value="" readonly>
+                        <input type="hidden" name="skore" id="expInput" value="" readonly>
+                        <input type="hidden" name="nilai" id="NilaiInput" value="" readonly>
 
 
                 </div>

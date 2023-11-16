@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    
+
 
   </head>
   <body>
@@ -23,7 +23,7 @@
     <main class="pt-3 ">
             <div class="container-fluid">
                 <div class="col my-2 d-flex align-items-center ms-3" >
-                    <a href="javascript::void();" class="title-dp me-5  " style="color:black;" onclick="backpage()">
+                    <a href="{{ url('data') }}" class="title-dp me-5  " style="color:black;" >
                         <i class="fa-solid fa-arrow-right-from-bracket " style=" transform: rotate(180deg);"></i>
                     </a>
                     <span class="ji-sp">Edit data akun</span>
@@ -45,6 +45,7 @@
                             {{ $errors }}
                           </span>
                           @endif
+
                           <div class="d-flex justify-content-end d-md-none">
     CC
                           </div>
@@ -64,6 +65,11 @@
                     </div>
 
                     <div class="col col-md-6 mt-5 mt-md-0 px-4">
+                        @if(session('error'))
+                        <span class="mes-e  me-4   position-absolute">
+                            {{ session('error') }}
+                        </span>
+                    @endif
                       {{-- <span class="title-dp pb-4 position-absolute">Lainnya</span> --}}
                       <div class="i-ep mt-5 ">
                         <div class="col">
@@ -73,7 +79,7 @@
                     </div>
                       <div class="i-ep mt-3 ">
                         <div class="col">
-                            <label for="" class="ji-ep">Konfirmasi Password</label>
+                            <label for="" class="ji-ep" name="konfirmasi        ">Konfirmasi Password</label>
                         </div>
                         <input class="ie-nama" placeholder="" type="password" name="password">
                     </div>

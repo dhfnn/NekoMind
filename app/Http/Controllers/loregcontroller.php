@@ -108,6 +108,10 @@ class loregcontroller extends Controller
         Auth::logout();
         return redirect('/masuk');
     }
+    function reset(){
+        // dd('hai');
+        return view('more.reset');
+    }
 
 
 

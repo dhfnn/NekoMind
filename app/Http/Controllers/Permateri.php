@@ -84,7 +84,7 @@ class Permateri extends Controller
         $kelas = Kelas::where('kelas', $id)->first();
         $pelajaran = Pelajaran::where('id', $id)->first();
         $babs = Bab::where('id_pelajaran' , $id)->get();
-        
+
 
         // $babs = DB::table('bab')
         // ->leftJoin('materi', 'bab.id', '=', 'materi.id_bab')

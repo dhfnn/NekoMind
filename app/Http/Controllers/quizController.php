@@ -195,11 +195,12 @@ class quizController extends Controller
     public function update(Request $request, string $id)
     {
 
-
+        $jenis =  Ujian::where('id', $id)->first();
+        $jeni = $jenis->id;
         $data['judul'] =$request->judul;
         $data['id_kelas'] = $request->idkelas;
 
-        $data['jenis'] = $request->jenis;
+        $data['jenis'] = $jeni;
 
         Ujian::where('id', $id)->update($data);
         return redirect()->back();
@@ -214,6 +215,8 @@ class quizController extends Controller
         hasilujian::where('ujian_id', $id)->delete();
 
         soal::where('ujian_id' ,$id)->delete();
+        Historyujian::where('ujian_id', $id)->delete();
+        hasilujian::where('ujian_id', $id)->delete();
         Ujian::where('id' ,$id)->delete();
 
         return redirect()->back();
