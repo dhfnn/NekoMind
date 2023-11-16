@@ -64,7 +64,7 @@
                         <div class=" d-flex justify-content-between align-items-center p-3">
                           <h5 class="mb-0">Diskusi Bersama</h5>
                         </div>
-                        <div class="card-body" data-mdb-perfect-scrollbar="true" style="position: relative; height: 400px; overflow-y: auto;">
+                        <div class="card-body" id="chatbody" data-mdb-perfect-scrollbar="true" style="position: relative; height: 400px; overflow-y: auto;">
 
                             @foreach ($datachat as $item)
                             @if ($item->user->id === $userId)

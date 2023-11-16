@@ -24,6 +24,29 @@ SEMBUNYIKAN
     @endif
 
     </div>
+    <div class="col d-flex justify-content-center mt-2" >
+        @if ($materi)
+            @if ($kec == 'ada')
+            <span class="fw-bold" ><i class="fa-regular fa-circle-check me-1"></i><span>Telah dibaca</span></span>
+            @else
+            <form action="{{ url('MateriPengguna') }}" method="POST" id="myForm">
+                @csrf
+                <div class="form-check">
+                    <input type="hidden" value="{{ $babM->id }}" name="babid">
+                    <input class="form-check-input" type="checkbox" name="telah_dibaca" id="flexCheckDefault">
+                    <label class="form-check-label fw-bold" for="flexCheckDefault" style="color: #009feb;">
+                        Selesai dibaca
+                    </label>
+                    <button type="submit" id="submitButton" ></button>
+                </div>
+            </form>
+            @endif
+    @else
+
+    @endif
+
+              </div>
 </div>
+
 @endsection
 

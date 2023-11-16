@@ -35,7 +35,7 @@
                                     <span class="text-bold">Pertanyaan ke  {{ $urutan++ }}</span>
 
                                     <div>
-                                        <a class="btn btn-link text-dark text-sm px-3 mb-0 tdn"  data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+                                        <a class="btn btn-link text-dark text-sm px-3 mb-0 tdn"  data-bs-toggle="modal" data-bs-target="#popo{{$data->id}}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
                                         <!-- Button trigger modal -->
                                         @include('component.MeditSoal')
                                     </div>

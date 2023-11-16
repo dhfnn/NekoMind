@@ -97,10 +97,20 @@ class ujianController extends Controller
      */
     public function show(string $id)
     {
+        $userId = Auth::user()->id;
         $dataUjian = Ujian::find($id);
+        $hasilujian =  hasilujian::where('ujian_id', $dataUjian->id)->where('user_id', $userId)->first();
+
+        $historyujian = Historyujian::where('ujian_id', $dataUjian->id)
+        ->where('user_id', $userId)
+        ->orderBy('waktu', 'desc')
+        ->take(5)
+        ->get();
+
+        // dd($historyujian);
         $jumlahSoal = soal::where('ujian_id' , $id)->count();
 
-        return view('pengguna.praujian' ,compact('dataUjian','jumlahSoal'));
+        return view('pengguna.praujian' ,compact('dataUjian','jumlahSoal','hasilujian','historyujian'));
     }
 
 

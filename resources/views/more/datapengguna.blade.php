@@ -121,6 +121,9 @@
 
     </div>
     <div class="col d-flex justify-content-end mb-2">
+        @if ($userData->id == $userId)
+
+        @else
         <form action="{{ url('Konfigdata/' . $userData->id) }}" method="POST">
             @csrf
             @method('DELETE')
@@ -131,6 +134,7 @@
           <!-- Modal -->
          @include('component.hapus')
         </form>
+        @endif
 
          <a href="{{ url('data') }}" class="t-sep me-3 me-md-0 mt-md-3 ms-2" >
             <span style="font-size: 15px; font-weight: 600;">Kembali</span>

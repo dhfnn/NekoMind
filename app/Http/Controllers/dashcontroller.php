@@ -375,10 +375,11 @@ class dashcontroller extends Controller
         ->join('datalainnyas', 'level.user_id', '=', 'datalainnyas.user_id')
         ->select('level.*', 'users.*', 'poinpengguna.*', 'datapengguna.*', 'datalainnyas.*')
         ->get();
+        // dd($userDataPeringkat);
         $urutan = -1;
 foreach ($userDataPeringkat as $index => $user) {
     if ($user->user_id == $userId) {
-        $urutan = $index + 1; // Karena indeks dimulai dari 0
+        $urutan = $index + 1;
         break;
     }
 }
@@ -387,36 +388,50 @@ foreach ($userDataPeringkat as $index => $user) {
         $jumlahBenarPerUser = HasilUjian::select('user_id', \DB::raw('SUM(benar) as totalBenar'))
         ->groupBy('user_id')
         ->get();
-
     $jumlahSalahPerUser = HasilUjian::select('user_id', \DB::raw('SUM(salah) as totalSalah'))
         ->groupBy('user_id')
         ->get();
 
+    // dd($jumlahBenarPerUser);
+
+
     if (!$jumlahBenarPerUser->isEmpty() && !$jumlahSalahPerUser->isEmpty()) {
-        // Jalankan kode jika $jumlahBenarPerUser dan $jumlahSalahPerUser memiliki nilai atau data
+
+
 
         $hasil = [];
-// dd($userDataPeringkat);
+
         foreach ($userDataPeringkat as $data) {
-            $totalBenar = $jumlahBenarPerUser->where('user_id', $data->user_id)->first()->totalBenar;
-            $totalSalah = $jumlahSalahPerUser->where('user_id', $data->user_id)->first()->totalSalah;
+                //             $totalBenar = '1';
+                // $totalSalah = '2';
+                                    $benarData = $jumlahBenarPerUser->where('user_id', '21')->first();
+
+
+                    $salahData = $jumlahSalahPerUser->where('user_id', $data->user_id)->first();
+
+                    if ($benarData && $salahData) {
+                        $totalBenar = $benarData->totalBenar;
+                        $totalSalah = $salahData->totalSalah;
+
+                        // Your existing code for calculations
+
+
+                    }
             $totalUjian = $totalBenar + $totalSalah;
             $persentase = ($totalBenar / $totalUjian) * 100;
-            $pelajaranfavArray = explode(' ', $data->pelajaranfav); // Ubah spasi sesuai dengan pemisah yang sesuai
- // Ambil kata pertama// Ubah spasi sesuai dengan pemisah yang sesuai
+            $pelajaranfavArray = explode(' ', $data->pelajaranfav);
             $satu = $pelajaranfavArray[0];
             $dua = $pelajaranfavArray[1];
             $tiga = $pelajaranfavArray[2];
             $empat = $pelajaranfavArray[3];
- $satuKataTanpaKoma = trim($satu, ',');
- $duaKataTanpaKoma = trim($dua, ',');
- $tigaKataTanpaKoma = trim($tiga, ',');
- $empatKataTanpaKoma = trim($empat, ',');
+            $satuKataTanpaKoma = trim($satu, ',');
+            $duaKataTanpaKoma = trim($dua, ',');
+            $tigaKataTanpaKoma = trim($tiga, ',');
+            $empatKataTanpaKoma = trim($empat, ',');
+            // dd($hasil);
 
-
-            // Now you can use $totalBenar in your calculations or display
             $hasil[] = [
-                'no' => 1, // Menggunakan nomor dan kemudian menambahkannya
+                'no' => 1,
                 'foto' => $data->foto,
                 'username' => $data->username,
                 'level' => $data->exp / 1200,
@@ -424,19 +439,19 @@ foreach ($userDataPeringkat as $index => $user) {
                 'poin' => $data->poin,
                 'nama' => $data->nama,
                 'namasekolah' => $data->namasekolah,
-                'jeniskelamin'=>$data->jeniskelamin,
-                'kelas'=>$data->kelas,
-                'jurusan'=>$data->jurusan,
-                'target'=>$data->target,
-                'motto'=>$data->motto,
-                'pel1' =>$satuKataTanpaKoma,
-                'pel2' =>$duaKataTanpaKoma,
-                'pel3' =>$tigaKataTanpaKoma,
-                'pel4' =>$empatKataTanpaKoma
+                'jeniskelamin' => $data->jeniskelamin,
+                'kelas' => $data->kelas,
+                'jurusan' => $data->jurusan,
+                'target' => $data->target,
+                'motto' => $data->motto,
+                'pel1' => $satuKataTanpaKoma,
+                'pel2' => $duaKataTanpaKoma,
+                'pel3' => $tigaKataTanpaKoma,
+                'pel4' => $empatKataTanpaKoma
             ];
-            // dd($hasil);
-
         }
+        // dd($userDataPeringkat);
+        // dd($hasil);
 
         // Lakukan sesuatu dengan $hasil atau tampilkan hasilnya
     }

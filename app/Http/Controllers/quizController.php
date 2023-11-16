@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\hasilujian;
 use App\Models\Historyujian;
+use App\Models\Level;
+use App\Models\Poin;
 use App\Models\soal;
 use App\Models\Ujian;
 use Illuminate\Http\Request;
@@ -50,11 +52,72 @@ class quizController extends Controller
         $data['waktu']= $tanggal;
         if ($hai = hasilujian::where('user_id', $user_id)->where('waktu' ,$tanggal)->where('ujian_id', $dataUjianid)->first()) {
             $tambahhistory  = Historyujian::create($data);
+            $benar = $tambahhistory->benar;
+            $ujianid= $tambahhistory->ujian_id;
+            $ujiannya = Ujian::where('id' ,$ujianid)->first();
+            $jenis = $ujiannya->jenis;
+            $userId = Auth::user()->id;
+            if ($jenis = 'QUIZ') {
+                $poin = Poin::where('user_id', $userId)->first();
+                $poin->update(['poin' => $poin->poin + ($benar*10)]);
+
+                $level = Level::where('user_id' ,$userId)->first();
+                $level->update(['exp'=> $level->exp +  ($benar*5)]);
+            }elseif ($jenis = 'LATIHAN') {
+                $poin = Poin::where('user_id', $userId)->first();
+                $poin->update(['poin' => $poin->poin +  ($benar*10)]);
+
+                $level = Level::where('user_id' ,$userId)->first();
+                $level->update(['exp'=> $level->exp + ($benar*5)]);
+            }elseif ($jenis = 'UJIAN') {
+                $poin = Poin::where('user_id', $userId)->first();
+                $poin->update(['poin' => $poin->poin + ($benar*10)]);
+
+                $level = Level::where('user_id' ,$userId)->first();
+                $level->update(['exp'=> $level->exp + ($benar*5)]);
+            }else{
+                $poin = Poin::where('user_id', $userId)->first();
+                $poin->update(['poin' => $poin->poin + ($benar*10)]);
+
+                $level = Level::where('user_id' ,$userId)->first();
+                $level->update(['exp'=> $level->exp + ($benar*5)]);
+            }
             // dd($hai);
         }else{
             // dd('tidak ada');
             $tambah = hasilujian::create($data);
             $tambahhistory  = Historyujian::create($data);
+            $benar = $tambahhistory->benar;
+
+            $ujianid= $tambahhistory->ujian_id;
+            $ujiannya = Ujian::where('id' ,$ujianid)->first();
+            $jenis = $ujiannya->jenis;
+            $userId = Auth::user()->id;
+            if ($jenis = 'QUIZ') {
+                $poin = Poin::where('user_id', $userId)->first();
+                $poin->update(['poin' => $poin->poin + ($benar*15)]);
+
+                $level = Level::where('user_id' ,$userId)->first();
+                $level->update(['exp'=> $level->exp + ($benar*10)]);
+            }elseif ($jenis = 'LATIHAN') {
+                $poin = Poin::where('user_id', $userId)->first();
+                $poin->update(['poin' => $poin->poin + ($benar*15)]);
+
+                $level = Level::where('user_id' ,$userId)->first();
+                $level->update(['exp'=> $level->exp + ($benar*10)]);
+            }elseif ($jenis = 'UJIAN') {
+                $poin = Poin::where('user_id', $userId)->first();
+                $poin->update(['poin' => $poin->poin + ($benar*15)]);
+
+                $level = Level::where('user_id' ,$userId)->first();
+                $level->update(['exp'=> $level->exp + ($benar*10)]);
+            }else{
+                $poin = Poin::where('user_id', $userId)->first();
+                $poin->update(['poin' => $poin->poin + ($benar*15)]);
+
+                $level = Level::where('user_id' ,$userId)->first();
+                $level->update(['exp'=> $level->exp + ($benar*10)]);
+            }
 
         }
         return redirect('Soal/' . $dataUjianid);

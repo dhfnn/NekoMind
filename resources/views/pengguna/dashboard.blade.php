@@ -158,7 +158,10 @@
                  <div class="isi-j" style="position: relative">
                      <div class="col ">
                          @if ($ListdataMisi === '0')
-                             <span>data tidak tersedia</span>
+                         <div class="col d-flex justify-content-center align-items-center">
+                            <img width="150px" src="{{ asset('assets/ikon/kucingm.png') }}" alt="">
+                            <span class="j-d2">Misi sudah kamu selesaikan</span>
+                         </div>
                          @else
                          <div class="col  bg-white px-3 py-1" style="box-shadow: 1px 6px 9px 4px rgba(0, 0, 0, 0.035); border-radius:5px; border:1px rgba(0, 0, 0, 0.107) solid;">
                              <div class="col d-flex justify-content-between">
@@ -263,6 +266,8 @@
 
     </div>
   </main>
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
 @endsection
 
     <!-- dashboard  -------------------------------------------------------------------------------->

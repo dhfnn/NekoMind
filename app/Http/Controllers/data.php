@@ -89,7 +89,7 @@ class data extends Controller
             Poin::create($data1);
 
             $data5['user_id'] = $datatambah->id;
-            $data5['exp'] = '0';
+            $data5['exp'] = '1200';
             Level::create($data5);
         }
 
@@ -99,13 +99,14 @@ class data extends Controller
     {
         $namepage = 'Data';
         $userData = users::with('Datapengguna','Datalainnya')->find($id);
+        $userId = Auth::user()->id;
 
         // $mergedData = [
         //     'datapengguna' => $userData->datapengguna,
         //     'datalainnya' => $userData->datalainnya,
         // ];
 
-        return view('more.datapengguna',compact('userData','namepage'));
+        return view('more.datapengguna',compact('userData','namepage','userId'));
 
 
 
