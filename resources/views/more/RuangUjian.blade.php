@@ -97,7 +97,7 @@
                         </div>
                     </div>
                     <div class="col d-flex justify-content-end m-3">
-                        <div class="tnp" id="tombolKembali"><i class="fa-solid fa-angle-left text-white"></i></div>
+                        <div class="tnp d-flex justify-content-center align-items-center " id="tombolKembali"><i class="fa-solid fa-angle-left text-white"></i></div>
                         <div class="tnp" id="tombolLanjut"><i class="fa-solid fa-angle-right text-white"></i></div>
                     </div>
                 </div>
@@ -126,6 +126,7 @@
 
                 </div>
                 <div class="modal-body">
+                    Tunggu sebentar jawaban anda sedang di proses
                     <form action="{{ url('Hasil/' .$UjianData->id ) }}" method="POST" >
                         @csrf
                         <p id="modalScoreDisplay"></p>
@@ -133,16 +134,13 @@
                         <input type="hidden" name="salah" id="jawabanSalahInput" value="" readonly>
                         <input type="hidden" name="skore" id="expInput" value="" readonly>
                         <input type="hidden" name="nilai" id="NilaiInput" value="" readonly>
+                        <button class="d-none" id="tambahHistory" type="submit"></button>
+
+                    </form>
 
 
                 </div>
-                <div class="modal-footer">
-                    <button class="d-none" id="tambahHistory" type="submit"></button>
-                  <button type="button" class="btn btn-secondary"   data-bs-dismiss="modal" aria-label="Close" >Tutup</button>
-                </form>
-            <button id="restartButton"  data-bs-dismiss="modal" aria-label="Close">Mulai Ulang</button>
 
-                </div>
               </div>
             </div>
           </div>

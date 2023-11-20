@@ -76,7 +76,6 @@ function startQuiz() {
 function showQuestion() {
     var wadahSoal = document.getElementById("wadahSoal");
     var soal = soals[currentQuestion];
-
     var opsiElement = document.getElementById("opsi");
     var tombolKembali = document.getElementById("tombolKembali");
     var tombolLanjut = document.getElementById("tombolLanjut");
@@ -106,7 +105,6 @@ function showQuestion() {
             radio.name = "answer" + currentQuestion; // Menggunakan nama berdasarkan indeks pertanyaan
             radio.value = i;
 
-            // Tambahkan event listener untuk menangani klik pada elemen div
             div.addEventListener("click", function () {
                 var relatedRadio = this.querySelector("input[type=radio]");
                 relatedRadio.checked = true;
@@ -123,8 +121,8 @@ function showQuestion() {
         if (currentQuestion < 1) {
             tombolKembali.style.display = "none";
             var icon = document.createElement("i");
-            icon.className = "fa-solid fa-angle-left text-white";
-            tombolKembali.innerHTML = "woi";
+            // icon.className = "fa-solid fa-angle-left text-white";
+            // tombolKembali.innerHTML = "woi";
             tombolKembali.appendChild(icon);
         } else {
             tombolKembali.style.display = "block";
@@ -143,12 +141,15 @@ function showQuestion() {
         }
 
         var selectedAnswer = selectedAnswers[currentQuestion];
-        var radioButtons = document.getElementsByName("answer");
+        var radioButtons = document.getElementsByName("answer" + currentQuestion);
 
         if (selectedAnswer !== -1 && selectedAnswer < radioButtons.length) {
             radioButtons[selectedAnswer].checked = true;
         } else {
-            selectedAnswers[currentQuestion] = -1;
+            // Jika belum ada jawaban yang dipilih, pastikan semua radio button tidak terpilih
+            radioButtons.forEach((radio) => {
+                radio.checked = false;
+            });
         }
 
         wadahWaktu.innerText = "Waktu Tersisa: " + time + " detik";
@@ -166,7 +167,7 @@ function fillQuestionList() {
         div.textContent = " " + (i + 1);
         div.dataset.soalIndex = i;
         if (selectedAnswers[i] !== -1) {
-            div.style.color = "green";
+            div.style.color = "blue";
         } else {
             div.style.color = "white"; // Jika belum dijawab, beri warna merah
         }

@@ -37,7 +37,7 @@ SEMBUNYIKAN
                     <label class="form-check-label fw-bold" for="flexCheckDefault" style="color: #009feb;">
                         Selesai dibaca
                     </label>
-                    <button type="submit" id="submitButton" ></button>
+                    <button class="" type="submit" style="border: none;" id="submitButton" ></button>
                 </div>
             </form>
             @endif

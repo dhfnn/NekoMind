@@ -5,7 +5,7 @@
     <link rel="shortcut icon" href="{{ asset('assets/ikon/logon.png') }}" type="image/x-icon">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Nekomind</title>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
@@ -84,6 +84,12 @@
             <span class="i-multit  {{Request::is('Soal') ? 'i-act': '' }}  ">Soal</span>
           </a>
         </div>
+        <div class="nav-item d-flex flex-column align-items-center">
+          <a href="{{ Request::is('peringkat') ? '#' : url('peringkat') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
+            <i class="fa-solid fa-lines-leaning i-multi  {{Request::is('peringkat') ? 'i-act': '' }}"></i>
+            <span class="i-multit  {{Request::is('peringkat') ? 'i-act': '' }}  ">peringkat</span>
+          </a>
+        </div>
         <div class="nav-item d-flex flex-column align-items-center ps-0 pe-3">
           <a href="{{ request()->is('Profilepengguna') ? '#' : route('Profilepengguna.index') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
             <i class="fa-solid fa-circle-user i-multi {{ request()->is('Profilepengguna') ? 'i-act' : '' }}"></i>
@@ -113,7 +119,7 @@
 
   <script>
 
-let teksArray = ["Sel saraf manusia dapat mengirimkan sinyal dengan kecepatan hingga 120 meter per detik.", "Umurku 18 tahun"];
+let teksArray = ["Sel saraf manusia dapat mengirimkan sinyal dengan kecepatan hingga 120 meter per detik.", "Walaupun Pluto tidak lagi dianggap sebagai planet dalam Sistem Tata Surya, ternyata, butiran es di permukaannya dapat menghasilkan suara mirip dengan 'dengungan' atau 'gemuruh' yang dapat didengar jika manusia berada disana.","Kupu-kupu Monark (Monarch Butterfly) memiliki perjalanan migrasi yang luar biasa. Meskipun hanya seukuran tangan, mereka dapat menempuh perjalanan ribuan mil dari Amerika Utara ke Meksiko untuk berkumpul dalam jumlah besar di hutan.","Nikola Tesla, seorang ilmuwan Serbia-Amerika, memiliki kebiasaan aneh. Dia menghabiskan waktu berjam-jam berjalan-jalan di sekitar gedung sebelum memasuki ruang laboratoriumnya, dan dia memiliki ketidakmampuan terhadap perasaan sentuhan dengan rambut manusia.","Kolibri adalah burung yang sangat kecil, namun memiliki detak jantung yang sangat cepat, mencapai lebih dari 1.200 denyut per menit saat sedang terbang. Ini membantu mereka mempertahankan energi selama aktivitas bergerak intens"];
 let index = 0;
 
 function gantiTeks() {

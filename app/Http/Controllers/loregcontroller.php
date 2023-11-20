@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Level;
 use App\Models\MateriModel;
+use App\Models\Poin;
 use App\Models\Ujian;
 use App\Models\users;
 use Illuminate\Http\Request;
