@@ -23,6 +23,7 @@ class materiPengguna extends Controller
     {
 
         $userId = auth()->id();
+        $usersData  = users::where('id', $userId)->first();
         $userdata = users::where('id', $userId)->first();
         $datachat=  Chatpengguna::with('user')->get();
         $selectedKelas = $request->input('kelas');
@@ -39,7 +40,7 @@ class materiPengguna extends Controller
         }
         $dataUTBK = $dataUTBK->get();
 
-        return view('pengguna.materi', compact('dataPelajaran', 'userId', 'dataUTBK','datachat', 'userdata'));
+        return view('pengguna.materi', compact('dataPelajaran', 'userId', 'dataUTBK','datachat', 'userdata','usersData'));
     }
 
 

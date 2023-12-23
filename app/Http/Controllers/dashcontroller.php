@@ -513,8 +513,6 @@ foreach ($userDataPeringkat as $index => $user) {
         }
         // dd($userDataPeringkat);
         // dd($hasil);
-
-        // Lakukan sesuatu dengan $hasil atau tampilkan hasilnya
     }
 
 

@@ -52,7 +52,7 @@
       <div class="container-fluid px-3 px-sm-5 py-1">
         <nav class="navbar navbar-light navbar-expand-md d-flex justify-content-between align-items-center">
           <div class="container-fluid" style="display: flex !important; align-items: center !   ;">
-            <a href="javascript:void(0);" onclick="backpage()" class="d-none d-md-block">
+            <a href="{{ url('pengguna/dashboard') }}"  class="d-none d-md-block">
               <i class="fa-solid fa-arrow-left" style="color: #313131b0; font-size: 25px;"></i>
             </a>
             <span  style="font-size:25px; font-weight: bolder;color: #3b73c5;">Profile</span>

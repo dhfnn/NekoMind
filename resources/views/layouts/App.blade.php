@@ -20,6 +20,13 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
       </head>
+      <style>
+        .g-ad{
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+        }
+      </style>
   <body class=""  style="background-color: #F8F9FA !important;" >
     <header class="position-fixed fixed-top d-md-flex justify-content">
       <nav class="navbar navbar-light navbar-expand-md dash-nav d-none d-md-flex">
@@ -42,7 +49,8 @@
                   <li class="menu-item">
                     <a href="Profilepengguna" class="ps-4 ps-xl-4 d-flex align-items-center a-putar">
                       <i class="fa-solid fa-caret-down i-putar" style="color: #00000076"></i>
-                      <i class="fa-solid fa-circle-user i-pd ms-1"></i>
+                      {{-- <i class="fa-solid fa-circle-user i-pd ms-1"></i> --}}
+                      <img src="{{ asset('assets/pp/'.$usersData->foto .'.jpg') }}" class="g-ad ms-1" alt="">
                     </a>
                     <ul class="drop-menu">
                       <li class="drop-menu-item"><a href="/Profilepengguna">Akun</a></li>
@@ -86,7 +94,7 @@
         </div>
         <div class="nav-item d-flex flex-column align-items-center">
           <a href="{{ Request::is('peringkat') ? '#' : url('peringkat') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
-            <i class="fa-solid fa-lines-leaning i-multi  {{Request::is('peringkat') ? 'i-act': '' }}"></i>
+            <i class="fa-solid fa-ranking-star i-multi  {{Request::is('peringkat') ? 'i-act': '' }}"></i>
             <span class="i-multit  {{Request::is('peringkat') ? 'i-act': '' }}  ">peringkat</span>
           </a>
         </div>

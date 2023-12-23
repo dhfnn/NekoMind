@@ -227,30 +227,34 @@
           </div>
         </div>
        </div>
-        <div class="row gap-3 my-3">
-          <div class="col-7 d-flex  p-3 px-4 bg-white" style="border-radius: 8px">
-            <div class="d-flex align-items-end">
-            <img src="{{ asset('assets/ikon/catPencil.png') }}" height="200px" alt="">
-
-            </div>
-            <div class="col d-flex align-items-end">
-              <div class="col">
-                <span class="j-rm " style="color: #fe8d00;">Mengukur Kemampuanmu</span>
-                <p class="t-j px-3 pt-2  " style="text-align: justify;">
-                  Di sini, kamu akan menemukan berbagai macam soal yang dirancang untuk mengukur dan meningkatkan kemampuan kamu, ada latihan ujian dan quiz yang siap menantangmu.
-                </p>
-                <div class="col d-flex justify-content-end pt-2">
-                <button class="btn-os fw-bolder p-1 px-3" onclick="window.location.href  ='/Soal';">MULAI </button>
+       <div class="col d-flex  my-3">
+        <div class="col-7 pe-3 " >
+            <div class="col d-flex  p-3 px-4 bg-white" style="border-radius: 8px; height:315px;">
+                <div class="d-flex align-items-end">
+                <img src="{{ asset('assets/ikon/catPencil.png') }}" height="200px" alt="">
 
                 </div>
+                <div class="col d-flex align-items-center">
+                  <div class="col">
+                    <span class="j-rm " style="color: #fe8d00;">Mengukur Kemampuanmu</span>
+                    <p class="t-j px-3 pt-2  " style="text-align: justify;">
+                      Di sini, kamu akan menemukan berbagai macam soal yang dirancang untuk mengukur dan meningkatkan kemampuan kamu, ada latihan ujian dan quiz yang siap menantangmu.
+                    </p>
+                    <div class="col d-flex justify-content-end pt-2">
+                    <button class="btn-os fw-bolder p-1 px-3" onclick="window.location.href  ='/Soal';">MULAI </button>
+
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
           </div>
-          <div class="col d-flex flex-column justify-content-between py-2 bg-white" style="border-radius: 8px">
+
+          <div class="col-5 d-flex flex-column justify-content-between py-2 px-2 bg-white " style="border-radius: 8px">
             <span class="tjb" style="color: #009feb">Rekap Nilai</span>
             <canvas id="myChart2" style="max-height: 300px;">
             </canvas>
           </div>
+       </div>
         </div>
       </div>
       <div class="container px-5 py-4">
