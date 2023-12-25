@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="shortcut icon" href="{{ asset('assets/ikon/logon.png') }}" type="image/x-icon">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
     <script src="https://kit.fontawesome.com/9494185896.js" crossorigin="anonymous"></script>
@@ -16,13 +16,14 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
+
   </head>
   <body>
     <!-- dashboard  -------------------------------------------------------------------------------->
     <main class="pt-3 ">
             <div class="container-fluid">
                 <div class="col my-2 d-flex align-items-center ms-3" >
-                    <a href="javascript::void();" class="title-dp me-5  " style="color:black;" onclick="backpage()">
+                    <a href="{{ url('data') }}" class="title-dp me-5  " style="color:black;" >
                         <i class="fa-solid fa-arrow-right-from-bracket " style=" transform: rotate(180deg);"></i>
                     </a>
                     <span class="ji-sp">Edit data akun</span>
@@ -44,6 +45,7 @@
                             {{ $errors }}
                           </span>
                           @endif
+
                           <div class="d-flex justify-content-end d-md-none">
     CC
                           </div>
@@ -63,6 +65,11 @@
                     </div>
 
                     <div class="col col-md-6 mt-5 mt-md-0 px-4">
+                        @if(session('error'))
+                        <span class="mes-e  me-4   position-absolute">
+                            {{ session('error') }}
+                        </span>
+                    @endif
                       {{-- <span class="title-dp pb-4 position-absolute">Lainnya</span> --}}
                       <div class="i-ep mt-5 ">
                         <div class="col">
@@ -72,7 +79,7 @@
                     </div>
                       <div class="i-ep mt-3 ">
                         <div class="col">
-                            <label for="" class="ji-ep">Konfirmasi Password</label>
+                            <label for="" class="ji-ep" name="konfirmasi        ">Konfirmasi Password</label>
                         </div>
                         <input class="ie-nama" placeholder="" type="password" name="password">
                     </div>
@@ -98,7 +105,7 @@
 <!-- Scripts -->
 <script>
     $(document).ready(function() {
-    $("#selectKT").select2();
+    $(".selectKT").select2();
 });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>

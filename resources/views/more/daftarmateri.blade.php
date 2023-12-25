@@ -60,7 +60,7 @@
                 <td class="align-middle text-center ">
                   <a class="text-secondary font-weight-bold text-xs pe-1" data-toggle="tooltip" data-        original-title="Edit user"   href="#exampleModaledit{{$data->id}}" data-bs-toggle="modal" data-bs-target="#editmodal{{ $data->id }}" style="border-right: 1px #8392AB solid;">Edit</a>
 
-                  <a class="text-danger font-weight-bold text-xs ps-1" type="button" data-bs-toggle="modal" data-bs-target="#hapusmodal" >Hapus</a>
+                  <a class="text-danger font-weight-bold text-xs ps-1" type="button" data-bs-toggle="modal" data-bs-target="#hapusmodal{{ $data->id }}" >Hapus</a>
             @include('component.Mhapuspelajaran')
 
 

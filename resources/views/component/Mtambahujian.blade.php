@@ -30,7 +30,7 @@
                                 <select class="form-select" name="jenis" id="" required title="Pilih jenis ujian">
                                     <option value="">Pilih Jenis</option>
                                     <option value="QUIZ">QUIZ(10 menit/10 pertanyaan)</option>
-                                    <option value="LATIHAN">LATIHAN(30 menit/)</option>
+                                    <option value="LATIHAN">LATIHAN(30 menit/20 pertanyaan)</option>
                                     <option value="UJIAN">UJIAN(40 menit)</option>
                                     <option value="TRYOUT">TRYOUT(120 menit)</option>
                                 </select>

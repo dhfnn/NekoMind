@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bab;
 use App\Models\Historyujian;
 use App\Models\Kelas;
+use App\Models\MateriModel;
 use App\Models\Pelajaran;
 use App\Models\soal;
 use App\Models\Ujian;
@@ -164,7 +165,11 @@ public function destroy(string $id)
 
 if ($pelajaran) {
     $id_pelajaran = $pelajaran->id;
+   $babhapus =  Bab::where('id_pelajaran', $id_pelajaran)->first();
+   MateriModel::where('id_bab' , $babhapus->id)->delete();
     Bab::where('id_pelajaran', $id_pelajaran)->delete();
+
+    $babhapus->delete();
     $pelajaran->delete();
     return redirect()->back();
 

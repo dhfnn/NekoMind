@@ -26,13 +26,13 @@
                                     <div class="col text-start">
                                         <label for="isi" class="form-label">Judul Bab</label>
                                     </div>
-                                        <input class="form-control" type="text" id="isi" name="judul" value="{{ $bab->judul }}">
+                                        <input class="form-control" type="text" id="isi" name="judul" value="{{ $bab->judul }}" required>
                                 </div>
                                 <div class="col">
                                     <div class="col text-start">
                                         <label for="isia" class="form-label">Subab</label>
                                     </div>
-                                        <input class="form-control" type="number" id="isia" name="subab" value="{{ $bab->subab }}">
+                                        <input class="form-control" type="number" id="isia" name="subab" value="{{ $bab->subab }}" required>
                                 </div>
                             </div>
 
@@ -44,7 +44,7 @@
                     <div class="row mt-2">
                     </div>
                         <div class="col d-flex justify-content-end mb-2">
-                            <button class="t-sep me-3 me-md-0 mt-md-3" type="submit" onclick="tampilkanTagHTML()"  data-bs-dismiss="modal" aria-label="Close"   >
+                            <button class="t-sep me-3 me-md-0 mt-md-3" type="submit" onclick="tampilkanTagHTML()"   >
                                 selesaai
                             </button>
                         </div>

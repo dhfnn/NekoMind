@@ -5,19 +5,14 @@
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
-    <meta name="generator" content="Hugo 0.115.4" />
-    <title>tes</title>
+    <link rel="shortcut icon" href="{{ asset('assets/ikon/logon.png') }}" type="image/x-icon">
+    <title>Nekomind</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/" />
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
     <script src="https://kit.fontawesome.com/9494185896.js" crossorigin="anonymous"></script>
-    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <script src="../assets/js/color-modes.js"></script>
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -154,7 +149,7 @@
 
       <div class="container-fluid pt-4 pt-sm-5 bc-biru">
         <div class="row align-items-center pt-5 px-3 px-sm-5 ">
-          <div class="col-xxl-8 px-xl-5">
+          <div class="col-lg-8 px-xl-5 pt-5">
             <div class="text-center text-xxl-start pt-3 pt-sm-5">
               <h1 class="text-start text-sm-start display-3 fw-bolder text-white pt-3"><span class="text-gradient d-inline">Tahun Ajaran Baru Jangan Sampai Tersesat!</span></h1>
               <div>
@@ -164,17 +159,17 @@
               </div>
 
               <div class="d-flex justify-content-end gap-3 d-sm-flex justify-content-sm-end justify-content-xxl-start mb-5 py-1 py-sm-5">
-                <a class="btn btn-primary btn-lg px-sm-5 py-sm-3 me-sm-3 fw-sm-bolder tt-ds" href="resume.html" style="background-color: #fe8d00">Daftar Sekarang</a>
+                <a class="btn btn-primary btn-lg px-sm-5 py-sm-3 me-sm-3 fw-sm-bolder tt-ds" href="{{ route('daftar') }}" style="background-color: #fe8d00">Daftar Sekarang</a>
               </div>
             </div>
           </div>
-          <div class="col-xxl-4">
+          <div class="col-lg-4 d-none d-lg-block">
             <!-- Header profile picture-->
             <div class="d-flex justify-content-center mt-5 mt-xxl-0">
               <div class="profile bg-gradient-primary-to-secondary">
                 <!-- TIP: For best results, use a photo with a transparent background like the demo example below-->
                 <!-- Watch a tutorial on how to do this on YouTube (link)-->
-                <img class="profile-img" src="{{ asset('assets/ikon/cat2.png') }}" alt="..." />
+                <img class="profile-img" src="{{ asset('assets/ikon/cat-1.png') }}" alt="..." />
               </div>
             </div>
           </div>
@@ -189,7 +184,7 @@
       <div class="container-xxl-fluid pb-0 pt-4 px-xxl-5">
         <div class="row row-cols-1  row-cols-xl-3 g-xl-2 g-1 ps-md-5 ps-xl-1 px-2 pe-sm-1 pb-5">
           <div class="col d-flex  px-sm-3 pb-md-5">
-            <div class=" rounded-circle bg-primary col-3 gam-3 " >
+            <div class=" rounded-circle bg-primary col-3 gam-3 " style="background-image:url({{ asset('assets/pp/pplvl1.jpg') }})">
             </div>
             <div class="col-9  ps-3 pe-xl-2 pt-2">
               <h5 class=" fw-semibold" style="color: #1D3962;">
@@ -201,7 +196,7 @@
             </div>
           </div>
           <div class="col d-flex  px-sm-3">
-            <div class=" rounded-circle bg-primary col-3 gam-3" >
+            <div class=" rounded-circle bg-primary col-3 gam-3"  style="background-image:url({{ asset('assets/pp/pplvl1.jpg') }})">
             </div>
             <div class="col-9  ps-3 pe-xl-2 pt-2">
               <h5 class=" fw-semibold" style="color: #1D3962;">
@@ -214,7 +209,7 @@
             </div>
           </div>
           <div class="col d-flex  px-sm-3">
-            <div class=" rounded-circle bg-primary col-3 gam-3" >
+            <div class=" rounded-circle bg-primary col-3 gam-3" style="background-image:url({{ asset('assets/pp/pplvl1.jpg') }})" >
             </div>
             <div class="col-9  ps-3 pe-xl-2 pt-2">
               <h5 class=" fw-semibold" style="color: #1D3962;">
@@ -237,16 +232,18 @@
           <div class="container px-3 px-xl-5" >
               <div class="bg-white  tengah ">
                 <div class=" row row-cols-1  row-cols-xl-2  px-4 px-xl-3">
-                  <div class="col col-xl-4">
-                    <div class=" ps-5 d-none d-md-block">p</div>
+                  <div class="col col-xl-3">
+                    <div class=" ps-2 d-none d-md-block">
+                        <img width="150px;" src="{{ asset('assets/ikon/kucingb.png') }}" alt="">
+                    </div>
                   </div>
-                  <div class="col col-xl-8">
+                  <div class="col col-xl-9">
                     <div class=" col py-1   px-xl-3">
-                      <h5 class="j-tengah" style="color: #3b73c5; ">Buwhan Edu siap membantumu!</h5>
-                      <p class=" i-tengah mt-2 mb-4" style="color: #1D3962; text-align: justify;" >Tenang saja sobat Buwhan, Buwhan Edu akan membantumu belajar efektif dengan rangkuman lengkap serta ribuan soal yang variatif dan menantang.</p>
-                      <div class=" d-flex justify-content-end">
+                      <h5 class="j-tengah" style="color: #3b73c5; ">Nekomind siap membantumu!</h5>
+                      <p class=" i-tengah mt-2 mb-4" style="color: #1D3962; text-align: justify;" >Tenang saja , Nekomind akan membantumu belajar efektif dengan rangkuman lengkap serta  soal yang variatif dan menantang.</p>
+                      {{-- <div class=" d-flex justify-content-end">
                         <button class="t-cs " style="">Coba Sekarang</button>
-                      </div>
+                      </div> --}}
                     </div>
                   </div>
                 </div>
@@ -260,40 +257,6 @@
       <div class="container-fluid" style="background-color: #D0DDF0;">
           <div class="container  px-xl-5">
               <div class="row g-5 d-flex justify-content-center align-items-center">
-                  <!-- <div class="col-lg-6">
-                      <h6 class="section-title text-start text-primary text-uppercase">About Us</h6>
-                      <h1 class="mb-4">Welcome to <span class="" style="color: #fe8d00;">NekoMind</span></h1>
-                      <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere similique voluptas autem sequi, nihil veniam quod? Ratione tempore illo ipsa ea nemo iusto!</p>
-                      <div class="row g-3 pb-4">
-                          <div class="col-sm-4 wow fadeIn" data-wow-delay="0.1s">
-                              <div class="border rounded p-1">
-                                  <div class="border rounded text-center p-4">
-                                      <i class="fa fa-hotel fa-2x text-primary mb-2"></i>
-                                      <h2 class="mb-1" data-toggle="counter-up">1234</h2>
-                                      <p class="mb-0">Materi</p>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-sm-4 wow fadeIn" data-wow-delay="0.3s">
-                              <div class="border rounded p-1">
-                                  <div class="border rounded text-center p-4">
-                                      <i class="fa fa-users-cog fa-2x text-primary mb-2"></i>
-                                      <h2 class="mb-1" data-toggle="counter-up">1234</h2>
-                                      <p class="mb-0">Soal</p>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-sm-4 wow fadeIn" data-wow-delay="0.5s">
-                              <div class="border rounded p-1">
-                                  <div class="border rounded text-center p-4">
-                                      <i class="fa fa-users fa-2x text-primary mb-2"></i>
-                                      <h2 class="mb-1" data-toggle="counter-up">1234</h2>
-                                      <p class="mb-0">TryOut</p>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div> -->
                   <div class="row row-cols-1 row-cols-xl-2 px-0px-md-5 my-5 d-flex align-items-center justify-content-center">
                     <div class="col px-lg-5 px-xl-0">
                       <!-- <h6 class="section-title text-start text-primary text-uppercase">About Us</h6> -->
@@ -306,7 +269,7 @@
                             <div class="border rounded p-1">
                                 <div class="border rounded text-center k-3 p-4 bg-white flex-column t-e  ">
                                   <i class="fa-brands fa-leanpub mb-2 fs-5 fs-md-2" style="color: #3b72c5c8;"></i>
-                                    <h3 class="m-i" style="color: rgb(69, 69, 69); " data-toggle="counter-up">{{ $totalMateri }}</h3>
+                                    <h3 class="m-i" style="color: rgb(69, 69, 69); " data-toggle="counter-up" id="result1"></h3>
                                     <p class="mb-0" style="font-weight: 600;">Materi</p>
                                 </div>
                             </div>
@@ -315,7 +278,7 @@
                             <div class="border rounded p-1">
                                 <div class="border rounded text-center k-3 p-4 bg-white flex-column t-e   ">
                                   <i class="fa-solid fa-lines-leaning mb-2 fs-5 fs-md-2" style="color: #3b72c5c8 ;"></i>
-                                    <h3 class="m-i" data style="color: rgb(69, 69, 69);"-toggle="counter-up">1234</h3>
+                                    <h3 class="m-i" data style="color: rgb(69, 69, 69);"-toggle="counter-up" id="result2">+</h3>
                                     <p class="mb-0" style="font-weight: 600;"> Soal</p>
                                 </div>
                             </div>
@@ -324,7 +287,7 @@
                             <div class="border rounded p-1">
                                 <div class="border rounded text-center k-3 p-4 bg-white flex-column t-e  ">
                                     <i class="fa-solid fa-list-check mb-2 fs-5 fs-md-2" style="color: #3b72c5c8 ;"></i>
-                                    <h3 class="m-i" dat style="color: rgb(69, 69, 69);"a-toggle="counter-up">1234</h3>
+                                    <h3 class="m-i" dat style="color: rgb(69, 69, 69);"a-toggle="counter-up" id="result3"></h3>
                                     <p class="mb-0" style="font-weight: 600;" >TryOut</p>
                                 </div>
                             </div>
@@ -348,8 +311,67 @@
 
       <!-- FOOTER -->
 
+      <div class="container-fluid px-3 px-sm-5 pt-3 pt-sm-5 bg-dark text-white ">
+        <footer class="" >
+          <div class="row px-1 px-sm-5  justify-content-between">
+            <div class="col-md-5 offset-md-1 mb-3 align-items-end">
+                <h5 style="color:#fe8d00">Nekomind</h5>
+                <p>Nekomind adalah platform belajar  yang inovatif, dirancang untuk memberikan pengalaman belajar yang fleksibel dan interaktif. Nekomind berfokus untuk meningkatkan keterampilan dan juga pemahaman dalam memecahkan masalah yang kompleks.</p>
 
+            </div>
+            <div class="pe-3 col-12  col-md-4 col-xl-3 d-flex   px-4 mt-3 mb-5 my-sm-0">
+
+              <div class="col-6 col-md-2 mb-sm-3" style="width:100px;">
+                <h5>Fitur</h5>
+                <ul class="nav flex-column ">
+                  <li class=" nav-foot mb-sm-2"><a href="#" class="nav-link p-0 text-abu" style="white-space: nowrap;">Bank Materi</a></li>
+                  <li class=" nav-foot mb-sm-2"><a href="#" class="nav-link p-0 text-abu">Bank Soal</a></li>
+                  <li class=" nav-foot mb-sm-2" ><a href="#" class="nav-link p-0 text-abu" style="white-space: wrap;">Form Diskusi</a></li>
+                </ul>
+              </div>
+
+              <div class="col-6 col-md-2 mb-3 ms-3 ms-sm-5 ms-sm-0 ps-md-5 ps-xl-0 me-xxl-5">
+                <h5>Kontak</h5>
+                <ul class="nav flex-column ">
+                  <li class=" nav-foot mb-sm-2 d-flex align-items-center "><i class="fa-brands fa-whatsapp " style="color: #25D366;"></i><a href="https://wa.me/628177284612" class="nav-link p-0 text-abu ms-1 WhatsApp">WhatsApp</a></li>
+                  <li class=" nav-foot mb-sm-2 d-flex align-items-center"><i class="fa-reguler fa-at"></i>
+                    <a href="mailto:naufaldhafin80.com" class="nav-link p-0 text-abu ms-1 Email">Email</a>
+                </li>
+                </ul>
+              </div>
+            </div>
+
+
+
+          </div>
+
+          <div class="d-flex flex-column flex-sm-row justify-content-center py-3" style="border-top: 1px rgba(255, 255, 255, 0.475) solid;">
+            <p class="copy text-abu" >&copy; 2023 NekoMind, Inc. All rights reserved.</p>
+          </div>
+        </footer>
+      </div>
     </main>
+    <script>
+let counter = 1;
+
+function updateCounter() {
+  for (let i = 1; i <= 3; i++) {
+    let resultElement = document.getElementById("result" + i);
+    if (resultElement) {
+      resultElement.innerHTML = counter + "+";
+    }
+  }
+
+  counter++;
+
+  if (counter > 100) {
+    clearInterval(timer);
+  }
+}
+
+let timer = setInterval(updateCounter, 10);
+
+      </script>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

@@ -60,8 +60,8 @@
 </style>
 <main class="" style="background-color: #F8F9FA !important;">
     <div class="col-12 d-flex d-md-none justify-content-between align-items-center px-4 position-absolute" style="">
-      <label class="fw-bold fs-2 pt-3" style="color: #fe8d00">NekoMind</label>
-      <i class="fa-solid fa-magnifying-glass pt-4 pe-3" style="color: rgb(52, 52, 52); font-size: 15px"></i>
+      {{-- <label class="fw-bold fs-2 pt-3" style="color: #fe8d00">NekoMind</label> --}}
+      {{-- <i class="fa-solid fa-magnifying-glass pt-4 pe-3" style="color: rgb(52, 52, 52); font-size: 15px"></i> --}}
     </div>
     <div class="container-fluid text-dark  pt-0 pt-md-5 mt-5 px-5" style="">
         <div class="row">
@@ -162,21 +162,15 @@
                               </td>
                               <td class="align-middle text-center">
                                 <div class="d-flex align-items-center justify-content-center">
-                                    <button type="button" style="background: none; border:none;"  data-bs-toggle="modal" data-bs-target="#exampleModal"><span>Lihat</span>
+                                    <button type="button" style="background: none; border:none;"  data-bs-toggle="modal" data-bs-target="#exampleModal{{$nomor+1}}"><span>Lihat</span>
                                         <i class="fa-solid fa-caret-right ms-2" style="color: #344767"></i></button>
                                 </div>
                               </td>
                             </tr>
-                            <div class="modal fade " style="background: none; " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade " style="background: none; " id="exampleModal{{$nomor+1}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog"  style="background: none;">
                                   <div class="modal-content"  style="background: none;max-width:440px;">
-
                                     <div class="col  text-center px-4 px-md-0">
-                                        <!-- <span class="">Profile</span> -->
-                                        {{-- <div class="col ps-2  pb-1 d-flex justify-content-end">
-                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div> --}}
-
                                           <div class="card-p bg-white pb-3" style="" >
                                             <div class="card-header">
                                               <div class="card-cover" style="background-image: url('{{ asset('assets/pp/' . $data['foto'] . '.jpg') }}')"></div>

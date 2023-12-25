@@ -442,7 +442,7 @@ body {
   border: 3px #d0ddf0 solid;
   width: 60px;
   height: 60px;
-  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn7-WBE9eIbsMRwRj37EtmbDeKgTCCUS-PFw&usqp=CAU");
+  /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn7-WBE9eIbsMRwRj37EtmbDeKgTCCUS-PFw&usqp=CAU"); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bab;
+use App\Models\GambarMateri;
 use App\Models\Kelas;
 use App\Models\MateriModel;
 use App\Models\Pelajaran;
@@ -79,9 +80,11 @@ class Permateri extends Controller
      */
     public function show(string $id)
     {
+
         $kelas = Kelas::where('kelas', $id)->first();
         $pelajaran = Pelajaran::where('id', $id)->first();
         $babs = Bab::where('id_pelajaran' , $id)->get();
+
 
         // $babs = DB::table('bab')
         // ->leftJoin('materi', 'bab.id', '=', 'materi.id_bab')

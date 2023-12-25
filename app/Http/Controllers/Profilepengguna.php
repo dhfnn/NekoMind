@@ -18,9 +18,7 @@ class profilepengguna extends Controller
     public function index()
     {
         // $data = Datapengguna::all();
-        $userId = auth()->id(); // Mendapatkan user_id pengguna yang login.
-
-        // Mengambil data pengguna berdasarkan user_id.
+        $userId = auth()->id();
         $level = Level::where('user_id', $userId)->first();
         $levelpengguna = $level->exp/1200;
         $dataAkun = users::where('id',$userId)->first();

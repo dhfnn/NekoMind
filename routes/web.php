@@ -43,6 +43,7 @@ route::middleware(['guest'])->group(function(){
         return view('component.texkeditor');
     });
     Route::get('/masuk',[loregcontroller::class,'loginpage'])->name('masuk');
+    Route::get('/reset',[loregcontroller::class,'reset'])->name('reset');
     Route::post('/daftar',[loregcontroller::class,'register'])->name('register');
     Route::get('/daftar',[loregcontroller::class,'registerpage'])->name('daftar');
     Route::post('/masuk',[loregcontroller::class,'login'])->name('login');

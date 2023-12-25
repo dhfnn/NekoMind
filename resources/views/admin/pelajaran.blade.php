@@ -65,12 +65,11 @@
                         </span>
                     </td>
                     <td class="align-middle text-center text-sm d-flex">
-                            <form action="{{ route('ujian.delete', ['id'=>$data->id]) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-link  text-danger text-gradient mb-0" style="font-size: 10px;" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Hapus</button>
-                            </form>
-                            <button class="btn btn-link  text-dark mb-0" style="font-size: 10px;"aria-hidden="true "data-bs-toggle="modal" data-bs-target="#ModalEditUjian"><i class="fas fa-pencil-alt text-dark me-2"  aria-hidden="true "data-bs-toggle="modal" data-bs-target="#ModalEditUjian"> </i>Edit</button>
+
+                                <button type="button" class="btn btn-link  text-danger text-gradient mb-0" style="font-size: 10px;" aria-hidden="true "data-bs-toggle="modal" data-bs-target="#exampleModal09{{$data->id}}"><i class="far fa-trash-alt me-2" ></i>Hapus</button>
+                                @include('component.hapusp')
+
+                            <button class="btn btn-link  text-dark mb-0" style="font-size: 10px;"aria-hidden="true "data-bs-toggle="modal" data-bs-target="#ModalEditUjian{{$data->id}}"><i class="fas fa-pencil-alt text-dark me-2"  aria-hidden="true "data-bs-toggle="modal" data-bs-target="#ModalEditUjian"> </i>Edit</button>
                             @include('component.Meditujian')
                     </td>
 

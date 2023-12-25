@@ -67,6 +67,6 @@ class Chatgrup extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        dd('hai');
     }
 }

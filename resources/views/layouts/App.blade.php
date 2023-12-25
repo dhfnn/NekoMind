@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
+    <link rel="shortcut icon" href="{{ asset('assets/ikon/logon.png') }}" type="image/x-icon">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Nekomind</title>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
     <script src="https://kit.fontawesome.com/9494185896.js" crossorigin="anonymous"></script>
@@ -16,10 +17,16 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
       </head>
+      <style>
+        .g-ad{
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+        }
+      </style>
   <body class=""  style="background-color: #F8F9FA !important;" >
     <header class="position-fixed fixed-top d-md-flex justify-content">
       <nav class="navbar navbar-light navbar-expand-md dash-nav d-none d-md-flex">
@@ -42,7 +49,8 @@
                   <li class="menu-item">
                     <a href="Profilepengguna" class="ps-4 ps-xl-4 d-flex align-items-center a-putar">
                       <i class="fa-solid fa-caret-down i-putar" style="color: #00000076"></i>
-                      <i class="fa-solid fa-circle-user i-pd ms-1"></i>
+                      {{-- <i class="fa-solid fa-circle-user i-pd ms-1"></i> --}}
+                      <img src="{{ asset('assets/pp/'.$usersData->foto .'.jpg') }}" class="g-ad ms-1" alt="">
                     </a>
                     <ul class="drop-menu">
                       <li class="drop-menu-item"><a href="/Profilepengguna">Akun</a></li>
@@ -84,6 +92,12 @@
             <span class="i-multit  {{Request::is('Soal') ? 'i-act': '' }}  ">Soal</span>
           </a>
         </div>
+        <div class="nav-item d-flex flex-column align-items-center">
+          <a href="{{ Request::is('peringkat') ? '#' : url('peringkat') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
+            <i class="fa-solid fa-ranking-star i-multi  {{Request::is('peringkat') ? 'i-act': '' }}"></i>
+            <span class="i-multit  {{Request::is('peringkat') ? 'i-act': '' }}  ">peringkat</span>
+          </a>
+        </div>
         <div class="nav-item d-flex flex-column align-items-center ps-0 pe-3">
           <a href="{{ request()->is('Profilepengguna') ? '#' : route('Profilepengguna.index') }}" class="text-decoration-none d-flex flex-column justify-content-center align-items-center">
             <i class="fa-solid fa-circle-user i-multi {{ request()->is('Profilepengguna') ? 'i-act' : '' }}"></i>
@@ -96,9 +110,9 @@
     </header>
 
     @yield('main')
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     {{-- ini bagian script --}}
 
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
@@ -113,7 +127,7 @@
 
   <script>
 
-let teksArray = ["Sel saraf manusia dapat mengirimkan sinyal dengan kecepatan hingga 120 meter per detik.", "Umurku 18 tahun"];
+let teksArray = ["Sel saraf manusia dapat mengirimkan sinyal dengan kecepatan hingga 120 meter per detik.", "Walaupun Pluto tidak lagi dianggap sebagai planet dalam Sistem Tata Surya, ternyata, butiran es di permukaannya dapat menghasilkan suara mirip dengan 'dengungan' atau 'gemuruh' yang dapat didengar jika manusia berada disana.","Kupu-kupu Monark (Monarch Butterfly) memiliki perjalanan migrasi yang luar biasa. Meskipun hanya seukuran tangan, mereka dapat menempuh perjalanan ribuan mil dari Amerika Utara ke Meksiko untuk berkumpul dalam jumlah besar di hutan.","Nikola Tesla, seorang ilmuwan Serbia-Amerika, memiliki kebiasaan aneh. Dia menghabiskan waktu berjam-jam berjalan-jalan di sekitar gedung sebelum memasuki ruang laboratoriumnya, dan dia memiliki ketidakmampuan terhadap perasaan sentuhan dengan rambut manusia.","Kolibri adalah burung yang sangat kecil, namun memiliki detak jantung yang sangat cepat, mencapai lebih dari 1.200 denyut per menit saat sedang terbang. Ini membantu mereka mempertahankan energi selama aktivitas bergerak intens"];
 let index = 0;
 
 function gantiTeks() {
@@ -296,5 +310,9 @@ function updateURLParameter(key, value) {
 function resetURL() {
     window.location.href = window.location.origin + window.location.pathname;
 }
+document.addEventListener("DOMContentLoaded", function() {
+        var chatBody = document.getElementById('chatbody');
+        chatBody.scrollTop = chatBody.scrollHeight;
+    });
   </script>
   </html>

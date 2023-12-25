@@ -3,7 +3,7 @@
 <main class="" >
     <div class="col-12 d-flex d-md-none justify-content-between align-items-center px-4 position-absolute">
       <label class="fw-bold fs-2 pt-3" style="color: #fe8d00">NekoMind</label>
-      <i class="fa-solid fa-magnifying-glass pt-4 pe-3" style="color: rgb(52, 52, 52); font-size: 15px"></i>
+      {{-- <i class="fa-solid fa-magnifying-glass pt-4 pe-3" style="color: rgb(52, 52, 52); font-size: 15px"></i> --}}
     </div>
     <div class="container-fluid text-dark bg-white pt-0 pt-md-4" style="padding-right: 0px !important; padding-left: 0px !important; background-color: #F8F9FA !important;">
       <div class="d-flex justify-content-center jr-d pt-5">
@@ -46,7 +46,7 @@
                         </div>
                       </div>
                       <div class="col-8 d-flex flex-column">
-                        <span class="fw-bold j-d"> 10</span>
+                        <span class="fw-bold j-d"> {{ $jumlahBaca }}</span>
                         <label for="" class="j-d2">Materi yang dibaca</label>
                       </div>
                     </div>
@@ -158,7 +158,10 @@
                  <div class="isi-j" style="position: relative">
                      <div class="col ">
                          @if ($ListdataMisi === '0')
-                             <span>data tidak tersedia</span>
+                         <div class="col d-flex justify-content-center align-items-center">
+                            <img width="150px" src="{{ asset('assets/ikon/kucingm.png') }}" alt="">
+                            <span class="j-d2">Misi sudah kamu selesaikan</span>
+                         </div>
                          @else
                          <div class="col  bg-white px-3 py-1" style="box-shadow: 1px 6px 9px 4px rgba(0, 0, 0, 0.035); border-radius:5px; border:1px rgba(0, 0, 0, 0.107) solid;">
                              <div class="col d-flex justify-content-between">
@@ -224,30 +227,34 @@
           </div>
         </div>
        </div>
-        <div class="row gap-3 my-3">
-          <div class="col-7 d-flex  p-3 px-4 bg-white" style="border-radius: 8px">
-            <div class="d-flex align-items-end">
-            <img src="{{ asset('assets/ikon/catPencil.png') }}" height="200px" alt="">
-
-            </div>
-            <div class="col d-flex align-items-end">
-              <div class="col">
-                <span class="j-rm " style="color: #fe8d00;">Mengukur Kemampuanmu</span>
-                <p class="t-j px-3 pt-2  " style="text-align: justify;">
-                  Di sini, kamu akan menemukan berbagai macam soal yang dirancang untuk mengukur dan meningkatkan kemampuan kamu, ada latihan ujian dan quiz yang siap menantangmu.
-                </p>
-                <div class="col d-flex justify-content-end pt-2">
-                <button class="btn-os fw-bolder p-1 px-3" onclick="window.location.href  ='/Soal';">MULAI </button>
+       <div class="col d-flex  my-3">
+        <div class="col-7 pe-3 " >
+            <div class="col d-flex  p-3 px-4 bg-white" style="border-radius: 8px; height:315px;">
+                <div class="d-flex align-items-end">
+                <img src="{{ asset('assets/ikon/catPencil.png') }}" height="200px" alt="">
 
                 </div>
+                <div class="col d-flex align-items-center">
+                  <div class="col">
+                    <span class="j-rm " style="color: #fe8d00;">Mengukur Kemampuanmu</span>
+                    <p class="t-j px-3 pt-2  " style="text-align: justify;">
+                      Di sini, kamu akan menemukan berbagai macam soal yang dirancang untuk mengukur dan meningkatkan kemampuan kamu, ada latihan ujian dan quiz yang siap menantangmu.
+                    </p>
+                    <div class="col d-flex justify-content-end pt-2">
+                    <button class="btn-os fw-bolder p-1 px-3" onclick="window.location.href  ='/Soal';">MULAI </button>
+
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
           </div>
-          <div class="col d-flex flex-column justify-content-between py-2 bg-white" style="border-radius: 8px">
+
+          <div class="col-5 d-flex flex-column justify-content-between py-2 px-2 bg-white " style="border-radius: 8px">
             <span class="tjb" style="color: #009feb">Rekap Nilai</span>
             <canvas id="myChart2" style="max-height: 300px;">
             </canvas>
           </div>
+       </div>
         </div>
       </div>
       <div class="container px-5 py-4">
@@ -263,6 +270,8 @@
 
     </div>
   </main>
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
 @endsection
 
     <!-- dashboard  -------------------------------------------------------------------------------->

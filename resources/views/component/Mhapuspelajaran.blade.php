@@ -2,11 +2,11 @@
 <form action="{{ route('materi.destroy', $data->id) }}" method="POST">
     @csrf
     @method('DELETE')
-<div class="modal fade" id="hapusmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="hapusmodal{{ $data->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content rounded-4 shadow">
           <div class="modal-header border-bottom-0">
-            <h1 class="modal-title fs-5">HAPUS DATA AKUN PENGGUNA !!!</h1>
+            <h1 class="modal-title fs-5">HAPUS DATA PELAJARAN !!!</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body py-0 text-start" style="white-space: wrap; ">
