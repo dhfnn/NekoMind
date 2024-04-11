@@ -93,7 +93,7 @@
                   <td class="align-middle text-center">
                     <a href="{{ url('/data/' .$user->id) }}"  class="text-secondary text-xs font-weight-bold">
                         <span class="">
-                            <i class="fa-solid fa-caret-right"></i>
+                           lihat <i class="fa-solid fa-caret-right"></i>
                           </span>
                     </a>
 

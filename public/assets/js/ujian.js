@@ -1,4 +1,3 @@
-
 let soals = [];
 fetch("/soall")
     .then((response) => response.json())
@@ -19,65 +18,64 @@ fetch("/soall")
         console.error("Gagal mengambil data soal:", error);
     });
 
-    function showQuestions() {
-        soals.forEach((item) => {
-            console.log(item.pertanyaan);
-            item.opsi.forEach((opsi) => {
-                console.log(opsi);
-            });
-            console.log(item.jawaban);
+function showQuestions() {
+    soals.forEach((item) => {
+        console.log(item.pertanyaan);
+        item.opsi.forEach((opsi) => {
+            console.log(opsi);
         });
-    }
-    var urutanPertanyaan = 0;
-    var selectedAnswers = new Array(soals.length).fill(-1);
-    var score = 0;
-    var quizStarted = false;
-    var time = 0;
-    var timeInSeconds = 0;
-    var intervalId;
-    fetch('/waktuu')
-      .then((response) => response.json())
-      .then((data) => {
+        console.log(item.jawaban);
+    });
+}
+var currentQuestion = 0;
+var selectedAnswers = new Array(soals.length).fill(-1);
+var score = 0;
+var quizStarted = false;
+var time = 0;
+var timeInSeconds = 0;
+var intervalId;
+fetch("/waktuu")
+    .then((response) => response.json())
+    .then((data) => {
         if (data && data.waktu) {
-          time = data.waktu;
-          timeInSeconds = time * 60;
+            time = data.waktu;
+            timeInSeconds = time * 60;
         } else {
-          console.error('Data waktu ujian tidak valid:', data);
+            console.error("Data waktu ujian tidak valid:", data);
         }
-      })
-      .catch((error) => {
-        console.error('Gagal mengambil waktu ujian:', error);
-      });
-    function startTimer() {
-        var wadahWaktu = document.getElementById("wadahWaktu");
+    })
+    .catch((error) => {
+        console.error("Gagal mengambil waktu ujian:", error);
+    });
+function startTimer() {
+    var wadahWaktu = document.getElementById("wadahWaktu");
 
-        intervalId = setInterval(function () {
-          if (timeInSeconds === 0) {
+    intervalId = setInterval(function () {
+        if (timeInSeconds === 0) {
             clearInterval(intervalId);
             endQuiz();
-          } else {
+        } else {
             var minutes = Math.floor(timeInSeconds / 60);
             var seconds = timeInSeconds % 60;
-            wadahWaktu.innerText = "Waktu Tersisa: " + minutes + " menit " + seconds + " detik";
+            wadahWaktu.innerText =
+                "Waktu Tersisa: " + minutes + " menit " + seconds + " detik";
 
             if (timeInSeconds > 0) {
-
-              timeInSeconds--;
+                timeInSeconds--;
             }
-          }
-        }, 1000);
-      }
-      function startQuiz() {
-        quizStarted = true;
-        document.getElementById("home").style.display = "none";
-        document.getElementById("quiz").style.display = "block";
-        showQuestion();
-        startTimer();
-      }
-  function showQuestion() {
+        }
+    }, 1000);
+}
+function startQuiz() {
+    quizStarted = true;
+    document.getElementById("home").style.display = "none";
+    document.getElementById("quiz").style.display = "block";
+    showQuestion();
+    startTimer();
+}
+function showQuestion() {
     var wadahSoal = document.getElementById("wadahSoal");
-    var soal = soals[urutanPertanyaan];
-
+    var soal = soals[currentQuestion];
     var opsiElement = document.getElementById("opsi");
     var tombolKembali = document.getElementById("tombolKembali");
     var tombolLanjut = document.getElementById("tombolLanjut");
@@ -86,209 +84,190 @@ fetch("/soall")
     var soalElement = document.getElementById("soal");
     soalElement.textContent = soal.pertanyaan;
 
-
-    if (urutanPertanyaan >= soals.length) {
-      wadahSoal.style.display = "none";
+    if (currentQuestion >= soals.length) {
+        wadahSoal.style.display = "none";
     } else {
-      wadahSoal.style.display = "block";
+        wadahSoal.style.display = "block";
 
-      var judulPertanyaan = document.getElementById("judulPertanyaan");
-      judulPertanyaan.innerText = "Pertanyaan Ke-" + (urutanPertanyaan + 1);
+        var judulPertanyaan = document.getElementById("judulPertanyaan");
+        judulPertanyaan.innerText = "Pertanyaan Ke-" + (currentQuestion + 1);
 
-
-      while (opsiElement.firstChild) {
-        opsiElement.removeChild(opsiElement.firstChild);
-      }
-
-      for (var i = 0; i < soal.opsi.length; i++) {
-        var div = document.createElement("div");
-        div.className = "col p-2 mt-3 px-4 py-3 bgn-opsi";
-
-        var radio = document.createElement("input");
-        radio.type = "radio";
-        radio.name = "answer" + urutanPertanyaan;
-        radio.value = i;
-
-
-        div.addEventListener("click", function () {
-            var RadioPertanyaan = this.querySelector("input[type=radio]");
-            RadioPertanyaan.checked = true;
-            selectedAnswers[urutanPertanyaan] = parseInt(RadioPertanyaan.value);
-        });
-
-        var choice = document.createTextNode(soal.opsi[i]);
-
-        div.appendChild(radio);
-        div.appendChild(choice);
-        opsiElement.appendChild(div);
-      }
-
-      if (urutanPertanyaan === 0) {
-        tombolKembali.style.display = "none !important";
-        var tombolKembali = document.getElementById("tombolKembali");
-        if (tombolKembali) {
-          tombolKembali.parentNode.removeChild(tombolKembali);
+        while (opsiElement.firstChild) {
+            opsiElement.removeChild(opsiElement.firstChild);
         }
-        console.log(urutanPertanyaan);
 
-      } else {
-        tombolKembali.style.display = "flex";
-                var icon = document.createElement("i");
-        icon.className = "fa-solid fa-angle-left text-white";
-        tombolKembali.classList.add("tnp");
-        tombolKembali.innerHTML = '';
-        tombolKembali.appendChild(icon);
-        console.log(urutanPertanyaan);
+        for (var i = 0; i < soal.opsi.length; i++) {
+            var div = document.createElement("div");
+            div.className = "col p-2 mt-3 px-4 py-3 bgn-opsi";
 
-      }
+            var radio = document.createElement("input");
+            radio.type = "radio";
+            radio.name = "answer" + currentQuestion; // Menggunakan nama berdasarkan indeks pertanyaan
+            radio.value = i;
 
+            div.addEventListener("click", function () {
+                var relatedRadio = this.querySelector("input[type=radio]");
+                relatedRadio.checked = true;
+                selectedAnswers[currentQuestion] = parseInt(relatedRadio.value);
+            });
 
-      if (urutanPertanyaan === soals.length - 1) {
-        tombolLanjut.classList.add("tombol-selesai");
-        tombolLanjut.innerHTML = 'Selesai';
-      } else {
-        tombolLanjut.classList.remove("tombol-selesai");
-        tombolLanjut.innerText = "";
-        var icon = document.createElement("i");
-        icon.className = "fa-solid fa-angle-right text-white";
-        tombolLanjut.innerHTML = '' ; 
-        tombolLanjut.appendChild(icon);
-      }
+            var choice = document.createTextNode(soal.opsi[i]);
 
+            div.appendChild(radio);
+            div.appendChild(choice);
+            opsiElement.appendChild(div);
+        }
 
-      var selectedAnswer = selectedAnswers[urutanPertanyaan];
-      var radioButtons = document.getElementsByName("answer");
+        if (currentQuestion < 1) {
+            tombolKembali.style.display = "none";
+            var icon = document.createElement("i");
+            // icon.className = "fa-solid fa-angle-left text-white";
+            // tombolKembali.innerHTML = "woi";
+            tombolKembali.appendChild(icon);
+        } else {
+            tombolKembali.style.display = "block";
+        }
 
-      if (selectedAnswer !== -1 && selectedAnswer < radioButtons.length) {
-          radioButtons[selectedAnswer].checked = true;
-      } else {
-          selectedAnswers[urutanPertanyaan] = -1;
-      }
+        if (currentQuestion === soals.length - 1) {
+            tombolLanjut.classList.add("tombol-selesai"); // Menambahkan class "tombol-selesai"
+            tombolLanjut.innerHTML = "Selesai"; // Menetapkan teks "Selesai"
+        } else {
+            tombolLanjut.classList.remove("tombol-selesai");
+            tombolLanjut.innerText = "";
+            var icon = document.createElement("i");
+            icon.className = "fa-solid fa-angle-right text-white";
+            tombolLanjut.innerHTML = ""; // Menghapus semua konten sebelumnya
+            tombolLanjut.appendChild(icon);
+        }
 
+        var selectedAnswer = selectedAnswers[currentQuestion];
+        var radioButtons = document.getElementsByName("answer" + currentQuestion);
 
-      wadahWaktu.innerText = "Waktu Tersisa: " + time + " detik";
+        if (selectedAnswer !== -1 && selectedAnswer < radioButtons.length) {
+            radioButtons[selectedAnswer].checked = true;
+        } else {
+            // Jika belum ada jawaban yang dipilih, pastikan semua radio button tidak terpilih
+            radioButtons.forEach((radio) => {
+                radio.checked = false;
+            });
+        }
+
+        wadahWaktu.innerText = "Waktu Tersisa: " + time + " detik";
     }
-  }
+}
 
-  function fillQuestionList() {
-      var daftarSoal = document.getElementById("daftarSoal");
-      while (daftarSoal.firstChild) {
+function fillQuestionList() {
+    var daftarSoal = document.getElementById("daftarSoal");
+    while (daftarSoal.firstChild) {
         daftarSoal.removeChild(daftarSoal.firstChild);
-      }
-
-      // Tambahkan pertanyaan-pertanyaan ke tampail
-      for (var i = 0; i < soals.length; i++) {
+    }
+    for (var i = 0; i < soals.length; i++) {
         var div = document.createElement("div");
         div.className = "list-soal";
         div.textContent = " " + (i + 1);
         div.dataset.soalIndex = i;
-
-        //Buat  Cek apakah pertanyaan ini sudah dijawabbbbbbbbbbbbbbbb
         if (selectedAnswers[i] !== -1) {
-          div.style.color = "green";
+            div.style.color = "blue";
         } else {
-          div.style.color = "white";
+            div.style.color = "white"; // Jika belum dijawab, beri warna merah
         }
-
-
-
         daftarSoal.appendChild(div);
-      }
     }
+}
 
-    fillQuestionList();
+fillQuestionList();
 
-    function calculateScore() {
-        score = 0;
+function calculateScore() {
+    score = 0;
 
-        for (var i = 0; i < soals.length; i++) {
-          if (selectedAnswers[i] === soals[i].jawaban) {
+    for (var i = 0; i < soals.length; i++) {
+        if (selectedAnswers[i] === soals[i].jawaban) {
             score++;
-          }
         }
-      }
-    function endQuiz() {
-        clearInterval(intervalId);
-        quizStarted = false;
-        calculateScore();
-        if (time === 0) {
-
-        }
-        document.getElementById("quiz").style.display = "none";
-        document.getElementById("score").style.display = "none";
-        document.getElementById("home").style.display = "none";
-            var jawabanBenarInput = document.getElementById('jawabanBenarInput');
-            var jawabanSalahInput = document.getElementById('jawabanSalahInput');
-            var NilaiInput = document.getElementById('NilaiInput');
-            var expInput = document.getElementById('expInput');
-
-            var jawabanBenar = score;
-            jawabanBenarInput.value = jawabanBenar;
-
-            var jawabanSalah = soals.length - score;
-            jawabanSalahInput.value = jawabanSalah;
-
-            var exp = score*150;
-            expInput.value = exp;
-
-
-            var persentase = Math.round((score / soals.length) * 100);
-            NilaiInput.value = persentase;
-        // });
-
-        document.getElementById("tambahHistory").click();
-        $("#scoreModal").modal("show");
     }
-  function restartQuiz() {
-    urutanPertanyaan = 0;
+}
+function endQuiz() {
+    clearInterval(intervalId);
+    quizStarted = false;
+    calculateScore();
+    if (time === 0) {
+    }
+    document.getElementById("quiz").style.display = "none";
+    document.getElementById("score").style.display = "none";
+    document.getElementById("home").style.display = "none";
+    var jawabanBenarInput = document.getElementById("jawabanBenarInput");
+    var jawabanSalahInput = document.getElementById("jawabanSalahInput");
+    var NilaiInput = document.getElementById("NilaiInput");
+    var expInput = document.getElementById("expInput");
+
+    var jawabanBenar = score;
+    jawabanBenarInput.value = jawabanBenar;
+
+    var jawabanSalah = soals.length - score;
+    jawabanSalahInput.value = jawabanSalah;
+
+    var exp = score * 150;
+    expInput.value = exp;
+
+    var persentase = Math.round((score / soals.length) * 100);
+    NilaiInput.value = persentase;
+    // });
+
+    document.getElementById("tambahHistory").click();
+    $("#scoreModal").modal("show");
+}
+function restartQuiz() {
+    currentQuestion = 0;
     selectedAnswers = new Array(soals.length).fill(-1);
     score = 0;
-    fetch('/waktuu')
-    .then((response) => response.json())
-    .then((data) => {
-      if (data && data.waktu) {
-        time = data.waktu;
-        timeInSeconds = time * 60;
-        document.getElementById("score").style.display = "none";
-        document.getElementById("quiz").style.display = "block";
-        showQuestion();
-        startTimer();
-      } else {
-        console.error('Data waktu ujian tidak valid:', data);
-      }
-    })
-    .catch((error) => {
-      console.error('Gagal mengambil waktu ujian:', error);
-    });
+    fetch("/waktuu")
+        .then((response) => response.json())
+        .then((data) => {
+            if (data && data.waktu) {
+                time = data.waktu;
+                timeInSeconds = time * 60;
+                document.getElementById("score").style.display = "none";
+                document.getElementById("quiz").style.display = "block";
+                showQuestion();
+                startTimer();
+            } else {
+                console.error("Data waktu ujian tidak valid:", data);
+            }
+        })
+        .catch((error) => {
+            console.error("Gagal mengambil waktu ujian:", error);
+        });
+}
 
-  }
-
-  document.getElementById("startButton").addEventListener("click", startQuiz);
-  document.getElementById("tombolKembali").addEventListener("click", function () {
-    urutanPertanyaan--;
+document.getElementById("startButton").addEventListener("click", startQuiz);
+document.getElementById("tombolKembali").addEventListener("click", function () {
+    currentQuestion--;
     showQuestion();
-  });
+});
 
-  document.getElementById("tombolLanjut").addEventListener("click", function () {
-    if (urutanPertanyaan === soals.length - 1) {
-      endQuiz();
+document.getElementById("tombolLanjut").addEventListener("click", function () {
+    if (currentQuestion === soals.length - 1) {
+        endQuiz();
     } else {
-      urutanPertanyaan++;
-      showQuestion();
-    }
-  });
-  document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("restartButton").addEventListener("click", restartQuiz);
-  });
-
-
-  var daftarSoal = document.getElementById("daftarSoal");
-  daftarSoal.addEventListener("click", function (event) {
-    if (event.target && event.target.tagName === "DIV") {
-      var clickedQuestionIndex = Array.from(daftarSoal.children).indexOf(event.target);
-      if (clickedQuestionIndex !== -1) {
-        urutanPertanyaan = clickedQuestionIndex;
+        currentQuestion++;
         showQuestion();
-      }
     }
-  });
+});
+document.addEventListener("DOMContentLoaded", function () {
+    document
+        .getElementById("restartButton")
+        .addEventListener("click", restartQuiz);
+});
+
+var daftarSoal = document.getElementById("daftarSoal");
+daftarSoal.addEventListener("click", function (event) {
+    if (event.target && event.target.tagName === "DIV") {
+        var clickedQuestionIndex = Array.from(daftarSoal.children).indexOf(
+            event.target
+        );
+        if (clickedQuestionIndex !== -1) {
+            currentQuestion = clickedQuestionIndex;
+            showQuestion();
+        }
+    }
+});

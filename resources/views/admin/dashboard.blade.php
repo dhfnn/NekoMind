@@ -79,7 +79,7 @@
 
                   </div>
                   <div class="col-lg-6 col-5 my-auto text-end">
-                    <div class="dropdown float-lg-end pe-4">
+                    {{-- <div class="dropdown float-lg-end pe-4">
                       <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-ellipsis-v text-secondary"></i>
                       </a>
@@ -88,7 +88,7 @@
                         <li><a class="dropdown-item border-radius-md" href="javascript:;">Another action</a></li>
                         <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
                       </ul>
-                    </div>
+                    </div> --}}
                   </div>
                 </div>
               </div>
@@ -126,7 +126,7 @@
                         <td class="align-middle d-flex align-items-center">
                             <span class="text-xs font-weight-bold py-2 ">  {{ number_format($data->exp/1200, 0, '', '') }} </span>
 
-                            <div class="progress-wrapper w-75 mx-auto">
+                            {{-- <div class="progress-wrapper w-75 mx-auto">
                               <div class="progress-info">
                                 <div class="progress-percentage">
                                   <span class="text-xs font-weight-bold"></span>
@@ -135,7 +135,7 @@
                               <div class="progress">
                                 <div class="progress-bar bg-gradient-info w-{{ (($data->exp % 1200 ) /1200) *100}}" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
                               </div>
-                            </div>
+                            </div> --}}
                           </td>
                         <td class="align-middle text-center text-sm">
                             <span class="text-xs font-weight-bold">
@@ -194,7 +194,7 @@
                       <div class="card-footer bg-white text-muted d-flex justify-content-start align-items-start px-3">
                         <img class="rounded-circle" src="{{ asset('assets/pp/' .$userdata->foto. '.jpg') }}"
                           alt="avatar 3" style="width: 40px; height: 100%;">
-                          <form class="d-flex" action="{{ url('chatpengguna') }}" method="POST">
+                          <form class="d-flex w-100" action="{{ url('chatpengguna') }}" method="POST">
                           @csrf
                         <input type="text" class="form-control form-control-lg" name="pesan" id="exampleFormControlInput1"
                           placeholder="Masukan pesan">

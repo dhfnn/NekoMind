@@ -43,12 +43,7 @@
                                     <option value="sosial">Sosial</option>
                                     <option value="ips">IPS</option>
                                 </optgroup>
-                                <optgroup label="Lainnya">
-                                    <option value="tps">Tes Potensi Skolastik</option>
-                                    <option value="lindonesia">Literasi B. Indonesia</option>
-                                    <option value="linggris">Literasi B. Inggris</option>
-                                    <option value="pm">Penalaran Matematika</option>
-                                </optgroup>
+
                             </select>
 
                         </div>

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="shortcut icon" href="{{ asset('assets/ikon/logon.png') }}" type="image/x-icon">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
     <script src="https://kit.fontawesome.com/9494185896.js" crossorigin="anonymous"></script>
@@ -43,7 +43,7 @@ CC
                                 <span class="mes-e">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <input class="ie-nama" placeholder="Nama Lengkap" type="text" name="nama" value="{{ old('nama') }}">
+                            <input class="ie-nama" placeholder="Nama Lengkap" type="text" name="nama" value="{{ old('nama') }}" required>
                         </div>
                         <div class="i-ep">
                             <div class="col d-flex justify-content-between">
@@ -52,7 +52,7 @@ CC
                                 <span class="mes-e">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <input class="ie-date"  type="Date" name="tanggallahir" value="{{ old('tanggallahir') }}">
+                            <input class="ie-date"  type="Date" name="tanggallahir" value="{{ old('tanggallahir') }}" required>
                         </div>
                         <div class="i-ep">
                             <div class="col d-flex justify-content-between">
@@ -63,13 +63,13 @@ CC
                             </div>
                             <div class="radio">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="jeniskelamin" id="lk" value="laki-laki">
+                                    <input class="form-check-input" type="radio" name="jeniskelamin" id="lk" value="laki-laki" required>
                                     <label class="form-check-label" for="lk">
                                       Laki-Laki
                                     </label>
                                   </div>
                                   <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="jeniskelamin" id="pr" value="perempuan">
+                                    <input class="form-check-input" type="radio" name="jeniskelamin" id="pr" value="perempuan" required>
                                     <label class="form-check-label" for="pr">
                                       Perempuan
                                     </label>
@@ -83,7 +83,7 @@ CC
                                 <span class="mes-e">{{ $message }}</span>
                                 @enderror
                             </div>
-                              <select class="w-select outline-none selectKT" name="kota" id="">
+                              <select class="w-select outline-none selectKT" name="kota" id="" required>
                                   <option value="">PILIH KOTA</option>
                                   @foreach ($dataKota as $kota )
                                 <option value="{{ $kota->city_name }}">{{ $kota->city_name }}</option>
@@ -97,7 +97,7 @@ CC
                                 <span class="mes-e">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <textarea id="" class="ie-alamat" name="alamat">{{ old('alamat') }}</textarea>
+                            <textarea id="" class="ie-alamat" name="alamat" required>{{ old('alamat') }}</textarea>
                         </div>
                        <div class="i-ep">
                         <div class="col d-flex justify-content-between">
@@ -106,7 +106,7 @@ CC
                             <span class="mes-e">{{ $message }}</span>
                             @enderror
                         </div>
-                        <input type="number" id="" class="ie-no" placeholder="08XXXXXXXXXX" name="nohp" value="{{ old('nohp') }}">
+                        <input type="number" id="" class="ie-no" placeholder="08XXXXXXXXXX" name="nohp" value="{{ old('nohp') }}" required>
                       </div>
                     <!-- </div> -->
                 </div>
@@ -121,7 +121,7 @@ CC
                         <span class="mes-e">{{ $message }}</span>
                         @enderror
                     </div>
-                    <input class="ie-nama" placeholder="Nama Sekolah" type="text" name="namasekolah" value="{{ old('namasekolah') }}">
+                    <input class="ie-nama" placeholder="Nama Sekolah" type="text" name="namasekolah" value="{{ old('namasekolah') }}" required>
                 </div>
                 <div class="i-ep">
                     <div class="col d-flex justify-content-between">
@@ -131,7 +131,7 @@ CC
                         @enderror
                     </div>
                   <div class="w-selectk">
-                    <select class="ie-select" name="kelas">
+                    <select class="ie-select" name="kelas" required>
                       <option selected>Pilih Kelas</option>
                       <option value="1">Kelas 1</option>
                       <option value="2">Kelas 2</option>
@@ -159,7 +159,7 @@ CC
                         @enderror
                     </div>
                   <div class="w-selectk">
-                    <select class="ie-select" name="jurusan">
+                    <select class="ie-select" name="jurusan" required>
                       <option value="">Pilih Jurusan</option>
                       <option value="IPA">IPA</option>
                       <option value="IPS">IPS</option>
@@ -177,7 +177,7 @@ CC
                         @enderror
                     </div>
                   <div class="w-select">
-                    <select class="ie-select" name="target">
+                    <select class="ie-select" name="target" required>
                       <option value="">Tentukan Targetmu</option>
                       <option value="UTBK">UTBK</option>
                       <option value="UTS">UTS</option>
@@ -219,7 +219,7 @@ CC
                         <span class="mes-e">{{ $message }}</span>
                         @enderror
                     </div>
-                    <input class="ie-nama" placeholder="Keikan Mottomu" type="text" name="motto" value="{{ old('motto') }}">
+                    <input class="ie-nama" placeholder="Keikan Mottomu" type="text" name="motto" value="{{ old('motto') }}" required>
                 </div>
                 </div>
                 </div>
@@ -270,7 +270,7 @@ CC
       });
   });
   $(document).ready(function() {
-    $("#selectKT").select2();
+    $(".selectKT").select2();
 });
 </script>
 </html>

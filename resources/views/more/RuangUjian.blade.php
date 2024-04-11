@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <link rel="shortcut icon" href="{{ asset('assets/ikon/logon.png') }}" type="image/x-icon">
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Login</title>
         <link rel="stylesheet" href="../../assets/style/style.css" />
-        <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
         <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -97,7 +97,7 @@
                         </div>
                     </div>
                     <div class="col d-flex justify-content-end m-3">
-                        <div class="tnp" id="tombolKembali"><i class="fa-solid fa-angle-left text-white"></i></div>
+                        <div class="tnp d-flex justify-content-center align-items-center " id="tombolKembali"><i class="fa-solid fa-angle-left text-white"></i></div>
                         <div class="tnp" id="tombolLanjut"><i class="fa-solid fa-angle-right text-white"></i></div>
                     </div>
                 </div>
@@ -126,23 +126,21 @@
 
                 </div>
                 <div class="modal-body">
+                    Tunggu sebentar jawaban anda sedang di proses
                     <form action="{{ url('Hasil/' .$UjianData->id ) }}" method="POST" >
                         @csrf
                         <p id="modalScoreDisplay"></p>
-                        <input type="number" name="benar" id="jawabanBenarInput" value="" readonly>
-                        <input type="number" name="salah" id="jawabanSalahInput" value="" readonly>
-                        <input type="number" name="skore" id="expInput" value="" readonly>
-                        <input type="number" name="nilai" id="NilaiInput" value="" readonly>
+                        <input type="hidden" name="benar" id="jawabanBenarInput" value="" readonly>
+                        <input type="hidden" name="salah" id="jawabanSalahInput" value="" readonly>
+                        <input type="hidden" name="skore" id="expInput" value="" readonly>
+                        <input type="hidden" name="nilai" id="NilaiInput" value="" readonly>
+                        <button class="d-none" id="tambahHistory" type="submit"></button>
+
+                    </form>
 
 
                 </div>
-                <div class="modal-footer">
-                    <button class="d-none" id="tambahHistory" type="submit"></button>
-                  <button type="button" class="btn btn-secondary"   data-bs-dismiss="modal" aria-label="Close" >Tutup</button>
-                </form>
-            <button id="restartButton"  data-bs-dismiss="modal" aria-label="Close">Mulai Ulang</button>
 
-                </div>
               </div>
             </div>
           </div>

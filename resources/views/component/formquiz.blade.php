@@ -2,7 +2,7 @@
 <form action="{{ url('Pelajaran/'  .$ujianId) }}" method="POST">
     @csrf
     <input type="hidden" name="ujianid" id="" value="{{ $ujianId }}">
-    <input type="text" name="type" id="" value="{{ $type }}">
+    <input type="hidden" name="type" id="" value="{{ $type }}">
     @for ($i = 1; $i <= $jumlahSoal; $i++)
 
 <div class="col col-md-11 kage mb-3 px-3 px-md-5 pb-3 pt-1" style="border:1px rgba(0, 0, 0, 0.082) solid; border-radius:10px;">

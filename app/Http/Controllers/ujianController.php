@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\hasilujian;
-use App\Models\Historyujian;
 use App\Models\soal;
 use App\Models\Ujian;
+use App\Models\users;
+use App\Models\hasilujian;
+use App\Models\Historyujian;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ujianController extends Controller
 {
@@ -29,7 +30,7 @@ class ujianController extends Controller
                 })
                 ->get();
             $totalBenar = $data->sum('benar');
-
+$usersData  = users::where('id', $userId)->first();
             $data = DB::table('hasilujian')
                     ->select('ujian_id', 'id', 'user_id', 'benar', 'salah', 'nilai')
                     ->whereIn('id', function($query) use ($userId) {
@@ -73,7 +74,7 @@ class ujianController extends Controller
         // foreach ($dataUjian as $ujian) {
         //     $totalSoal += soal::where('ujian_id', $ujian->id)->count();
         // }
-        return view('pengguna.soal' , compact('userId','dataUjian' ,'filterkelas','filterjenis','totalBenar','totalSalah','jumlahSoal'));
+        return view('pengguna.soal' , compact('userId','dataUjian' ,'filterkelas','filterjenis','totalBenar','totalSalah','jumlahSoal','usersData'));
     }
 
     /**
@@ -97,10 +98,20 @@ class ujianController extends Controller
      */
     public function show(string $id)
     {
+        $userId = Auth::user()->id;
         $dataUjian = Ujian::find($id);
+        $hasilujian =  hasilujian::where('ujian_id', $dataUjian->id)->where('user_id', $userId)->first();
+
+        $historyujian = Historyujian::where('ujian_id', $dataUjian->id)
+        ->where('user_id', $userId)
+        ->orderBy('waktu', 'desc')
+        ->take(5)
+        ->get();
+
+        // dd($historyujian);
         $jumlahSoal = soal::where('ujian_id' , $id)->count();
 
-        return view('pengguna.praujian' ,compact('dataUjian','jumlahSoal'));
+        return view('pengguna.praujian' ,compact('dataUjian','jumlahSoal','hasilujian','historyujian'));
     }
 
 

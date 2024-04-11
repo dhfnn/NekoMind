@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Level;
 use App\Models\MateriModel;
+use App\Models\Poin;
 use App\Models\Ujian;
 use App\Models\users;
 use Illuminate\Http\Request;
@@ -80,7 +82,15 @@ class loregcontroller extends Controller
         $data['password'] = Hash::make($request->password);
         $data['role']     = 'pengguna';
         $data['bergabung']= $tanggal;
-        users::create($data);
+        $data['foto']= 'pplvl1';
+        $data00 = users::create($data);
+
+        $data5['user_id'] = $data00->id;
+        $data5['exp'] = '1200';
+        Level::create($data5);
+        $datapoin['user_id'] = $data00->id;
+        $datapoin['poin'] = '0';
+        Poin::create($datapoin);
 
         $infologin = [
             'email' => $request->email,
@@ -98,6 +108,10 @@ class loregcontroller extends Controller
     function logout(){
         Auth::logout();
         return redirect('/masuk');
+    }
+    function reset(){
+        // dd('hai');
+        return view('more.reset');
     }
 
 

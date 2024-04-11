@@ -17,7 +17,7 @@
         </div>
         <div class="card mb-4">
           <div class="card-header pb-0 d-flex justify-content-between">
-            <h6>BAB MATERI {{ $pelajaran->namapelajaran }} id {{ $pelajaran->id }}  semester {{ $pelajaran->id_semester }} id_kelas {{ $pelajaran->id_kelas }}</h6>
+            <h6 class="">BAB MATERI {{ $pelajaran->namapelajaran }}</h6>
 
             <a href="#exampleModal" data-bs-toggle="modal" data-bs-target="#exampleModal"  class="d-flex justify-content-between align-items-center px-2 me-2" style="border: 1px solid rgba(0, 0, 0, 0.075); border-radius:10px ;color:black !important;">  <i class="fa-solid fa-plus"></i></a>
             @include('component.Mtambahbab')

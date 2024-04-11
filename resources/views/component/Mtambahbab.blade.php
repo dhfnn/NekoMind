@@ -19,7 +19,7 @@
                             <div class="col">
                             <label for="" class="ji-ep">Nama Pelajaran</label>
                             </div>
-                            <input type="text" class="form-control" name="judul" placeholder="Masukan judul BAB">
+                            <input type="text" class="form-control" name="judul" placeholder="Masukan judul BAB" required>
                             <input  name="id_pelajaran"  type="hidden" value="{{ $pelajaran->id }}">
 
                         </div>
@@ -27,7 +27,7 @@
                             <div class="col">
                             <label for="" class="ji-ep">subab</label>
                             </div>
-                            <input type="number" class="form-control" name="subab" placeholder="">
+                            <input type="number" class="form-control" name="subab" placeholder="" required>
 
                         </div>
 
